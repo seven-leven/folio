@@ -1,14 +1,10 @@
 //src/pages/Miscellaneous.tsx
-import React from 'react';
-import Navbar from '../components/common/Navbar';
 
-const miscellaneous: React.FC = () => {
+export default function miscellaneous() {
   return (
-    <>
-      <Navbar />
-      <p>miscellaneous</p>
-    </>
+    <main>
+      <h1>miscellaneous</h1>
+      {/* Architecture content */}
+    </main>
   );
-};
-
-export default miscellaneous;
+}

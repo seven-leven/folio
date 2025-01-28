@@ -9,15 +9,10 @@ import NotFound from './pages/NotFound';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Specific routes first */}
+      <Route path="/" element={<Home />} />
       <Route path="/architecture" element={<Architecture />} />
       <Route path="/coding" element={<CodingProjects />} />
       <Route path="/misc" element={<Miscellaneous />} />
-      
-      {/* Home route */}
-      <Route path="/" element={<Home />} />
-      
-      {/* Catch-all for 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
