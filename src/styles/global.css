@@ -1,0 +1,19 @@
+/* global.css */
+
+/* Apply sans-serif font to the entire body */
+*,
+*::before,
+*::after {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* You can specify your preferred sans-serif font */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: inherit; /* Ensures body follows the inherited sans-serif font */
+}
+
+/* Allow specific overrides for elements if needed */
+h1, h2, h3, p {
+  font-family: inherit; /* Inherit the global sans-serif font */
+}

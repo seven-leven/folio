@@ -1,0 +1,17 @@
+/* src/components/coding/SphereAnimation.module.css */
+.container {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .output {
+    font-family: monospace;
+    line-height: 1;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+  }

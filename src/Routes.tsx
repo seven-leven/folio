@@ -5,6 +5,7 @@ import Architecture from './pages/Architecture';
 import CodingProjects from './pages/CodingProjects';
 import Miscellaneous from './pages/Miscellaneous';
 import NotFound from './pages/NotFound';
+import SphereAnimationPage from './pages/SphereAnimationPage';
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/coding" element={<CodingProjects />} />
       <Route path="/misc" element={<Miscellaneous />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/coding/sphere" element={<SphereAnimationPage />} />
     </Routes>
   );
 };
