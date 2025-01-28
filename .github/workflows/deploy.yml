@@ -3,39 +3,41 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Update to v3
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build the project
       - name: Build project
         run: npm run build
         env:
           PUBLIC_URL: .
           CI: false
 
-      # Deploy to GitHub Pages
+      # Optional: Verify build files
+      - name: List build files
+        run: ls -la ./build
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          force_orphan: true 
+          publish_branch: gh-pages  # Explicitly set (default)
+          force_orphan: true
