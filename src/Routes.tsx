@@ -1,4 +1,4 @@
-//src/Routes.tsx
+//src/Routes.tsx 
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Architecture from './pages/Architecture';
