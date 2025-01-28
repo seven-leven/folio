@@ -1,6 +1,6 @@
 {
   "homepage": ".",
-  "name": "portfolio-website",
+  "name": "portfolio",
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.tsx",
@@ -9,7 +9,7 @@
     "build": "react-scripts build",
     "test": "test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build"
   },
   "author": "",
   "license": "ISC",
