@@ -9,6 +9,9 @@ export default function codingprojects() {
         <h3>Terminal Sphere Animation</h3>
         <p>ASCII art sphere with dynamic lighting</p>
       </Link>
+      <Link to="https://seven-leven.github.io/bird_dash/">
+        <h3>Bird tracking dashboard</h3>
+      </Link>
     </main>
   );
 }
