@@ -10,11 +10,11 @@ import SphereAnimationPage from './pages/SphereAnimation';
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/folio" element={<Home />} />
-      <Route path="/folio/architecture" element={<Architecture />} />
-      <Route path="/folio/coding" element={<CodingProjects />} />
-      <Route path="/folio/misc" element={<Miscellaneous />} />
-      <Route path="/folio/coding/sphere" element={<SphereAnimationPage />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/architecture" element={<Architecture />} />
+      <Route path="/coding" element={<CodingProjects />} />
+      <Route path="/misc" element={<Miscellaneous />} />
+      <Route path="/coding/sphere" element={<SphereAnimationPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
