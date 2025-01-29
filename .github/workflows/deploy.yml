@@ -13,33 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code (updated to v4)
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Install system build tools (critical for native modules)
-      - name: Install system dependencies
-        run: sudo apt-get install -y build-essential python3
+      # Add case sensitivity check
+      - name: Check for case issues
+        run: |
+          find src -name '*.js' -print | awk '!tolower($0)~/^[a-z0-9_\/\.-]+$/{print}'
+          find src -name '*.jsx' -print | awk '!tolower($0)~/^[a-z0-9_\/\.-]+$/{print}'
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Install dependencies with clean slate
       - name: Install dependencies
-        run: |
-          npm ci # Uses package-lock.json for exact versions
+        run: npm ci
 
-      # Build the project
       - name: Build project
         run: npm run build
         env:
           PUBLIC_URL: .
-          CI: false # Disable CI-only behaviors
+          CI: false
 
-      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
