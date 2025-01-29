@@ -1,54 +1,84 @@
+/* src/pages/HomePage.module.css */
 .homePage {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.section {
+  padding: 4rem 2rem;
+}
+
+.sectionAlt {
+  background-color: #f8f9fa;
+}
+
+.personalStatement {
+  background-color: #e9ecef;
+  text-align: center;
+}
+
+.projectCategories {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .projectCategories {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .logo {
-    width: 100px;
-  }
-  
-  .contactInfo {
-    text-align: right;
-  }
-  
-  .personalStatement {
-    padding: 40px;
-    background-color: #f4f4f4;
-  }
-  
-  .workCategories {
-    padding: 40px;
-  }
-  
-  .projects {
-    margin-bottom: 20px;
-  }
-  
-  .employmentHistory, .educationHistory, .skills, .interests {
-    padding: 40px;
-    background-color: #fafafa;
-  }
-  
-  h1, h2, h3 {
-    color: #333;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  ul li {
-    margin-bottom: 10px;
-  }
-  
+}
+
+.projectGroup {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.projectList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+h1, h2, h3 {
+  color: #2d3436;
+  margin: 0 0 1.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #74b9ff;
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #0984e3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.interestsText {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 80ch;
+  margin: 0 auto;
+}
