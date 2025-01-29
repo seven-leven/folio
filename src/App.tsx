@@ -5,7 +5,9 @@ function App() {
   return (
     <>
       <Navbar />
-      <AppRoutes />
+      <div className="content">
+        <AppRoutes />
+      </div>
     </>
   );
 }

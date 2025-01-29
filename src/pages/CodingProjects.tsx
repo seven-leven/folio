@@ -1,6 +1,6 @@
 // src/pages/CodingProjects.tsx
 import { useEffect } from 'react';
-import ProjectCard from '../components/common/ProjectCard.tsx';
+import ProjectCard from '../components/ProjectCard.tsx';
 import styles from './CodingProjects.module.css';
 
 const colors = [
@@ -25,7 +25,7 @@ export default function CodingProjects() {
     <main className={styles.container}>
       <section className={styles.githubSection}>
         <a 
-          href="https://github.com/yourusername"
+          href="https://github.com/seven-leven/"
           className={styles.githubCard}
           target="_blank"
           rel="noopener noreferrer"

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import styles from './ProjectCard.module.css';
-
+import styles from './common/ProjectCard.module.css';
+import { handleImgError } from '../utils/imageUtils'; 
 interface ProjectCardProps {
   title: string;
   description: string;
@@ -8,6 +8,7 @@ interface ProjectCardProps {
   image: string;
   side: 'left' | 'right';
   bgColor: string;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;  
 }
 
 export default function ProjectCard({
@@ -20,18 +21,11 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const isExternal = link.startsWith('http');
 
-  const handleImgError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.target as HTMLImageElement;
-    console.error(`Image not found: ${img.src}`);
-    img.src = '/assets/placeholder.png';
-  };
-
   const commonProps = {
     className: `${styles.card} ${side === 'right' ? styles.right : ''}`,
     style: { backgroundColor: bgColor }
   };
 
-  // Render different components based on link type
   if (isExternal) {
     return (
       <a
@@ -62,7 +56,7 @@ export default function ProjectCard({
             src={image}
             alt={title}
             className={styles.image}
-            onError={handleImgError}
+            onError={handleImgError}  // Use the imported utility function here
           />
         </div>
         <div className={styles.content}>
