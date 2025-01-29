@@ -1,4 +1,4 @@
-// src/pages/CodingProjects.tsx
+//  src/pages/CodingProjects.tsx
 import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard.tsx';
 import styles from './CodingProjects.module.css';
