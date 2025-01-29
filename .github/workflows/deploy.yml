@@ -4,6 +4,10 @@ on:
   push:
     branches: [ master ]
 
+    branches:
+      - main  # Trigger on pushes to the main branch
+permissions:
+  contents: write
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -11,20 +15,37 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
 
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 18.x
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
     - name: Install dependencies
       run: npm install
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build project
-      run: npm run build
+      # Build the project
+      - name: Build project
+        run: npm run build
+        env:
+          PUBLIC_URL: .
+          CI: false
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          force_orphan: true  # Ensures a clean gh-pages branch
