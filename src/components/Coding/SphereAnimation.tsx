@@ -32,9 +32,8 @@ const SphereAnimation = () => {
 
           if (distanceSq <= RADIUS) {
             const z = Math.sqrt(RADIUS - distanceSq);
-            // True 3D dot product with normalized vectors
             const intensity = xScaled * lx + yScaled * ly + z * lz;
-            const j = Math.floor((intensity + 1) * 6); // Map from [-1,1] to [0,12]
+            const j = Math.floor((intensity + 1) * 6);
             matrix[y][x] = CHARACTER_LIST[Math.max(0, Math.min(j, CHARACTER_LIST.length - 1))];
           }
         }
@@ -51,7 +50,6 @@ const SphereAnimation = () => {
       if (autoRotate) {
         const newAngle = angle + ANGLE_INCREMENT;
         setAngle(newAngle);
-        // Spherical coordinates rotation
         currentLight = {
           x: 5 * Math.cos(newAngle),
           y: 5 * Math.sin(newAngle),
@@ -70,6 +68,10 @@ const SphereAnimation = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.terminalContainer}>
+        <pre ref={outputRef} className={styles.output} />
+      </div>
+
       <div className={styles.controls}>
         <div className={styles.sliderGroup}>
           <label>Light X: {lightDir.x.toFixed(2)}</label>
@@ -82,7 +84,7 @@ const SphereAnimation = () => {
             onChange={(e) => setLightDir({...lightDir, x: parseFloat(e.target.value)})}
           />
         </div>
-        
+
         <div className={styles.sliderGroup}>
           <label>Light Y: {lightDir.y.toFixed(2)}</label>
           <input
@@ -113,38 +115,6 @@ const SphereAnimation = () => {
         >
           {autoRotate ? '⏸ Stop Rotation' : '▶ Start Rotation'}
         </button>
-      </div>
-
-      <pre ref={outputRef} className={styles.output} />
-
-      <div className={styles.explanation}>
-        <h3>3D Lighting Mathematics</h3>
-        
-        <div className={styles.mathCard}>
-          <p><strong>Normalized Light Vector:</strong></p>
-          <div className={styles.mathEquation}>
-            ||L|| = √(x² + y² + z²)<br />
-            û = (x/||L||, y/||L||, z/||L||)
-          </div>
-        </div>
-
-        <div className={styles.mathCard}>
-          <p><strong>Surface Normal Calculation:</strong></p>
-          <div className={styles.mathEquation}>
-            N = (x', y', √(R² - x'² - y'²))<br />
-            Where x' = (x - X₀) * 0.6<br />
-            y' = y - Y₀
-          </div>
-        </div>
-
-        <div className={styles.mathCard}>
-          <p><strong>Diffuse Lighting:</strong></p>
-          <div className={styles.mathEquation}>
-            I = N · û<br />
-            I ∈ [-1, 1] → mapped to [0, 12]<br />
-            char = CHARACTERS[⌊I * 6 + 6⌋]
-          </div>
-        </div>
       </div>
     </div>
   );

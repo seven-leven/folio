@@ -1,82 +1,91 @@
 /* src/components/coding/SphereAnimation.module.css */
 .container {
-  background-color: #1a1a1a;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
+  padding: 2rem;
+  background: #0a0a0a;
+}
+
+.terminalContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem 0;
+  background: #000;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
 .output {
   font-family: 'Courier New', monospace;
-  line-height: 1;
-  text-align: center;
   color: #00ff00;
   font-size: 14px;
-  border: 2px solid #00ff0055;
-  padding: 1rem;
-  grid-column: 1 / -1;
+  line-height: 1.2;
+  margin: 0 auto;
+  text-align: center;
+  white-space: pre-wrap;
 }
 
 .controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  background: #2a2a2a;
-  padding: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  background: #1a1a1a;
+  padding: 2rem;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .sliderGroup {
-  display: grid;
-  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.sliderGroup label {
+  display: block;
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
 }
 
 .sliderGroup input[type="range"] {
   width: 100%;
-  accent-color: #00ff00;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.sliderGroup input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.sliderGroup input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 
 .toggleButton {
+  width: 100%;
+  padding: 1rem;
   background: #00ff00;
-  color: #1a1a1a;
+  color: #000;
   border: none;
-  padding: 0.8rem;
   border-radius: 4px;
-  cursor: pointer;
+  font-family: monospace;
   font-weight: bold;
-  transition: opacity 0.2s;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
 }
 
 .toggleButton:hover {
-  opacity: 0.8;
-}
-
-.explanation {
-  background: #2a2a2a;
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.mathCard {
-  background: #333;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 6px;
-  border-left: 4px solid #00ff00;
-}
-
-.mathEquation {
-  font-family: monospace;
-  color: #00ff00;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  background: #00000033;
-  border-radius: 4px;
-}
-
-h3 {
-  color: #00ff00;
-  margin-bottom: 1rem;
+  background: #00cc00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
 }
