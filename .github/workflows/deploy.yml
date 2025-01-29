@@ -32,7 +32,7 @@ jobs:
       - name: Build project
         run: bun run build
         env:
-          PUBLIC_URL: ./folio/
+          PUBLIC_URL: .
           CI: false
 
       - name: Deploy to GitHub Pages

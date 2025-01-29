@@ -36,7 +36,7 @@ export default function CodingProjects() {
               alt="GitHub"
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
-                img.src = '/assets/placeholder.png';
+                img.src = `${process.env.PUBLIC_URL}/assets/placeholder.png`;
               }}
             />
           </div>
