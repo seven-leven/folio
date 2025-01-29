@@ -1,23 +1,27 @@
 // src/components/coding/SphereAnimation.tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './SphereAnimation.module.css';
 
 const SphereAnimation = () => {
   const outputRef = useRef<HTMLPreElement>(null);
+  const [lightDir, setLightDir] = useState({ x: 0, y: 5, z: 5 });
+  const [autoRotate, setAutoRotate] = useState(true);
+  const [angle, setAngle] = useState(0);
 
   useEffect(() => {
     const CHARACTER_LIST = ".,-~:;=!*#$@";
     const WIDTH = 21, HEIGHT = 21;
     const X_OFFSET = 10, Y_OFFSET = 10;
     const RADIUS = 16;
-    const LIGHT_RADIUS = 5.0;
-    const ANGLE_INCREMENT = 0.1;
+    const ANGLE_INCREMENT = 0.05;
 
-    const drawFrame = (lightDirX: number, lightDirY: number) => {
+    const drawFrame = (light: { x: number, y: number, z: number }) => {
       if (!outputRef.current) return;
 
-      const lightDirMagnitude = Math.sqrt(lightDirX ** 2 + lightDirY ** 2 + 1);
-      const d1 = 11 / (lightDirMagnitude * RADIUS);
+      // Normalize light vector
+      const length = Math.sqrt(light.x ** 2 + light.y ** 2 + light.z ** 2);
+      const [lx, ly, lz] = [light.x/length, light.y/length, light.z/length];
+      
       const matrix = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(' '));
 
       for (let y = 0; y < HEIGHT; y++) {
@@ -28,10 +32,10 @@ const SphereAnimation = () => {
 
           if (distanceSq <= RADIUS) {
             const z = Math.sqrt(RADIUS - distanceSq);
-            const dotProduct = xScaled * lightDirX + yScaled * lightDirY + z * 1.0;
-            let j = Math.floor(dotProduct * d1);
-            j = Math.max(0, Math.min(j, CHARACTER_LIST.length - 1));
-            matrix[y][x] = CHARACTER_LIST[j];
+            // True 3D dot product with normalized vectors
+            const intensity = xScaled * lx + yScaled * ly + z * lz;
+            const j = Math.floor((intensity + 1) * 6); // Map from [-1,1] to [0,12]
+            matrix[y][x] = CHARACTER_LIST[Math.max(0, Math.min(j, CHARACTER_LIST.length - 1))];
           }
         }
       }
@@ -39,21 +43,109 @@ const SphereAnimation = () => {
       outputRef.current.textContent = matrix.map(row => row.join('')).join('\n');
     };
 
-    let angle = 0;
+    let animationFrame: number;
+    
     const animate = () => {
-      const lightX = LIGHT_RADIUS * Math.cos(angle);
-      const lightY = LIGHT_RADIUS * Math.sin(angle);
-      drawFrame(lightX, lightY);
-      angle += ANGLE_INCREMENT;
+      let currentLight = { ...lightDir };
+      
+      if (autoRotate) {
+        const newAngle = angle + ANGLE_INCREMENT;
+        setAngle(newAngle);
+        // Spherical coordinates rotation
+        currentLight = {
+          x: 5 * Math.cos(newAngle),
+          y: 5 * Math.sin(newAngle),
+          z: 5 * Math.sin(newAngle * 0.5)
+        };
+        setLightDir(currentLight);
+      }
+
+      drawFrame(currentLight);
+      animationFrame = requestAnimationFrame(animate);
     };
 
-    const intervalId = setInterval(animate, 100);
-    return () => clearInterval(intervalId);
-  }, []);
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [angle, autoRotate, lightDir]);
 
   return (
     <div className={styles.container}>
+      <div className={styles.controls}>
+        <div className={styles.sliderGroup}>
+          <label>Light X: {lightDir.x.toFixed(2)}</label>
+          <input
+            type="range"
+            min="-10"
+            max="10"
+            step="0.1"
+            value={lightDir.x}
+            onChange={(e) => setLightDir({...lightDir, x: parseFloat(e.target.value)})}
+          />
+        </div>
+        
+        <div className={styles.sliderGroup}>
+          <label>Light Y: {lightDir.y.toFixed(2)}</label>
+          <input
+            type="range"
+            min="-10"
+            max="10"
+            step="0.1"
+            value={lightDir.y}
+            onChange={(e) => setLightDir({...lightDir, y: parseFloat(e.target.value)})}
+          />
+        </div>
+
+        <div className={styles.sliderGroup}>
+          <label>Light Z: {lightDir.z.toFixed(2)}</label>
+          <input
+            type="range"
+            min="-10"
+            max="10"
+            step="0.1"
+            value={lightDir.z}
+            onChange={(e) => setLightDir({...lightDir, z: parseFloat(e.target.value)})}
+          />
+        </div>
+
+        <button 
+          className={styles.toggleButton}
+          onClick={() => setAutoRotate(!autoRotate)}
+        >
+          {autoRotate ? '⏸ Stop Rotation' : '▶ Start Rotation'}
+        </button>
+      </div>
+
       <pre ref={outputRef} className={styles.output} />
+
+      <div className={styles.explanation}>
+        <h3>3D Lighting Mathematics</h3>
+        
+        <div className={styles.mathCard}>
+          <p><strong>Normalized Light Vector:</strong></p>
+          <div className={styles.mathEquation}>
+            ||L|| = √(x² + y² + z²)<br />
+            û = (x/||L||, y/||L||, z/||L||)
+          </div>
+        </div>
+
+        <div className={styles.mathCard}>
+          <p><strong>Surface Normal Calculation:</strong></p>
+          <div className={styles.mathEquation}>
+            N = (x', y', √(R² - x'² - y'²))<br />
+            Where x' = (x - X₀) * 0.6<br />
+            y' = y - Y₀
+          </div>
+        </div>
+
+        <div className={styles.mathCard}>
+          <p><strong>Diffuse Lighting:</strong></p>
+          <div className={styles.mathEquation}>
+            I = N · û<br />
+            I ∈ [-1, 1] → mapped to [0, 12]<br />
+            char = CHARACTERS[⌊I * 6 + 6⌋]
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

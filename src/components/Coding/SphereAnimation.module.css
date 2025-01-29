@@ -1,17 +1,82 @@
 /* src/components/coding/SphereAnimation.module.css */
 .container {
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .output {
-    font-family: monospace;
-    line-height: 1;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-  }
+  background-color: #1a1a1a;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.output {
+  font-family: 'Courier New', monospace;
+  line-height: 1;
+  text-align: center;
+  color: #00ff00;
+  font-size: 14px;
+  border: 2px solid #00ff0055;
+  padding: 1rem;
+  grid-column: 1 / -1;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.sliderGroup {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sliderGroup input[type="range"] {
+  width: 100%;
+  accent-color: #00ff00;
+}
+
+.toggleButton {
+  background: #00ff00;
+  color: #1a1a1a;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.toggleButton:hover {
+  opacity: 0.8;
+}
+
+.explanation {
+  background: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.mathCard {
+  background: #333;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 6px;
+  border-left: 4px solid #00ff00;
+}
+
+.mathEquation {
+  font-family: monospace;
+  color: #00ff00;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background: #00000033;
+  border-radius: 4px;
+}
+
+h3 {
+  color: #00ff00;
+  margin-bottom: 1rem;
+}
