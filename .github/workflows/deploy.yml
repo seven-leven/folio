@@ -2,18 +2,24 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
+      # Checkout code (updated to v4)
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      # Install system build tools (critical for native modules)
+      - name: Install system dependencies
+        run: sudo apt-get install -y build-essential python3
 
       # Set up Node.js
       - name: Set up Node.js
@@ -21,16 +27,17 @@ jobs:
         with:
           node-version: 18
 
-      # Install dependencies
+      # Install dependencies with clean slate
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm ci # Uses package-lock.json for exact versions
 
       # Build the project
       - name: Build project
         run: npm run build
         env:
           PUBLIC_URL: .
-          CI: false
+          CI: false # Disable CI-only behaviors
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
@@ -38,4 +45,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          force_orphan: true  # Ensures a clean gh-pages branch
+          force_orphan: true
