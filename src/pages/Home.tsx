@@ -1,26 +1,27 @@
 // src/pages/HomePage.tsx
-import ProjectCard from '../components/ProjectCard';
-import { homeData } from '../data/Home';
-import styles from './HomePage.module.css';
+import React from "react";
+import ProjectCard from "../components/ProjectCard.tsx";
+import { homeData } from "../data/Home.ts";
+import styles from "./HomePage.module.css";
 
 const HomePage = () => {
-  const { 
-    architectureProjects, 
-    codingProjects, 
-    miscProjects, 
-    employmentHistory, 
-    educationHistory, 
-    skills, 
-    interests 
+  const {
+    architectureProjects,
+    codingProjects,
+    miscProjects,
+    employmentHistory,
+    educationHistory,
+    skills,
+    interests,
   } = homeData;
 
-  const ListSection = ({ title, items }: { title: string; items: string[] }) => (
+  const ListSection = (
+    { title, items }: { title: string; items: string[] },
+  ) => (
     <section className={`${styles.section} ${styles.sectionAlt}`}>
       <h2>{title}</h2>
       <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        {items.map((item, index) => <li key={index}>{item}</li>)}
       </ul>
     </section>
   );
@@ -30,8 +31,10 @@ const HomePage = () => {
       <section className={`${styles.section} ${styles.personalStatement}`}>
         <h1>Personal Statement</h1>
         <p>
-          I am a passionate architect and developer, blending creativity with technology to build impactful projects. 
-          With a focus on design and user experience, I aim to create functional and beautiful spaces and applications.
+          I am a passionate architect and developer, blending creativity with
+          technology to build impactful projects. With a focus on design and
+          user experience, I aim to create functional and beautiful spaces and
+          applications.
         </p>
       </section>
 

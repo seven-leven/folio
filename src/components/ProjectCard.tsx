@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
-import styles from './common/ProjectCard.module.css';
-import { handleImgError } from '../utils/imageUtils'; 
+import { Link } from "react-router-dom";
+import styles from "./common/ProjectCard.module.css";
+import { handleImgError } from "../utils/imageUtils";
 interface ProjectCardProps {
   title: string;
   description: string;
   link: string;
   image: string;
-  side: 'left' | 'right';
+  side: "left" | "right";
   bgColor: string;
-  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;  
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
 export default function ProjectCard({
@@ -17,13 +17,13 @@ export default function ProjectCard({
   link,
   image,
   side,
-  bgColor
+  bgColor,
 }: ProjectCardProps) {
-  const isExternal = link.startsWith('http');
+  const isExternal = link.startsWith("http");
 
   const commonProps = {
-    className: `${styles.card} ${side === 'right' ? styles.right : ''}`,
-    style: { backgroundColor: bgColor }
+    className: `${styles.card} ${side === "right" ? styles.right : ""}`,
+    style: { backgroundColor: bgColor },
   };
 
   if (isExternal) {
@@ -52,11 +52,11 @@ export default function ProjectCard({
     return (
       <>
         <div className={styles.imageContainer}>
-          <img 
+          <img
             src={image}
             alt={title}
             className={styles.image}
-            onError={handleImgError}  // Use the imported utility function here
+            onError={handleImgError} // Use the imported utility function here
           />
         </div>
         <div className={styles.content}>
@@ -65,7 +65,11 @@ export default function ProjectCard({
           <div className={styles.link}>
             View Project
             <svg className={styles.arrow} viewBox="0 0 24 24">
-              <path d={isExternal ? "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" : "M9 5l7 7-7 7"} />
+              <path
+                d={isExternal
+                  ? "M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  : "M9 5l7 7-7 7"}
+              />
             </svg>
           </div>
         </div>

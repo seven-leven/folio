@@ -4,7 +4,12 @@
 *,
 *::before,
 *::after {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* You can specify your preferred sans-serif font */
+  font-family:
+    "Segoe UI",
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif; /* You can specify your preferred sans-serif font */
   margin: 0;
   padding: 0;
 }

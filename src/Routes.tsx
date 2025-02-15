@@ -1,11 +1,11 @@
-//src/Routes.tsx 
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Architecture from './pages/Architecture';
-import CodingProjects from './pages/CodingProjects';
-import Miscellaneous from './pages/Miscellaneous';
-import NotFound from './pages/NotFound';
-import SphereAnimationPage from './pages/SphereAnimation';
+// src/Routes.tsx
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home.tsx";
+import Architecture from "./pages/Architecture.tsx";
+import CodingProjects from "./pages/CodingProjects.tsx";
+import Miscellaneous from "./pages/Miscellaneous.tsx";
+import NotFound from "./pages/NotFound.tsx";
+import SphereAnimationPage from "./pages/SphereAnimation.tsx";
 
 const AppRoutes = () => {
   return (

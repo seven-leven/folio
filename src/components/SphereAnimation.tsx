@@ -1,6 +1,6 @@
 // src/components/coding/SphereAnimation.tsx
-import { useEffect, useRef, useState } from 'react';
-import styles from './SphereAnimation.module.css';
+import { useEffect, useRef, useState } from "react";
+import styles from "./SphereAnimation.module.css";
 
 const SphereAnimation = () => {
   const outputRef = useRef<HTMLPreElement>(null);
@@ -15,14 +15,21 @@ const SphereAnimation = () => {
     const RADIUS = 16;
     const ANGLE_INCREMENT = 0.05;
 
-    const drawFrame = (light: { x: number, y: number, z: number }) => {
+    const drawFrame = (light: { x: number; y: number; z: number }) => {
       if (!outputRef.current) return;
 
       // Normalize light vector
       const length = Math.sqrt(light.x ** 2 + light.y ** 2 + light.z ** 2);
-      const [lx, ly, lz] = [light.x/length, light.y/length, light.z/length];
-      
-      const matrix = Array.from({ length: HEIGHT }, () => Array(WIDTH).fill(' '));
+      const [lx, ly, lz] = [
+        light.x / length,
+        light.y / length,
+        light.z / length,
+      ];
+
+      const matrix = Array.from(
+        { length: HEIGHT },
+        () => Array(WIDTH).fill(" "),
+      );
 
       for (let y = 0; y < HEIGHT; y++) {
         for (let x = 0; x < WIDTH; x++) {
@@ -34,26 +41,30 @@ const SphereAnimation = () => {
             const z = Math.sqrt(RADIUS - distanceSq);
             const intensity = xScaled * lx + yScaled * ly + z * lz;
             const j = Math.floor((intensity + 1) * 6);
-            matrix[y][x] = CHARACTER_LIST[Math.max(0, Math.min(j, CHARACTER_LIST.length - 1))];
+            matrix[y][x] = CHARACTER_LIST[
+              Math.max(0, Math.min(j, CHARACTER_LIST.length - 1))
+            ];
           }
         }
       }
 
-      outputRef.current.textContent = matrix.map(row => row.join('')).join('\n');
+      outputRef.current.textContent = matrix.map((row) => row.join("")).join(
+        "\n",
+      );
     };
 
     let animationFrame: number;
-    
+
     const animate = () => {
       let currentLight = { ...lightDir };
-      
+
       if (autoRotate) {
         const newAngle = angle + ANGLE_INCREMENT;
         setAngle(newAngle);
         currentLight = {
           x: 5 * Math.cos(newAngle),
           y: 5 * Math.sin(newAngle),
-          z: 5 * Math.sin(newAngle * 0.5)
+          z: 5 * Math.sin(newAngle * 0.5),
         };
         setLightDir(currentLight);
       }
@@ -81,7 +92,8 @@ const SphereAnimation = () => {
             max="10"
             step="0.1"
             value={lightDir.x}
-            onChange={(e) => setLightDir({...lightDir, x: parseFloat(e.target.value)})}
+            onChange={(e) =>
+              setLightDir({ ...lightDir, x: parseFloat(e.target.value) })}
           />
         </div>
 
@@ -93,7 +105,8 @@ const SphereAnimation = () => {
             max="10"
             step="0.1"
             value={lightDir.y}
-            onChange={(e) => setLightDir({...lightDir, y: parseFloat(e.target.value)})}
+            onChange={(e) =>
+              setLightDir({ ...lightDir, y: parseFloat(e.target.value) })}
           />
         </div>
 
@@ -105,15 +118,16 @@ const SphereAnimation = () => {
             max="10"
             step="0.1"
             value={lightDir.z}
-            onChange={(e) => setLightDir({...lightDir, z: parseFloat(e.target.value)})}
+            onChange={(e) =>
+              setLightDir({ ...lightDir, z: parseFloat(e.target.value) })}
           />
         </div>
 
-        <button 
+        <button
           className={styles.toggleButton}
           onClick={() => setAutoRotate(!autoRotate)}
         >
-          {autoRotate ? '⏸ Stop Rotation' : '▶ Start Rotation'}
+          {autoRotate ? "⏸ Stop Rotation" : "▶ Start Rotation"}
         </button>
       </div>
     </div>

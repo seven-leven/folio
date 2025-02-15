@@ -1,6 +1,6 @@
-import { useRef } from 'react';
-import ProjectCard from './ProjectCard';
-import styles from '../pages/Architecture.module.css';
+import { useRef } from "react";
+import ProjectCard from "./ProjectCard";
+import styles from "../pages/Architecture.module.css";
 
 interface HorizontalScrollSectionProps {
   title: string;
@@ -12,13 +12,15 @@ interface HorizontalScrollSectionProps {
   }>;
 }
 
-export default function HorizontalScrollSection({ title, projects }: HorizontalScrollSectionProps) {
+export default function HorizontalScrollSection(
+  { title, projects }: HorizontalScrollSectionProps,
+) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const scrollRight = () => {
     if (sectionRef.current) {
       const scrollAmount = sectionRef.current.offsetWidth * 0.8;
-      sectionRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      sectionRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
@@ -28,14 +30,14 @@ export default function HorizontalScrollSection({ title, projects }: HorizontalS
       <div className={styles.scrollContainer} ref={sectionRef}>
         {projects.map((project, index) => (
           <ProjectCard
-          key={index}
-          title={project.title}
-          description={project.description}
-          link={project.link}
-          image={project.image}
-          side="left" 
-          bgColor="lightgray"  
-          onError={(e) => console.error(e)}  
+            key={index}
+            title={project.title}
+            description={project.description}
+            link={project.link}
+            image={project.image}
+            side="left"
+            bgColor="lightgray"
+            onError={(e) => console.error(e)}
           />
         ))}
       </div>

@@ -1,13 +1,13 @@
-import { useState, useEffect, useMemo } from 'react';
-import styles from './Architecture.module.css';
-import HorizontalScrollSection from '../components/HorizontalScrollSection';
-import { 
+import { useEffect, useMemo, useState } from "react";
+import styles from "./Architecture.module.css";
+import HorizontalScrollSection from "../components/HorizontalScrollSection";
+import {
   mainProjects,
-  trips,
+  miscProjects,
   precedentStudies,
-  miscProjects
-} from '../data/architectureData';
-import { handleImgError } from '../utils/imageUtils';
+  trips,
+} from "../data/architectureData";
+import { handleImgError } from "../utils/imageUtils";
 
 export default function Architecture() {
   const [mainProjectIndex, setMainProjectIndex] = useState(0);
@@ -15,7 +15,7 @@ export default function Architecture() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMainProjectIndex(prev => (prev + 1) % memoizedMainProjects.length);
+      setMainProjectIndex((prev) => (prev + 1) % memoizedMainProjects.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [memoizedMainProjects.length]);
@@ -38,7 +38,10 @@ export default function Architecture() {
       </section>
 
       <HorizontalScrollSection title="Trips" projects={trips} />
-      <HorizontalScrollSection title="Precedent Studies" projects={precedentStudies} />
+      <HorizontalScrollSection
+        title="Precedent Studies"
+        projects={precedentStudies}
+      />
       <HorizontalScrollSection title="Miscellaneous" projects={miscProjects} />
     </main>
   );

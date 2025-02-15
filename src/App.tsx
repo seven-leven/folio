@@ -1,17 +1,16 @@
-import Navbar from './components/common/Navbar';
-import AppRoutes from './Routes';
+import Navbar from "./components/common/Navbar.tsx";
+import AppRoutes from "./Routes.tsx";
+import React from "react";
 
 function App() {
   return (
     <>
-    <Navbar />
+      <Navbar />
       <div className="content">
         <AppRoutes />
       </div>
-
     </>
   );
 }
 
 export default App;
-

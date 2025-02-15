@@ -1,16 +1,13 @@
-
 .navbar {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px; 
-    background-color: #333;
-    z-index: 1000;
-  }
-  
-  
-  .content {
-    margin-top: 60px;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #333;
+  z-index: 1000;
+}
+
+.content {
+  margin-top: 600px;
+}

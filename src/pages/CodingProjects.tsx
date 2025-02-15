@@ -1,17 +1,17 @@
 //  src/pages/CodingProjects.tsx
-import { useEffect } from 'react';
-import ProjectCard from '../components/ProjectCard.tsx';
-import styles from './CodingProjects.module.css';
+import { useEffect } from "react";
+import ProjectCard from "../components/ProjectCard.tsx";
+import styles from "./CodingProjects.module.css";
 
 const colors = [
-  '#f0f4ff', // Light blue
-  '#fff0f4', // Light pink
-  '#f4fff0'  // Light green
+  "#f0f4ff", // Light blue
+  "#fff0f4", // Light pink
+  "#f4fff0", // Light green
 ];
 
 export default function CodingProjects() {
   useEffect(() => {
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
@@ -24,19 +24,19 @@ export default function CodingProjects() {
   return (
     <main className={styles.container}>
       <section className={styles.githubSection}>
-        <a 
+        <a
           href="https://github.com/seven-leven/"
           className={styles.githubCard}
           target="_blank"
           rel="noopener noreferrer"
         >
           <div className={styles.githubImage}>
-            <img 
-              src="/github-logo.png"
+            <img
+              src="./github-logo.png"
               alt="GitHub"
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
-                img.src = `${process.env.PUBLIC_URL}/assets/placeholder.png`;
+                img.src = `./assets/placeholder.png`;
               }}
             />
           </div>
@@ -54,7 +54,7 @@ export default function CodingProjects() {
           title="Terminal Sphere Animation"
           description="Dynamic ASCII art sphere with real-time lighting calculations"
           link="/coding/sphere"
-          image="/sphere-preview.jpg"
+          image="./sphere-preview.jpg"
           side="left"
           bgColor={colors[0]}
         />
@@ -63,7 +63,7 @@ export default function CodingProjects() {
           title="Bird Tracking Dashboard"
           description="Interactive visualization of bird migration patterns"
           link="https://seven-leven.github.io/bird_dash/"
-          image="/bird-dash.jpg"
+          image="./bird-dash.jpg"
           side="right"
           bgColor={colors[1]}
         />
