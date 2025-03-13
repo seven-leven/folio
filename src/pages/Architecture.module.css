@@ -67,3 +67,21 @@
 .scrollButton:hover {
   background: rgba(0, 0, 0, 0.9);
 }
+
+.clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.clickable:hover {
+  transform: scale(1.02);
+}
+
+.viewProject {
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-block;
+}

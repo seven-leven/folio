@@ -1,19 +1,6 @@
-export interface Project {
-  title: string;
-  description: string;
-  link: string;
-  image: string;
-  side: "left" | "right";
-  bgColor: string;
-}
+import { type HomeData } from "../types/portfolioTypes.ts";
 
-export interface HomeData {
-  architectureProjects: Project[];
-  codingProjects: Project[];
-  miscProjects: Project[];
-}
-
-export const homeData = {
+export const homeData: HomeData = {
   statement:
     "I am a passionate architect and developer, blending creativity with technology to build impactful projects. With a focus on design and user experience, I aim to create functional and beautiful spaces and applications.",
   architectureProjects: [
@@ -81,6 +68,7 @@ export const homeData = {
     "UI/UX Design",
   ],
 
-  interests:
+  interests: [
     "I am interested in sustainable design, open-source projects, and creative coding.",
+  ],
 };

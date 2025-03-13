@@ -6,12 +6,14 @@ import CodingProjects from "./pages/CodingProjects.tsx";
 import Miscellaneous from "./pages/Miscellaneous.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import SphereAnimationPage from "./pages/SphereAnimation.tsx";
+import Design1 from "./pages/design1.tsx";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/architecture" element={<Architecture />} />
+      <Route path="/architecture/design1" element={<Design1 />} />
       <Route path="/coding" element={<CodingProjects />} />
       <Route path="/misc" element={<Miscellaneous />} />
       <Route path="/coding/sphere" element={<SphereAnimationPage />} />

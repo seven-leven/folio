@@ -1,4 +1,5 @@
 // server.ts
+/// <reference lib="deno.ns" />
 const PORT = 3000;
 
 const handler = async (req: Request): Promise<Response> => {

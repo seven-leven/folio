@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import ProjectCard from "../components/common/ProjectCard.tsx";
 import styles from "./CodingProjects.module.css";
+import { handleImgError } from "../utils/imageUtils.ts";
 
 const colors = [
   "#f0f4ff", // Light blue
@@ -34,10 +35,7 @@ export default function CodingProjects() {
             <img
               src="./github-logo.png"
               alt="GitHub"
-              onError={(e) => {
-                const img = e.target as HTMLImageElement;
-                img.src = `./assets/placeholder.png`;
-              }}
+              onError={handleImgError} // Use the exported function here
             />
           </div>
           <div className={styles.githubContent}>

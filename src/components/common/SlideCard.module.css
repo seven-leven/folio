@@ -1,0 +1,45 @@
+/* SlideCard.module.css */
+
+.slideCard {
+  display: flex; /* Use flexbox for side-by-side layout */
+  border: 1px solid #ccc; /* Example border */
+  margin-bottom: 20px;
+  overflow: hidden; /* To prevent potential layout issues */
+  align-items: stretch; /* Ensure containers stretch to equal height */
+}
+
+.imageContainer {
+  width: 50%; /* Image container takes up half the width */
+}
+
+.textContainer {
+  width: 50%; /* Text container takes up the other half */
+  padding: 20px; /* Add some padding to the text container */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.slideImage {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Prevent extra space below image */
+}
+
+.slideTitle {
+  margin-bottom: 10px; /* Spacing below the title */
+}
+
+/* Styles when image is on the left (you can adjust further) */
+.imageLeft .imageContainer {
+  order: 1; /* Default order in flexbox is 0, so 1 will push it to the visual left if needed */
+}
+.imageLeft .textContainer {
+  order: 2;
+}
+
+/* Styles when image is on the right (you can adjust further) */
+.imageRight .imageContainer {
+  order: 2;
+}
+.imageRight .textContainer {
+  order: 1;
+}

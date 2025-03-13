@@ -20,10 +20,29 @@ export default function Architecture() {
     return () => clearInterval(interval);
   }, [memoizedMainProjects.length]);
 
+  const handleMainProjectClick = () => {
+    const currentProject = memoizedMainProjects[mainProjectIndex];
+    if (currentProject.link) {
+      globalThis.open(currentProject.link, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <main>
       <section className={styles.mainProjectSection}>
-        <div className={styles.mainProject}>
+        <div
+          className={`${styles.mainProject} ${
+            memoizedMainProjects[mainProjectIndex].link ? styles.clickable : ""
+          }`}
+          onClick={handleMainProjectClick}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handleMainProjectClick();
+            }
+          }}
+        >
           <img
             src={memoizedMainProjects[mainProjectIndex].image}
             alt={memoizedMainProjects[mainProjectIndex].title}
@@ -33,6 +52,9 @@ export default function Architecture() {
           <div className={styles.overlay}>
             <h2>{memoizedMainProjects[mainProjectIndex].title}</h2>
             <p>{memoizedMainProjects[mainProjectIndex].description}</p>
+            {memoizedMainProjects[mainProjectIndex].link && (
+              <div className={styles.viewProject}>View Project</div>
+            )}
           </div>
         </div>
       </section>

@@ -9,7 +9,7 @@ await build({
   outfile: "build/bundle.js",
   jsx: "automatic",
   sourcemap: true,
-  target: "es2020",
+  target: "esnext",
   format: "esm",
   loader: { ".tsx": "tsx", ".ts": "ts" },
   external: ["react", "react-dom", "react-router-dom", "react-icons/fi"],
