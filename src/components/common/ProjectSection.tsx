@@ -2,7 +2,7 @@
 import React from "react";
 import ProjectCard from "./ProjectCard.tsx";
 import styles from "./ProjectSection.module.css";
-import {type ProjectGroupProps} from "../../types/portfolioTypes.ts";
+import { type ProjectGroupProps } from "../../types/portfolioTypes.ts";
 
 const ProjectGroup: React.FC<ProjectGroupProps> = ({ title, projects }) => {
   return (

@@ -126,6 +126,7 @@ const SphereAnimation = () => {
         <button
           className={styles.toggleButton}
           onClick={() => setAutoRotate(!autoRotate)}
+          type="button"
         >
           {autoRotate ? "⏸ Stop Rotation" : "▶ Start Rotation"}
         </button>

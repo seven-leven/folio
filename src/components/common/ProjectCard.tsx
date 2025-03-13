@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./common/ProjectCard.module.css";
 import { handleImgError } from "../../utils/imageUtils.ts";
-import {type ProjectCardProps} from "../../types/portfolioTypes.ts";
+import { type ProjectCardProps } from "../../types/portfolioTypes.ts";
 
 export default function ProjectCard({
   title,

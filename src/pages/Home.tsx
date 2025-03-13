@@ -32,9 +32,9 @@ const HomePage = () => {
       <section className={`${styles.section} ${styles.personalStatement}`}>
         <div className={styles.statementContainer}>
           <div className={styles.logoContainer}>
-            <img 
-              src="./assets/logo.png" 
-              alt="Logo" 
+            <img
+              src="./assets/logo.png"
+              alt="Logo"
               className={styles.logo}
               onError={handleImgError}
             />
@@ -51,7 +51,10 @@ const HomePage = () => {
       <section className={styles.section}>
         <h2>My Work</h2>
         <div className={styles.projectCategories}>
-          <ProjectSection title="Architecture" projects={architectureProjects} />
+          <ProjectSection
+            title="Architecture"
+            projects={architectureProjects}
+          />
           <ProjectSection title="Coding" projects={codingProjects} />
           <ProjectSection title="Miscellaneous" projects={miscProjects} />
         </div>

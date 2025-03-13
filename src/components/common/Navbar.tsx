@@ -24,7 +24,7 @@ const Navbar = () => {
             className={styles.logoImage}
             onError={handleImgError}
           />
-          <span className={styles.logoText}>  Folio</span>
+          <span className={styles.logoText}>Folio</span>
         </NavLink>
 
         {/* Desktop Navigation */}
@@ -34,8 +34,7 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.active : ""}`
-              }
+                `${styles.navLink} ${isActive ? styles.active : ""}`}
             >
               {link.name}
             </NavLink>
@@ -47,6 +46,7 @@ const Navbar = () => {
           className={styles.menuButton}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle navigation menu"
+          type="button"
         >
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
@@ -60,8 +60,7 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.active : ""}`
-              }
+                `${styles.navLink} ${isActive ? styles.active : ""}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {link.name}

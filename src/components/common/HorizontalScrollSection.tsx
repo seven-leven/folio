@@ -32,7 +32,11 @@ export default function HorizontalScrollSection(
           />
         ))}
       </div>
-      <button className={styles.scrollButton} onClick={scrollRight}>
+      <button
+        type="button"
+        className={styles.scrollButton}
+        onClick={scrollRight}
+      >
         Next
       </button>
     </section>

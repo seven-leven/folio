@@ -10,7 +10,7 @@ export interface ProjectCardProps {
 
 export interface ProjectGroupProps {
   title: string;
-  projects: any[]; // You can replace 'any' with your project type
+  projects: ProjectCardProps[]; // You can replace 'any' with your project type
 }
 
 export interface HorizontalScrollSectionProps {
