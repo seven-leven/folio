@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { handleImgError } from "../../utils/imageUtils.ts";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -17,7 +18,13 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={styles.container}>
         <NavLink to="./" className={styles.logo}>
-          YourPortfolio
+          <img
+            src="./assets/logo.png"
+            alt="Logo"
+            className={styles.logoImage}
+            onError={handleImgError}
+          />
+          <span className={styles.logoText}>  Folio</span>
         </NavLink>
 
         {/* Desktop Navigation */}
@@ -27,7 +34,8 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.active : ""}`}
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
             >
               {link.name}
             </NavLink>
@@ -52,7 +60,8 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               className={({ isActive }) =>
-                `${styles.navLink} ${isActive ? styles.active : ""}`}
+                `${styles.navLink} ${isActive ? styles.active : ""}`
+              }
               onClick={() => setIsMenuOpen(false)}
             >
               {link.name}

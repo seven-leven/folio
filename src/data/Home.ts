@@ -1,4 +1,21 @@
+export interface Project {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  side: "left" | "right";
+  bgColor: string;
+}
+
+export interface HomeData {
+  architectureProjects: Project[];
+  codingProjects: Project[];
+  miscProjects: Project[];
+}
+
 export const homeData = {
+  statement:
+    "I am a passionate architect and developer, blending creativity with technology to build impactful projects. With a focus on design and user experience, I aim to create functional and beautiful spaces and applications.",
   architectureProjects: [
     {
       title: "Modern House",

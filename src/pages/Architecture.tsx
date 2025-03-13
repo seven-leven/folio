@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./Architecture.module.css";
-import HorizontalScrollSection from "../components/HorizontalScrollSection";
+import HorizontalScrollSection from "../components/common/HorizontalScrollSection.tsx";
 import {
   mainProjects,
   miscProjects,
   precedentStudies,
   trips,
-} from "../data/architectureData";
-import { handleImgError } from "../utils/imageUtils";
+} from "../data/architectureData.ts";
+import { handleImgError } from "../utils/imageUtils.ts";
 
 export default function Architecture() {
   const [mainProjectIndex, setMainProjectIndex] = useState(0);

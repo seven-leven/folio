@@ -1,6 +1,6 @@
 //  src/pages/CodingProjects.tsx
 import { useEffect } from "react";
-import ProjectCard from "../components/ProjectCard.tsx";
+import ProjectCard from "../components/common/ProjectCard.tsx";
 import styles from "./CodingProjects.module.css";
 
 const colors = [

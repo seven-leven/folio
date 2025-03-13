@@ -1,16 +1,7 @@
 import { useRef } from "react";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "./ProjectCard.tsx";
 import styles from "../pages/Architecture.module.css";
-
-interface HorizontalScrollSectionProps {
-  title: string;
-  projects: Array<{
-    title: string;
-    description: string;
-    link: string;
-    image: string;
-  }>;
-}
+import { type HorizontalScrollSectionProps } from "../../types/portfolioTypes.ts";
 
 export default function HorizontalScrollSection(
   { title, projects }: HorizontalScrollSectionProps,

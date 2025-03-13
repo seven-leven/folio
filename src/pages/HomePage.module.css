@@ -16,7 +16,34 @@
 
 .personalStatement {
   background-color: #e9ecef;
-  text-align: center;
+  border-radius: 12px; /* Rounded corners for personal statement */
+  overflow: hidden; /* Ensures content doesn't overflow rounded corners */
+  padding: 0; /* Remove padding from section to apply it to the container instead */
+}
+
+.statementContainer {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem; /* Add padding here instead */
+}
+
+.logoContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+.statementText {
+  flex: 2;
+  text-align: left; /* Align text to the left since we now have the logo on the left */
 }
 
 .projectCategories {
@@ -29,19 +56,6 @@
   .projectCategories {
     grid-template-columns: repeat(3, 1fr);
   }
-}
-
-.projectGroup {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-}
-
-.projectList {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1rem;
 }
 
 h1, h2, h3 {
@@ -81,4 +95,33 @@ ul li {
   color: #555;
   max-width: 80ch;
   margin: 0 auto;
+}
+
+/* Add this to your HomePage.module.css */
+.projectCategories {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 1rem; /* Added to provide space for scrollbar */
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  scrollbar-width: thin; /* For Firefox */
+  gap: 0; /* Remove gap if you're using margin on project groups */
+}
+
+/* Optional: Custom scrollbar styling for webkit browsers */
+.projectCategories::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projectCategories::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.projectCategories::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.projectCategories::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

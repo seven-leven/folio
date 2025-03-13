@@ -1,11 +1,12 @@
 // src/pages/HomePage.tsx
-import React from "react";
-import ProjectCard from "../components/ProjectCard.tsx";
+import ProjectSection from "../components/common/ProjectSection.tsx";
 import { homeData } from "../data/Home.ts";
+import { handleImgError } from "../utils/imageUtils.ts";
 import styles from "./HomePage.module.css";
 
 const HomePage = () => {
   const {
+    statement,
     architectureProjects,
     codingProjects,
     miscProjects,
@@ -29,44 +30,30 @@ const HomePage = () => {
   return (
     <div className={styles.homePage}>
       <section className={`${styles.section} ${styles.personalStatement}`}>
-        <h1>Personal Statement</h1>
-        <p>
-          I am a passionate architect and developer, blending creativity with
-          technology to build impactful projects. With a focus on design and
-          user experience, I aim to create functional and beautiful spaces and
-          applications.
-        </p>
+        <div className={styles.statementContainer}>
+          <div className={styles.logoContainer}>
+            <img 
+              src="./assets/logo.png" 
+              alt="Logo" 
+              className={styles.logo}
+              onError={handleImgError}
+            />
+          </div>
+          <div className={styles.statementText}>
+            <h1>Personal Statement</h1>
+            <p>
+              {statement}
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className={styles.section}>
         <h2>My Work</h2>
         <div className={styles.projectCategories}>
-          <div className={styles.projectGroup}>
-            <h3>Architecture</h3>
-            <div className={styles.projectList}>
-              {architectureProjects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.projectGroup}>
-            <h3>Coding</h3>
-            <div className={styles.projectList}>
-              {codingProjects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.projectGroup}>
-            <h3>Miscellaneous</h3>
-            <div className={styles.projectList}>
-              {miscProjects.map((project, index) => (
-                <ProjectCard key={index} {...project} />
-              ))}
-            </div>
-          </div>
+          <ProjectSection title="Architecture" projects={architectureProjects} />
+          <ProjectSection title="Coding" projects={codingProjects} />
+          <ProjectSection title="Miscellaneous" projects={miscProjects} />
         </div>
       </section>
 

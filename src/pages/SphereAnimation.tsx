@@ -1,5 +1,5 @@
 // src/pages/SphereAnimationPage.tsx
-import SphereAnimation from "../components/SphereAnimation.tsx";
+import SphereAnimation from "../components/Coding/SphereAnimation.tsx";
 
 const SphereAnimationPage = () => {
   return (
