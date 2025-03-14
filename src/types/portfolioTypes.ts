@@ -10,7 +10,7 @@ export interface ProjectCardProps {
 
 export interface ProjectGroupProps {
   title: string;
-  projects: ProjectCardProps[]; // You can replace 'any' with your project type
+  projects: ProjectCardProps[];
 }
 
 export interface HorizontalScrollSectionProps {
@@ -27,7 +27,7 @@ export interface SlideCardProps {
   image: string;
   title: string;
   text: string;
-  imageSide: "left" | "right";
+  imageSide: "Left" | "Right" | "Full";
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
@@ -38,6 +38,15 @@ export interface Project {
   image: string;
   side: "left" | "right";
   bgColor: string;
+}
+
+export interface ListSectionProps {
+  title: string;
+  items: string[];
+}
+
+export interface PersonalStatementProps {
+  statement: string;
 }
 
 export interface HomeData {

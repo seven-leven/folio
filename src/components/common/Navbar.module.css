@@ -7,7 +7,7 @@
   width: 100%;
   top: 0;
   z-index: 1000;
-  font-family: sans-serif; /* Add sans-serif font family here */
+  font-family: sans-serif; /* Ensure consistent font family */
 }
 
 .container {
@@ -20,12 +20,20 @@
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #333;
-  text-decoration: none;
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: inherit; /* Use inherit to respect potential parent color */
+}
+
+.logoImage {
+  max-height: 30px; /* Adjust size as needed */
+  margin-right: 10px;
+}
+
+.logoText {
+  font-size: 1rem; /* Match the base font size or adjust slightly */
+  font-weight: 500; /* Match the font weight of nav links */
 }
 
 .desktopLinks {
@@ -38,6 +46,7 @@
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  font-size: 1rem; /* Ensure navLink has an explicit font size */
 }
 
 .navLink:hover {
@@ -90,22 +99,4 @@
   .mobileLinks {
     display: none;
   }
-}
-
-/* Navbar.module.css */
-.logoImage {
-  max-height: 40px;
-  margin-right: 10px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  color: inherit;
-}
-
-.logoText {
-  font-size: 1.2em; /* adjust as needed */
 }

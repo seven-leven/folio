@@ -23,7 +23,7 @@ export default function Architecture() {
   const handleMainProjectClick = () => {
     const currentProject = memoizedMainProjects[mainProjectIndex];
     if (currentProject.link) {
-      globalThis.open(currentProject.link, "_blank", "noopener,noreferrer");
+      globalThis.location.href = currentProject.link;
     }
   };
 

@@ -1,45 +1,90 @@
 /* SlideCard.module.css */
 
 .slideCard {
-  display: flex; /* Use flexbox for side-by-side layout */
-  border: 1px solid #ccc; /* Example border */
+  display: flex;
+  border: 1px solid #ccc;
   margin-bottom: 20px;
-  overflow: hidden; /* To prevent potential layout issues */
-  align-items: stretch; /* Ensure containers stretch to equal height */
+  overflow: hidden;
+  align-items: stretch;
+  border-radius: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  /* 16:9 aspect ratio container */
+  width: 100%;
+  position: relative;
+  padding-top: 56.25%; /* 9/16 = 0.5625 or 56.25% */
+  height: 0;
+}
+
+/* Styles for Left/Right layout */
+.imageLeft, .imageRight {
+  padding-top: 0; /* Override padding-top for split layouts */
+  height: auto;
+  aspect-ratio: 16/9; /* Maintain 16:9 aspect ratio */
 }
 
 .imageContainer {
-  width: 50%; /* Image container takes up half the width */
+  width: 50%;
+  overflow: hidden;
+  position: relative;
 }
 
-.textContainer {
-  width: 50%; /* Text container takes up the other half */
-  padding: 20px; /* Add some padding to the text container */
-  box-sizing: border-box; /* Include padding in width calculation */
+.contentContainer {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .slideImage {
   width: 100%;
-  height: auto; /* Maintain aspect ratio */
-  display: block; /* Prevent extra space below image */
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Full image slide */
+.imageFull {
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  position: relative;
+}
+
+.imageContainerFull {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.imageFull .slideImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .slideTitle {
-  margin-bottom: 10px; /* Spacing below the title */
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Styles when image is on the left (you can adjust further) */
-.imageLeft .imageContainer {
-  order: 1; /* Default order in flexbox is 0, so 1 will push it to the visual left if needed */
-}
-.imageLeft .textContainer {
-  order: 2;
+.slideText {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Styles when image is on the right (you can adjust further) */
-.imageRight .imageContainer {
-  order: 2;
+/* Direction control */
+.imageLeft {
+  flex-direction: row;
 }
-.imageRight .textContainer {
-  order: 1;
+
+.imageRight {
+  flex-direction: row-reverse;
 }

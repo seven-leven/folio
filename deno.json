@@ -23,12 +23,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "lint": {
-      "rules": {
-        "exclude": ["no-explicit-any", "no-unused-vars"]
-      }
-    }
+    "noFallthroughCasesInSwitch": true
   },
   "unstable": [
     "sloppy-imports"
