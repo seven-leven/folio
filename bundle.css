@@ -1,0 +1,613 @@
+/* src/components/common/Navbar.module.css */
+.Navbar_navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  font-family: sans-serif;
+}
+.Navbar_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Navbar_logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+.Navbar_logoImage {
+  max-height: 30px;
+  margin-right: 10px;
+}
+.Navbar_logoText {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.Navbar_desktopLinks {
+  display: none;
+  gap: 2rem;
+}
+.Navbar_navLink {
+  color: #666;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+.Navbar_navLink:hover {
+  color: #333;
+}
+.Navbar_active {
+  color: #0070f3;
+  font-weight: 600;
+}
+.Navbar_menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: block;
+}
+.Navbar_mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+  opacity: 0;
+}
+.Navbar_mobileLinks.Navbar_open {
+  transform: translateY(0);
+  opacity: 1;
+}
+@media (min-width: 768px) {
+  .Navbar_desktopLinks {
+    display: flex;
+  }
+  .Navbar_menuButton {
+    display: none;
+  }
+  .Navbar_mobileLinks {
+    display: none;
+  }
+}
+
+/* src/components/common/ProjectCard.module.css */
+.ProjectCard_card {
+  display: flex;
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 250px;
+  overflow: hidden;
+}
+.ProjectCard_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+.ProjectCard_imageContainer {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.ProjectCard_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.ProjectCard_content {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ProjectCard_content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2d3748;
+}
+.ProjectCard_content p {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.ProjectCard_link {
+  display: inline-flex;
+  align-items: center;
+  color: #4299e1;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.ProjectCard_arrow {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.5rem;
+  stroke: currentColor;
+  transition: transform 0.3s ease;
+}
+.ProjectCard_card:hover .ProjectCard_arrow {
+  transform: translateX(3px);
+}
+@media (max-width: 768px) {
+  .ProjectCard_card {
+    flex-direction: column;
+    max-width: 400px;
+  }
+  .ProjectCard_imageContainer {
+    width: 100%;
+    height: 200px;
+  }
+  .ProjectCard_right {
+    flex-direction: column;
+  }
+}
+
+/* src/components/common/ProjectGroup.module.css */
+.ProjectGroup_projectGroup {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  min-width: 300px;
+  flex-shrink: 0;
+  margin-right: 1.5rem;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.ProjectGroup_projectList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* src/pages/HomePage.module.css */
+.HomePage_homePage {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  line-height: 1.6;
+}
+.HomePage_section {
+  padding: 4rem 2rem;
+}
+.HomePage_sectionAlt {
+  background-color: #f8f9fa;
+}
+.HomePage_personalStatement {
+  background-color: #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+}
+.HomePage_statementContainer {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+}
+.HomePage_logoContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+.HomePage_logo {
+  max-width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+.HomePage_statementText {
+  flex: 2;
+  text-align: left;
+}
+.HomePage_projectCategories {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+@media (min-width: 768px) {
+  .HomePage_projectCategories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+h1,
+h2,
+h3 {
+  color: #2d3436;
+  margin: 0 0 1.5rem;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #74b9ff;
+  padding-bottom: 0.5rem;
+}
+h3 {
+  font-size: 1.5rem;
+  color: #0984e3;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+}
+.HomePage_interestsText {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 80ch;
+  margin: 0 auto;
+}
+.HomePage_projectCategories {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  gap: 0;
+}
+.HomePage_projectCategories::-webkit-scrollbar {
+  height: 8px;
+}
+.HomePage_projectCategories::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+.HomePage_projectCategories::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+.HomePage_projectCategories::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* src/pages/Architecture.module.css */
+.Architecture_mainProjectSection {
+  position: relative;
+  height: 70vh;
+  margin: 2rem 0;
+}
+.Architecture_mainProject {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.Architecture_mainProjectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+.Architecture_overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  padding: 2rem;
+}
+.Architecture_projectsSection {
+  margin: 4rem 0;
+  padding: 0 2rem;
+}
+.Architecture_projectsSection h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+.Architecture_scrollContainer {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+.Architecture_scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+.Architecture_scrollButton {
+  position: absolute;
+  right: 2rem;
+  transform: translateY(-150%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.Architecture_scrollButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+.Architecture_clickable {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.Architecture_clickable:hover {
+  transform: scale(1.02);
+}
+.Architecture_viewProject {
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* src/pages/CodingProjects.module.css */
+.CodingProjects_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+.CodingProjects_githubSection {
+  margin-bottom: 4rem;
+  animation: CodingProjects_fadeIn 0.6s ease-out;
+}
+.CodingProjects_githubCard {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.CodingProjects_githubCard:hover {
+  transform: translateY(-3px);
+}
+.CodingProjects_githubImage {
+  width: 120px;
+  height: 120px;
+  margin-right: 2rem;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.CodingProjects_githubImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.CodingProjects_githubContent h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+}
+.CodingProjects_githubContent p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+.CodingProjects_heading {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+  color: #2d3748;
+  animation: CodingProjects_fadeIn 0.6s ease-out;
+}
+.CodingProjects_projectsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* src/components/Coding/SphereAnimation.module.css */
+.SphereAnimation_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #0a0a0a;
+}
+.SphereAnimation_terminalContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem 0;
+  background: #000;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+.SphereAnimation_output {
+  font-family: "Courier New", monospace;
+  color: #00ff00;
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 0 auto;
+  text-align: center;
+  white-space: pre-wrap;
+}
+.SphereAnimation_controls {
+  width: 100%;
+  max-width: 800px;
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.SphereAnimation_sliderGroup {
+  margin: 1.5rem 0;
+}
+.SphereAnimation_sliderGroup label {
+  display: block;
+  color: #00ff00;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
+}
+.SphereAnimation_sliderGroup input[type=range] {
+  width: 100%;
+  height: 8px;
+  background: #333;
+  border-radius: 4px;
+  outline: none;
+}
+.SphereAnimation_sliderGroup input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.SphereAnimation_sliderGroup input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+.SphereAnimation_toggleButton {
+  width: 100%;
+  padding: 1rem;
+  background: #00ff00;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-family: monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+.SphereAnimation_toggleButton:hover {
+  background: #00cc00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+}
+
+/* src/components/common/SlideCard.module.css */
+.SlideCard_slideCard {
+  display: flex;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  overflow: hidden;
+  align-items: stretch;
+  border-radius: 12px;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+  width: 100%;
+  position: relative;
+  padding-top: 56.25%;
+  height: 0;
+}
+.SlideCard_imageLeft,
+.SlideCard_imageRight {
+  padding-top: 0;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+.SlideCard_imageContainer {
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.SlideCard_contentContainer {
+  width: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.SlideCard_slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.SlideCard_imageFull {
+  padding-top: 56.25%;
+  height: 0;
+  position: relative;
+}
+.SlideCard_imageContainerFull {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.SlideCard_imageFull .SlideCard_slideImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.SlideCard_slideTitle {
+  margin-bottom: 10px;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+.SlideCard_slideText {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+.SlideCard_imageLeft {
+  flex-direction: row;
+}
+.SlideCard_imageRight {
+  flex-direction: row-reverse;
+}
+
+/* src/App.module.css */
+.App_navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #333;
+  z-index: 1000;
+}
+.App_content {
+  padding-top: 60px;
+}
+/*# sourceMappingURL=bundle.css.map */
