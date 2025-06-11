@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Canvas - Architectural Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --heading-color: #2c3e50;
+            --accent-blue: #3498db;
+            --accent-red: #e74c3c;
+            --accent-terracotta: #c07A51;
+            --font-primary: 'Lato', sans-serif;
+            --font-headings: 'Montserrat', sans-serif;
+            --shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --border-radius: 8px;
+            --sub-project-bg: #eaf2f8; 
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-primary);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            color: var(--heading-color);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .title-container h1 {
+            font-family: var(--font-headings);
+            font-size: 3em;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .canvas-text {
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            font-weight: 300;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hero section and general section animation states */
+        #hero, 
+        section.animate-on-scroll-target { /* Renamed for clarity, sections to be observed */
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slightly longer transition */
+        }
+
+        #hero.is-visible,
+        section.animate-on-scroll-target.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #hero { /* Specific styles for hero, initial animation state is set above */
+            width: 100%;
+            background-color: var(--primary-bg); 
+            padding: 30px 0; 
+            margin-bottom: 30px;
+        }
+
+        #hero figure {
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+
+        #hero img {
+            width: 100%; 
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        #hero figcaption {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section { /* General section styling, animation handled by .animate-on-scroll-target */
+            background-color: var(--card-bg);
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        section h2 {
+            font-family: var(--font-headings);
+            color: var(--heading-color);
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+            display: inline-block;
+        }
+
+        section h3 {
+            font-family: var(--font-headings);
+            color: var(--heading-color);
+            margin-top: 20px;
+        }
+
+        #introduction .intro-text p {
+            margin-bottom: 25px;
+        }
+
+        .problem-remedy-wrapper {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .problem-box, .remedy-box {
+            padding: 20px;
+            background-color: #f9f9f9; 
+            border-radius: var(--border-radius);
+            border: 1px solid #eee;
+        }
+
+        .problem-box h3, .remedy-box h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            font-size: 1.2em;
+        }
+        .problem-box h3 {
+            border-bottom: 2px solid var(--accent-red); 
+        }
+        .remedy-box h3 {
+            border-bottom: 2px solid var(--accent-blue); 
+        }
+
+        p.statement-text {
+            font-size: 1.1em;
+            font-style: italic;
+            color: var(--accent-terracotta);
+            text-align: center;
+            padding: 15px;
+            border-left: 3px solid var(--accent-terracotta);
+            margin: 30px 0 0 0; 
+        }
+
+        #form-development {
+            background-color: var(--sub-project-bg);
+            border: 1px solid #cce0ff;
+        }
+        #form-development .section-intro-note {
+            font-size: 0.95em;
+            font-style: italic;
+            color: #444;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-left: 3px solid var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        figure {
+            margin: 15px 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto 10px auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        figcaption {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+        }
+
+        .site-grid, .ricci-flow-grid, .plans-grid, .details-grid, .blowups-grid, .sections-elevations-grid, .views-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .site-grid, .details-grid, .blowups-grid, .views-grid {
+            grid-template-columns: 1fr;
+        }
+        .plans-grid, .ricci-flow-grid, .sections-elevations-grid {
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .problem-remedy-wrapper {
+                grid-template-columns: 1fr 1fr; 
+            }
+
+            .site-grid, .details-grid, .blowups-grid, .views-grid { grid-template-columns: repeat(2, 1fr); }
+            .plans-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+            .ricci-flow-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
+            .sections-elevations-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--heading-color);
+            color: var(--primary-bg);
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="title-container">
+            <h1>BLUE <span class="canvas-text">CANVAS</span></h1>
+            <p class="subtitle">EXPLORING THE INTERSECTION OF ARTISTIC PRACTICE AND CHILDHOOD PLAY</p>
+        </div>
+    </header>
+
+    <!-- Hero section with specific ID for direct JS targeting if needed, but CSS handles initial state -->
+    <section id="hero"> 
+        <figure>
+            <img src="sem 2/killer.png" alt="Blue Canvas Conceptual Form - Main Building">
+            <figcaption>The "Blue Canvas" - Main Building Conceptual Form</figcaption>
+        </figure>
+    </section>
+
+    <main>
+        <!-- Add 'animate-on-scroll-target' class to sections you want observed by IntersectionObserver -->
+        <section id="introduction" class="animate-on-scroll-target">
+            <h2>Introduction & Concept</h2>
+            <div class="intro-text">
+                <p>The project explores the intersection of artistic practice and childhood play, proposing a new typology of public infrastructure that challenges traditional art education norms.</p>
+            </div>
+
+            <div class="problem-remedy-wrapper">
+                <div class="problem-box">
+                    <h3>Problem Factor</h3>
+                    <figure>
+                        <img src="sem 2/problem.png" alt="Problem Factor Diagram">
+                        <figcaption>Art education often sterile, limiting children's innate creativity.</figcaption>
+                    </figure>
+                </div>
+                <div class="remedy-box">
+                    <h3>Remedy</h3>
+                    <figure>
+                        <img src="sem 2/remedy.png" alt="Remedy Diagram">
+                        <figcaption>Foster exploration and creation in a positive, uninhibited environment.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <h3>Statement</h3>
+            <p class="statement-text">FOSTERING A NURTURING AND SUPPORTIVE ENVIRONMENT WHERE CHILDREN CAN FREELY EXPLORE ART, CONNECT WITH NATURE, AND GAIN AUTHENTIC UNDERSTANDING OF ARTISTIC PRACTICE AND EXPRESSION.</p>
+        </section>
+
+        <section id="site" class="animate-on-scroll-target">
+            <h2>Site Analysis & Strategy</h2>
+            <div class="site-grid">
+                <figure>
+                    <img src="sem 2/site.png" alt="Site Plan">
+                    <figcaption>Site Plan & Key Areas</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/site strategies.png" alt="Site Strategies">
+                    <figcaption>Site Strategies: Preserving trees, maximizing views, integrating pathways.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="form-development" class="animate-on-scroll-target"> <!-- Ricci Flow Section -->
+            <h2>Form Development: Ricci Flow Study</h2>
+            <p class="section-intro-note">
+                The "Ricci Flow" concept served as a foundational design study for this project. It explores an iterative process of form generation (illustrated below) which guided the organic development of the main building's structure (showcased by the hero image) and offered insights into creating adaptable, evolving spaces. This methodology also presents potential for further exploration in smaller-scale elements, such as furniture design (a related sub-study not detailed on this page).
+            </p>
+            <div class="ricci-flow-grid">
+                <figure>
+                    <img src="sem 2/form.png" alt="Ricci Flow initial form study">
+                    <figcaption>Ricci Flow: Initial Form Generation Concepts</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/ricci flow form.png" alt="Ricci Flow iterative form diagram">
+                    <figcaption>Ricci Flow: Iterative Structural Form Generation</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/ricci flow view 1.png" alt="Ricci Flow conceptual view 1">
+                    <figcaption>Ricci Flow Study: Conceptual Shell Structure View</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/ricci flow view 2.png" alt="Ricci Flow conceptual view 2">
+                    <figcaption>Ricci Flow Study: Resulting Conceptual Shell</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="programming" class="animate-on-scroll-target">
+            <h2>Programming & Parti</h2>
+            <figure>
+                <img src="sem 2/programming.png" alt="Programming and Parti Diagrams">
+                <figcaption>Spatial Programming and Parti Diagrams for each floor.</figcaption>
+            </figure>
+        </section>
+
+        <section id="floor-plans" class="animate-on-scroll-target">
+            <h2>Floor Plans</h2>
+            <div class="plans-grid">
+                <figure>
+                    <img src="sem 2/ground floor.png" alt="Ground Floor Plan">
+                    <figcaption>Ground Floor Plan</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/1st floor.png" alt="First Floor Plan">
+                    <figcaption>First Floor Plan</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/2nd floor.png" alt="Second Floor Plan">
+                    <figcaption>Second Floor Plan</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="details" class="animate-on-scroll-target">
+            <h2>Structural & Material Details</h2>
+            <div class="details-grid">
+                <figure>
+                    <img src="sem 2/frame connection detail.png" alt="Structural Frame Connection">
+                    <figcaption>Structural Frame Connection Detail</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/flooring detail.png" alt="Ground Flooring Detail">
+                    <figcaption>Ground Flooring Detail</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="blow-ups" class="animate-on-scroll-target">
+            <h2>Detailed Views & Blow-ups</h2>
+            <div class="blowups-grid">
+                <figure>
+                    <img src="sem 2/blow up 1.png" alt="Pathway Blowup">
+                    <figcaption>Pathway Blowup - Integrating Nature</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/blow up 2.png" alt="Individual Workspace Blowup">
+                    <figcaption>Individual Workspace Blowup</figcaption>
+                </figure>
+            </div>
+        </section>
+        
+        <section id="sections-elevations" class="animate-on-scroll-target">
+            <h2>Sections & Elevations</h2>
+            <div class="sections-elevations-grid">
+                <figure>
+                    <img src="sem 2/section 1 1 100.png" alt="Section 1 at 1:100">
+                    <figcaption>Section 1 (Scale 1:100)</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/section 2 1 50.png" alt="Section 2 at 1:50">
+                    <figcaption>Section 2 (Scale 1:50)</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/elevation 1.png" alt="Elevation 1">
+                    <figcaption>Elevation 1</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/elevation 2.png" alt="Elevation 2">
+                    <figcaption>Elevation 2</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section id="views" class="animate-on-scroll-target">
+            <h2>Perspective Views</h2>
+            <div class="views-grid">
+                <figure>
+                    <img src="sem 2/view 1.png" alt="Perspective View 1">
+                    <figcaption>Interior Perspective - Workshop Space</figcaption>
+                </figure>
+                <figure>
+                    <img src="sem 2/view 2.png" alt="Perspective View 2">
+                    <figcaption>Exterior Perspective - Entrance View</figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Blue Canvas Project. Design by GAURI GAJBHIYE YAJOOR</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate Hero Section on load
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                // The initial state (opacity:0, transform:translateY) is set by CSS.
+                // We add 'is-visible' after a short delay to trigger the transition.
+                setTimeout(() => {
+                    heroSection.classList.add('is-visible');
+                }, 100); // 100ms delay - adjust if needed
+            }
+
+            // Animate other sections on scroll
+            const sectionsToAnimate = document.querySelectorAll('.animate-on-scroll-target');
+
+            if ("IntersectionObserver" in window) {
+                const observerOptions = {
+                    root: null, 
+                    rootMargin: '0px',
+                    threshold: 0.1 // 10% of the item is visible
+                };
+
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            // Optional: Stop observing once it's visible if you don't want re-animation
+                            // observerInstance.unobserve(entry.target); 
+                        }
+                        // Optional: else clause to remove 'is-visible' if you want re-animation on scroll up/down
+                        // else { entry.target.classList.remove('is-visible'); }
+                    });
+                }, observerOptions);
+
+                sectionsToAnimate.forEach(section => {
+                    observer.observe(section);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                // Make all sections visible immediately or use a simpler scroll listener
+                sectionsToAnimate.forEach(section => {
+                    section.classList.add('is-visible');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
