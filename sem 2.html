@@ -60,12 +60,11 @@
             margin: 0 auto;
         }
 
-        /* Hero section and general section animation states */
         #hero, 
-        section.animate-on-scroll-target { /* Renamed for clarity, sections to be observed */
+        section.animate-on-scroll-target {
             opacity: 0; 
             transform: translateY(30px); 
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Slightly longer transition */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         #hero.is-visible,
@@ -74,7 +73,7 @@
             transform: translateY(0);
         }
 
-        #hero { /* Specific styles for hero, initial animation state is set above */
+        #hero {
             width: 100%;
             background-color: var(--primary-bg); 
             padding: 30px 0; 
@@ -107,7 +106,7 @@
             padding: 0 20px;
         }
 
-        section { /* General section styling, animation handled by .animate-on-scroll-target */
+        section {
             background-color: var(--card-bg);
             margin-bottom: 40px;
             padding: 30px;
@@ -171,11 +170,12 @@
             margin: 30px 0 0 0; 
         }
 
-        #form-development {
+        /* Styling for the Ricci Flow Study section */
+        #ricci-flow-study { /* Updated ID */
             background-color: var(--sub-project-bg);
             border: 1px solid #cce0ff;
         }
-        #form-development .section-intro-note {
+        #ricci-flow-study .section-intro-note { /* Updated ID */
             font-size: 0.95em;
             font-style: italic;
             color: #444;
@@ -212,9 +212,14 @@
             font-style: italic;
         }
 
-        .site-grid, .ricci-flow-grid, .plans-grid, .details-grid, .blowups-grid, .sections-elevations-grid, .views-grid {
+        .site-grid, .ricci-flow-grid, .plans-grid, .details-grid, .blowups-grid, .sections-elevations-grid, .views-grid, .conceptual-form-grid {
             display: grid;
             gap: 25px;
+        }
+        
+        /* Single column by default for conceptual form grid */
+        .conceptual-form-grid {
+            grid-template-columns: 1fr;
         }
 
         .site-grid, .details-grid, .blowups-grid, .views-grid {
@@ -224,14 +229,19 @@
             grid-template-columns: 1fr;
         }
 
+
         @media (min-width: 768px) {
             .problem-remedy-wrapper {
                 grid-template-columns: 1fr 1fr; 
             }
 
+            .conceptual-form-grid { /* Can be 1 or 2 columns based on preference for form.png */
+                 grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+
             .site-grid, .details-grid, .blowups-grid, .views-grid { grid-template-columns: repeat(2, 1fr); }
             .plans-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-            .ricci-flow-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
+            .ricci-flow-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));} /* For 3 images, this will space them out */
             .sections-elevations-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         }
 
@@ -253,16 +263,14 @@
         </div>
     </header>
 
-    <!-- Hero section with specific ID for direct JS targeting if needed, but CSS handles initial state -->
     <section id="hero"> 
         <figure>
-            <img src="sem 2/killer.webp" alt="Blue Canvas Conceptual Form - Main Building">
+            <img src="sem 2/killer.png" alt="Blue Canvas Conceptual Form - Main Building">
             <figcaption>The "Blue Canvas" - Main Building Conceptual Form</figcaption>
         </figure>
     </section>
 
     <main>
-        <!-- Add 'animate-on-scroll-target' class to sections you want observed by IntersectionObserver -->
         <section id="introduction" class="animate-on-scroll-target">
             <h2>Introduction & Concept</h2>
             <div class="intro-text">
@@ -273,14 +281,14 @@
                 <div class="problem-box">
                     <h3>Problem Factor</h3>
                     <figure>
-                        <img src="sem 2/problem.webp" alt="Problem Factor Diagram">
+                        <img src="sem 2/problem.png" alt="Problem Factor Diagram">
                         <figcaption>Art education often sterile, limiting children's innate creativity.</figcaption>
                     </figure>
                 </div>
                 <div class="remedy-box">
                     <h3>Remedy</h3>
                     <figure>
-                        <img src="sem 2/remedy.webp" alt="Remedy Diagram">
+                        <img src="sem 2/remedy.png" alt="Remedy Diagram">
                         <figcaption>Foster exploration and creation in a positive, uninhibited environment.</figcaption>
                     </figure>
                 </div>
@@ -290,41 +298,48 @@
             <p class="statement-text">FOSTERING A NURTURING AND SUPPORTIVE ENVIRONMENT WHERE CHILDREN CAN FREELY EXPLORE ART, CONNECT WITH NATURE, AND GAIN AUTHENTIC UNDERSTANDING OF ARTISTIC PRACTICE AND EXPRESSION.</p>
         </section>
 
+        <section id="conceptual-building-form" class="animate-on-scroll-target">
+            <h2>Conceptual Building Form</h2>
+            <p>Early conceptual explorations for the main building's form, considering massing, program distribution, and experiential qualities.</p>
+            <div class="conceptual-form-grid">
+                <figure>
+                    <img src="sem 2/form.png" alt="Initial building form sketches and diagrams">
+                    <figcaption>Initial Building Form & Massing Concepts</figcaption>
+                </figure>
+            </div>
+        </section>
+
         <section id="site" class="animate-on-scroll-target">
             <h2>Site Analysis & Strategy</h2>
             <div class="site-grid">
                 <figure>
-                    <img src="sem 2/site.webp" alt="Site Plan">
+                    <img src="sem 2/site.png" alt="Site Plan">
                     <figcaption>Site Plan & Key Areas</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/site strategies.webp" alt="Site Strategies">
+                    <img src="sem 2/site strategies.png" alt="Site Strategies">
                     <figcaption>Site Strategies: Preserving trees, maximizing views, integrating pathways.</figcaption>
                 </figure>
             </div>
         </section>
 
-        <section id="form-development" class="animate-on-scroll-target"> <!-- Ricci Flow Section -->
-            <h2>Form Development: Ricci Flow Study</h2>
+        <section id="ricci-flow-study" class="animate-on-scroll-target"> <!-- Changed ID -->
+            <h2>Design Methodology: Ricci Flow Study</h2>
             <p class="section-intro-note">
-                The "Ricci Flow" concept served as a foundational design study for this project. It explores an iterative process of form generation (illustrated below) which guided the organic development of the main building's structure (showcased by the hero image) and offered insights into creating adaptable, evolving spaces. This methodology also presents potential for further exploration in smaller-scale elements, such as furniture design (a related sub-study not detailed on this page).
+                The "Ricci Flow" geometric process served as a key design methodology, explored as a foundational study for this project. This iterative technique for form generation (illustrated below) provided a framework for developing the organic and adaptable qualities of the main building's structure. The study focused on how such processes can yield evolving and responsive architectural spaces.
             </p>
             <div class="ricci-flow-grid">
                 <figure>
-                    <img src="sem 2/form.webp" alt="Ricci Flow initial form study">
-                    <figcaption>Ricci Flow: Initial Form Generation Concepts</figcaption>
+                    <img src="sem 2/ricci flow form.png" alt="Ricci Flow iterative form diagram">
+                    <figcaption>Ricci Flow: Iterative Structural Form Generation Process</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/ricci flow form.webp" alt="Ricci Flow iterative form diagram">
-                    <figcaption>Ricci Flow: Iterative Structural Form Generation</figcaption>
+                    <img src="sem 2/ricci flow view 1.png" alt="Ricci Flow conceptual view 1">
+                    <figcaption>Ricci Flow Study: Conceptual Shell Structure Visualization</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/ricci flow view 1.webp" alt="Ricci Flow conceptual view 1">
-                    <figcaption>Ricci Flow Study: Conceptual Shell Structure View</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 2/ricci flow view 2.webp" alt="Ricci Flow conceptual view 2">
-                    <figcaption>Ricci Flow Study: Resulting Conceptual Shell</figcaption>
+                    <img src="sem 2/ricci flow view 2.png" alt="Ricci Flow conceptual view 2">
+                    <figcaption>Ricci Flow Study: Resulting Conceptual Shell Form</figcaption>
                 </figure>
             </div>
         </section>
@@ -332,7 +347,7 @@
         <section id="programming" class="animate-on-scroll-target">
             <h2>Programming & Parti</h2>
             <figure>
-                <img src="sem 2/programming.webp" alt="Programming and Parti Diagrams">
+                <img src="sem 2/programming.png" alt="Programming and Parti Diagrams">
                 <figcaption>Spatial Programming and Parti Diagrams for each floor.</figcaption>
             </figure>
         </section>
@@ -341,15 +356,15 @@
             <h2>Floor Plans</h2>
             <div class="plans-grid">
                 <figure>
-                    <img src="sem 2/ground floor.webp" alt="Ground Floor Plan">
+                    <img src="sem 2/ground floor.png" alt="Ground Floor Plan">
                     <figcaption>Ground Floor Plan</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/1st floor.webp" alt="First Floor Plan">
+                    <img src="sem 2/1st floor.png" alt="First Floor Plan">
                     <figcaption>First Floor Plan</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/2nd floor.webp" alt="Second Floor Plan">
+                    <img src="sem 2/2nd floor.png" alt="Second Floor Plan">
                     <figcaption>Second Floor Plan</figcaption>
                 </figure>
             </div>
@@ -359,11 +374,11 @@
             <h2>Structural & Material Details</h2>
             <div class="details-grid">
                 <figure>
-                    <img src="sem 2/frame connection detail.webp" alt="Structural Frame Connection">
+                    <img src="sem 2/frame connection detail.png" alt="Structural Frame Connection">
                     <figcaption>Structural Frame Connection Detail</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/flooring detail.webp" alt="Ground Flooring Detail">
+                    <img src="sem 2/flooring detail.png" alt="Ground Flooring Detail">
                     <figcaption>Ground Flooring Detail</figcaption>
                 </figure>
             </div>
@@ -373,11 +388,11 @@
             <h2>Detailed Views & Blow-ups</h2>
             <div class="blowups-grid">
                 <figure>
-                    <img src="sem 2/blow up 1.webp" alt="Pathway Blowup">
+                    <img src="sem 2/blow up 1.png" alt="Pathway Blowup">
                     <figcaption>Pathway Blowup - Integrating Nature</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/blow up 2.webp" alt="Individual Workspace Blowup">
+                    <img src="sem 2/blow up 2.png" alt="Individual Workspace Blowup">
                     <figcaption>Individual Workspace Blowup</figcaption>
                 </figure>
             </div>
@@ -387,19 +402,19 @@
             <h2>Sections & Elevations</h2>
             <div class="sections-elevations-grid">
                 <figure>
-                    <img src="sem 2/section 1 1 100.webp" alt="Section 1 at 1:100">
+                    <img src="sem 2/section 1 1 100.png" alt="Section 1 at 1:100">
                     <figcaption>Section 1 (Scale 1:100)</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/section 2 1 50.webp" alt="Section 2 at 1:50">
+                    <img src="sem 2/section 2 1 50.png" alt="Section 2 at 1:50">
                     <figcaption>Section 2 (Scale 1:50)</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/elevation 1.webp" alt="Elevation 1">
+                    <img src="sem 2/elevation 1.png" alt="Elevation 1">
                     <figcaption>Elevation 1</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/elevation 2.webp" alt="Elevation 2">
+                    <img src="sem 2/elevation 2.png" alt="Elevation 2">
                     <figcaption>Elevation 2</figcaption>
                 </figure>
             </div>
@@ -409,11 +424,11 @@
             <h2>Perspective Views</h2>
             <div class="views-grid">
                 <figure>
-                    <img src="sem 2/view 1.webp" alt="Perspective View 1">
+                    <img src="sem 2/view 1.png" alt="Perspective View 1">
                     <figcaption>Interior Perspective - Workshop Space</figcaption>
                 </figure>
                 <figure>
-                    <img src="sem 2/view 2.webp" alt="Perspective View 2">
+                    <img src="sem 2/view 2.png" alt="Perspective View 2">
                     <figcaption>Exterior Perspective - Entrance View</figcaption>
                 </figure>
             </div>
@@ -426,35 +441,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Animate Hero Section on load
             const heroSection = document.getElementById('hero');
             if (heroSection) {
-                // The initial state (opacity:0, transform:translateY) is set by CSS.
-                // We add 'is-visible' after a short delay to trigger the transition.
                 setTimeout(() => {
                     heroSection.classList.add('is-visible');
-                }, 100); // 100ms delay - adjust if needed
+                }, 100); 
             }
 
-            // Animate other sections on scroll
             const sectionsToAnimate = document.querySelectorAll('.animate-on-scroll-target');
 
             if ("IntersectionObserver" in window) {
                 const observerOptions = {
                     root: null, 
                     rootMargin: '0px',
-                    threshold: 0.1 // 10% of the item is visible
+                    threshold: 0.1 
                 };
 
                 const observer = new IntersectionObserver((entries, observerInstance) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            // Optional: Stop observing once it's visible if you don't want re-animation
-                            // observerInstance.unobserve(entry.target); 
                         }
-                        // Optional: else clause to remove 'is-visible' if you want re-animation on scroll up/down
-                        // else { entry.target.classList.remove('is-visible'); }
                     });
                 }, observerOptions);
 
@@ -462,8 +469,6 @@
                     observer.observe(section);
                 });
             } else {
-                // Fallback for browsers that don't support IntersectionObserver
-                // Make all sections visible immediately or use a simpler scroll listener
                 sectionsToAnimate.forEach(section => {
                     section.classList.add('is-visible');
                 });
