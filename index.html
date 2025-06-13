@@ -5,6 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaahis Yaugoob - Architecture Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Project Card Styles - Add these to your style.css or keep them here */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+            gap: 30px; /* Space between cards */
+            margin-top: 20px; /* Space below the "Projects" heading */
+        }
+
+        .project-card {
+            background-color: #fff; /* Or your card background color */
+            border-radius: 8px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; /* Important for border-radius and image container */
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        .project-image-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Makes the container square */
+            overflow: hidden; 
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image covers square, crops if needed */
+            display: block; 
+            transition: transform 0.3s ease; 
+        }
+
+        .project-image-container:hover img {
+            transform: scale(1.05); /* Optional: slight zoom on hover */
+        }
+
+        .project-image-container .btn-project {
+            position: absolute;
+            bottom: 15px; 
+            right: 15px;  
+            z-index: 10;   
+            background-color: rgba(44, 62, 80, 0.75); /* Using a theme color, semi-transparent */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: none; /* remove default border if any from global .btn-project */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .project-image-container .btn-project:hover {
+            background-color: rgba(44, 62, 80, 0.95); /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .project-info {
+            padding: 20px; /* Increased padding */
+            text-align: left; 
+            background-color: #f9f9f9; /* Light background for info section */
+            flex-grow: 1; /* Allows info section to take remaining space if cards have varying text height */
+        }
+
+        .project-info h3 {
+            margin-top: 0;
+            margin-bottom: 10px; /* Increased space */
+            font-size: 1.3em; /* Adjusted size */
+            color: #2c3e50; /* Theme heading color */
+        }
+
+        .project-info p {
+            font-size: 0.95em; /* Adjusted size */
+            color: #555; 
+            margin-bottom: 0; 
+            line-height: 1.5;
+        }
+        /* End of Project Card Styles */
+    </style>
 </head>
 <body>
     <nav id="navbar">
@@ -25,14 +105,13 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="logo-area">
-                        <!-- Replace with your actual logo image -->
-                        <img src="images/logo.png" alt="Your Logo" class="logo">
-                        <h1>Gaahis Yaugoob</h1> <!-- Your Name -->
+                        <img src="images/logo.png" alt="Gaahis Yaugoob Logo" class="logo">
+                        <h1>Gaahis Yaugoob</h1>
                         <p>Architectural Designer & Civil Engineer</p>
                     </div>
                     <div class="contact-area">
                         <h2>Contact</h2>
-                        <p>Email: <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a></p> <!-- Corrected email -->
+                        <p>Email: <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a></p>
                         <p>Phone: +960 980-9844</p>
                     </div>
                 </div>
@@ -42,23 +121,36 @@
         <section id="projects" class="animate-on-scroll-target">
             <div class="container">
                 <h2>Projects</h2>
+                <div class="project-grid"> {/* Wrapper for the cards */}
                     <div class="project-card">
-                        <img src="sem 1/killer.webp" alt="Semester 1 Project">
-                        <h3>Semester 1 Project</h3>
-                        <p>Enchanting Reading Nook</p>
-                        <a href="sem1.html" class="btn-project">View Details</a>
+                        <div class="project-image-container">
+                            <img src="sem 1/killer.webp" alt="Semester 1 Project - Reading Nook">
+                            <a href="sem1.html" class="btn-project">View Details</a>
+                        </div>
+                        <div class="project-info">
+                            <h3>Enchanting Reading Nook</h3>
+                            <p>Semester 1: A cozy and immersive space designed for literary escape and tranquility.</p>
+                        </div>
                     </div>
                     <div class="project-card">
-                        <img src="sem 2/killer.webp" alt="Semester 2 Project">
-                        <h3>Semester 2 Project</h3>
-                        <p>Exploring the Intersection of Artistic Practice and Childhood Play</p>
-                        <a href="sem2.html" class="btn-project">View Details</a>
+                        <div class="project-image-container">
+                            <img src="sem 2/killer.webp" alt="Semester 2 Project - Blue Canvas">
+                            <a href="sem2.html" class="btn-project">View Details</a>
+                        </div>
+                        <div class="project-info">
+                            <h3>Blue Canvas</h3>
+                            <p>Semester 2: Exploring the intersection of artistic practice and childhood play.</p>
+                        </div>
                     </div>
                     <div class="project-card">
-                        <img src="sem 3/killer.webp" alt="Semester 3 Project">
-                        <h3>Semester 3 Project</h3>
-                        <p>Vitalizing Retreat withing concrete Jungle</p>
-                        <a href="sem3.html" class="btn-project">View Details</a>
+                        <div class="project-image-container">
+                            <img src="sem 3/killer.webp" alt="Semester 3 Project - Acupuncture">
+                            <a href="sem3.html" class="btn-project">View Details</a>
+                        </div>
+                        <div class="project-info">
+                            <h3>Urban Acupuncture</h3>
+                            <p>Semester 3: A vitalizing retreat designed as a strategic intervention within the concrete jungle.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,7 +246,7 @@
         <section id="contact-me" class="contact-form-section animate-on-scroll-target">
             <div class="container">
                 <h2>Get In Touch</h2>
-                <form action="mailto:s069483@student.mnu.edu.mv" method="post" enctype="text/plain"> <!-- Corrected email -->
+                <form action="mailto:s069483@student.mnu.edu.mv" method="post" enctype="text/plain">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
                     
@@ -172,7 +264,7 @@
 
     <footer>
         <div class="container">
-            <p>© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p> <!-- Your Name -->
+            <p>© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
         </div>
     </footer>
 
