@@ -84,6 +84,24 @@
             line-height: 1.5;
         }
         /* End of Project Card Styles */
+
+        /* Style for the Download CV button */
+        .btn-download-cv {
+            background-color: #2c3e50; /* Theme heading color, same as project-info h3 */
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            display: inline-block; /* Allows text-align:center on parent to work */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none; 
+        }
+
+        .btn-download-cv:hover {
+            background-color: #34495e; /* A slightly different shade for hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
     </style>
 </head>
 <body>
@@ -112,7 +130,7 @@
                     <div class="contact-area">
                         <h2>Contact</h2>
                         <p>Email: <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a></p>
-                        <p>Phone: +960 980-9844</p>
+                        <p>Phone: +960 9XX-XXXX</p>
                     </div>
                 </div>
             </div>
@@ -239,6 +257,11 @@
                 <div class="about-section">
                     <h3>Hobbies & Interests</h3>
                     <p>Architectural Photography, Urban Sketching, Sustainable Building Materials Research, Traveling, Reading about Architectural History, Drone Piloting & Photogrammetry.</p>
+                </div>
+
+                <!-- Download CV Button -->
+                <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+                    <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf" class="btn-download-cv">Download CV</a>
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acupuncture - Architectural Design</title>
@@ -9,355 +9,431 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Project-Specific Styles (can be inline or in a separate file if very complex) -->
-    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;600;700&display=swap" rel="stylesheet"> <!-- Example if Helvetica Neue from Google Fonts was desired, otherwise system font is used -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <!-- Example if Helvetica Neue from Google Fonts was desired, otherwise system font is used -->
     <style>
-        /* Scoping to this page's unique body class */
-        .project-acupuncture {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Already defined, but good for specificity */
-            /* background-color: #f0f0f0; -- This will be inherited from global or body style, or can be set here */
-            /* color: #333; -- Inherited */
-            /* line-height: 1.6; -- Inherited */
-        }
+      /* Scoping to this page's unique body class */
+      .project-acupuncture {
+        font-family:
+          "Helvetica Neue",
+          Helvetica,
+          Arial,
+          sans-serif; /* Already defined, but good for specificity */
+        /* background-color: #f0f0f0; -- This will be inherited from global or body style, or can be set here */
+        /* color: #333; -- Inherited */
+        /* line-height: 1.6; -- Inherited */
+      }
 
-        /* Styles for the main content area of THIS project page */
-        .project-acupuncture .page-content-container { /* Renamed from .container to avoid conflict with global .container */
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px 40px;
-            background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
+      /* Styles for the main content area of THIS project page */
+      .project-acupuncture .page-content-container {
+        /* Renamed from .container to avoid conflict with global .container */
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 20px 40px;
+        background-color: #ffffff;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
 
-        .project-acupuncture header.project-header-section { /* Specific to the header block within this page's content */
-            text-align: left;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+      .project-acupuncture header.project-header-section {
+        /* Specific to the header block within this page's content */
+        text-align: left;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e0e0e0;
+      }
 
-        .project-acupuncture header.project-header-section h1 {
-            font-size: 2.8em;
-            color: #1a1a1a;
-            margin-bottom: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .project-acupuncture header.project-header-section .author {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 15px;
-        }
+      .project-acupuncture header.project-header-section h1 {
+        font-size: 2.8em;
+        color: #1a1a1a;
+        margin-bottom: 5px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
 
-        .project-acupuncture .hero-image-section {
-            margin-bottom: 30px;
-        }
-        .project-acupuncture .hero-image-section figure {
-            margin: 0; 
-        }
-        .project-acupuncture .hero-image-section img {
-            width: 100%; 
-            max-height: 75vh; 
-            object-fit: cover; 
-            border: 1px solid #ccc; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-        }
-        .project-acupuncture .hero-image-section figcaption {
-            text-align: right;
-            font-size: 0.9em;
-            padding-top: 8px;
-            color: #666;
-        }
+      .project-acupuncture header.project-header-section .author {
+        font-size: 1.1em;
+        color: #555;
+        margin-bottom: 15px;
+      }
 
-        .project-acupuncture .project-narrative {
-            font-size: 1.05em;
-            color: #444;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-left: 4px solid #0056b3; 
-        }
-        .project-acupuncture .project-narrative p {
-            margin-bottom: 1em;
-        }
-        .project-acupuncture .project-narrative p:last-child {
-            margin-bottom: 0;
-        }
+      .project-acupuncture .hero-image-section {
+        margin-bottom: 30px;
+      }
+      .project-acupuncture .hero-image-section figure {
+        margin: 0;
+      }
+      .project-acupuncture .hero-image-section img {
+        width: 100%;
+        max-height: 75vh;
+        object-fit: cover;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      .project-acupuncture .hero-image-section figcaption {
+        text-align: right;
+        font-size: 0.9em;
+        padding-top: 8px;
+        color: #666;
+      }
 
-        .project-acupuncture section { /* Sections within the page-content-container */
-            margin-bottom: 50px;
-        }
+      .project-acupuncture .project-narrative {
+        font-size: 1.05em;
+        color: #444;
+        margin-bottom: 30px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-left: 4px solid #0056b3;
+      }
+      .project-acupuncture .project-narrative p {
+        margin-bottom: 1em;
+      }
+      .project-acupuncture .project-narrative p:last-child {
+        margin-bottom: 0;
+      }
 
-        .project-acupuncture section h2 {
-            font-size: 1.8em;
-            color: #333;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-        
-        .project-acupuncture section h3 {
-            font-size: 1.4em;
-            color: #444;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
+      .project-acupuncture section {
+        /* Sections within the page-content-container */
+        margin-bottom: 50px;
+      }
 
-        .project-acupuncture figure {
-            margin: 0 0 25px 0;
-            text-align: center;
-        }
+      .project-acupuncture section h2 {
+        font-size: 1.8em;
+        color: #333;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+        font-weight: 500;
+      }
 
-        .project-acupuncture figure img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto 10px auto;
-            border: 1px solid #ddd;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            /* Consider adding hover effect from other pages if desired */
-            /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
-        }
-        /*
-        .project-acupuncture figure img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        */
+      .project-acupuncture section h3 {
+        font-size: 1.4em;
+        color: #444;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-weight: 500;
+      }
 
-        .project-acupuncture figcaption {
-            font-size: 0.9em;
-            color: #555;
-            font-style: italic;
-            text-align: center;
-            margin-top: 5px;
-        }
+      .project-acupuncture figure {
+        margin: 0 0 25px 0;
+        text-align: center;
+      }
 
-        .project-acupuncture .image-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .project-acupuncture .image-grid figure {
-            flex: 1 1 45%; 
-            min-width: 300px; 
-            margin-bottom: 20px;
-        }
-        .project-acupuncture .image-grid figure img {
-            width: 100%;
-        }
+      .project-acupuncture figure img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto 10px auto;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        /* Consider adding hover effect from other pages if desired */
+        /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+      }
+      /*
+      .project-acupuncture figure img:hover {
+          transform: scale(1.03);
+          box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      }
+      */
 
-        .project-acupuncture .full-width-figure img {
-             max-width: 100%;
-        }
+      .project-acupuncture figcaption {
+        font-size: 0.9em;
+        color: #555;
+        font-style: italic;
+        text-align: center;
+        margin-top: 5px;
+      }
 
-        /* Animation target class for JS if you plan to add scroll animations */
-        .project-acupuncture .animate-on-scroll-target {
-             /* Basic setup for JS controlled animation */
-            /* opacity: 0; */
-            /* transform: translateY(20px); */
-            /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
-        }
-        .project-acupuncture .animate-on-scroll-target.is-visible {
-            /* opacity: 1; */
-            /* transform: translateY(0); */
-        }
+      .project-acupuncture .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .project-acupuncture .image-grid figure {
+        flex: 1 1 45%;
+        min-width: 300px;
+        margin-bottom: 20px;
+      }
+      .project-acupuncture .image-grid figure img {
+        width: 100%;
+      }
 
+      .project-acupuncture .full-width-figure img {
+        max-width: 100%;
+      }
+
+      /* Animation target class for JS if you plan to add scroll animations */
+      .project-acupuncture .animate-on-scroll-target {
+        /* Basic setup for JS controlled animation */
+        /* opacity: 0; */
+        /* transform: translateY(20px); */
+        /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
+      }
+      .project-acupuncture .animate-on-scroll-target.is-visible {
+        /* opacity: 1; */
+        /* transform: translateY(0); */
+      }
     </style>
-</head>
-<body class="project-page project-acupuncture"> <!-- Added body classes -->
+  </head>
+  <body class="project-page project-acupuncture">
+    <!-- Added body classes -->
 
     <!-- Global Navbar -->
     <nav id="navbar">
-        <div class="container"> <!-- Global container class for navbar width -->
-            <a href="index.html" class="nav-logo">Gaahis Yaugoob</a>
-            <ul>
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#contact-me">Contact</a></li>
-            </ul>
-        </div>
+      <div class="container">
+        <!-- Global container class for navbar width -->
+        <a href="index.html" class="nav-logo">Gaahis Yaugoob</a>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+        </ul>
+      </div>
     </nav>
 
     <!-- Page specific content for Acupuncture project -->
-    <div class="page-content-container"> <!-- Specific container for this page's main content -->
-        <header class="project-header-section"> <!-- Changed from generic header to a class -->
-            <h1>ACUPUNCTURE</h1>
-            <p class="author">by Gaahis Yaugoob</p>
-        </header>
+    <div class="page-content-container">
+      <!-- Specific container for this page's main content -->
+      <header class="project-header-section">
+        <!-- Changed from generic header to a class -->
+        <h1>ACUPUNCTURE</h1>
+        <p class="author">by Gaahis Yaugoob</p>
+      </header>
 
-        <section class="hero-image-section animate-on-scroll-target" id="hero"> <!-- Added animate class -->
-            <figure>
-                <img src="sem 3/killer.webp" alt="Exterior View of the Acupuncture Project">
-                <figcaption>Strategic intervention in the urban fabric.</figcaption>
-            </figure>
-        </section>
+      <section class="hero-image-section animate-on-scroll-target" id="hero">
+        <!-- Added animate class -->
+        <figure>
+          <img
+            src="sem 3/killer.webp"
+            alt="Exterior View of the Acupuncture Project"
+          >
+          <figcaption>Strategic intervention in the urban fabric.</figcaption>
+        </figure>
+      </section>
 
-        <section class="project-narrative animate-on-scroll-target" id="narrative"> <!-- Added animate class -->
-            <p>Malé has become a monotonous concrete jungle, choked by unchecked development that strains infrastructure and erodes local identity. This project embraces “Acupuncture” as an approach to revitalization, focusing not on sweeping change, but on precise, strategic interventions.</p>
-            <p>This building acts as one such “acupuncture point,” designed to alleviate identified urban ailments and inject vitality. It introduces a ground-level printshop and co-working space, vital for nearby academic institutions, complemented by a wellness floor and duplex residences to diversify the urban offering.</p>
-            <p>Constructed with an efficient steel structure for rapid, low-impact assembly, it incorporates a rear vertical void for natural ventilation. Beyond its footprint, the building actively addresses local deficiencies by illuminating the poorly-lit streetscape and integrating a soak tank to mitigate street flooding, demonstrating how targeted design can mend and enliven its urban context.</p>
-        </section>
+      <section
+        class="project-narrative animate-on-scroll-target"
+        id="narrative"
+      >
+        <!-- Added animate class -->
+        <p>
+          Malé has become a monotonous concrete jungle, choked by unchecked
+          development that strains infrastructure and erodes local identity.
+          This project embraces “Acupuncture” as an approach to revitalization,
+          focusing not on sweeping change, but on precise, strategic
+          interventions.
+        </p>
+        <p>
+          This building acts as one such “acupuncture point,” designed to
+          alleviate identified urban ailments and inject vitality. It introduces
+          a ground-level printshop and co-working space, vital for nearby
+          academic institutions, complemented by a wellness floor and duplex
+          residences to diversify the urban offering.
+        </p>
+        <p>
+          Constructed with an efficient steel structure for rapid, low-impact
+          assembly, it incorporates a rear vertical void for natural
+          ventilation. Beyond its footprint, the building actively addresses
+          local deficiencies by illuminating the poorly-lit streetscape and
+          integrating a soak tank to mitigate street flooding, demonstrating how
+          targeted design can mend and enliven its urban context.
+        </p>
+      </section>
 
-        <section id="design-intent-image" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Core Concept Visualized</h2>
-            <figure class="full-width-figure">
-                <img src="sem 3/design intent.webp" alt="Design Intent Diagram">
-                <figcaption>The core concept: blurring boundaries, vertical connectivity, and lightweight interventions.</figcaption>
-            </figure>
-        </section>
+      <section id="design-intent-image" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Core Concept Visualized</h2>
+        <figure class="full-width-figure">
+          <img src="sem 3/design intent.webp" alt="Design Intent Diagram">
+          <figcaption>
+            The core concept: blurring boundaries, vertical connectivity, and
+            lightweight interventions.
+          </figcaption>
+        </figure>
+      </section>
 
-        <section id="context" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Context & Problem</h2>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/site analysis.webp" alt="Site Analysis">
-                    <figcaption>Site Analysis showing existing conditions and opportunities.</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/problem.webp" alt="Problem Statement Diagram">
-                    <figcaption>Problem Statement: addressing urban challenges.</figcaption>
-                </figure>
-            </div>
-        </section>
+      <section id="context" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Context & Problem</h2>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/site analysis.webp" alt="Site Analysis">
+            <figcaption>
+              Site Analysis showing existing conditions and opportunities.
+            </figcaption>
+          </figure>
+          <figure>
+            <img src="sem 3/problem.webp" alt="Problem Statement Diagram">
+            <figcaption>
+              Problem Statement: addressing urban challenges.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section id="concept-development" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Concept Development</h2>
-            <h3>Programming</h3>
-            <figure>
-                <img src="sem 3/programming.webp" alt="Programming Diagram">
-                <figcaption>Programmatic distribution across the building levels.</figcaption>
-            </figure>
-            
-            <h3>Parti & Massing</h3>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/parti.webp" alt="Parti Diagram">
-                    <figcaption>Parti: development of the core design idea.</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/massing.webp" alt="Massing Development">
-                    <figcaption>Massing strategy and volumetric evolution.</figcaption>
-                </figure>
-            </div>
-        </section>
+      <section id="concept-development" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Concept Development</h2>
+        <h3>Programming</h3>
+        <figure>
+          <img src="sem 3/programming.webp" alt="Programming Diagram">
+          <figcaption>
+            Programmatic distribution across the building levels.
+          </figcaption>
+        </figure>
 
-        <section id="overall-views" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Building Representation</h2>
-            <figure>
-                <img src="sem 3/North side elevation.webp" alt="North Side Elevation">
-                <figcaption>North Elevation (1:175)</figcaption>
-            </figure>
-            <figure>
-                <img src="sem 3/section.webp" alt="Building Section B-B">
-                <figcaption>Section B-B (1:120)</figcaption>
-            </figure>
-        </section>
+        <h3>Parti & Massing</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/parti.webp" alt="Parti Diagram">
+            <figcaption>Parti: development of the core design idea.</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 3/massing.webp" alt="Massing Development">
+            <figcaption>Massing strategy and volumetric evolution.</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <section id="floor-breakdown" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Floor by Floor</h2>
+      <section id="overall-views" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Building Representation</h2>
+        <figure>
+          <img src="sem 3/North side elevation.webp" alt="North Side Elevation">
+          <figcaption>North Elevation (1:175)</figcaption>
+        </figure>
+        <figure>
+          <img src="sem 3/section.webp" alt="Building Section B-B">
+          <figcaption>Section B-B (1:120)</figcaption>
+        </figure>
+      </section>
 
-            <h3>Entrance & Ground Floor</h3>
-            <figure>
-                <img src="sem 3/entrance view.webp" alt="View of Entrance">
-                <figcaption>View of Entrance, showcasing ground-level activation.</figcaption>
-            </figure>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 0 ground.webp" alt="Ground Floor Plan">
-                    <figcaption>Ground Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 0 ground.webp" alt="Ground Floor Interior View">
-                    <figcaption>Ground Floor Interior View.</figcaption>
-                </figure>
-            </div>
+      <section id="floor-breakdown" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Floor by Floor</h2>
 
-            <h3>First Floor</h3>
-             <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 1st.webp" alt="First Floor Plan">
-                    <figcaption>First Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 1st.webp" alt="First Floor Suspension Detail View">
-                    <figcaption>First Floor Suspension Detail & Interior Character.</figcaption>
-                </figure>
-            </div>
+        <h3>Entrance & Ground Floor</h3>
+        <figure>
+          <img src="sem 3/entrance view.webp" alt="View of Entrance">
+          <figcaption>
+            View of Entrance, showcasing ground-level activation.
+          </figcaption>
+        </figure>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 0 ground.webp" alt="Ground Floor Plan">
+            <figcaption>Ground Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="sem 3/view 0 ground.webp"
+              alt="Ground Floor Interior View"
+            >
+            <figcaption>Ground Floor Interior View.</figcaption>
+          </figure>
+        </div>
 
-            <h3>Second Floor</h3>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 2nd.webp" alt="Second Floor Plan">
-                    <figcaption>Second Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 2nd.webp" alt="Second Floor Interior View">
-                    <figcaption>Second Floor Interior View.</figcaption>
-                </figure>
-            </div>
+        <h3>First Floor</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 1st.webp" alt="First Floor Plan">
+            <figcaption>First Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="sem 3/view 1st.webp"
+              alt="First Floor Suspension Detail View"
+            >
+            <figcaption>
+              First Floor Suspension Detail & Interior Character.
+            </figcaption>
+          </figure>
+        </div>
 
-            <h3>Third Floor</h3>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 3rd.webp" alt="Third Floor Plan">
-                    <figcaption>Third Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 3rd.webp" alt="Third Floor Interior View">
-                    <figcaption>Third Floor Interior View.</figcaption>
-                </figure>
-            </div>
+        <h3>Second Floor</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 2nd.webp" alt="Second Floor Plan">
+            <figcaption>Second Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 3/view 2nd.webp" alt="Second Floor Interior View">
+            <figcaption>Second Floor Interior View.</figcaption>
+          </figure>
+        </div>
 
-            <h3>Fourth Floor</h3>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 4th.webp" alt="Fourth Floor Plan">
-                    <figcaption>Fourth Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 4th.webp" alt="Fourth Floor Interior View - Skylight">
-                    <figcaption>Fourth Floor Interior - Skylight and Central Stair Detail.</figcaption>
-                </figure>
-            </div>
+        <h3>Third Floor</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 3rd.webp" alt="Third Floor Plan">
+            <figcaption>Third Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 3/view 3rd.webp" alt="Third Floor Interior View">
+            <figcaption>Third Floor Interior View.</figcaption>
+          </figure>
+        </div>
 
-            <h3>Fifth Floor & Terrace</h3>
-            <div class="image-grid">
-                <figure>
-                    <img src="sem 3/floor 5th.webp" alt="Fifth Floor Plan">
-                    <figcaption>Fifth Floor Plan (1:50)</figcaption>
-                </figure>
-                <figure>
-                    <img src="sem 3/view 5th.webp" alt="Fifth Floor Terrace View">
-                    <figcaption>Fifth Floor Terrace View & Trellis Connection Detail.</figcaption>
-                </figure>
-            </div>
-        </section>
-        
-        <section id="precedents" class="animate-on-scroll-target"> <!-- Added animate class -->
-            <h2>Precedent Studies</h2>
-            <figure>
-                <img src="sem 3/precedents.webp" alt="Precedent Studies">
-                <figcaption>Influential precedent projects and concepts.</figcaption>
-            </figure>
-        </section>
+        <h3>Fourth Floor</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 4th.webp" alt="Fourth Floor Plan">
+            <figcaption>Fourth Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="sem 3/view 4th.webp"
+              alt="Fourth Floor Interior View - Skylight"
+            >
+            <figcaption>
+              Fourth Floor Interior - Skylight and Central Stair Detail.
+            </figcaption>
+          </figure>
+        </div>
 
-    </div> <!-- End .page-content-container -->
+        <h3>Fifth Floor & Terrace</h3>
+        <div class="image-grid">
+          <figure>
+            <img src="sem 3/floor 5th.webp" alt="Fifth Floor Plan">
+            <figcaption>Fifth Floor Plan (1:50)</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 3/view 5th.webp" alt="Fifth Floor Terrace View">
+            <figcaption>
+              Fifth Floor Terrace View & Trellis Connection Detail.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="precedents" class="animate-on-scroll-target">
+        <!-- Added animate class -->
+        <h2>Precedent Studies</h2>
+        <figure>
+          <img src="sem 3/precedents.webp" alt="Precedent Studies">
+          <figcaption>Influential precedent projects and concepts.</figcaption>
+        </figure>
+      </section>
+    </div>
+    <!-- End .page-content-container -->
 
     <!-- Global Footer -->
     <footer>
-        <div class="container"> <!-- Global container class for footer width -->
-            <p>© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
-            <!-- You can add project-specific credits here if desired, like in sem2.html -->
-            <!-- e.g., <p>Acupuncture Project by Gaahis Yaugoob</p> -->
-        </div>
+      <div class="container">
+        <!-- Global container class for footer width -->
+        <p>
+          © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+        </p>
+        <!-- You can add project-specific credits here if desired, like in sem2.html -->
+        <!-- e.g., <p>Acupuncture Project by Gaahis Yaugoob</p> -->
+      </div>
     </footer>
 
     <!-- Centralized JavaScript -->
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
