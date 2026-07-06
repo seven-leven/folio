@@ -6,7 +6,7 @@ export const architectureGroups: ItemGroup[] = [
   {
     title: "Main Designs",
     items: [
-      { title: "Design 1", description: "Studio design project.", image: "./assets/design1.png", link: "/architecture/design-1", status: "done" },
+      { title: "Design 1 — Pages, Serenity & Cosmic Wonders", description: "A reading nook at a house courtyard.", image: "./assets/design1/hero.png", link: "/architecture/design-1", status: "done" },
       { title: "Design 2", description: "Studio design project.", image: "./assets/design2.png", link: "/architecture/design-2", status: "done" },
       { title: "Design 3", description: "Studio design project.", image: "./assets/design3.png", link: "/architecture/design-3", status: "done" },
       { title: "Design 4", description: "Coming soon.", image: "./assets/design4.png", status: "planned" },
