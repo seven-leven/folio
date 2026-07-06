@@ -1,49 +1,37 @@
 name: Deploy to GitHub Pages
 
 on:
+  # Deploy only when main is updated (day-to-day work lives on `dev`).
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - main
+  workflow_dispatch: {}
 
 permissions:
   contents: write
 
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Deno 2
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x # Use latest Deno 2.x
+          deno-version: v2.x
 
-      # Cache dependencies (optional)
-      - name: Cache Deno modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/deno
-          key: ${{ runner.os }}-deno-${{ hashFiles('**/deps.ts') }}
+      - name: Build
+        run: deno task build
 
-      # Install esbuild by caching the build script
-      - name: Cache esbuild
-        run: deno cache build.ts
-
-      # Build the project using Deno and esbuild with required permissions
-      - name: Build project
-        run: deno run --allow-read --allow-write --allow-net --allow-env --allow-run build.ts
-        env:
-          PUBLIC_URL: .
-
-      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          force_orphan: true # Ensures a clean gh-pages branch
+          publish_dir: ./dist
+          force_orphan: true

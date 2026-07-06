@@ -1,31 +1,21 @@
 {
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-icons/fi": "https://esm.sh/react-icons@5.4.0/fi",
-    "react-router-dom": "https://esm.sh/react-router-dom@7.1.5",
-    "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client"
-  },
+  "nodeModulesDir": "auto",
   "tasks": {
-    "build": "deno run --allow-all build.ts",
-    "start": "deno run --allow-net --allow-read server.ts",
-    "dev": "deno run --allow-net --allow-read --watch server.ts"
+    "dev": "deno run -A npm:vite",
+    "build": "deno run -A npm:vite build",
+    "preview": "deno run -A npm:vite preview"
+  },
+  "imports": {
+    "vue": "npm:vue@^3.5.13",
+    "vue-router": "npm:vue-router@^4.5.0",
+    "vite": "npm:vite@^6.0.11",
+    "@vitejs/plugin-vue": "npm:@vitejs/plugin-vue@^5.2.1",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.0.0",
+    "tailwindcss": "npm:tailwindcss@^4.0.0"
   },
   "compilerOptions": {
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "unstable": [
-    "sloppy-imports"
-  ]
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "deno.ns"],
+    "jsx": "preserve",
+    "types": ["vite/client"]
+  }
 }
