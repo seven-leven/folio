@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measured Embrace - Gaahis Yaugoob</title>
+    <meta name="description" content="Measured Embrace: a homestay for an introverted host in N. Kendhikulhudhoo, Maldives. Design Studio IV main portfolio and supplementary technical resolution.">
+    <meta property="og:title" content="Measured Embrace - Gaahis Yaugoob">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/images/sem4-cover.webp">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital@1&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      /* Board identity: Myriad-style sans, Garamond italic taglines, and the
+         slate / steel / terracotta palette of the Design IV boards. */
+      .project-measured-embrace {
+        --me-ink: #231f20;
+        --me-text: #3b3836;
+        --me-muted: #6c6863;
+        --me-slate: #2f4f4f;
+        --me-steel: #6a8d9f;
+        --me-terra: #be543c;
+        --me-terra-text: #a4432e;
+        --me-navy: #1d4d8b;
+        --me-paper: #faf8f4;
+        --me-sand: #f1ebe2;
+        --me-line: #e2dcd2;
+        --me-sans: "Source Sans 3", "Myriad Pro", system-ui, sans-serif;
+        --me-serif: "EB Garamond", Garamond, Georgia, serif;
+        --me-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+        --me-subnav-h: 50px;
+
+        background: var(--me-paper);
+        color: var(--me-text);
+        font-family: var(--me-sans);
+        font-size: 1.05rem;
+      }
+      /* :where() keeps these resets at element weight so component classes win. */
+      :where(.project-measured-embrace) section {
+        padding: 0;
+        scroll-margin-top: calc(var(--nav-h) + var(--me-subnav-h) + 16px);
+      }
+      :where(.project-measured-embrace) :is(h1, h2, h3, h4) {
+        margin: 0;
+        color: var(--me-ink);
+        font-family: var(--me-sans);
+        letter-spacing: 0;
+      }
+      :where(.project-measured-embrace) p {
+        margin: 0 0 1rem;
+        color: var(--me-text);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+      :where(.project-measured-embrace) p:last-child {
+        margin-bottom: 0;
+      }
+
+      .me-wrap {
+        width: min(1240px, 100% - 2.5rem);
+        margin-inline: auto;
+      }
+
+      /* --- Hero -------------------------------------------------------- */
+      .me-hero {
+        padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(3rem, 6vw, 5rem);
+        background: linear-gradient(180deg, var(--me-paper) 0%, var(--me-sand) 100%);
+        border-bottom: 1px solid var(--me-line);
+      }
+      .me-hero__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(2rem, 5vw, 4.5rem);
+        align-items: center;
+      }
+      .me-hero__text > * {
+        animation: rise 0.9s var(--ease) both;
+      }
+      .me-hero__text > :nth-child(2) { animation-delay: 80ms; }
+      .me-hero__text > :nth-child(3) { animation-delay: 160ms; }
+      .me-hero__text > :nth-child(4) { animation-delay: 240ms; }
+      .me-hero__text > :nth-child(5) { animation-delay: 320ms; }
+      .me-kicker {
+        font-family: var(--me-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--me-slate);
+      }
+      .project-measured-embrace .me-title {
+        margin: 1rem 0 1.25rem;
+        font-size: clamp(3.2rem, 8vw, 6.2rem);
+        font-weight: 700;
+        line-height: 0.9;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        color: var(--me-slate);
+      }
+      .project-measured-embrace .me-title span {
+        color: var(--me-terra);
+      }
+      .project-measured-embrace .me-question {
+        max-width: 26ch;
+        margin-bottom: 1.25rem;
+        font-family: var(--me-serif);
+        font-style: italic;
+        font-size: clamp(1.5rem, 2.6vw, 2rem);
+        line-height: 1.2;
+        color: var(--me-ink);
+      }
+      .me-facts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem 2rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--me-line);
+      }
+      .me-facts dt {
+        font-family: var(--me-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--me-muted);
+      }
+      .me-facts dd {
+        margin-top: 0.2rem;
+        font-weight: 600;
+        color: var(--me-ink);
+      }
+      .me-hero__media {
+        margin: 0;
+        animation: rise 1s var(--ease) 0.15s both;
+      }
+      .project-measured-embrace .me-hero__media img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        background: #fff;
+        box-shadow: 0 30px 60px -30px rgba(47, 79, 79, 0.45);
+      }
+      .me-hero__media figcaption,
+      .me-fig figcaption {
+        margin-top: 0.6rem;
+        font-family: var(--me-mono);
+        font-size: 0.75rem;
+        color: var(--me-muted);
+      }
+
+      /* --- Chapter nav ------------------------------------------------- */
+      .me-subnav {
+        position: sticky;
+        top: var(--nav-h);
+        z-index: 900;
+        height: var(--me-subnav-h);
+        display: flex;
+        align-items: center;
+        background: rgba(250, 248, 244, 0.94);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--me-line);
+      }
+      .me-subnav__row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .me-subnav__row::-webkit-scrollbar { display: none; }
+      .me-subnav a {
+        flex: none;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        font-family: var(--me-mono);
+        font-size: 0.78rem;
+        color: var(--me-muted);
+        white-space: nowrap;
+      }
+      .me-subnav a:hover {
+        color: var(--me-ink);
+        background: rgba(47, 79, 79, 0.07);
+      }
+      .me-subnav a.is-active {
+        color: #fff;
+        background: var(--me-slate);
+      }
+      .me-subnav__sep {
+        flex: none;
+        width: 1px;
+        height: 18px;
+        margin: 0 0.4rem;
+        background: var(--me-line);
+      }
+      .me-subnav__hint {
+        flex: none;
+        margin-left: auto;
+        padding-left: 1rem;
+        font-family: var(--me-mono);
+        font-size: 0.72rem;
+        color: var(--me-muted);
+        white-space: nowrap;
+      }
+
+      /* --- Parts & chapters ------------------------------------------- */
+      .me-part {
+        padding: clamp(3rem, 6vw, 5rem) 0 1rem;
+      }
+      .me-part__head {
+        display: grid;
+        gap: 0.6rem;
+        margin-bottom: clamp(2rem, 4vw, 3rem);
+      }
+      .project-measured-embrace .me-part__title {
+        font-size: clamp(2rem, 4.5vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1;
+        text-transform: uppercase;
+        color: var(--me-slate);
+      }
+      .project-measured-embrace .me-part__lead {
+        max-width: 60ch;
+        color: var(--me-muted);
+      }
+
+      .me-chapter {
+        padding: clamp(2rem, 4vw, 3rem) 0;
+        border-top: 1px solid var(--me-line);
+      }
+      .me-chapter__head {
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+      }
+      .me-chapter__num {
+        font-family: var(--me-mono);
+        font-size: 0.95rem;
+        color: var(--me-terra-text);
+      }
+      .project-measured-embrace .me-chapter__title {
+        font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+
+      /* A block pairs readable text with its board. */
+      .me-block {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        align-items: start;
+        margin-bottom: clamp(3rem, 6vw, 4.5rem);
+      }
+      .me-block:last-child {
+        margin-bottom: 0;
+      }
+      .me-block__text {
+        position: sticky;
+        top: calc(var(--nav-h) + var(--me-subnav-h) + 24px);
+      }
+      .me-block__media {
+        display: grid;
+        gap: 1.5rem;
+      }
+      .project-measured-embrace .me-sub {
+        margin-bottom: 0.9rem;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .me-sub span {
+        margin-right: 0.35rem;
+        color: #8a8680;
+      }
+      .project-measured-embrace .me-lead {
+        margin-bottom: 1.1rem;
+        font-family: var(--me-serif);
+        font-style: italic;
+        font-size: 1.45rem;
+        line-height: 1.3;
+        color: var(--me-slate);
+      }
+
+      .me-fig {
+        margin: 0;
+      }
+      .project-measured-embrace .me-fig img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border: 1px solid var(--me-line);
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0 18px 40px -28px rgba(35, 31, 32, 0.45);
+        transition: box-shadow 0.3s ease, transform 0.3s var(--ease);
+      }
+      .project-measured-embrace .me-fig img:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 26px 50px -28px rgba(35, 31, 32, 0.55);
+      }
+
+      /* Callouts, stats, steps, lists */
+      .me-callout {
+        margin: 1.25rem 0 0;
+        padding: 1rem 1.2rem;
+        border-left: 3px solid var(--me-terra);
+        background: #fff;
+      }
+      .project-measured-embrace .me-callout p {
+        font-size: 0.98rem;
+      }
+      .me-callout strong {
+        color: var(--me-terra-text);
+        letter-spacing: 0.04em;
+      }
+      .me-stats {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.75rem;
+        margin: 1.4rem 0 0;
+      }
+      .me-stats li {
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--me-line);
+        border-radius: 6px;
+        background: #fff;
+      }
+      .me-stats strong {
+        display: block;
+        font-size: 1.75rem;
+        font-weight: 700;
+        line-height: 1.05;
+        color: var(--me-slate);
+      }
+      .me-stats li:nth-child(2n) strong {
+        color: var(--me-terra);
+      }
+      .me-stats span {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.86rem;
+        line-height: 1.4;
+        color: var(--me-muted);
+      }
+      .me-steps {
+        list-style: none;
+        display: grid;
+        gap: 0.6rem;
+        margin: 1.25rem 0 0;
+        counter-reset: step;
+      }
+      .me-steps li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.2rem 0.8rem;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--me-line);
+        border-radius: 6px;
+        background: #fff;
+        counter-increment: step;
+      }
+      .me-steps li::before {
+        content: counter(step, decimal-leading-zero);
+        grid-row: span 2;
+        font-family: var(--me-mono);
+        font-size: 0.8rem;
+        color: var(--me-terra-text);
+      }
+      .me-steps b {
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--me-ink);
+      }
+      .me-steps span {
+        font-size: 0.95rem;
+        color: var(--me-muted);
+      }
+      .me-list {
+        list-style: none;
+        display: grid;
+        gap: 0.55rem;
+        margin: 1.1rem 0 0;
+      }
+      .me-list li {
+        position: relative;
+        padding-left: 1.1rem;
+        font-size: 0.98rem;
+        line-height: 1.55;
+      }
+      .me-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--me-steel);
+      }
+      .me-list b {
+        color: var(--me-ink);
+      }
+      .me-quote {
+        margin: 1.25rem 0 0;
+        padding: 0;
+        font-family: var(--me-serif);
+        font-style: italic;
+        font-size: 1.2rem;
+        line-height: 1.5;
+        color: var(--me-slate);
+      }
+      .me-note {
+        margin-top: 1rem;
+        font-family: var(--me-mono);
+        font-size: 0.78rem;
+        color: var(--me-muted);
+      }
+
+      /* Stacked bar (capital breakdown) */
+      .me-bar {
+        display: flex;
+        height: 14px;
+        margin-top: 1.25rem;
+        overflow: hidden;
+        border-radius: 999px;
+      }
+      .me-bar span { display: block; height: 100%; }
+      .me-legend {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1rem;
+        margin: 0.7rem 0 0;
+        font-size: 0.85rem;
+        color: var(--me-muted);
+      }
+      .me-legend i {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 0.35rem;
+        border-radius: 2px;
+        vertical-align: -1px;
+      }
+
+      /* Render galleries */
+      .me-gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .me-gallery__label {
+        grid-column: 1 / -1;
+        margin-top: 0.25rem;
+        font-family: var(--me-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--me-slate);
+      }
+
+      /* Reflection prose */
+      .me-prose {
+        columns: 2 22rem;
+        column-gap: clamp(2rem, 4vw, 3.5rem);
+      }
+      .project-measured-embrace .me-prose h4 {
+        margin: 0 0 0.5rem;
+        break-after: avoid;
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--me-terra-text);
+      }
+      .project-measured-embrace .me-prose p {
+        margin-bottom: 1.4rem;
+      }
+
+      /* --- Supplementary resolution: technical-sheet flavour ---------- */
+      .me-resit {
+        margin-top: clamp(2rem, 5vw, 4rem);
+        padding-bottom: clamp(2rem, 5vw, 4rem);
+        background: #fff;
+        border-top: 1px solid var(--me-line);
+      }
+      .me-resit__band {
+        padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+        background: var(--me-slate);
+        color: #eef2f1;
+      }
+      .me-resit__band .me-kicker {
+        color: #b9ccd3;
+      }
+      .project-measured-embrace .me-resit__band .me-part__title {
+        color: #fff;
+      }
+      .project-measured-embrace .me-resit__band .me-part__lead {
+        color: #cfdcdb;
+      }
+      .me-resit__intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        margin-top: 2rem;
+      }
+      .project-measured-embrace .me-resit__band p {
+        color: #dde6e5;
+      }
+      .me-fail {
+        list-style: none;
+        display: grid;
+        gap: 0.75rem;
+        counter-reset: fail;
+      }
+      .me-fail li {
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 6px;
+        counter-increment: fail;
+        font-size: 0.97rem;
+        line-height: 1.55;
+        color: #dde6e5;
+      }
+      .me-fail li::before {
+        content: "Failure " counter(fail);
+        display: block;
+        margin-bottom: 0.2rem;
+        font-family: var(--me-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #f0a38f;
+      }
+      .me-resit__quote {
+        margin-top: 2rem;
+        font-family: var(--me-serif);
+        font-style: italic;
+        font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+        line-height: 1.35;
+        color: #fff;
+      }
+      .me-method {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 2.5rem;
+      }
+      .me-method li {
+        padding: 1rem;
+        border-top: 2px solid var(--me-terra);
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 0.9rem;
+        line-height: 1.45;
+        color: #dde6e5;
+      }
+      .me-method b {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-family: var(--me-mono);
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: #fff;
+      }
+
+      .me-sheet {
+        margin: 0 0 1.75rem;
+      }
+      .me-cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        align-items: start;
+      }
+      .me-resit .me-chapter__num,
+      .me-resit .me-sub span {
+        font-family: var(--me-mono);
+      }
+      .me-fp {
+        display: inline-block;
+        margin-bottom: 0.4rem;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        background: var(--me-sand);
+        font-family: var(--me-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--me-slate);
+      }
+
+      /* Comparative matrix */
+      .me-table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--me-line);
+        border-radius: 6px;
+      }
+      .me-table {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+        font-size: 0.93rem;
+        line-height: 1.5;
+      }
+      .me-table th,
+      .me-table td {
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid var(--me-line);
+        text-align: left;
+        vertical-align: top;
+      }
+      .me-table thead th {
+        background: var(--me-slate);
+        color: #fff;
+        font-family: var(--me-mono);
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .me-table tbody th {
+        width: 17%;
+        background: var(--me-sand);
+        color: var(--me-ink);
+        font-weight: 600;
+      }
+      .me-table tr:last-child th,
+      .me-table tr:last-child td {
+        border-bottom: 0;
+      }
+      .me-table b {
+        color: var(--me-ink);
+      }
+
+      .me-details {
+        margin-top: 1.5rem;
+        border: 1px solid var(--me-line);
+        border-radius: 6px;
+        background: var(--me-paper);
+      }
+      .me-details summary {
+        padding: 1rem 1.2rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--me-ink);
+      }
+      .me-details[open] summary {
+        border-bottom: 1px solid var(--me-line);
+      }
+      .me-details .me-prose {
+        padding: 1.4rem 1.2rem 0.4rem;
+      }
+
+      /* --- Responsive -------------------------------------------------- */
+      @media (max-width: 1020px) {
+        .me-method {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 900px) {
+        .me-hero__grid,
+        .me-block,
+        .me-cols,
+        .me-resit__intro {
+          grid-template-columns: 1fr;
+        }
+        .me-block__text {
+          position: static;
+        }
+        .me-subnav__hint {
+          display: none;
+        }
+      }
+      @media (max-width: 560px) {
+        .me-facts,
+        .me-gallery,
+        .me-method {
+          grid-template-columns: 1fr;
+        }
+        .project-measured-embrace .me-lead {
+          font-size: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="project-page project-measured-embrace">
+    <nav id="navbar" aria-label="Main">
+      <div class="container">
+        <a href="index.html" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+          <span class="nav-mark" aria-hidden="true">GY</span>
+          <span class="nav-name">Gaahis Yaugoob</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#projects" class="is-active" aria-current="true">Projects</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+          <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero -->
+      <header class="me-hero">
+        <div class="me-wrap me-hero__grid">
+          <div class="me-hero__text">
+            <p class="me-kicker">Semester 4 · Architectural Design Studio IV</p>
+            <h1 class="me-title">Measured <span>Embrace</span></h1>
+            <p class="me-question">How do we welcome the world without losing ourselves?</p>
+            <p>
+              In the Maldives, the shift from isolated resort tourism to local island homestays has
+              created a new friction: the clash between a tourist’s desire for ‘authentic’ connection
+              and a local family’s need for privacy. Located in N. Kendhikulhudhoo, this project
+              addresses the dilemma of the ‘introverted host.’
+            </p>
+            <dl class="me-facts">
+              <div><dt>Site</dt><dd>N. Kendhikulhudhoo, Noonu Atoll</dd></div>
+              <div><dt>Programme</dt><dd>Homestay · 3 guest suites</dd></div>
+              <div><dt>Footprint</dt><dd>510 ft² of 600 ft² allowed</dd></div>
+              <div><dt>Est. cost</dt><dd>MVR 2.3M</dd></div>
+            </dl>
+          </div>
+          <figure class="me-hero__media">
+            <img src="sem 4/axonometric.webp" alt="Cutaway axonometric of the homestay with guest suites lifted above the host's ground floor" width="2000" height="2000" fetchpriority="high">
+            <figcaption>Cutaway axonometric</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <!-- Chapter nav -->
+      <nav class="me-subnav" aria-label="On this page" data-spy>
+        <div class="me-wrap me-subnav__row">
+          <a href="#context">01 Context</a>
+          <a href="#concept">02 Concept</a>
+          <a href="#proposal">03 Proposal</a>
+          <a href="#technical">04 Technical</a>
+          <a href="#reflection">05 Reflection</a>
+          <span class="me-subnav__sep" aria-hidden="true"></span>
+          <a href="#resolution">Resolution</a>
+          <a href="#bedroom">FP1 Bedroom</a>
+          <a href="#shared">FP2 Shared</a>
+          <a href="#synthesis">Synthesis</a>
+          <span class="me-subnav__hint">Click any board to view full size</span>
+        </div>
+      </nav>
+
+      <!-- ===================== PART A: MAIN PORTFOLIO ===================== -->
+      <div class="me-part">
+        <div class="me-wrap">
+          <div class="me-part__head">
+            <p class="me-kicker">Part A · Main portfolio</p>
+            <h2 class="me-part__title">A journey from the island context to the architectural detail</h2>
+          </div>
+
+          <!-- 01 Context -->
+          <section class="me-chapter" id="context" aria-labelledby="ch-context">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">01.0</span>
+              <h2 class="me-chapter__title" id="ch-context">Context &amp; Narrative</h2>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>01.0</span>Project Abstract</h3>
+                <p class="me-lead">How do we welcome the world without losing ourselves?</p>
+                <p>
+                  The design intervenes by creating a deliberate architectural boundary. Utilizing the
+                  site’s existing coral stone walls as an anchor, the project lifts the guest quarters to
+                  create a vertical threshold. This allows the host to control the intensity of social
+                  interaction, preserving their ‘social energy’ while offering guests a genuine,
+                  sustainable window into island life.
+                </p>
+                <div class="me-callout">
+                  <p><strong>MEASURED EMBRACE:</strong> A permeable membrane that allows for intentional
+                  engagement, transforming a potentially draining experience into a reciprocal one.</p>
+                </div>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-05.webp" alt="Board 05: project abstract" width="1800" height="1800" loading="lazy"><figcaption>Board 05 · Project abstract</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>01.1</span>The Shift &amp; The Site</h3>
+                <p class="me-lead">In the rush for economic integration, local privacy is often the first casualty.</p>
+                <p>
+                  N. Kendhikulhudhoo is not a blank canvas; it is a dense tapestry of mangroves,
+                  residential zones, and narrow streets. The site sits at the intersection of public
+                  exposure and ecological sensitivity.
+                </p>
+                <p>
+                  In established hubs like Maafushi, 40% of revenue leaks to off-island investors. This
+                  project aims to reverse that trend by designing a facility that is affordable to build,
+                  easy to maintain, and keeps revenue within the household.
+                </p>
+                <ul class="me-stats">
+                  <li><strong>40%</strong><span>of revenue leaks off-island in established hubs like Maafushi</span></li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-06.webp" alt="Board 06: the shift and the site" width="1800" height="1800" loading="lazy"><figcaption>Board 06 · The shift &amp; the site</figcaption></figure>
+                <figure class="me-fig"><img src="sem 4/board-07.webp" alt="Board 07: site plan of N. Kendhikulhudhoo, Noonu Atoll" width="1800" height="1800" loading="lazy"><figcaption>Board 07 · Site, N. Kendhikulhudhoo</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>01.2</span>Island Infrastructure</h3>
+                <p class="me-lead">The home cannot exist in isolation; it must be a node in a living network.</p>
+                <p>
+                  This homestay is not an isolated island; it is a node in a larger community network.
+                  Aligned with the island’s ‘Localism’ masterplan, the design integrates with the
+                  community solar buggy loop and supports the ‘Collaborative Commerce’ model—directing
+                  guests to local bakers, guides, and craftsmen rather than hoarding services on-site.
+                </p>
+                <ol class="me-steps">
+                  <li><b>Cooperative Empowerment</b></li>
+                  <li><b>Local Circulation</b></li>
+                  <li><b>Regenerative Ecology</b></li>
+                  <li><b>Authentic Culture</b></li>
+                  <li><b>Low Impact Growth</b></li>
+                </ol>
+                <p class="me-note">Planning principles</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-08.webp" alt="Board 08: island infrastructure and planning principles" width="1800" height="1800" loading="lazy"><figcaption>Board 08 · Island infrastructure</figcaption></figure>
+                <figure class="me-fig"><img src="sem 4/board-09.webp" alt="Board 09: community network and solar buggy loop" width="1800" height="1800" loading="lazy"><figcaption>Board 09 · Community network</figcaption></figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- 02 Concept -->
+          <section class="me-chapter" id="concept" aria-labelledby="ch-concept">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">02.0</span>
+              <h2 class="me-chapter__title" id="ch-concept">Conceptual Framework</h2>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>02.1</span>Defining the Threshold</h3>
+                <p class="me-lead">We sought a boundary that filters rather than blocks—a measured embrace.</p>
+                <p>
+                  Creates a deliberate architectural boundary to preserve the host’s energy, enabling
+                  richer and more authentic cultural engagement with guests.
+                </p>
+                <ol class="me-steps">
+                  <li><b>The Conflict</b><span>Personal space vs. cultural exchange.</span></li>
+                  <li><b>The Filter</b><span>Reducing energy drain via physical threshold.</span></li>
+                  <li><b>The Embrace</b><span>Controlled permeability nurtures connection.</span></li>
+                </ol>
+                <blockquote class="me-quote">
+                  “The goal is a carefully calibrated openness—close enough to connect, with the inherent
+                  freedom to retreat.”
+                </blockquote>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-10.webp" alt="Board 10: defining the threshold, concept diagrams" width="1800" height="1800" loading="lazy"><figcaption>Board 10 · Defining the threshold</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>02.2</span>Form Development</h3>
+                <p class="me-lead">The form does not impose; it retreats behind the veil.</p>
+                <ol class="me-steps">
+                  <li><b>Protective Screen</b><span>Screen to filter street noise and define the private realm.</span></li>
+                  <li><b>Lift &amp; Orient</b><span>Elevated to maximize ground-level airflow and oriented to minimize solar heat gain.</span></li>
+                  <li><b>Rugged Form</b><span>Stepped to create terraces and frame views, establishing a rugged, protective identity.</span></li>
+                </ol>
+                <p class="me-note">Precedent: Lunuganga Estate, Sri Lanka, by Geoffrey Bawa. Its layered thresholds (controlled permeability, creating threshold, framing views, creating a social hub) are adapted to mediate the host-guest relationship.</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-11.webp" alt="Board 11: form development and Lunuganga precedent" width="1800" height="1800" loading="lazy"><figcaption>Board 11 · Form development</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>02.3</span>Climatic Response</h3>
+                <p class="me-lead">The building breathes, reducing the thermal load before a switch is even flipped.</p>
+                <p>
+                  Passive cooling is not a luxury; it is an economic necessity. By orienting for the
+                  cross-breeze and utilizing the stack effect, the design reduces the thermal load by
+                  ~7°C, significantly cutting operational electricity costs. A 5,000L cistern captures
+                  roof runoff, significantly reducing municipal dependency.
+                </p>
+                <ul class="me-stats">
+                  <li><strong>33→26°C</strong><span>Reflective roof &amp; insulation, then stack effect &amp; cross vent</span></li>
+                  <li><strong>55%</strong><span>Water independence</span></li>
+                  <li><strong>5,000 L</strong><span>Cistern: harvests, stores, irrigates</span></li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-12.webp" alt="Board 12: passive cooling and water strategy" width="1800" height="1800" loading="lazy"><figcaption>Board 12 · Climatic response</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>02.4</span>Material Strategy</h3>
+                <p class="me-lead">A kit-of-parts strategy allows for rapid assembly without alienating local craft.</p>
+                <p>
+                  The radar chart weighs a hybrid prefab system against standard concrete and full timber
+                  on speed, low waste, affordability and local skill fit, balancing rapid assembly with
+                  local labor capability. The hybrid prefab option was chosen.
+                </p>
+                <ul class="me-stats">
+                  <li><strong>35%</strong><span>Off-grid</span></li>
+                  <li><strong>30 m²</strong><span>Roof-integrated PV array</span></li>
+                  <li><strong>10 kWh</strong><span>Battery for night-time load balancing</span></li>
+                  <li><strong>~50</strong><span>Buggies: excess solar sold to charge the community fleet</span></li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-13.webp" alt="Board 13: material strategy radar chart and energy independence" width="1800" height="1800" loading="lazy"><figcaption>Board 13 · Material strategy &amp; energy</figcaption></figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03 Proposal -->
+          <section class="me-chapter" id="proposal" aria-labelledby="ch-proposal">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">03.0</span>
+              <h2 class="me-chapter__title" id="ch-proposal">Design Proposal</h2>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.1</span>The Social Condenser</h3>
+                <p class="me-lead">The ground belongs to the host—a place of voluntary interaction.</p>
+                <p>
+                  The design acts as a spatial filter. By lifting the guest quarters into a distinct
+                  volume, the architecture establishes a vertical separation. The ground floor remains the
+                  domain of the host—a ‘Social Condenser’ where interactions are voluntary and curated.
+                </p>
+                <ul class="me-stats">
+                  <li><strong>510 ft²</strong><span>Total footprint (max 600 ft²)</span></li>
+                  <li><strong>270 ft²</strong><span>Existing modification (max 300 ft²)</span></li>
+                </ul>
+                <ul class="me-list">
+                  <li><b>Guest suites</b> (private): 206, 142 &amp; 142 ft²</li>
+                  <li><b>Living &amp; kitchenette</b> (semi-private): 314 ft²</li>
+                  <li><b>Quiet zone</b> (host): 333 ft²</li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-14.webp" alt="Board 14: programming, zoning hierarchy and compliance" width="1800" height="1800" loading="lazy"><figcaption>Board 14 · Programming &amp; compliance</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.2</span>Ground Floor Plan</h3>
+                <p class="me-lead">We maintain the street edge not with a barrier, but with a breathing space.</p>
+                <p>
+                  Buffer Zone: The front yard serves as a semi-public threshold, allowing the host to
+                  engage with the street or retreat behind the coral wall.
+                </p>
+                <p class="me-note">Ground floor · 1:75</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-15.webp" alt="Board 15: ground floor plan at 1:75" width="1800" height="1800" loading="lazy"><figcaption>Board 15 · Ground floor plan (1:75)</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.3</span>Guest Realm &amp; Roof</h3>
+                <p class="me-lead">The upper floor floats, detached from the street but connected to the canopy.</p>
+                <p class="me-note">First and roof plan · 1:100</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-16.webp" alt="Board 16: first floor and roof plan at 1:100" width="1800" height="1800" loading="lazy"><figcaption>Board 16 · First &amp; roof plan (1:100)</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.4</span>Elevation Study</h3>
+                <p class="me-lead">The facade is not just a skin; it is a mechanism for privacy and shade.</p>
+                <ul class="me-list">
+                  <li><b>Visual Veil</b>: screen prevents the “fishbowl” effect.</li>
+                  <li><b>Vernacular Anchor</b>: existing stone wall grounds the design.</li>
+                  <li><b>Breathing Space</b>: setback respects neighbor context.</li>
+                  <li><b>Climatic Transition</b>: external stair engages the elements.</li>
+                  <li><b>Stratified Zoning</b>: vertical separation protects host privacy.</li>
+                  <li><b>Social Condenser</b>: ground plane invites controlled interaction.</li>
+                </ul>
+                <p class="me-note">Elevations E1 &amp; E2 · 1:100</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-17.webp" alt="Board 17: elevations E1 and E2 at 1:100" width="1800" height="1800" loading="lazy"><figcaption>Board 17 · Elevation study (1:100)</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.5</span>Experiential Zoning</h3>
+                <p class="me-lead">Light and air dictate the guest experience; shadow and earth define the host’s.</p>
+                <figure class="me-fig"><img src="sem 4/board-18.webp" alt="Board 18: experiential zoning" width="1800" height="1800" loading="lazy"><figcaption>Board 18 · Experiential zoning</figcaption></figure>
+              </div>
+              <div class="me-block__media">
+                <div class="me-gallery">
+                  <p class="me-gallery__label">Guest realm (+3.00 m)</p>
+                  <figure class="me-fig"><img src="sem 4/view-guest-1.webp" alt="Guest realm view 1" width="1510" height="1186" loading="lazy"><figcaption>View 1</figcaption></figure>
+                  <figure class="me-fig"><img src="sem 4/view-guest-2.webp" alt="Guest realm view 2" width="1509" height="1186" loading="lazy"><figcaption>View 2</figcaption></figure>
+                  <p class="me-gallery__label">Host realm (ground)</p>
+                  <figure class="me-fig"><img src="sem 4/view-host-1.webp" alt="Host realm view 3" width="1510" height="1182" loading="lazy"><figcaption>View 3</figcaption></figure>
+                  <figure class="me-fig"><img src="sem 4/view-host-2.webp" alt="Host realm view 4" width="1510" height="1186" loading="lazy"><figcaption>View 4</figcaption></figure>
+                </div>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>03.6</span>Sectional Strategy</h3>
+                <p class="me-lead">The section reveals the project’s core logic: vertical separation.</p>
+                <blockquote class="me-quote">
+                  “The host lives grounded and protected; the guest lives elevated and exposed to the
+                  elements.”
+                </blockquote>
+                <p class="me-note">Section · 1:40</p>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-19.webp" alt="Board 19: section at 1:40" width="1800" height="1800" loading="lazy"><figcaption>Board 19 · Section (1:40)</figcaption></figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- 04 Technical -->
+          <section class="me-chapter" id="technical" aria-labelledby="ch-technical">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">04.0</span>
+              <h2 class="me-chapter__title" id="ch-technical">Technical Resolution</h2>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>04.1</span>Systems Integration</h3>
+                <p class="me-lead">A kit-of-parts designed for local labor, not imported specialists.</p>
+                <ul class="me-list">
+                  <li><b>PV Array</b>: on-site energy generation for use and selling.</li>
+                  <li><b>Insulated Roof Assembly</b>: reflective finish to minimize heat gain.</li>
+                  <li><b>Aerated Block</b>: saves cost and speeds construction.</li>
+                  <li><b>Cross Ventilation</b>: prevailing winds cool guest zones.</li>
+                  <li><b>Prefabricated Concrete</b>: modular slab system for rapid, low-impact assembly.</li>
+                  <li><b>Primary In-situ Frame</b>: skeleton adapted to local labor skills.</li>
+                  <li><b>Water Harvesting</b>: 5 m³ cistern captures roof runoff for garden irrigation.</li>
+                  <li><b>Permeable Decking</b>: rainwater infiltration recharges groundwater.</li>
+                  <li><b>The Buffer</b>: vegetation zone creates acoustic separation from the street.</li>
+                  <li><b>Buggy Charging</b>: commercializing excess solar energy.</li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-20.webp" alt="Board 20: exploded systems integration axonometric" width="1800" height="1800" loading="lazy"><figcaption>Board 20 · Systems integration</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>04.2</span>Construction Detail</h3>
+                <p class="me-lead">The joinery is where the architecture proves its resilience.</p>
+                <ul class="me-list">
+                  <li><b>D-1</b>: roof detail (1:10)</li>
+                  <li><b>D-2</b>: railing detail (1:10)</li>
+                  <li><b>D-3</b>: slab void detail (1:10)</li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-21.webp" alt="Board 21: roof, railing and slab void details at 1:10" width="1800" height="1800" loading="lazy"><figcaption>Board 21 · Construction details (1:10)</figcaption></figure>
+              </div>
+            </div>
+
+            <div class="me-block animate-on-scroll-target">
+              <div class="me-block__text">
+                <h3 class="me-sub"><span>04.3</span>Community Dividend</h3>
+                <p class="me-lead">Sustainability is not just climatic; it is the financial ability to maintain one’s heritage.</p>
+                <p>
+                  Sustainability must be financial. With a construction cost of 2.3M MVR and a focus on
+                  low-maintenance local materials, the project targets an ROI that supports a family, not
+                  a corporation. The ‘Community Dividend’ model ensures that for every dollar spent by a
+                  guest, distinct percentages flow to the local laundry, the fisherman, and the farmer.
+                </p>
+                <ul class="me-stats">
+                  <li><strong>MVR 2.3M</strong><span>Estimated construction cost</span></li>
+                  <li><strong>MVR 80,000</strong><span>Annual net profit from homestay &amp; buggy fees</span></li>
+                  <li><strong>$50</strong><span>Night rate · 4-month season · 30% margin</span></li>
+                </ul>
+                <div class="me-bar" role="img" aria-label="Capital investment: architecture and finishes 42%, structure 37%, MEP and solar 12%, preliminaries 9%">
+                  <span style="width:42%;background:var(--me-slate)"></span>
+                  <span style="width:37%;background:var(--me-steel)"></span>
+                  <span style="width:12%;background:var(--me-terra)"></span>
+                  <span style="width:9%;background:#c9c2b6"></span>
+                </div>
+                <ul class="me-legend" aria-hidden="true">
+                  <li><i style="background:var(--me-slate)"></i>Arch. &amp; finishes 42%</li>
+                  <li><i style="background:var(--me-steel)"></i>Structure 37%</li>
+                  <li><i style="background:var(--me-terra)"></i>MEP / solar 12%</li>
+                  <li><i style="background:#c9c2b6"></i>Preliminaries 9%</li>
+                </ul>
+              </div>
+              <div class="me-block__media">
+                <figure class="me-fig"><img src="sem 4/board-22.webp" alt="Board 22: capital investment and community dividend" width="1800" height="1800" loading="lazy"><figcaption>Board 22 · Community dividend</figcaption></figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- 05 Reflection -->
+          <section class="me-chapter" id="reflection" aria-labelledby="ch-reflection">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">05.0</span>
+              <h2 class="me-chapter__title" id="ch-reflection">Reflection</h2>
+            </div>
+
+            <div class="me-prose animate-on-scroll-target">
+              <h4>The Evolution of the Concept</h4>
+              <p>
+                The core friction of this semester was the conflict between the tourist’s gaze and the
+                local resident’s need for sanctuary. My design journey began with a functional problem:
+                how to fit a fully operational homestay onto a restricted site without choking the
+                existing household. Early iterations failed to address this nuance; as pointed out in
+                mid-semester reviews, my initial proposals felt like two disconnected buildings awkwardly
+                sharing a plot. The feedback was clear: the architecture needed to act less like a
+                neighbor and more like a protective barrier.
+              </p>
+              <h4>Design Decisions &amp; Strategic Response</h4>
+              <p>
+                This critique drove the pivotal decision to vertically separate the program. Since the
+                majority of N. Kendhikulhudhoo consists of single-story structures, elevating the guest
+                quarters to +3.00m achieved two critical goals simultaneously. First, it unlocked
+                panoramic views for the guests, offering them a visual connection to the island canopy
+                that isn’t possible from the street. Second, and more importantly, it minimized the
+                invasion of the host. By lifting the mass, I could keep the structural supports minimal,
+                allowing the host to retain ownership of the ground plane. The building essentially
+                “floats,” acting as a filter between the introverted private home and the public street.
+              </p>
+              <h4>Technical &amp; Research Challenges</h4>
+              <p>
+                The constraints of the site required a rigorous approach to spatial efficiency. Fitting
+                the required square footage into the allowed setback while maintaining a “breathing
+                space” for the street edge was the most difficult spatial challenge. Furthermore, this
+                project marked a significant shift in my skill set regarding integrated research. For the
+                first time, I moved beyond standard architectural drawing to explore the socio-economic
+                mechanics of design. Developing the “Community Dividend” model and the material radar
+                charts forced me to justify my choices not just aesthetically, but financially.
+                Understanding that the choice of a “Hybrid Prefab” system impacts the local labor economy
+                was a major learning curve.
+              </p>
+              <h4>Future Growth &amp; Evaluation</h4>
+              <p>
+                Reflecting on the final outcome, the physical separation successfully resolves the privacy
+                conflict. However, if I had more time, I would have delved deeper into the programmatic
+                choreography of the space. While the “hardware” of the building works, the
+                “software”—the specific scheduled interactions between guest and host—could be more
+                tightly integrated with the island’s broader “Localism” masterplan. Additionally, I see
+                value in further expanding the economic feasibility study to ensure the operational costs
+                remain as sustainable as the passive cooling strategies.
+              </p>
+              <h4>Conclusion</h4>
+              <p>
+                “Measured Embrace” is not just a building; it is a prototype for dignity. It demonstrates
+                that with careful sectional manipulation and a respect for local labor, we can design
+                tourism infrastructure that protects the host while delighting the guest. The resulting
+                architecture is a resilient threshold—one that welcomes the world without surrendering
+                the home.
+              </p>
+            </div>
+
+            <div class="me-gallery animate-on-scroll-target" style="margin-top: 2.5rem">
+              <figure class="me-fig"><img src="sem 4/model.webp" alt="Physical model of the homestay" width="1251" height="950" loading="lazy"><figcaption>Physical model</figcaption></figure>
+              <figure class="me-fig"><img src="sem 4/board-03.webp" alt="Board 03: cutaway axonometric" width="1800" height="1800" loading="lazy"><figcaption>Board 03 · Cutaway axonometric</figcaption></figure>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- ============== PART B: SUPPLEMENTARY RESOLUTION ============== -->
+      <div class="me-resit">
+        <section class="me-resit__band" id="resolution" aria-labelledby="ch-resolution">
+          <div class="me-wrap">
+            <div class="me-part__head">
+              <p class="me-kicker">Part B · ARC207 Supplementary assessment · 01 February 2026</p>
+              <h2 class="me-part__title" id="ch-resolution">Resolution Portfolio</h2>
+              <p class="me-part__lead">A portfolio of integrated architectural resolution: two focal points, the Bedroom Unit and the Shared Space, resolved at the 1:20 scale.</p>
+            </div>
+
+            <div class="me-resit__intro animate-on-scroll-target">
+              <div>
+                <p>
+                  The initial submission of ‘Measured Embrace’ proposed a vertical separation strategy to
+                  preserve host privacy through elevated guest quarters. While the conceptual narrative
+                  was compelling, the technical execution remained fundamentally unresolved. The final
+                  crit exposed three critical failures.
+                </p>
+                <p>
+                  This portfolio directly addresses those deficiencies through the rigorous resolution of
+                  two focal points. For the Bedroom Unit: a Hybrid-Prefab Lattice System calibrated for
+                  Maldivian labor capacity, a 1.2m Staggered Entry Foyer and a 600mm Living Skin planter.
+                  For the Shared Space: a Metabolic Interface, a quantified system where greywater
+                  filtration and passive ventilation are engineered assemblies with calculated flow rates
+                  and material specifications.
+                </p>
+              </div>
+              <ol class="me-fail">
+                <li>The structural system was generic. The column ambiguity and lack of assembly logic revealed that I had drawn a building rather than designed its construction.</li>
+                <li>The bedroom units functioned as “fishbowls”: the thin walls and exposed glazing contradicted the entire premise of protecting the introverted host’s sanctuary.</li>
+                <li>The roof assembly was merely suggestive; its environmental performance, water catchment strategy, and constructability were never articulated beyond a gestural overhang.</li>
+              </ol>
+            </div>
+
+            <blockquote class="me-resit__quote animate-on-scroll-target">
+              “I treated technical resolution as a secondary layer applied after the concept, rather than
+              the mechanism through which the concept is physically realized.”
+            </blockquote>
+
+            <ol class="me-method animate-on-scroll-target" aria-label="Methodology">
+              <li><b>I. Diagnostic audit</b>Identifying the friction between concept and resolution in the previous submission.</li>
+              <li><b>II. System definition</b>Establishing the three core performance systems before drawing any details.</li>
+              <li><b>III. Component resolution</b>Isolating two critical junctions to resolve the macro-strategy at the micro-scale.</li>
+              <li><b>IV. Integrated synthesis</b>Testing components against construction logic and environmental flows simultaneously.</li>
+              <li><b>V. Visualized proof</b>Production of the ‘Anatomy Cutaway’ to demonstrate total coherence.</li>
+            </ol>
+          </div>
+        </section>
+
+        <div class="me-wrap">
+          <!-- FP1 Bedroom -->
+          <section class="me-chapter" id="bedroom" aria-labelledby="ch-bedroom" style="border-top: 0">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">2.0</span>
+              <h2 class="me-chapter__title" id="ch-bedroom">Focal Point 1: Bedroom Unit</h2>
+            </div>
+
+            <div class="animate-on-scroll-target">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-03.webp" alt="Sheet 3: bedroom unit conceptual framework, plan and section at 1:50" width="2400" height="1698" loading="lazy"><figcaption>Sheet 3 · 2.1 Conceptual framework: parti, plan 1:50, section X-X 1:50</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">2.1 Conceptual framework</span>
+                  <p class="me-lead">A ‘Buffered Sanctuary’ defined by Thick Thresholds.</p>
+                  <p>
+                    Addressing the critique of the ‘fishbowl’ effect, the bedroom unit is reimagined not as
+                    a sealed box. Thin partitions have been replaced with spatial depth: a 1.2m Staggered
+                    Entry Foyer prevents direct sightlines from the corridor, while a ‘Living Skin’ planter
+                    creates a defensible perimeter zone. This allows the guest to open the door without
+                    ever feeling exposed to the public eye.
+                  </p>
+                </div>
+                <ol class="me-steps">
+                  <li><b>Separation by Stratification</b><span>Lifting the guest unit +4.5m creates a vertical ‘air gap’. Separation is structural, not just visual.</span></li>
+                  <li><b>The Unobstructed Horizon</b><span>Solid side walls block views of neighbors, while the facade opens completely to the mangrove.</span></li>
+                  <li><b>The Privacy Valve</b><span>The staggered screen forces a 90-degree turn, preventing sightlines even when the door is open for airflow.</span></li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-04.webp" alt="Sheet 4: balcony detail section 1:20, junctions 1:5 and exploded axonometric" width="2400" height="1698" loading="lazy"><figcaption>Sheet 4 · 2.2 Technical resolution: balcony detail 1:20, junctions 1:5, exploded axonometric</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">2.2 Technical resolution</span>
+                  <p class="me-lead">A Hybrid Lattice Slab tailored to the local context.</p>
+                  <p>
+                    Unlike fully cast-in-situ methods that generate excessive timber waste, or pre-cast
+                    systems requiring heavy cranes, this hybrid approach balances structural performance
+                    with logistical feasibility. Pre-cast concrete planks are hoisted manually via pulleys
+                    and seated onto beam rebates, serving as permanent formwork for a 100mm in-situ
+                    topping. Projecting lattice trusses bond the layers into a monolithic structural
+                    diaphragm.
+                  </p>
+                </div>
+                <ul class="me-stats">
+                  <li><strong>45 kg</strong><span>Max plank weight: manual lifting by a two-person local team</span></li>
+                  <li><strong>0.8</strong><span>R-value (m²K/W) of the planks: the floor is a thermal barrier</span></li>
+                  <li><strong>STC 55</strong><span>Acoustic isolation from guest footfall</span></li>
+                  <li><strong>0</strong><span>Heavy machinery needed</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-05.webp" alt="Sheet 5: bedroom unit environmental strategy" width="2400" height="1698" loading="lazy"><figcaption>Sheet 5 · 2.3 Environmental strategy: active systems &amp; passive strategy</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">2.3 Environmental strategy</span>
+                  <p class="me-lead">The 1.5m “Solar Umbrella”.</p>
+                  <p>
+                    Overhang depth is tuned to N. Kendhikulhudhoo’s latitude (approx. 5°N), blocking 100%
+                    of direct solar incidence on the vertical glass between 10:00 AM and 3:00 PM. A
+                    high-mass reflective roof creates a “thermal time lag”, while the staggered entry
+                    compresses incoming air through the Living Skin planter for adiabatic cooling.
+                  </p>
+                </div>
+                <ul class="me-stats">
+                  <li><strong>100%</strong><span>Direct solar gain blocked on the glass, 10am–3pm</span></li>
+                  <li><strong>SRI &gt;90</strong><span>Reflective cool-roof paint</span></li>
+                  <li><strong>~1.5°C</strong><span>Drop through the Living Skin planter</span></li>
+                  <li><strong>35%</strong><span>Less carbon than full cast-in-situ</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-06.webp" alt="Sheet 6: integrated social and technical diagram" width="2400" height="1698" loading="lazy"><figcaption>Sheet 6 · 2.4 Socio-cultural integration</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">2.4 Socio-cultural integration</span>
+                  <p class="me-lead">Construction speed is the primary economic driver for the host.</p>
+                  <p>
+                    While traditional cast-in-situ concrete requires 6 months of ‘wet work’ before
+                    occupancy, this Hybrid-Prefab system reduces the timeline to just 2 months, letting the
+                    host start generating rental income 4 months earlier. The ‘Dry-Fit’ assembly allows the
+                    host to employ local carpenters instead of specialized concrete crews from Malé.
+                  </p>
+                </div>
+                <ul class="me-stats">
+                  <li><strong>$35,000</strong><span>Total capex (construction + systems)</span></li>
+                  <li><strong>3.2 yrs</strong><span>Break-even</span></li>
+                  <li><strong>+$700</strong><span>Monthly profit after loan</span></li>
+                  <li><strong>2 mo</strong><span>Build time vs. 6 months cast-in-situ</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <span class="me-fp">2.5 Visualization</span>
+              <figure class="me-fig me-sheet"><img src="sem 4/cutaway-bedroom.webp" alt="Anatomy cutaway of the bedroom unit" width="2400" height="1697" loading="lazy"><figcaption>Fig 2.10 · Anatomy cutaway: the ‘Buffered Sanctuary’</figcaption></figure>
+              <p>
+                Cutaway revealing the ‘Buffered Sanctuary’: the Hybrid-Prefab Lattice Slab provides STC 55
+                acoustic isolation while the 1.5m Solar Umbrella blocks 100% direct solar gain. The
+                staggered entry foyer and Living Skin planter construct privacy through physical depth,
+                allowing cross-ventilation without exposure.
+              </p>
+            </div>
+          </section>
+
+          <!-- FP2 Shared -->
+          <section class="me-chapter" id="shared" aria-labelledby="ch-shared">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">3.0</span>
+              <h2 class="me-chapter__title" id="ch-shared">Focal Point 2: Shared Space</h2>
+            </div>
+
+            <div class="animate-on-scroll-target">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-08.webp" alt="Sheet 8: shared space conceptual framework, plan and section at 1:50" width="2400" height="1698" loading="lazy"><figcaption>Sheet 8 · 3.1 Conceptual framework: parti, plan 1:50, section X-X 1:50</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">3.1 Conceptual framework</span>
+                  <p class="me-lead">‘Autonomy as Hospitality’.</p>
+                  <p>
+                    While the Bedroom Unit secures privacy through physical elevation, the Shared Space
+                    ensures it through operational autonomy. Critically, it enables the vertical strategy;
+                    without a self-service kitchenette, guests would inevitably intrude on the host’s
+                    private domain, rendering the separation meaningless.
+                  </p>
+                </div>
+                <ol class="me-steps">
+                  <li><b>Unmediated Intrusion</b><span>Without programmatic autonomy, guest dependency forces constant intrusion into the host’s domain.</span></li>
+                  <li><b>Captured Autonomy</b><span>The self-service kitchenette contains guest activity within a defined volume.</span></li>
+                  <li><b>Regulated Exchange</b><span>Guests modulate between private retreat and shared experience without obligating the host.</span></li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-09.webp" alt="Sheet 9: stair and service zone detail 1:20, junctions 1:5 and exploded axonometric" width="2400" height="1698" loading="lazy"><figcaption>Sheet 9 · 3.2 Technical resolution: stair/service zone 1:20, junctions 1:5, exploded axonometric</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">3.2 Technical resolution</span>
+                  <p class="me-lead">The homestay’s ‘Hard Engine’.</p>
+                  <p>
+                    A Raised Glass Terrazzo Plinth lifts the floor for better views while creating a
+                    service plenum for greywater drainage and solar cabling. A sacrificial Impact Kerb
+                    protects the coralstone wall from the buggy station, and an exposed Under-Stair Service
+                    Spine choreographs infrastructure as a pedagogical tool, letting guests witness the
+                    systems sustaining their stay.
+                  </p>
+                </div>
+                <ul class="me-list">
+                  <li><b>Greywater</b>: gravity-fed 110mm pipes, sand filtration tank, 100 L underground storage.</li>
+                  <li><b>Energy</b>: 10 kWh battery bank and IP66 DC charging station.</li>
+                  <li><b>Stair</b>: galvanized SHS stringer, recycled teak treads, open risers for stack-effect ventilation.</li>
+                  <li><b>Kitchenette</b>: ‘Dry-Fit’ modular timber assembly bolted to the plinth.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-10.webp" alt="Sheet 10: shared space environmental strategy" width="2400" height="1698" loading="lazy"><figcaption>Sheet 10 · 3.3 Environmental strategy</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">3.3 Environmental strategy</span>
+                  <p class="me-lead">Utility turned into an aesthetic experience.</p>
+                  <p>
+                    Woven coir screens filter high-velocity salt spray into a gentle cooling breeze, a
+                    mechanical assist removes cooking heat before it accumulates, and kitchen wastewater is
+                    filtered and diverted to the underground cistern with no pumps required.
+                  </p>
+                </div>
+                <ul class="me-stats">
+                  <li><strong>60%</strong><span>Porosity of the woven coir “Permeable Skin”</span></li>
+                  <li><strong>20%</strong><span>Less cement: glass terrazzo from crushed bottles</span></li>
+                  <li><strong>0</strong><span>Pumps: greywater is gravity-fed</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <figure class="me-fig me-sheet"><img src="sem 4/resit-11.webp" alt="Sheet 11: socio-technical axonometric of the shared space" width="2400" height="1698" loading="lazy"><figcaption>Sheet 11 · 3.4 Socio-cultural integration</figcaption></figure>
+              <div class="me-cols">
+                <div>
+                  <span class="me-fp">3.4 Socio-cultural integration</span>
+                  <p class="me-lead">Rapid, low-capital construction that keeps value on the island.</p>
+                  <p>
+                    The 6-week sequence minimizes host displacement: weeks 1–2 pour the RC plinth with
+                    local crews, weeks 3–4 assemble the timber frame with hand tools only, weeks 5–6
+                    complete the solar and plumbing rough-in. An undersized kitchenette nudges guests to
+                    buy from local ‘Home Bakers’, and the modular coir screens create recurring maintenance
+                    work for local weavers.
+                  </p>
+                </div>
+                <ul class="me-stats">
+                  <li><strong>6 wks</strong><span>Construction sequence</span></li>
+                  <li><strong>−$5,000</strong><span>Capex saved by eliminating heavy appliances</span></li>
+                  <li><strong>600 mm</strong><span>Counter depth: host and guest cook side by side, not face to face</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="animate-on-scroll-target" style="margin-top: 3.5rem">
+              <span class="me-fp">3.5 Visualization</span>
+              <figure class="me-fig me-sheet"><img src="sem 4/cutaway-shared.webp" alt="Anatomy cutaway of the shared space" width="2400" height="1697" loading="lazy"><figcaption>Fig 3.10 · Anatomy cutaway: the Metabolic Interface</figcaption></figure>
+              <p>
+                The Metabolic Interface exposed: the Hard Engine tucks 10kWh batteries and gravity-fed
+                greywater filtration within the raised plinth and stair void. Exposed structure
+                choreographs resource flows, demonstrating how technical systems generate both spatial
+                experience and community revenue.
+              </p>
+            </div>
+          </section>
+
+          <!-- Synthesis -->
+          <section class="me-chapter" id="synthesis" aria-labelledby="ch-synthesis">
+            <div class="me-chapter__head animate-on-scroll-target">
+              <span class="me-chapter__num">4.0</span>
+              <h2 class="me-chapter__title" id="ch-synthesis">Synthesis &amp; Reflection</h2>
+            </div>
+
+            <div class="me-table-wrap animate-on-scroll-target">
+              <table class="me-table">
+                <caption class="visually-hidden">Comparative analysis matrix of the two focal points</caption>
+                <thead>
+                  <tr><th scope="col">Criteria</th><th scope="col">Focal Point 1: Bedroom Unit</th><th scope="col">Focal Point 2: Shared Space</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Primary conceptual driver</th>
+                    <td><b>The Buffered Sanctuary:</b> creating a psychological ‘Recharge Zone’ through staggered thresholds and defensible perimeters.</td>
+                    <td><b>The Metabolic Interface:</b> facilitating ‘Mediated Engagement’ where social exchange and resource cycling (water/energy) intersect as visible systems.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Key technical innovation</th>
+                    <td><b>Hybrid-Prefab Lattice Slab:</b> pre-cast planks as permanent formwork eliminate 2.5m³ of timber waste per unit and reduce construction time by 40%.</td>
+                    <td><b>Integrated Bio-Filtration Planter:</b> on-site greywater treatment irrigates 10m² of privacy buffer, reducing freshwater demand by 20L/day.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Core environmental strategy</th>
+                    <td><b>Climatic Exclusion (Defensive):</b> 1.5m roof overhang blocks 100% afternoon solar gain; 50mm monsoon step-down prevents water ingress during 40mm/hr rainfall events.</td>
+                    <td>Greywater bio-filtration provides 50% of irrigation, while passive ventilation ensures thermal comfort naturally.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cultural accommodation</th>
+                    <td><b>Absolute Privacy:</b> 1.2m staggered foyer + 600mm planter buffer eliminate direct sightlines, allowing the door to remain open for ventilation without exposing the sleeping zone.</td>
+                    <td><b>Parallel Play (Low-Pressure Hospitality):</b> sliding screens enable the host to be ‘present but separate,’ observing guests without forced conversation.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Primary construction challenge</th>
+                    <td><b>Waterproofing Integrity:</b> achieving a continuous membrane across the balcony threshold while maintaining a flush floor finish for accessibility (resolved via recessed track system).</td>
+                    <td><b>Service Coordination:</b> integrating high-voltage DC charging, low-voltage controls, plumbing rough-ins, and natural ventilation within a compact 15m² footprint.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Quantified performance</th>
+                    <td><b>Carbon Reduction:</b> 35% embodied CO₂ savings vs. conventional cast-in-situ (325 vs. 500 kgCO₂e/m²).</td>
+                    <td><b>Energy Surplus:</b> 10 kWh/day excess generation enables a community vehicle charging revenue stream.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Systemic role</th>
+                    <td><b>The Privacy Amplifier:</b> elevates guests vertically to create acoustic/visual separation from the host’s dwelling. Operates through exclusion.</td>
+                    <td><b>The Autonomy Generator:</b> a self-sufficient hub at ground level. Operates through facilitation, providing tools (kitchen, charging, water) so guests don’t depend on host labor.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <blockquote class="me-quote animate-on-scroll-target" style="margin-top: 2.5rem; font-size: 1.6rem">
+              “Resolution is not about adding more detail—it is about ensuring every detail serves a purpose.”
+            </blockquote>
+
+            <details class="me-details animate-on-scroll-target">
+              <summary>Read the full synthesis &amp; reflection</summary>
+              <div class="me-prose">
+                <p>
+                  My initial submission for ‘Measured Embrace’ was, in retrospect, a project of beautifully
+                  rendered intentions. I had established a compelling narrative regarding the introverted
+                  host and the ethical imperative of privacy-conscious tourism, but I had failed to
+                  construct the physical mechanisms that would make that narrative architecturally
+                  credible. The feedback from the final crit, highlighting generic structural logic,
+                  exposed “fishbowl” bedrooms, and vague environmental claims revealed a fundamental
+                  disconnect: I was designing representations of ideas rather than the material assemblies
+                  that embody them.
+                </p>
+                <p>
+                  This resolution portfolio has fundamentally recalibrated my understanding of the
+                  relationship between architectural idea and built reality. Through the rigorous
+                  detailing of two focal points, I have learned that concept is not something applied to a
+                  building like a finish coat, but something that emerges from its construction logic, its
+                  environmental performance, and its material coherence.
+                </p>
+                <p>
+                  The “Introverted Host” was originally a psychological metaphor. By resolving the 1:20
+                  junction of the guest unit, I discovered that this concept actually lives in the
+                  vertical elevation that shields the host’s ground-floor domain, and simultaneously in the
+                  staggered foyer, planter buffer, and acoustic lattice slab that protect the guest from
+                  the corridor gaze. Without these specific calibrations, the architecture fails on both
+                  counts—exposing the host to intrusion above and the guest to surveillance
+                  below—remaining only as text.
+                </p>
+                <p>
+                  Similarly, the “Community Contribution” ethos was abstract until I calculated the Water
+                  Balance Audit for the Shared Space. Realizing that the kitchenette could physically close
+                  the hydrological loop and irrigate 10m² of vegetation transformed the project from a
+                  passive shelter into an active metabolic participant in the island’s ecology.
+                </p>
+                <p>
+                  This process has also reshaped my understanding of the original masterplan. I now
+                  recognize that the Hybrid-Prefab structural system is not merely a construction method
+                  but an economic and social strategy. By designing components that eliminate the need for
+                  heavy machinery and utilize local carpentry skills, the project ensures that
+                  construction capital remains within the Kendhikulhudhoo economy rather than being
+                  extracted by Malé-based contractors. If I were to revisit the masterplan, I would extend
+                  this prefabrication logic to the communal pavilion and jetty structures, creating a
+                  systemic constructability strategy rather than site-specific solutions.
+                </p>
+                <p>
+                  Ultimately, this exercise has taught me that resolution is not about adding more
+                  detail—it is about ensuring every detail serves a purpose. The “Measured Embrace” is no
+                  longer a poetic ambition; it is a calibrated instrument of social, environmental, and
+                  economic performance.
+                </p>
+              </div>
+            </details>
+
+            <div class="me-gallery animate-on-scroll-target" style="margin-top: 2.5rem">
+              <p class="me-gallery__label">All resolution sheets</p>
+              <figure class="me-fig"><img src="sem 4/resit-01.webp" alt="Sheet 1: resolution portfolio cover" width="2400" height="1698" loading="lazy"><figcaption>Sheet 1 · Cover</figcaption></figure>
+              <figure class="me-fig"><img src="sem 4/resit-02.webp" alt="Sheet 2: introduction and methodology" width="2400" height="1698" loading="lazy"><figcaption>Sheet 2 · Introduction &amp; methodology</figcaption></figure>
+              <figure class="me-fig"><img src="sem 4/resit-07.webp" alt="Sheet 7: bedroom unit visualization" width="2400" height="1698" loading="lazy"><figcaption>Sheet 7 · Bedroom unit visualization</figcaption></figure>
+              <figure class="me-fig"><img src="sem 4/resit-12.webp" alt="Sheet 12: shared space visualization" width="2400" height="1698" loading="lazy"><figcaption>Sheet 12 · Shared space visualization</figcaption></figure>
+              <figure class="me-fig"><img src="sem 4/resit-13.webp" alt="Sheet 13: synthesis and comparative analysis matrix" width="2400" height="1698" loading="lazy"><figcaption>Sheet 13 · Synthesis &amp; reflection</figcaption></figure>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
+          <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Projects</p>
+          <nav class="site-footer__links" aria-label="Projects">
+            <a href="sem1.html">Enchanting Reading Nook</a>
+            <a href="sem2.html">Blue Canvas</a>
+            <a href="sem3.html">Urban Acupuncture</a>
+            <a href="sem4.html">Measured Embrace</a>
+          </nav>
+        </div>
+        <div>
+          <p class="site-footer__heading">Contact</p>
+          <div class="site-footer__links">
+            <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+            <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="container site-footer__bottom">
+        <p class="site-footer__copy">© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
+        <a class="site-footer__top" href="#">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

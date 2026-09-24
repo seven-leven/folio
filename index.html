@@ -4,290 +4,378 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaahis Yaugoob - Architecture Portfolio</title>
+    <meta name="description" content="Portfolio of Gaahis Yaugoob, architectural designer and civil engineer: studio projects, skills and experience.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gaahis Yaugoob - Architecture Portfolio">
+    <meta property="og:description" content="Architectural designer and civil engineer: studio projects, skills and experience.">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/images/sem1-cover.webp">
+    <meta name="theme-color" content="#f6f4ef">
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Project Card Styles - Add these to your style.css or keep them here */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-            gap: 30px; /* Space between cards */
-            margin-top: 20px; /* Space below the "Projects" heading */
-        }
-
-        .project-card {
-            background-color: #fff; /* Or your card background color */
-            border-radius: 8px; 
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
-            overflow: hidden; /* Important for border-radius and image container */
-            display: flex; 
-            flex-direction: column; 
-        }
-
-        .project-image-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1; /* Makes the container square */
-            overflow: hidden; 
-        }
-
-        .project-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures image covers square, crops if needed */
-            display: block; 
-            transition: transform 0.3s ease; 
-        }
-
-        .project-image-container:hover img {
-            transform: scale(1.05); /* Optional: slight zoom on hover */
-        }
-
-        .project-image-container .btn-project {
-            position: absolute;
-            bottom: 15px; 
-            right: 15px;  
-            z-index: 10;   
-            background-color: rgba(44, 62, 80, 0.75); /* Using a theme color, semi-transparent */
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9em;
-            font-weight: 500;
-            border: none; /* remove default border if any from global .btn-project */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .project-image-container .btn-project:hover {
-            background-color: rgba(44, 62, 80, 0.95); /* Darker on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
-
-        .project-info {
-            padding: 20px; /* Increased padding */
-            text-align: left; 
-            background-color: #f9f9f9; /* Light background for info section */
-            flex-grow: 1; /* Allows info section to take remaining space if cards have varying text height */
-        }
-
-        .project-info h3 {
-            margin-top: 0;
-            margin-bottom: 10px; /* Increased space */
-            font-size: 1.3em; /* Adjusted size */
-            color: #2c3e50; /* Theme heading color */
-        }
-
-        .project-info p {
-            font-size: 0.95em; /* Adjusted size */
-            color: #555; 
-            margin-bottom: 0; 
-            line-height: 1.5;
-        }
-        /* End of Project Card Styles */
-
-        /* Style for the Download CV button */
-        .btn-download-cv {
-            background-color: #2c3e50; /* Theme heading color, same as project-info h3 */
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            display: inline-block; /* Allows text-align:center on parent to work */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none; 
-        }
-
-        .btn-download-cv:hover {
-            background-color: #34495e; /* A slightly different shade for hover */
-            transform: translateY(-2px); /* Slight lift effect */
-        }
-    </style>
 </head>
-<body>
-    <nav id="navbar">
+<body class="home">
+    <a class="skip-link" href="#projects">Skip to projects</a>
+
+    <nav id="navbar" aria-label="Main">
         <div class="container">
-            <a href="#" class="nav-logo">Gaahis Yaugoob</a>
-            <ul>
+            <a href="#home" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+                <span class="nav-mark" aria-hidden="true">GY</span>
+                <span class="nav-name">Gaahis Yaugoob</span>
+            </a>
+            <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact-me">Contact</a></li>
+                <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
+        <!-- Hero -->
         <section id="home" class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="logo-area">
-                        <img src="images/logo.png" alt="Gaahis Yaugoob Logo" class="logo">
-                        <h1>Gaahis Yaugoob</h1>
-                        <p>Architectural Designer & Civil Engineer</p>
+            <div class="container hero__grid">
+                <div class="hero__text">
+                    <p class="eyebrow rise" style="--i: 0">Architectural Designer &amp; Civil Engineer</p>
+                    <h1 class="hero__title rise" style="--i: 1">Gaahis <em>Yaugoob</em></h1>
+                    <p class="hero__lede rise" style="--i: 2">
+                        Trained in both architectural design and civil engineering, now working as an
+                        Engineer at Novea Engineering, taking concepts through to detailed 2D/3D models and drawings.
+                    </p>
+                    <div class="hero__actions rise" style="--i: 3">
+                        <a class="btn btn--primary" href="#projects">
+                            View projects
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                        </a>
+                        <a class="btn btn--ghost" href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
                     </div>
-                    <div class="contact-area">
-                        <h2>Contact</h2>
-                        <p>Email: <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a></p>
-                        <p>Phone: +960 9XX-XXXX</p>
+                    <dl class="hero__facts rise" style="--i: 4">
+                        <div><dt>4</dt><dd>Studio design projects</dd></div>
+                        <div><dt>2</dt><dd>Degrees in architecture &amp; civil engineering</dd></div>
+                        <div><dt>2022</dt><dd>In practice at Novea Engineering</dd></div>
+                    </dl>
+                </div>
+
+                <div class="hero__media rise" style="--i: 2">
+                    <a class="hero__tile hero__tile--main" href="sem4.html">
+                        <img src="images/sem4-cover.webp" alt="Measured Embrace cutaway axonometric" width="1600" height="1600" fetchpriority="high">
+                        <span class="hero__tile-label"><span>04</span> Measured Embrace</span>
+                    </a>
+                    <a class="hero__tile" href="sem1.html">
+                        <img src="images/sem1-cover.webp" alt="Enchanting Reading Nook render" width="1600" height="1412">
+                        <span class="hero__tile-label"><span>01</span> Reading Nook</span>
+                    </a>
+                    <a class="hero__tile" href="sem2.html">
+                        <img src="images/sem2-cover.webp" alt="Blue Canvas render" width="1600" height="1013">
+                        <span class="hero__tile-label"><span>02</span> Blue Canvas</span>
+                    </a>
+                    <a class="hero__tile" href="sem3.html">
+                        <img src="images/sem3-cover.webp" alt="Urban Acupuncture render" width="1600" height="883">
+                        <span class="hero__tile-label"><span>03</span> Urban Acupuncture</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Selected work</p>
+                    <h2 class="section-title">Projects</h2>
+                    <p class="section-intro">Four studio projects from the architectural design programme, from a single reading nook to a homestay on a local island.</p>
+                </header>
+
+                <div class="project-list">
+                    <article class="project-row reveal">
+                        <a class="project-row__media" href="sem1.html" tabindex="-1" aria-hidden="true">
+                            <img src="images/sem1-cover.webp" alt="" width="1600" height="1412" loading="lazy">
+                        </a>
+                        <div class="project-row__body">
+                            <span class="project-row__index" aria-hidden="true">01</span>
+                            <p class="project-row__meta">Semester 1</p>
+                            <h3 class="project-row__title"><a href="sem1.html">Enchanting Reading Nook</a></h3>
+                            <p class="project-row__desc">A cozy and immersive space designed for literary escape and tranquility.</p>
+                            <ul class="tag-list" aria-label="Project contents">
+                                <li>Site analysis</li>
+                                <li>Form &amp; roof development</li>
+                                <li>Plans &amp; sections</li>
+                                <li>Construction details</li>
+                            </ul>
+                            <a class="link-arrow" href="sem1.html">
+                                View project
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-row reveal">
+                        <a class="project-row__media" href="sem2.html" tabindex="-1" aria-hidden="true">
+                            <img src="images/sem2-cover.webp" alt="" width="1600" height="1013" loading="lazy">
+                        </a>
+                        <div class="project-row__body">
+                            <span class="project-row__index" aria-hidden="true">02</span>
+                            <p class="project-row__meta">Semester 2</p>
+                            <h3 class="project-row__title"><a href="sem2.html">Blue Canvas</a></h3>
+                            <p class="project-row__desc">Exploring the intersection of artistic practice and childhood play.</p>
+                            <ul class="tag-list" aria-label="Project contents">
+                                <li>Ricci flow study</li>
+                                <li>Programming &amp; parti</li>
+                                <li>Floor plans</li>
+                                <li>Structural details</li>
+                            </ul>
+                            <a class="link-arrow" href="sem2.html">
+                                View project
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-row reveal">
+                        <a class="project-row__media" href="sem3.html" tabindex="-1" aria-hidden="true">
+                            <img src="images/sem3-cover.webp" alt="" width="1600" height="883" loading="lazy">
+                        </a>
+                        <div class="project-row__body">
+                            <span class="project-row__index" aria-hidden="true">03</span>
+                            <p class="project-row__meta">Semester 3</p>
+                            <h3 class="project-row__title"><a href="sem3.html">Urban Acupuncture</a></h3>
+                            <p class="project-row__desc">A vitalizing retreat designed as a strategic intervention within the concrete jungle.</p>
+                            <ul class="tag-list" aria-label="Project contents">
+                                <li>Context &amp; problem</li>
+                                <li>Concept development</li>
+                                <li>Floor by floor</li>
+                                <li>Precedent studies</li>
+                            </ul>
+                            <a class="link-arrow" href="sem3.html">
+                                View project
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-row reveal">
+                        <a class="project-row__media" href="sem4.html" tabindex="-1" aria-hidden="true">
+                            <img src="images/sem4-cover.webp" alt="" width="1600" height="1600" loading="lazy">
+                        </a>
+                        <div class="project-row__body">
+                            <span class="project-row__index" aria-hidden="true">04</span>
+                            <p class="project-row__meta">Semester 4</p>
+                            <h3 class="project-row__title"><a href="sem4.html">Measured Embrace</a></h3>
+                            <p class="project-row__desc">A homestay for an introverted host in N. Kendhikulhudhoo: guest quarters lifted to create a vertical threshold between host and guest.</p>
+                            <ul class="tag-list" aria-label="Project contents">
+                                <li>Island context</li>
+                                <li>Climatic &amp; material strategy</li>
+                                <li>1:20 technical resolution</li>
+                                <li>Community economics</li>
+                            </ul>
+                            <a class="link-arrow" href="sem4.html">
+                                View project
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Toolkit</p>
+                    <h2 class="section-title">Skills</h2>
+                </header>
+
+                <div class="skills-grid">
+                    <div class="skill-card reveal" style="--i: 0">
+                        <div class="skill-card__head"><h3 class="skill-card__title">Drafting 2D/3D</h3><span class="skill-card__num" aria-hidden="true">01</span></div>
+                        <ul class="chip-list">
+                            <li>AutoCAD</li><li>SketchUp</li><li>Rhino</li><li>Blender (Modeling)</li><li>Revit</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card reveal" style="--i: 1">
+                        <div class="skill-card__head"><h3 class="skill-card__title">Rendering</h3><span class="skill-card__num" aria-hidden="true">02</span></div>
+                        <ul class="chip-list">
+                            <li>V-Ray</li><li>Enscape</li><li>Lumion</li><li>Blender (Cycles/Eevee)</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card reveal" style="--i: 2">
+                        <div class="skill-card__head"><h3 class="skill-card__title">Graphic Design</h3><span class="skill-card__num" aria-hidden="true">03</span></div>
+                        <ul class="chip-list">
+                            <li>Adobe Photoshop</li><li>Adobe Illustrator</li><li>Adobe InDesign</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card reveal" style="--i: 3">
+                        <div class="skill-card__head"><h3 class="skill-card__title">Structural Analysis</h3><span class="skill-card__num" aria-hidden="true">04</span></div>
+                        <ul class="chip-list">
+                            <li>Staad.Pro</li><li>Autodesk Robot</li>
+                        </ul>
+                    </div>
+                    <div class="skill-card skill-card--wide reveal" style="--i: 4">
+                        <div class="skill-card__head"><h3 class="skill-card__title">Other Technical Skills</h3><span class="skill-card__num" aria-hidden="true">05</span></div>
+                        <ul class="chip-list">
+                            <li>Python (Scripting)</li><li>MS Project</li><li>MS Office Suite</li><li>WebODM Drone Mapping</li><li>Technical Drawing</li><li>Concept Development</li><li>Sustainable Design</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="animate-on-scroll-target">
+        <!-- About -->
+        <section id="about">
             <div class="container">
-                <h2>Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <div class="project-image-container">
-                            <img src="sem 1/killer.webp" alt="Semester 1 Project - Reading Nook">
-                            <a href="sem1.html" class="btn-project">View Details</a>
-                        </div>
-                        <div class="project-info">
-                            <h3>Enchanting Reading Nook</h3>
-                            <p>Semester 1: A cozy and immersive space designed for literary escape and tranquility.</p>
-                        </div>
+                <header class="section-head reveal">
+                    <p class="eyebrow">Background</p>
+                    <h2 class="section-title">About Me</h2>
+                </header>
+
+                <div class="about-grid">
+                    <div class="about-block reveal">
+                        <h3 class="about-block__title">Work Experience</h3>
+                        <ol class="timeline">
+                            <li class="timeline__item">
+                                <p class="timeline__date">Jan 2024 – Present</p>
+                                <div>
+                                    <p class="timeline__role">Engineer</p>
+                                    <p class="timeline__org">Novea Engineering</p>
+                                    <ul class="timeline__points">
+                                        <li>Developing detailed 2D/3D models and drawings using AutoCAD, Revit, and Blender.</li>
+                                        <li>Collaborating with architectural teams to integrate engineering solutions.</li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="timeline__item">
+                                <p class="timeline__date">Aug 2022 – 2023</p>
+                                <div>
+                                    <p class="timeline__role">Assistant Engineer</p>
+                                    <p class="timeline__org">Novea Engineering</p>
+                                    <ul class="timeline__points">
+                                        <li>Assisted senior engineers in design development and project execution.</li>
+                                        <li>Prepared technical drawings, reports, and presentations.</li>
+                                        <li>Gained experience in site inspections and project coordination.</li>
+                                        <li>Contributed to 3D modeling and visualization tasks.</li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ol>
                     </div>
-                    <div class="project-card">
-                        <div class="project-image-container">
-                            <img src="sem 2/killer.webp" alt="Semester 2 Project - Blue Canvas">
-                            <a href="sem2.html" class="btn-project">View Details</a>
+
+                    <div>
+                        <div class="about-block reveal">
+                            <h3 class="about-block__title">Education</h3>
+                            <ol class="timeline">
+                                <li class="timeline__item">
+                                    <p class="timeline__date">2023</p>
+                                    <div>
+                                        <p class="timeline__role">Bachelor of Arts in Architectural Design</p>
+                                        <p class="timeline__org">Maldives National University</p>
+                                    </div>
+                                </li>
+                                <li class="timeline__item">
+                                    <p class="timeline__date">2019 – 2023</p>
+                                    <div>
+                                        <p class="timeline__role">Bachelor of Civil Engineering (Honours)</p>
+                                        <p class="timeline__org">Maldives National University</p>
+                                    </div>
+                                </li>
+                            </ol>
                         </div>
-                        <div class="project-info">
-                            <h3>Blue Canvas</h3>
-                            <p>Semester 2: Exploring the intersection of artistic practice and childhood play.</p>
+
+                        <div class="about-block reveal">
+                            <h3 class="about-block__title">Hobbies &amp; Interests</h3>
+                            <ul class="chip-list">
+                                <li>Architectural Photography</li><li>Urban Sketching</li><li>Sustainable Building Materials Research</li><li>Traveling</li><li>Reading about Architectural History</li><li>Drone Piloting &amp; Photogrammetry</li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image-container">
-                            <img src="sem 3/killer.webp" alt="Semester 3 Project - Acupuncture">
-                            <a href="sem3.html" class="btn-project">View Details</a>
-                        </div>
-                        <div class="project-info">
-                            <h3>Urban Acupuncture</h3>
-                            <p>Semester 3: A vitalizing retreat designed as a strategic intervention within the concrete jungle.</p>
+
+                        <div class="cv-card reveal">
+                            <div>
+                                <p class="cv-card__title">Curriculum Vitae</p>
+                                <p class="cv-card__sub">The full picture in one PDF.</p>
+                            </div>
+                            <a class="btn btn--light" href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">
+                                Download CV
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="animate-on-scroll-target">
-            <div class="container">
-                <h2>Skills</h2>
-                <div class="skills-categories">
-                    <div class="skill-category">
-                        <h3>Drafting 2D/3D</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">AutoCAD</span>
-                            <span class="skill-tag">SketchUp</span>
-                            <span class="skill-tag">Rhino</span>
-                            <span class="skill-tag">Blender (Modeling)</span>
-                            <span class="skill-tag">Revit</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Rendering</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">V-Ray</span>
-                            <span class="skill-tag">Enscape</span>
-                            <span class="skill-tag">Lumion</span>
-                            <span class="skill-tag">Blender (Cycles/Eevee)</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Graphic Design</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Adobe Photoshop</span>
-                            <span class="skill-tag">Adobe Illustrator</span>
-                            <span class="skill-tag">Adobe InDesign</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Structural Analysis</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Staad.Pro</span>
-                            <span class="skill-tag">Autodesk Robot</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Other Technical Skills</h3>
-                        <div class="skills-list">
-                            <span class="skill-tag">Python (Scripting)</span>
-                            <span class="skill-tag">MS Project</span>
-                            <span class="skill-tag">MS Office Suite</span>
-                            <span class="skill-tag">WebODM Drone Mapping</span>
-                            <span class="skill-tag">Technical Drawing</span>
-                            <span class="skill-tag">Concept Development</span>
-                            <span class="skill-tag">Sustainable Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="animate-on-scroll-target">
-            <div class="container">
-                <h2>About Me</h2>
-                
-                <div class="about-section">
-                    <h3>Education</h3>
-                    <p><strong>Bachelor of Arts in Architectural Design</strong> - Maldives National University (2023)</p>
-                    <p><strong>Bachelor of Civil Engineering (Honours)</strong> - Maldives National University (2019 - 2023)</p>
+        <!-- Contact -->
+        <section id="contact-me">
+            <div class="container contact-grid">
+                <div class="reveal">
+                    <header class="section-head">
+                        <p class="eyebrow">Contact</p>
+                        <h2 class="section-title">Get In Touch</h2>
+                        <p class="section-intro">Have a project in mind or want to talk? Send a message, or email me directly.</p>
+                    </header>
+                    <a class="contact-mail" href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+                    <!-- TODO: add a real phone number here (the old site showed the placeholder "+960 9XX-XXXX"). -->
                 </div>
 
-                <div class="about-section">
-                    <h3>Work Experience</h3>
-                    <p><strong>Engineer</strong> - Novea Engineering (January 2024 - Present)</p>
-                    <ul>
-                        <li>Developing detailed 2D/3D models and drawings using AutoCAD, Revit, and Blender.</li>
-                        <li>Collaborating with architectural teams to integrate engineering solutions.</li>
-                    </ul>
-                    <p><strong>Assistant Engineer</strong> - Novea Engineering (August 2022 - 2023)</p>
-                     <ul>
-                        <li>Assisted senior engineers in design development and project execution.</li>
-                        <li>Prepared technical drawings, reports, and presentations.</li>
-                        <li>Gained experience in site inspections and project coordination.</li>
-                        <li>Contributed to 3D modeling and visualization tasks.</li>
-                    </ul>
-                </div>
-
-                <div class="about-section">
-                    <h3>Hobbies & Interests</h3>
-                    <p>Architectural Photography, Urban Sketching, Sustainable Building Materials Research, Traveling, Reading about Architectural History, Drone Piloting & Photogrammetry.</p>
-                </div>
-
-                <!-- Download CV Button -->
-                <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
-                    <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf" class="btn-download-cv">Download CV</a>
-                </div>
-            </div>
-        </section>
-        
-        <section id="contact-me" class="contact-form-section animate-on-scroll-target">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <form action="mailto:s069483@student.mnu.edu.mv" method="post" enctype="text/plain">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                    
-                    <button type="submit" class="btn-submit">Send Message</button>
+                <form class="contact-form reveal" id="contact-form" data-to="s069483@student.mnu.edu.mv"
+                      action="mailto:s069483@student.mnu.edu.mv" method="post" enctype="text/plain">
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-foot">
+                        <p class="form-note" role="status">Opens your email app with the message filled in.</p>
+                        <button type="submit" class="btn btn--primary">
+                            Send Message
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <div class="site-footer__brand">
+                <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
+                <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
+            </div>
+            <div>
+                <p class="site-footer__heading">Projects</p>
+                <nav class="site-footer__links" aria-label="Projects">
+                    <a href="sem1.html">Enchanting Reading Nook</a>
+                    <a href="sem2.html">Blue Canvas</a>
+                    <a href="sem3.html">Urban Acupuncture</a>
+                    <a href="sem4.html">Measured Embrace</a>
+                </nav>
+            </div>
+            <div>
+                <p class="site-footer__heading">Contact</p>
+                <div class="site-footer__links">
+                    <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+                    <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
+                </div>
+            </div>
+        </div>
+        <div class="container site-footer__bottom">
+            <p class="site-footer__copy">© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
+            <a class="site-footer__top" href="#">Back to top ↑</a>
         </div>
     </footer>
 
