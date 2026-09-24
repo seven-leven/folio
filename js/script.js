@@ -38,6 +38,7 @@
     initSectionNav();
     initContactForm();
     initTumblrFeed();
+    initWildlife();
 
     if (document.body.classList.contains("project-page")) {
       initBrokenImages();
@@ -254,6 +255,94 @@
     cap.textContent = caption || "View entry";
 
     card.append(meta, cap);
+    return card;
+  }
+
+  // --- Wildlife Illustrated: live progress from the bird_dash data ---------
+  // The page ships with the latest known numbers; this refreshes them from
+  // the collection's own JSON so the portfolio never goes stale.
+  async function initWildlife() {
+    const section = document.querySelector("[data-wildlife]");
+    if (!section || !window.fetch) return;
+    const base = section.dataset.wildlife;
+
+    try {
+      const getJSON = (path) =>
+        fetch(base + path, { cache: "no-cache" }).then((r) => {
+          if (!r.ok) throw new Error(`${path}: ${r.status}`);
+          return r.json();
+        });
+
+      const collections = await getJSON("collections.json");
+      const lists = await Promise.all(collections.map((c) => getJSON(`lists/${c.id}.json`)));
+
+      const stats = { all: { drawn: 0, total: 0 } };
+      const drawnItems = [];
+      collections.forEach((c, i) => {
+        const items = Object.values(lists[i]).flat();
+        const drawn = items.filter((it) => it.drawn);
+        stats[c.id] = { drawn: drawn.length, total: items.length };
+        stats.all.drawn += drawn.length;
+        stats.all.total += items.length;
+        drawn.forEach((it) => drawnItems.push({ ...it, collection: c }));
+      });
+
+      Object.entries(stats).forEach(([id, s]) => {
+        section.querySelectorAll(`[data-count="${id}"]`).forEach((el) => (el.textContent = String(s.drawn)));
+        section.querySelectorAll(`[data-total="${id}"]`).forEach((el) => (el.textContent = String(s.total)));
+        const bar = section.querySelector(`[data-bar="${id}"]`);
+        if (bar && s.total) {
+          bar.setAttribute("aria-valuenow", String(s.drawn));
+          bar.setAttribute("aria-valuemax", String(s.total));
+          bar.firstElementChild.style.width = `${((s.drawn / s.total) * 100).toFixed(1)}%`;
+        }
+      });
+
+      const grid = section.querySelector("[data-latest]");
+      if (grid && drawnItems.length) {
+        drawnItems.sort((a, b) => String(b.drawn).localeCompare(String(a.drawn)));
+        grid.replaceChildren(...drawnItems.slice(0, 6).map((it) => wildlifeCard(base, it)));
+      }
+    } catch (err) {
+      // Keep the numbers baked into the page.
+      console.warn("Wildlife Illustrated: using cached numbers.", err);
+    }
+  }
+
+  function wildlifeCard(base, it) {
+    const kind = it.collection.itemLabel || it.collection.id;
+    const card = document.createElement("a");
+    card.className = "wl-card";
+    card.href = base;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+
+    const media = document.createElement("span");
+    media.className = "wl-card__img";
+    const img = document.createElement("img");
+    img.src = `${base}thumb/${encodeURIComponent(it.collection.id)}/${encodeURIComponent(it.id)}.webp`;
+    img.alt = `Drawing of a ${it.name}`;
+    img.loading = "lazy";
+    media.appendChild(img);
+
+    const body = document.createElement("span");
+    body.className = "wl-card__body";
+    const id = document.createElement("span");
+    id.className = "wl-card__id";
+    id.textContent = `${kind.charAt(0).toUpperCase()}${kind.slice(1)} #${it.id}`;
+    const name = document.createElement("b");
+    name.textContent = it.name;
+    body.append(id, name);
+    if (it.dhiv_script) {
+      const dv = document.createElement("span");
+      dv.className = "wl-card__dv";
+      dv.lang = "dv";
+      dv.dir = "rtl";
+      dv.textContent = it.dhiv_script;
+      body.appendChild(dv);
+    }
+
+    card.append(media, body);
     return card;
   }
 
