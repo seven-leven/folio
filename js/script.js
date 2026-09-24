@@ -12,6 +12,7 @@
     { href: "sem2.html", title: "Blue Canvas", label: "Semester 2" },
     { href: "sem3.html", title: "Urban Acupuncture", label: "Semester 3" },
     { href: "sem4.html", title: "Measured Embrace", label: "Semester 4" },
+    { href: "sem5.html", title: "Yield, Register, Transmit", label: "Semester 5" },
   ];
 
   const ICON = {
@@ -36,6 +37,7 @@
     initScrollSpy();
     initSectionNav();
     initContactForm();
+    initTumblrFeed();
 
     if (document.body.classList.contains("project-page")) {
       initBrokenImages();
@@ -170,6 +172,89 @@
       { rootMargin: "-35% 0px -60% 0px" },
     );
     targets.forEach((t) => io.observe(t));
+  }
+
+  // --- Live Tumblr journal ([data-tumblr-feed="blogname"]) -----------------
+  // Tumblr's public v1 API answers with `var tumblr_api_read = {...}`, so it
+  // loads as a plain script (no CORS). Posts are rebuilt from their text and
+  // image URLs only; no Tumblr HTML is ever inserted into the page.
+  function initTumblrFeed() {
+    const feed = document.querySelector("[data-tumblr-feed]");
+    if (!feed) return;
+    const blog = feed.dataset.tumblrFeed;
+    const count = Number(feed.dataset.count) || 9;
+    const list = feed.querySelector(".tf-list");
+    const status = feed.querySelector(".tf-status");
+    const total = (feed.closest("section") || document).querySelector(".tf-total");
+
+    const fail = () => {
+      feed.classList.add("is-error");
+      if (status) status.textContent = "The journal couldn’t be loaded right now. Read it on Tumblr instead.";
+    };
+
+    const script = document.createElement("script");
+    script.src = `https://${blog}.tumblr.com/api/read/json?num=${count}`;
+    script.async = true;
+    script.onerror = fail;
+    script.onload = () => {
+      const data = window.tumblr_api_read;
+      if (!data || !Array.isArray(data.posts) || !list) return fail();
+      data.posts.forEach((post) => list.appendChild(tumblrCard(blog, post)));
+      if (total && data["posts-total"]) total.textContent = `all ${data["posts-total"]} entries`;
+      if (status) status.hidden = true;
+      feed.classList.add("is-loaded");
+    };
+    document.body.appendChild(script);
+  }
+
+  function tumblrCard(blog, post) {
+    const html = post["regular-body"] || post["photo-caption"] || post["video-caption"] || "";
+    const doc = new DOMParser().parseFromString(html, "text/html"); // inert: nothing loads or runs
+    const imgSrc = post["photo-url-500"] || doc.querySelector("img")?.getAttribute("src") || "";
+    // textContent glues adjacent blocks/links together ("@studiowork"); pad them first.
+    doc.body.querySelectorAll("p, div, br, li, h1, h2, h3, h4, figure, blockquote, a").forEach((el) => el.append(" "));
+    const text = `${post["regular-title"] || ""} ${doc.body.textContent || ""}`.replace(/\s+/g, " ").trim();
+    const num = text.match(/entry\s*\/\/\s*#?\s*(\d+)/i)?.[1];
+    const caption = text
+      .replace(/^.*?entry\s*\/\/\s*#?\s*\d+\s*/i, "")
+      .replace(/@[\w-]+/g, "")
+      .trim();
+    const date = new Date(Number(post["unix-timestamp"]) * 1000);
+
+    const card = document.createElement("a");
+    card.className = "tf-card";
+    card.href = `https://www.tumblr.com/${blog}/${encodeURIComponent(post.id)}`;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+
+    if (/^https:\/\//.test(imgSrc)) {
+      const media = document.createElement("span");
+      media.className = "tf-media";
+      const img = document.createElement("img");
+      img.src = imgSrc;
+      img.alt = "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.referrerPolicy = "no-referrer";
+      media.appendChild(img);
+      card.appendChild(media);
+    }
+
+    const meta = document.createElement("span");
+    meta.className = "tf-meta";
+    const label = document.createElement("span");
+    label.textContent = num ? `Entry #${num}` : "Journal";
+    const time = document.createElement("time");
+    time.dateTime = date.toISOString();
+    time.textContent = date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    meta.append(label, time);
+
+    const cap = document.createElement("span");
+    cap.className = "tf-caption";
+    cap.textContent = caption || "View entry";
+
+    card.append(meta, cap);
+    return card;
   }
 
   // --- Contact form: open the visitor's mail app with a pre-filled message --

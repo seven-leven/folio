@@ -638,6 +638,79 @@ body.home {
   font-size: 0.8rem;
 }
 
+.home .project-row__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.link-arrow--quiet {
+  color: var(--muted);
+  border-bottom-color: var(--line-strong);
+}
+
+/* Upcoming project: no link, drafting-grid placeholder instead of an image */
+.home .project-row__placeholder {
+  display: grid;
+  place-items: center;
+  background-color: var(--paper-2);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  box-shadow: none;
+  border: 1px dashed var(--line-strong);
+}
+.home .project-row__placeholder span {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 10vw, 7rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+}
+.home .project-row--soon .project-row__title {
+  color: var(--muted);
+}
+.home .soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.home .soon-badge::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-fill);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.home .contact-journal {
+  margin-top: 1.25rem;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+.home .contact-journal a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line-strong);
+}
+.home .contact-journal a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 /* --- Skills ------------------------------------------------------------- */
 .home #skills {
   background: var(--paper-2);
