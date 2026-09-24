@@ -1,7 +1,3 @@
 node_modules/
-dist/
 build/
-.vite/
 .coverage/
-*.local
-.DS_Store

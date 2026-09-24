@@ -1,0 +1,23 @@
+/* src/components/ProjectGroup.module.css */
+.projectGroup {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  /* Set a minimum width to ensure proper display */
+  min-width: 300px;
+  /* Add flex-shrink to prevent squishing */
+  flex-shrink: 0;
+  /* Add margin for spacing between groups */
+  margin-right: 1.5rem;
+  /* Ensure the last item doesn't have margin */
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.projectList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
