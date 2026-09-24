@@ -9,6 +9,7 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const file = await Deno.readFile(filePath);
     const headers = new Headers();
+    headers.set("cache-control", "no-store");
 
     if (filePath.endsWith(".html")) headers.set("content-type", "text/html");
     else if (filePath.endsWith(".js")) {
