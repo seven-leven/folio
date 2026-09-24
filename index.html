@@ -13,7 +13,7 @@
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
     <script>document.documentElement.classList.add("js");</script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thaana:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thaana:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 </head>
 <body class="home">
     <a class="skip-link" href="#projects">Skip to projects</a>
@@ -31,6 +31,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#wildlife">Wildlife</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#engineering-work">Engineering</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact-me">Contact</a></li>
@@ -47,8 +48,8 @@
                     <p class="eyebrow rise" style="--i: 0">Architectural Designer &amp; Civil Engineer</p>
                     <h1 class="hero__title rise" style="--i: 1">Gaahis <em>Yaugoob</em></h1>
                     <p class="hero__lede rise" style="--i: 2">
-                        Trained in both architectural design and civil engineering, now working as an
-                        Engineer at Novea Engineering, taking concepts through to detailed 2D/3D models and drawings.
+                        Trained in both architectural design and civil engineering, taking concepts
+                        through to detailed 2D/3D models and drawings.
                     </p>
                     <div class="hero__actions rise" style="--i: 3">
                         <a class="btn btn--primary" href="#projects">
@@ -59,8 +60,6 @@
                     </div>
                     <dl class="hero__facts rise" style="--i: 4">
                         <div><dt>5</dt><dd>Studio design projects</dd></div>
-                        <div><dt>2</dt><dd>Degrees in architecture &amp; civil engineering</dd></div>
-                        <div><dt>2022</dt><dd>In practice at Novea Engineering</dd></div>
                     </dl>
                 </div>
 
@@ -294,6 +293,47 @@
             </div>
         </section>
 
+        <!-- Engineering -->
+        <section id="engineering-work" class="eng-strip">
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Civil engineering</p>
+                    <h2 class="section-title">Engineering</h2>
+                    <p class="section-intro">Structural design, analysis and field work from the Bachelor of Civil Engineering (Hons).</p>
+                </header>
+                <div class="eng-cards">
+                    <a class="eng-card reveal" style="--i: 0" href="engineering.html#capstone">
+                        <span class="eng-card__img"><img src="images/eng-cover.webp" alt="" width="1600" height="900" loading="lazy"></span>
+                        <span class="eng-card__body">
+                            <small>Capstone · BES 401 · 2023</small>
+                            <b>Proposed 14-storey mixed-use building, Villimalé</b>
+                            <span>Site survey, structural design down to a raft foundation, drawing set, cost estimate and schedule.</span>
+                        </span>
+                    </a>
+                    <a class="eng-card reveal" style="--i: 1" href="engineering.html#thesis">
+                        <span class="eng-card__img eng-card__img--plot"><img src="engineering/wind-polar.webp" alt="" width="457" height="442" loading="lazy"></span>
+                        <span class="eng-card__body">
+                            <small>Thesis · 2023</small>
+                            <b>Wind-load analysis of a 14-storey building</b>
+                            <span>Analytical vs STAAD.Pro, with 40 years of Hulhulé wind data processed in Python.</span>
+                        </span>
+                    </a>
+                    <a class="eng-card reveal" style="--i: 2" href="engineering.html#coastal">
+                        <span class="eng-card__img"><img src="engineering/coastal-drone-map.webp" alt="" width="1250" height="953" loading="lazy"></span>
+                        <span class="eng-card__body">
+                            <small>Coastal engineering · 2023</small>
+                            <b>Field study &amp; breakwater design, K. Thulusdhoo</b>
+                            <span>Beach survey, drone mapping, soil sieve analysis and a layered breakwater.</span>
+                        </span>
+                    </a>
+                </div>
+                <a class="link-arrow eng-strip__more" href="engineering.html">
+                    View all engineering work
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </section>
+
         <!-- Skills -->
         <section id="skills">
             <div class="container">
@@ -478,6 +518,7 @@
                     <a href="sem3.html">Urban Acupuncture</a>
                     <a href="sem4.html">Measured Embrace</a>
                     <a href="sem5.html">Yield, Register, Transmit</a>
+                    <a href="engineering.html">Engineering work</a>
                 </nav>
             </div>
             <div>
