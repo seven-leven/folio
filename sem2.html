@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Canvas - Architectural Design</title>
+
+    <!-- Global Styles (apply first) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Project-Specific Styles (apply after global, or inline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      :root {
+        /* These variables are specific to THIS project page's theme */
+        --project-primary-bg: #f4f4f4;
+        --project-card-bg: #ffffff;
+        --project-text-color: #333333;
+        --project-heading-color: #2c3e50;
+        --project-accent-blue: #3498db;
+        --project-accent-red: #e74c3c;
+        --project-accent-terracotta: #c07a51;
+        --project-font-primary: "Lato", sans-serif;
+        --project-font-headings: "Montserrat", sans-serif;
+        --project-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        --project-border-radius: 8px;
+        --project-sub-project-bg: #eaf2f8;
+      }
+
+      .project-blue-canvas {
+        margin: 0;
+        font-family: var(--project-font-primary);
+        background-color: var(--project-primary-bg);
+        color: var(--project-text-color);
+        line-height: 1.7; /* Slightly increased line height for readability */
+      }
+
+      .project-blue-canvas #navbar, .project-blue-canvas footer {
+        margin: 0;
+      }
+
+      .project-blue-canvas .project-header {
+        background-color: var(--project-card-bg);
+        color: var(--project-heading-color);
+        padding: 40px 20px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .project-blue-canvas .title-container h1 {
+        font-family: var(--project-font-headings);
+        font-size: 3em;
+        margin: 0 0 10px 0;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--project-heading-color);
+      }
+
+      .project-blue-canvas .canvas-text {
+        color: var(--project-accent-blue);
+        font-weight: 700;
+      }
+
+      .project-blue-canvas .subtitle {
+        font-size: 1.1em;
+        font-weight: 300;
+        color: #555;
+        max-width: 700px; /* Slightly wider for longer subtitles */
+        margin: 0 auto;
+      }
+
+      #project-showcase-hero,
+      .project-blue-canvas section.animate-on-scroll-target {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      #project-showcase-hero.is-visible,
+      .project-blue-canvas section.animate-on-scroll-target.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #project-showcase-hero {
+        width: 100%;
+        background-color: var(--project-primary-bg);
+        padding: 30px 0;
+        margin-bottom: 30px;
+      }
+
+      #project-showcase-hero figure {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      #project-showcase-hero img {
+        width: 100%;
+        height: auto;
+        border-radius: var(--project-border-radius);
+        box-shadow: var(--project-shadow);
+      }
+
+      #project-showcase-hero figcaption {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 0.95em;
+        color: var(--project-text-color);
+      }
+
+      .project-blue-canvas main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .project-blue-canvas section {
+        background-color: var(--project-card-bg);
+        margin-bottom: 40px;
+        padding: 30px;
+        border-radius: var(--project-border-radius);
+        box-shadow: var(--project-shadow);
+      }
+
+      .project-blue-canvas section h2 {
+        font-family: var(--project-font-headings);
+        color: var(--project-heading-color);
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--project-accent-blue);
+        display: inline-block; /* Keeps border only under text */
+      }
+
+      .project-blue-canvas section h3 {
+        font-family: var(--project-font-headings);
+        color: var(--project-heading-color);
+        margin-top: 25px; /* Consistent margin */
+        margin-bottom: 15px;
+      }
+
+      .project-blue-canvas #introduction .intro-text p {
+        margin-bottom: 1em; /* Standard paragraph spacing */
+        color: var(--project-text-color);
+        font-size: 1.05em; /* Slightly larger for intro text */
+      }
+      .project-blue-canvas #introduction .intro-text p strong {
+        font-weight: 700; /* Ensure bold text is clearly bold */
+        color: var(--project-heading-color); /* Darker color for emphasis */
+      }
+
+      .project-blue-canvas .problem-remedy-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin: 30px 0; /* Increased margin */
+      }
+
+      .project-blue-canvas .problem-box, .project-blue-canvas .remedy-box {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: var(--project-border-radius);
+        border: 1px solid #eee;
+      }
+
+      .project-blue-canvas .problem-box h3,
+      .project-blue-canvas .remedy-box h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        font-size: 1.2em;
+      }
+      .project-blue-canvas .problem-box h3 {
+        border-bottom: 2px solid var(--project-accent-red);
+      }
+      .project-blue-canvas .remedy-box h3 {
+        border-bottom: 2px solid var(--project-accent-blue);
+      }
+
+      .project-blue-canvas p.statement-text {
+        font-size: 1.15em; /* Slightly larger */
+        font-style: italic;
+        font-weight: 400; /* Less heavy than default italic */
+        color: var(--project-accent-terracotta);
+        text-align: center;
+        padding: 20px; /* More padding */
+        background-color: #fffaf5; /* Light terracotta tint */
+        border-left: 4px solid var(--project-accent-terracotta);
+        margin: 30px auto 0 auto;
+        max-width: 90%; /* To make it not full width */
+        border-radius: 0 var(--project-border-radius)
+          var(--project-border-radius) 0;
+      }
+
+      .project-blue-canvas #ricci-flow-study {
+        background-color: var(--project-sub-project-bg);
+        border: 1px solid #cce0ff;
+      }
+      .project-blue-canvas #ricci-flow-study .section-intro-note {
+        font-size: 0.95em;
+        font-style: italic;
+        color: #444;
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background-color: #fff;
+        border-left: 3px solid var(--project-accent-blue);
+        border-radius: 4px;
+      }
+
+      .project-blue-canvas figure {
+        margin: 15px 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      .project-blue-canvas img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        display: block;
+        margin: 0 auto 10px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-blue-canvas img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .project-blue-canvas figcaption {
+        font-size: 0.9em;
+        color: #666;
+        font-style: italic;
+        margin-top: 5px; /* Added margin top */
+      }
+
+      .project-blue-canvas .site-grid,
+      .project-blue-canvas .ricci-flow-grid,
+      .project-blue-canvas .plans-grid,
+      .project-blue-canvas .details-grid,
+      .project-blue-canvas .blowups-grid,
+      .project-blue-canvas .sections-elevations-grid,
+      .project-blue-canvas .views-grid,
+      .project-blue-canvas .conceptual-form-grid {
+        display: grid;
+        gap: 25px;
+        margin-top: 20px; /* Add some space above grids */
+      }
+
+      .project-blue-canvas .conceptual-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-blue-canvas .site-grid,
+      .project-blue-canvas .details-grid,
+      .project-blue-canvas .blowups-grid,
+      .project-blue-canvas .views-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-blue-canvas .plans-grid,
+      .project-blue-canvas .ricci-flow-grid,
+      .project-blue-canvas .sections-elevations-grid {
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 768px) {
+        .project-blue-canvas .problem-remedy-wrapper {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .project-blue-canvas .conceptual-form-grid {
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+
+        .project-blue-canvas .site-grid,
+        .project-blue-canvas .details-grid,
+        .project-blue-canvas .blowups-grid,
+        .project-blue-canvas .views-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .project-blue-canvas .plans-grid {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .project-blue-canvas .ricci-flow-grid {
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .project-blue-canvas .sections-elevations-grid {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+      }
+
+      @media (max-width: 767px) {
+        .project-blue-canvas .title-container h1 {
+          font-size: 2.2em;
+        }
+        .project-blue-canvas .subtitle {
+          font-size: 1em;
+        }
+        .project-blue-canvas section {
+          padding: 20px;
+        }
+        .project-blue-canvas section h2 {
+          font-size: 1.5em;
+        }
+        .project-blue-canvas p.statement-text {
+          font-size: 1em;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body class="project-page project-blue-canvas">
+    <!-- Global Navbar from index.html -->
+    <nav id="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-logo">Gaahis Yaugoob</a>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Project Specific Header -->
+    <header class="project-header">
+      <div class="title-container">
+        <h1>BLUE <span class="canvas-text">CANVAS</span></h1>
+        <p class="subtitle">
+          EXPLORING THE INTERSECTION OF ARTISTIC PRACTICE AND CHILDHOOD PLAY
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Project Image - for initial animation -->
+    <section
+      id="project-showcase-hero"
+      class="project-hero-animate animate-on-scroll-target"
+    >
+      <figure>
+        <img
+          src="sem 2/killer.webp"
+          alt="Blue Canvas Conceptual Form - Main Building"
+        >
+        <figcaption>
+          The "Blue Canvas" - Main Building Conceptual Form
+        </figcaption>
+      </figure>
+    </section>
+
+    <main>
+      <section id="introduction" class="animate-on-scroll-target">
+        <h2>Introduction & Concept</h2>
+        <div class="intro-text">
+          <p>
+            The project explores the intersection of <strong>artistic
+              practice</strong> and <strong>community engagement</strong>
+            through a three-level structure that challenges traditional art
+            education paradigms.
+          </p>
+          <p>
+            The building's form responds to its primary function: creating
+            <strong>unrestricted spaces</strong> for <strong>artistic
+              exploration</strong> while fostering natural interaction between
+            practicing artists and the public, particularly children.
+          </p>
+          <p>
+            Named “Blue Canvas,” the design embodies the infinite nature of the
+            sky - a reflection of how children's creativity, like the vast azure
+            expanse above, knows no boundaries.
+          </p>
+        </div>
+
+        <div class="problem-remedy-wrapper">
+          <div class="problem-box">
+            <h3>Problem Factor</h3>
+            <figure>
+              <img src="sem 2/problem.webp" alt="Problem Factor Diagram">
+              <figcaption>
+                Art education often sterile, limiting children's innate
+                creativity.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="remedy-box">
+            <h3>Remedy</h3>
+            <figure>
+              <img src="sem 2/remedy.webp" alt="Remedy Diagram">
+              <figcaption>
+                Foster exploration and creation in a positive, uninhibited
+                environment.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <h3>Statement</h3>
+        <p class="statement-text">
+          FOSTERING A NURTURING AND SUPPORTIVE ENVIRONMENT WHERE CHILDREN CAN
+          FREELY EXPLORE ART, CONNECT WITH NATURE, AND GAIN AUTHENTIC
+          UNDERSTANDING OF ARTISTIC PRACTICE AND EXPRESSION.
+        </p>
+      </section>
+
+      <section id="conceptual-building-form" class="animate-on-scroll-target">
+        <h2>Conceptual Building Form</h2>
+        <p>
+          Early conceptual explorations for the main building's form,
+          considering massing, program distribution, and experiential qualities.
+        </p>
+        <div class="conceptual-form-grid">
+          <figure>
+            <img
+              src="sem 2/form.webp"
+              alt="Initial building form sketches and diagrams"
+            >
+            <figcaption>Initial Building Form & Massing Concepts</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="site" class="animate-on-scroll-target">
+        <h2>Site Analysis & Strategy</h2>
+        <div class="site-grid">
+          <figure>
+            <img src="sem 2/site.webp" alt="Site Plan">
+            <figcaption>Site Plan & Key Areas</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/site strategies.webp" alt="Site Strategies">
+            <figcaption>
+              Site Strategies: Preserving trees, maximizing views, integrating
+              pathways.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="ricci-flow-study" class="animate-on-scroll-target">
+        <h2>Design Methodology: Ricci Flow Study</h2>
+        <p class="section-intro-note">
+          The "Ricci Flow" geometric process served as a key design methodology,
+          explored as a foundational study for this project. This iterative
+          technique for form generation (illustrated below) provided a framework
+          for developing the organic and adaptable qualities of the main
+          building's structure. The study focused on how such processes can
+          yield evolving and responsive architectural spaces.
+        </p>
+        <div class="ricci-flow-grid">
+          <figure>
+            <img
+              src="sem 2/ricci flow form.webp"
+              alt="Ricci Flow iterative form diagram"
+            >
+            <figcaption>
+              Ricci Flow: Iterative Structural Form Generation Process
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              src="sem 2/ricci flow view 1.webp"
+              alt="Ricci Flow conceptual view 1"
+            >
+            <figcaption>
+              Ricci Flow Study: Conceptual Shell Structure Visualization
+            </figcaption>
+          </figure>
+          <figure>
+            <img
+              src="sem 2/ricci flow view 2.webp"
+              alt="Ricci Flow conceptual view 2"
+            >
+            <figcaption>
+              Ricci Flow Study: Resulting Conceptual Shell Form
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="programming" class="animate-on-scroll-target">
+        <h2>Programming & Parti</h2>
+        <figure>
+          <img
+            src="sem 2/programming.webp"
+            alt="Programming and Parti Diagrams"
+          >
+          <figcaption>
+            Spatial Programming and Parti Diagrams for each floor.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="floor-plans" class="animate-on-scroll-target">
+        <h2>Floor Plans</h2>
+        <div class="plans-grid">
+          <figure>
+            <img src="sem 2/ground floor.webp" alt="Ground Floor Plan">
+            <figcaption>Ground Floor Plan</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/1st floor.webp" alt="First Floor Plan">
+            <figcaption>First Floor Plan</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/2nd floor.webp" alt="Second Floor Plan">
+            <figcaption>Second Floor Plan</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="details" class="animate-on-scroll-target">
+        <h2>Structural & Material Details</h2>
+        <div class="details-grid">
+          <figure>
+            <img
+              src="sem 2/frame connection detail.webp"
+              alt="Structural Frame Connection"
+            >
+            <figcaption>Structural Frame Connection Detail</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/flooring detail.webp" alt="Ground Flooring Detail">
+            <figcaption>Ground Flooring Detail</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="blow-ups" class="animate-on-scroll-target">
+        <h2>Detailed Views & Blow-ups</h2>
+        <div class="blowups-grid">
+          <figure>
+            <img src="sem 2/blow up 1.webp" alt="Pathway Blowup">
+            <figcaption>Pathway Blowup - Integrating Nature</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/blow up 2.webp" alt="Individual Workspace Blowup">
+            <figcaption>Individual Workspace Blowup</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="sections-elevations" class="animate-on-scroll-target">
+        <h2>Sections & Elevations</h2>
+        <div class="sections-elevations-grid">
+          <figure>
+            <img src="sem 2/section 1 1 100.webp" alt="Section 1 at 1:100">
+            <figcaption>Section 1 (Scale 1:100)</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/section 2 1 50.webp" alt="Section 2 at 1:50">
+            <figcaption>Section 2 (Scale 1:50)</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/elevation 1.webp" alt="Elevation 1">
+            <figcaption>Elevation 1</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/elevation 2.webp" alt="Elevation 2">
+            <figcaption>Elevation 2</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="views" class="animate-on-scroll-target">
+        <h2>Perspective Views</h2>
+        <div class="views-grid">
+          <figure>
+            <img src="sem 2/view 1.webp" alt="Perspective View 1">
+            <figcaption>Interior Perspective - Workshop Space</figcaption>
+          </figure>
+          <figure>
+            <img src="sem 2/view 2.webp" alt="Perspective View 2">
+            <figcaption>Exterior Perspective - Entrance View</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <!-- Global Footer from index.html -->
+    <footer>
+      <div class="container">
+        <p>
+          © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Centralized JavaScript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

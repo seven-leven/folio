@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanting Reading Nook - Gaahis Yaugoob</title>
+
+    <!-- Global Styles (apply first) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Project-Specific Styles -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      :root {
+        --project-sem1-primary-blue: #65a9d3; /* Extracted from plans */
+        --project-sem1-text-dark: #333;
+        --project-sem1-text-light: #555;
+        --project-sem1-bg-light: #fdfaf3; /* Light beige from board bg */
+        --project-sem1-border-color: #ddd;
+        --project-sem1-accent-orange: #f08a5d; /* From site analysis arrows */
+      }
+
+      * {
+        /* Keep margin/padding reset if truly needed to override global, but usually not necessary if global handles it well */
+        /* margin: 0; */
+        /* padding: 0; */
+        /* box-sizing: border-box; */ /* Global style.css should handle this */
+      }
+
+      /* Scoping to this page's unique body class */
+      .project-reading-nook {
+        font-family: "Montserrat", sans-serif;
+        line-height: 1.6;
+        color: var(--project-sem1-text-dark);
+        background-color: var(--project-sem1-bg-light);
+        /* padding: 20px; -- Container will handle main padding */
+      }
+
+      /* Ensure global navbar and footer background/text styles are overridden if needed, or work with them */
+      .project-reading-nook #navbar {
+        /* Example: Override navbar background for this page if desired */
+        /* background: var(--project-sem1-bg-light); */
+      }
+      .project-reading-nook footer {
+        /* Example: Override footer background for this page if desired */
+        /* background: var(--project-sem1-text-dark); */
+        /* color: var(--project-sem1-bg-light); */
+      }
+
+      .project-reading-nook .page-container {
+        /* Specific container for this page's content, inside global .container */
+        max-width: 1200px; /* Or use global .container's width */
+        margin: 0 auto;
+        padding: 20px 15px; /* Padding for the content area */
+      }
+
+      .project-reading-nook h1,
+      .project-reading-nook h2,
+      .project-reading-nook h3 {
+        font-family: "Oswald", sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        color: var(--project-sem1-primary-blue);
+        /* animation: fadeInDown 0.8s ease-out; -- Let JS handle section animations */
+      }
+      /* Specific animations for h1 and author can stay if desired for initial load */
+      .project-reading-nook h1 {
+        font-size: 2.8em;
+        text-align: center;
+        margin-bottom: 5px;
+        letter-spacing: 2px;
+        animation: fadeInDown 0.8s ease-out;
+      }
+
+      .project-reading-nook .project-author {
+        text-align: center;
+        font-style: italic;
+        color: var(--project-sem1-text-light);
+        margin-bottom: 30px;
+        font-size: 1.1em;
+        animation: fadeIn 1s 0.2s ease-out backwards;
+      }
+
+      .project-reading-nook .hero-concept-text {
+        font-family: "Oswald", sans-serif;
+        font-size: 4em;
+        line-height: 1.1;
+        text-align: center;
+        margin: 30px 0;
+        color: var(--project-sem1-text-dark);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        animation: fadeInUp 1s 0.3s ease-out backwards;
+      }
+      .project-reading-nook .hero-concept-text span {
+        display: block;
+      }
+      .project-reading-nook .hero-concept-text .serenity {
+        color: var(--project-sem1-primary-blue);
+      }
+      .project-reading-nook .hero-concept-text .cosmic {
+        color: var(--project-sem1-accent-orange);
+      }
+
+      .project-reading-nook .section {
+        /* Renamed from .section to avoid conflict with global section if any */
+        margin-bottom: 60px;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        /* animation: fadeInUp 0.8s ease-out backwards; -- JS handles this with .animate-on-scroll-target */
+      }
+
+      .project-reading-nook .section-title {
+        font-size: 2em;
+        border-bottom: 2px solid var(--project-sem1-primary-blue);
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+      }
+
+      .project-reading-nook .section-subtitle {
+        font-size: 1.5em;
+        color: var(--project-sem1-text-dark);
+        margin-top: 20px;
+        margin-bottom: 15px;
+      }
+
+      .project-reading-nook p {
+        /* Paragraphs specific to this project page */
+        margin-bottom: 15px;
+        color: var(--project-sem1-text-light);
+        /* animation: fadeIn 1s 0.5s ease-out backwards; -- Too many animations can be distracting; consider removing for p */
+      }
+
+      .project-reading-nook .main-project-image {
+        /* For the initial hero image */
+        /* animation: zoomIn 1s 0.5s ease-out backwards; -- JS handles this */
+      }
+
+      .project-reading-nook img {
+        /* General image styling for this page */
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        display: block;
+        margin: 15px auto;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .project-reading-nook img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .project-reading-nook .image-caption {
+        text-align: center;
+        font-style: italic;
+        color: #777;
+        font-size: 0.9em;
+        margin-top: -5px;
+        margin-bottom: 15px;
+      }
+
+      .project-reading-nook .grid-container {
+        display: grid;
+        gap: 20px;
+      }
+
+      .project-reading-nook .grid-2-cols {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .project-reading-nook .grid-3-cols {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .project-reading-nook .grid-item {
+        /* animation: zoomIn 0.7s ease-out backwards; -- Individual item animation can be nice, but ensure it's not on top of section animation */
+      }
+      /* Stagger grid item animations if section itself isn't animated or for secondary effect */
+      /*
+      .project-reading-nook .grid-item:nth-child(1) { animation-delay: 0.1s; }
+      .project-reading-nook .grid-item:nth-child(2) { animation-delay: 0.2s; }
+      ...
+      */
+
+      .project-reading-nook .site-analysis-swot {
+        margin-top: 20px;
+      }
+      .project-reading-nook .site-analysis-swot p {
+        font-size: 1.1em;
+        margin-bottom: 8px;
+      }
+      .project-reading-nook .site-analysis-swot strong {
+        font-family: "Oswald", sans-serif;
+        font-size: 1.5em;
+        margin-right: 10px;
+        color: var(--project-sem1-primary-blue);
+      }
+      .project-reading-nook .site-analysis-swot .s {
+        color: #5cb85c;
+      }
+      .project-reading-nook .site-analysis-swot .w {
+        color: #d9534f;
+      }
+      .project-reading-nook .site-analysis-swot .o {
+        color: #f0ad4e;
+      }
+      .project-reading-nook .site-analysis-swot .t {
+        color: #5bc0de;
+      }
+
+      /* Keyframe Animations (keep if they are unique to this page and not covered by global script) */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes zoomIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .project-reading-nook .development-section .grid-item {}
+      .project-reading-nook .development-section .section-subtitle {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+      .project-reading-nook .development-section .grid-item img {
+        margin-top: 0;
+      }
+      .project-reading-nook .development-section .grid-item p {
+        margin-top: 15px;
+        font-size: 0.92em;
+        color: var(--project-sem1-text-light);
+      }
+
+      .project-reading-nook .details-section .grid-2-cols {
+        margin-bottom: 35px;
+      }
+      .project-reading-nook .axonometric-wrapper {
+        text-align: center;
+        margin-bottom: 25px;
+        /* animation: zoomIn 0.7s 0.3s ease-out backwards; -- If section is animated, this might be too much */
+      }
+      .project-reading-nook .axonometric-img-display {
+        max-width: 80%;
+        height: auto;
+        border-radius: 5px;
+        display: inline-block;
+        margin: 0 auto 5px auto;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease; /* Ensure hover is still defined */
+      }
+      .project-reading-nook .axonometric-img-display:hover {
+        transform: scale(1.02);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .project-reading-nook .page-container {
+          padding: 10px;
+        }
+        .project-reading-nook h1 {
+          font-size: 2em;
+        }
+        .project-reading-nook .hero-concept-text {
+          font-size: 2.5em;
+        }
+        .project-reading-nook .section-title {
+          font-size: 1.6em;
+        }
+        .project-reading-nook .section-subtitle {
+          font-size: 1.3em;
+        }
+        .project-reading-nook .grid-2-cols,
+        .project-reading-nook .grid-3-cols {
+          grid-template-columns: 1fr;
+        }
+        .project-reading-nook .details-section .axonometric-img-display {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body class="project-page project-reading-nook">
+    <!-- Added body classes -->
+
+    <!-- Global Navbar from index.html -->
+    <nav id="navbar">
+      <div class="container">
+        <a href="index.html" class="nav-logo">Gaahis Yaugoob</a>
+        <ul>
+          <li><a href="index.html#home">Home</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#skills">Skills</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page specific content -->
+    <div class="page-container">
+      <header
+        class="animate-on-scroll-target project-hero-animate"
+        id="project-showcase-hero"
+      >
+        <!-- Added animation classes and ID for JS hook -->
+        <h1>Enchanting Reading Nook</h1>
+        <p class="project-author">by Gaahis Yaugoob</p>
+
+        <div class="hero-concept-text">
+          <span>Pages</span>
+          <span class="serenity">Serenity</span>
+          <span>Cosmic</span>
+          <span class="cosmic">Wonders</span>
+        </div>
+
+        <p style="text-align: center; margin-bottom: 20px">
+          <!-- Removed inline animation, section will handle -->
+          Step into this enchanting reading nook, a space that invites book
+          lovers to immerse themselves in a world of literary wonder. The book
+          shelf showcases your beloved books while ambient and natural lighting
+          bathes the nook in a soft glow. LED strip lights illuminate the
+          spines, casting a mesmerizing aura. Sink into the plush comfort of a
+          bean bag, where time stands still as you delve into the pages of your
+          chosen adventure. The mirrored flooring offers a glimpse into another
+          dimension, a world that await within the pages. This haven is an
+          invitation to step inside, unplug, and reconnect with the enchanting
+          world of stories.
+        </p>
+        <img
+          src="sem 1/killer.webp"
+          alt="Reading Nook Perspective"
+          class="main-project-image"
+        >
+        <!-- Removed inline animation -->
+      </header>
+
+      <section class="section animate-on-scroll-target">
+        <h2 class="section-title">Concept</h2>
+        <h3 class="section-subtitle">Bubble Diagram</h3>
+        <img src="sem 1/parti.webp" alt="Bubble Diagram">
+        <p>
+          The concept revolves around creating an intimate and immersive reading
+          experience. Key elements include comfortable seating, ample book
+          storage, quality lighting, and a connection to nature, fostering
+          tranquility and focus.
+        </p>
+      </section>
+
+      <section class="section animate-on-scroll-target">
+        <h2 class="section-title">Site Analysis</h2>
+        <img src="sem 1/site.webp" alt="Site Analysis Diagram">
+        <div class="site-analysis-swot">
+          <p><strong class="s">S</strong> - Natural light</p>
+          <p><strong class="s">S</strong> - Privately owned unused land</p>
+          <p><strong class="w">W</strong> - Limited existing vegetation</p>
+          <p><strong class="w">W</strong> - Limited views/road access</p>
+          <p>
+            <strong class="o">O</strong> - Natural light for daytime lighting
+          </p>
+          <p><strong class="o">O</strong> - Privacy</p>
+          <p><strong class="o">O</strong> - Less noise</p>
+          <p><strong class="t">T</strong> - Prone to weathering</p>
+          <p><strong class="t">T</strong> - Harsh direct sunlight</p>
+        </div>
+        <p>
+          The site benefits from abundant natural light and privacy.
+          Considerations include managing direct sunlight and potential
+          weathering, while leveraging the quiet, secluded nature of the
+          location.
+        </p>
+      </section>
+
+      <section class="section development-section animate-on-scroll-target">
+        <h2 class="section-title">Development</h2>
+        <div class="grid-container grid-2-cols">
+          <div class="grid-item">
+            <h3 class="section-subtitle">Form</h3>
+            <img src="sem 1/Form_building.webp" alt="Form Development">
+            <p>
+              The form evolves from a simple allocated space, incorporating
+              transparent glazing and wooden compliments, to a stacked,
+              accessible structure that considers optimal viewing angles and
+              user comfort.
+            </p>
+          </div>
+          <div class="grid-item">
+            <h3 class="section-subtitle">Roof Design</h3>
+            <img src="sem 1/Form_roof.webp" alt="Roof Design">
+            <p>
+              The roof design prioritizes water drainage and protection from the
+              elements, evolving from a simple flat roof to a sloped design that
+              effectively directs rainwater away, ensuring durability.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section animate-on-scroll-target">
+        <h2 class="section-title">Plans, Elevations, & Sections</h2>
+        <div class="grid-container grid-2-cols">
+          <div class="grid-item">
+            <img src="sem 1/floor plan 1 20.webp" alt="Ground Floor Plan">
+            <p class="image-caption">Ground Floor Plan (Scale 1:20)</p>
+          </div>
+          <div class="grid-item">
+            <img src="sem 1/roof plan 1 20.webp" alt="Roof Plan">
+            <p class="image-caption">Roof Plan (Scale 1:20)</p>
+          </div>
+          <div class="grid-item">
+            <img src="sem 1/elevation 1 1 20.webp" alt="Elevation 1">
+            <p class="image-caption">Elevation 1 (Scale 1:20)</p>
+          </div>
+          <div class="grid-item">
+            <img src="sem 1/elevation 2 1 20.webp" alt="Elevation 2">
+            <p class="image-caption">Elevation 2 (Scale 1:20)</p>
+          </div>
+          <div class="grid-item">
+            <img src="sem 1/section x-x 1 20.webp" alt="Section X-X">
+            <p class="image-caption">Section X-X (Scale 1:20)</p>
+          </div>
+          <div class="grid-item">
+            <img src="sem 1/section y-y 1 20.webp" alt="Section Y-Y">
+            <p class="image-caption">Section Y-Y (Scale 1:20)</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section animate-on-scroll-target">
+        <h2 class="section-title">External Views</h2>
+        <div class="grid-container grid-2-cols">
+          <div class="grid-item">
+            <img
+              src="sem 1/exterior view 1.webp"
+              alt="Exterior View 1 - Daytime"
+            >
+            <p class="image-caption">Daytime Exterior View</p>
+          </div>
+          <div class="grid-item">
+            <img
+              src="sem 1/exterior view 2.webp"
+              alt="Exterior View 2 - Nighttime"
+            >
+            <p class="image-caption">Nighttime Exterior View</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section details-section animate-on-scroll-target">
+        <h2 class="section-title">Details</h2>
+        <div class="grid-container grid-2-cols">
+          <div class="grid-item">
+            <img src="sem 1/detail A 1 2.webp" alt="Detail A - Roof and Wall">
+            <p class="image-caption">
+              Detail A: Roof-Wall Junction (Scale 1:2)
+            </p>
+          </div>
+          <div class="grid-item">
+            <img
+              src="sem 1/detail B 1 5.webp"
+              alt="Detail B - Foundation and Cladding"
+            >
+            <p class="image-caption">
+              Detail B: Base/Cladding Detail (Scale 1:5)
+            </p>
+          </div>
+        </div>
+        <div class="axonometric-wrapper">
+          <img
+            src="sem 1/axonometric.webp"
+            alt="Axonometric View"
+            class="axonometric-img-display"
+          >
+          <p class="image-caption">Axonometric Cutaway</p>
+        </div>
+        <p>
+          The details illustrate key construction elements, including the sloped
+          roof connection, simple door mechanism, material usage for shelving
+          and cladding, and foundation details. The axonometric view provides a
+          comprehensive look at the assembled components.
+        </p>
+      </section>
+    </div>
+    <!-- end .page-container -->
+
+    <!-- Global Footer from index.html -->
+    <footer>
+      <div class="container">
+        <p>
+          © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Centralized JavaScript -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
