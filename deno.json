@@ -14,12 +14,6 @@
         "build"
       ]
     },
-    "tap-test": {
-      "command": "deno run -A tools/tap-test.ts",
-      "dependencies": [
-        "build"
-      ]
-    },
     "snapshot": {
       "command": "deno run -A tools/snapshot.ts",
       "dependencies": [

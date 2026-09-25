@@ -46,7 +46,6 @@ Requires [Deno](https://deno.com) 2.x. The browser-based tasks need Chrome
 | `deno task dev` | build, watch `site/`, serve at http://localhost:8000/folio/ |
 | `deno task build` | build `dist/` once |
 | `deno task check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
-| `deno task tap-test` | on a simulated phone, fail if anything invisible can be tapped |
 | `deno task snapshot <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
 | `deno task compare <a> <b>` | diff two snapshots: take one before a change and one after |
 | `deno task images <path>…` | convert images to WebP, at most 2400 px on the long side |
@@ -61,7 +60,7 @@ Requires [Deno](https://deno.com) 2.x. The browser-based tasks need Chrome
 
 1. Work on `dev`. Before a big visual change, `deno task snapshot before`; afterwards,
    `deno task snapshot after` and `deno task compare before after`.
-2. Commit. Every push runs formatting, lint, the check and the tap test in CI.
+2. Commit. Every push runs formatting, lint and the check in CI.
 3. `deno task release` when it's ready. CI builds `main`, checks it again and
    publishes `dist/` to the `gh-pages` branch as a fresh commit, which GitHub
    Pages serves. `gh-pages` is a build artifact: never commit to it.

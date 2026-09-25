@@ -1,5 +1,5 @@
 /**
- * Shared setup for the browser-based tools (snapshot, tap-test): serve dist/
+ * Shared setup for the browser-based tools (snapshot): serve dist/
  * the way GitHub Pages does and launch a headless Chrome.
  *
  * Chrome is found at CHROME_PATH, or the usual install locations on Windows,

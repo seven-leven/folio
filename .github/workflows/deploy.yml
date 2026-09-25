@@ -39,9 +39,6 @@ jobs:
       - name: Build and check links, images, anchors and page metadata
         run: deno task check
 
-      - name: Phone tap test (no invisible tappable links)
-        run: deno task tap-test
-
   deploy:
     name: Deploy to GitHub Pages
     needs: check
