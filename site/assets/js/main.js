@@ -6,20 +6,15 @@
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Order used for the previous/next links at the bottom of project pages.
-  const PROJECTS = [
-    { href: "sem1.html", title: "Enchanting Reading Nook", label: "Semester 1 · 2023" },
-    { href: "sem2.html", title: "Blue Canvas", label: "Semester 2 · 2024" },
-    { href: "sem3.html", title: "Urban Acupuncture", label: "Semester 3 · 2025" },
-    { href: "sem4.html", title: "Measured Embrace", label: "Semester 4 · 2025" },
-    { href: "sem5.html", title: "Yield, Register, Transmit", label: "Semester 5 · 2026" },
-  ];
-
   const ICON = {
-    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
-    prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
-    next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
-    zoom: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M20 20l-4-4"/></svg>',
+    close:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    prev:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+    next:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+    zoom:
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M20 20l-4-4"/></svg>',
   };
 
   function onReady(fn) {
@@ -414,8 +409,9 @@
 
       const subject = `Portfolio enquiry from ${name}`;
       const body = `${message}\n\n${name}\n${email}`;
-      window.location.href =
-        `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${
+        encodeURIComponent(body)
+      }`;
 
       const status = form.querySelector(".form-note");
       if (status) status.textContent = "Opening your email app…";
@@ -604,6 +600,12 @@
 
   // --- Project pages: previous / next project links above the footer --------
   function initPager() {
+    // The footer lists the projects in order (built from site/_data/projects.json).
+    const PROJECTS = [...document.querySelectorAll(".site-footer a[data-label]")].map((a) => ({
+      href: a.getAttribute("href"),
+      title: a.textContent.trim(),
+      label: a.dataset.label,
+    }));
     const page = (location.pathname.split("/").pop() || "").replace(/\.html$/, "");
     const i = PROJECTS.findIndex((p) => p.href.replace(/\.html$/, "") === page);
     if (i === -1) return;
@@ -617,7 +619,9 @@
     const pager = document.createElement("nav");
     pager.id = "project-pager";
     pager.setAttribute("aria-label", "More projects");
-    pager.innerHTML = `<div class="pp-inner">${link(PROJECTS[i - 1], "prev")}<a class="pp-all" href="index.html#architecture">All architecture</a>${link(PROJECTS[i + 1], "next")}</div>`;
+    pager.innerHTML = `<div class="pp-inner">${
+      link(PROJECTS[i - 1], "prev")
+    }<a class="pp-all" href="index.html#architecture">All architecture</a>${link(PROJECTS[i + 1], "next")}</div>`;
 
     const footer = document.querySelector(".site-footer, footer");
     if (footer) footer.before(pager);

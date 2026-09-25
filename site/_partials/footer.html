@@ -1,7 +1,8 @@
 <!--
   Shared footer, stamped into each page by tools/build.ts.
   Use in a page: an HTML comment reading  @include footer
-  Add new project pages to the "Academic" list here.
+  The Academic project links come from site/_data/projects.json ({{projectLinks}});
+  the previous/next links on project pages read them from here.
 -->
 <footer class="site-footer">
   <div class="container site-footer__inner">
@@ -12,11 +13,7 @@
     <div>
       <p class="site-footer__heading">Academic</p>
       <nav class="site-footer__links" aria-label="Academic work">
-        <a href="sem1.html">Enchanting Reading Nook</a>
-        <a href="sem2.html">Blue Canvas</a>
-        <a href="sem3.html">Urban Acupuncture</a>
-        <a href="sem4.html">Measured Embrace</a>
-        <a href="sem5.html">Yield, Register, Transmit</a>
+        {{projectLinks}}
         <a href="engineering.html">Engineering work</a>
       </nav>
     </div>
@@ -38,7 +35,10 @@
     </div>
   </div>
   <div class="container site-footer__bottom">
-    <p class="site-footer__copy">© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
+    <p class="site-footer__copy">
+      © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+      <a class="site-footer__version" href="https://github.com/seven-leven/folio/blob/main/CHANGELOG.md" title="What changed in each version">{{version}}</a>
+    </p>
     <a class="site-footer__top" href="#">Back to top ↑</a>
   </div>
 </footer>

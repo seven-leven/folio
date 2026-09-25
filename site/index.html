@@ -472,7 +472,7 @@
                     </header>
 
                     <!-- Timeline, oldest first. Each entry's animation is a <canvas data-vis="…">
-                         drawn by assets/js/coding-visuals.js. -->
+                         drawn by assets/js/coding/. -->
                     <ol class="code-tl">
                         <li class="tl-chapter reveal"><p>2021 · Scratching an itch</p></li>
 
@@ -548,8 +548,8 @@
                                     <p class="tl-text">
                                         Next I pointed Python at something I had years of data on: my MyAnimeList
                                         exports. I parsed the XML, built tables comparing my list with my friends',
-                                        and played with ways to show how much I'd actually watched. Rerun on my
-                                        latest export, it's a lot: 1,360 titles and 13,304 episodes, around 212 days
+                                        and played with ways to show how much I'd actually watched. On my September
+                                        2026 export, it's a lot: 1,360 titles and 13,304 episodes, around 212 days
                                         of nonstop watching.
                                     </p>
                                 </div>
@@ -574,7 +574,7 @@
                                         iteration. I wrote it in Python instead, looping until it converged to an
                                         exact answer. Then the function took on a second life: whenever a new AI
                                         model came out, I asked it to make my code faster. Sixteen versions later,
-                                        three were faster but wrong, one was slower than my original, and the latest,
+                                        three were faster but wrong, one was slower than my original, and the latest (as of September 2026),
                                         written by Claude Fable, runs 16 times faster than mine. I don't think it can
                                         be beaten.
                                     </p>
@@ -708,10 +708,10 @@
                                     <p class="tl-text">
                                         I read light novels in English and wanted to know when the translations
                                         would catch up with Japan. I scraped the volume lists from Wikipedia and
-                                        fitted a linear regression to predict the missing English dates. Rerun on
-                                        today's data for Re:Zero, the fit is almost perfect, and the answer is never:
+                                        fitted a linear regression to predict the missing English dates. Rerun in
+                                        September 2026 for Re:Zero, the fit is almost perfect, and the answer is never:
                                         English volumes come out about every 4.2 months and Japanese ones about every
-                                        3.3, so the gap keeps growing. Volume 46, out in Japan this month, should
+                                        3.3, so the gap keeps growing. Volume 46, out in Japan in September 2026, should
                                         reach English around the end of 2031.
                                     </p>
                                 </div>
@@ -833,7 +833,7 @@
                                         I got interested in machine learning and spent a few weeks working through an
                                         O'Reilly book for beginners, trying the basic models one by one on Kaggle's Titanic
                                         dataset: logistic regression, k-nearest neighbours, SVMs, random forests, gradient
-                                        boosting and a small neural network in PyTorch. Rerun today on the same held-out
+                                        boosting and a small neural network in PyTorch. Rerun in September 2026 on the same held-out
                                         passengers, the simplest of them, logistic regression, still comes out on top.
                                         The animation first shows how each model splits passengers on just two
                                         features, age and fare, then the real scores.
@@ -1087,6 +1087,6 @@
     <!-- @include footer -->
 
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/coding-visuals.js"></script>
+    <script type="module" src="assets/js/coding/index.js"></script>
 </body>
 </html>

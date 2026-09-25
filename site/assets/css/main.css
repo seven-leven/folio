@@ -1707,6 +1707,15 @@ body.home {
   font-size: 0.85rem;
   font-weight: 500;
 }
+.site-footer .site-footer__version {
+  margin-left: 0.5rem;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.site-footer .site-footer__version:hover {
+  color: var(--text);
+}
 
 /* 9. Project pages =========================================================
    Reading progress, zoomable images, lightbox and pager. ID-scoped so each

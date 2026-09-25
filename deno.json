@@ -1,16 +1,60 @@
 {
+  "imports": {
+    "@std/http": "jsr:@std/http@^1",
+    "@std/path": "jsr:@std/path@^1",
+    "puppeteer-core": "npm:puppeteer-core@23",
+    "sharp": "npm:sharp@0.33"
+  },
   "tasks": {
-    "build": "deno run --allow-read=site,dist --allow-write=dist tools/build.ts",
-    "dev": "deno run --allow-read=site,dist --allow-write=dist --allow-net tools/build.ts --watch --serve",
+    "build": "deno run --allow-read --allow-write=dist --allow-run=git tools/build.ts",
+    "dev": "deno run --allow-read --allow-write=dist --allow-run=git --allow-net tools/build.ts --watch --serve",
     "check": {
-      "command": "deno run --allow-read=dist tools/check.ts",
-      "dependencies": ["build"]
-    }
+      "command": "deno run --allow-read=dist,site/_data tools/check.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "tap-test": {
+      "command": "deno run -A tools/tap-test.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "snapshot": {
+      "command": "deno run -A tools/snapshot.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "compare": "deno run --allow-read=.snapshots tools/compare.ts",
+    "version": "deno run --allow-read=version.json --allow-run=git tools/version.ts",
+    "changelog": "deno run --allow-read=CHANGELOG.md,version.json --allow-write=CHANGELOG.md --allow-run=git tools/changelog.ts",
+    "images": "deno run --allow-read --allow-write --allow-env --allow-ffi --allow-sys tools/images.ts",
+    "links": {
+      "command": "deno run --allow-read=dist --allow-net tools/links.ts",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "release": "deno run --allow-read --allow-run=git,gh,deno tools/release.ts"
   },
   "fmt": {
-    "include": ["tools/"]
+    "include": [
+      "tools/",
+      "site/assets/js/"
+    ],
+    "lineWidth": 120
   },
   "lint": {
-    "include": ["tools/"]
+    "include": [
+      "tools/",
+      "site/assets/js/"
+    ],
+    "rules": {
+      "exclude": [
+        "no-window",
+        "no-window-prefix"
+      ]
+    }
   }
 }

@@ -12,6 +12,9 @@ desktop.ini
 # Build output (CI rebuilds it; never commit)
 dist/
 
+# Before/after page captures from `deno task snapshot`
+.snapshots/
+
 # Dependencies and scratch output
 node_modules/
 *.log

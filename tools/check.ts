@@ -2,17 +2,23 @@
  * Static site checker for the built site in dist/ (run `deno task build` first;
  * `deno task check` does that automatically).
  *
- * Errors (fail CI): broken local links/images/scripts/styles, missing
- * #anchors, <img> without alt, pages missing <title>, meta description,
- * lang or canonical, and duplicate ids.
- * Warnings: assets over the size budget and assets nothing references.
+ * Errors (fail CI): broken local links/images/scripts/styles, broken JS module
+ * imports and data URLs, missing #anchors, <img> without alt, pages missing
+ * <title>, meta description, lang or canonical, duplicate ids, raster images
+ * that aren't WebP, and projects in site/_data/projects.json without a page or
+ * a homepage entry.
+ * Warnings: assets over the size budget, images over 2400 px, and assets
+ * nothing references.
+ * Also lists placeholders still on the site ("xx", "Coming soon", "In progress").
  *
  * Run: deno task check
  */
 
 const SITE = new URL("../dist/", import.meta.url);
+const PROJECTS = new URL("../site/_data/projects.json", import.meta.url);
 const BASE_PATH = "/folio/"; // GitHub Pages project path, used by 404.html
 const SIZE_BUDGET = 1.5 * 1024 * 1024;
+const MAX_IMAGE_SIDE = 2400;
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -76,7 +82,7 @@ for (const [page, html] of pageText) {
   // Every local src/href must exist; every #anchor must exist
   for (const m of html.matchAll(/\s(src|href)="([^"]*)"/g)) {
     const value = m[2];
-    if (value === "" ) {
+    if (value === "") {
       errors.push(`${page}: empty ${m[1]}`);
       continue;
     }
@@ -111,6 +117,59 @@ for (const css of files.filter((f) => f.endsWith(".css"))) {
   }
 }
 
+// JS module imports and module-relative URLs (new URL("…", import.meta.url))
+for (const js of files.filter((f) => f.endsWith(".js"))) {
+  const text = await Deno.readTextFile(new URL(js, SITE));
+  const specs = [
+    ...text.matchAll(/\bfrom\s+["']([^"']+)["']/g),
+    ...text.matchAll(/\bimport\(\s*["']([^"']+)["']\s*\)/g),
+    ...text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g),
+  ].map((m) => m[1]);
+  for (const spec of specs) {
+    const target = resolveLocal(spec, js);
+    if (!target) continue;
+    if (!fileSet.has(target.path)) errors.push(`${js}: broken import/URL -> ${spec}`);
+    else referenced.add(target.path);
+  }
+}
+
+// Images: rasters must be WebP, at most MAX_IMAGE_SIDE on the long side
+function webpSize(bytes: Uint8Array): [number, number] | null {
+  const tag = String.fromCharCode(...bytes.subarray(12, 16));
+  const v = new DataView(bytes.buffer, bytes.byteOffset);
+  if (tag === "VP8 ") return [v.getUint16(26, true) & 0x3fff, v.getUint16(28, true) & 0x3fff];
+  if (tag === "VP8L") {
+    const b = v.getUint32(21, true);
+    return [(b & 0x3fff) + 1, ((b >> 14) & 0x3fff) + 1];
+  }
+  if (tag === "VP8X") {
+    const w = 1 + (bytes[24] | (bytes[25] << 8) | (bytes[26] << 16));
+    const h = 1 + (bytes[27] | (bytes[28] << 8) | (bytes[29] << 16));
+    return [w, h];
+  }
+  return null;
+}
+for (const f of files.filter((f) => f.startsWith("assets/"))) {
+  if (/\.(png|jpe?g|gif|bmp|tiff?)$/i.test(f)) {
+    errors.push(`${f}: raster images must be WebP (run \`deno task images\`)`);
+  } else if (f.endsWith(".webp")) {
+    const size = webpSize(await Deno.readFile(new URL(f, SITE)));
+    if (size && Math.max(...size) > MAX_IMAGE_SIDE) {
+      warnings.push(`${f} is ${size[0]}×${size[1]} px (limit ${MAX_IMAGE_SIDE} on the long side)`);
+    }
+  }
+}
+
+// Projects: every entry needs its page and a homepage row
+const projects: { page: string; title: string }[] = JSON.parse(await Deno.readTextFile(PROJECTS));
+const home = pageText.get("index.html") ?? "";
+for (const p of projects) {
+  if (!fileSet.has(p.page)) errors.push(`projects.json: "${p.title}" has no page ${p.page}`);
+  if (!home.includes(`class="project-row__media" href="${p.page}"`)) {
+    errors.push(`projects.json: "${p.title}" has no homepage row linking ${p.page}`);
+  }
+}
+
 // Warnings: size budget and unreferenced assets
 for (const f of files) {
   const { size } = await Deno.stat(new URL(f, SITE));
@@ -120,8 +179,24 @@ for (const f of files) {
   if (f.startsWith("assets/") && !referenced.has(f)) warnings.push(`unreferenced asset: ${f}`);
 }
 
+// Placeholders still on the site: a reminder, not a failure
+const PLACEHOLDERS: [string, RegExp][] = [
+  ['"xx" counts', />\s*xx\s*</g],
+  ['"Coming soon"', /coming soon/gi],
+  ['"In progress"', />\s*in progress\s*</gi],
+];
+const todo: string[] = [];
+for (const [page, html] of pageText) {
+  const body = html.replace(/<script[\s\S]*?<\/script>/g, "");
+  for (const [label, re] of PLACEHOLDERS) {
+    const n = body.match(re)?.length ?? 0;
+    if (n) todo.push(`${page}: ${n}× ${label}`);
+  }
+}
+
 const imgCount = [...pageText.values()].reduce((n, h) => n + [...h.matchAll(/<img\b/g)].length, 0);
 console.log(`Checked ${pages.length} pages, ${imgCount} images, ${files.length} files.`);
+if (todo.length) console.log(`Placeholders to fill in:\n${todo.map((t) => `  todo  ${t}`).join("\n")}`);
 for (const w of warnings) console.log(`  warn  ${w}`);
 for (const e of errors) console.log(`  ERROR ${e}`);
 if (errors.length) {
