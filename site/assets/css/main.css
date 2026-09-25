@@ -208,12 +208,14 @@ body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
   transform: translateY(26px);
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
   transition-delay: calc(var(--i, 0) * 80ms);
+  pointer-events: none; /* not tappable until it has faded in */
 }
 .js .animate-on-scroll-target.is-visible,
 .js #project-showcase-hero.project-hero-animate.is-visible,
 .js .home .reveal.is-visible {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
 }
 .home .rise {
   animation: rise 0.9s var(--ease) both;
@@ -1950,8 +1952,15 @@ html.lb-lock {
     background: none;
     box-shadow: none;
     opacity: 1;
-    visibility: visible;
     transform: none;
+  }
+  /* Follow the menu's own visibility. "visible" here would let these links
+     stay tappable, invisibly, over the page while the menu is closed. */
+  .js #navbar .nav-group__menu,
+  .js #navbar .nav-group:hover .nav-group__menu,
+  .js #navbar .nav-group__menu:focus-within,
+  .js #navbar .nav-group.is-open .nav-group__menu {
+    visibility: inherit;
   }
   /* Without JS, let the links wrap under the name instead. */
   html:not(.js) #navbar {
