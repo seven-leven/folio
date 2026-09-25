@@ -1,0 +1,162 @@
+/* Page styles for sem3.html (extracted from the page). */
+
+/* Scoping to this page's unique body class */
+.project-acupuncture {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif; /* Already defined, but good for specificity */
+  /* background-color: #f0f0f0; -- This will be inherited from global or body style, or can be set here */
+  /* color: #333; -- Inherited */
+  /* line-height: 1.6; -- Inherited */
+}
+
+/* Styles for the main content area of THIS project page */
+.project-acupuncture .page-content-container {
+  /* Renamed from .container to avoid conflict with global .container */
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-acupuncture header.project-header-section {
+  /* Specific to the header block within this page's content */
+  text-align: left;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.project-acupuncture header.project-header-section h1 {
+  font-size: 2.8em;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.project-acupuncture header.project-header-section .author {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.project-acupuncture .hero-image-section {
+  margin-bottom: 30px;
+}
+.project-acupuncture .hero-image-section figure {
+  margin: 0;
+}
+.project-acupuncture .hero-image-section img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.project-acupuncture .hero-image-section figcaption {
+  text-align: right;
+  font-size: 0.9em;
+  padding-top: 8px;
+  color: #666;
+}
+
+.project-acupuncture .project-narrative {
+  font-size: 1.05em;
+  color: #444;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #0056b3;
+}
+.project-acupuncture .project-narrative p {
+  margin-bottom: 1em;
+}
+.project-acupuncture .project-narrative p:last-child {
+  margin-bottom: 0;
+}
+
+.project-acupuncture section {
+  /* Sections within the page-content-container */
+  margin-bottom: 50px;
+}
+
+.project-acupuncture section h2 {
+  font-size: 1.8em;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.project-acupuncture section h3 {
+  font-size: 1.4em;
+  color: #444;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.project-acupuncture figure {
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.project-acupuncture figure img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  /* Consider adding hover effect from other pages if desired */
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+}
+/*
+.project-acupuncture figure img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+*/
+
+.project-acupuncture figcaption {
+  font-size: 0.9em;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.project-acupuncture .image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.project-acupuncture .image-grid figure {
+  flex: 1 1 45%;
+  min-width: 300px;
+  margin-bottom: 20px;
+}
+.project-acupuncture .image-grid figure img {
+  width: 100%;
+}
+
+.project-acupuncture .full-width-figure img {
+  max-width: 100%;
+}
+
+/* Animation target class for JS if you plan to add scroll animations */
+.project-acupuncture .animate-on-scroll-target {
+  /* Basic setup for JS controlled animation */
+  /* opacity: 0; */
+  /* transform: translateY(20px); */
+  /* transition: opacity 0.6s ease-out, transform 0.6s ease-out; */
+}
+.project-acupuncture .animate-on-scroll-target.is-visible {
+  /* opacity: 1; */
+  /* transform: translateY(0); */
+}

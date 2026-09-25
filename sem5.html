@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yield, Register, Transmit - Gaahis Yaugoob</title>
+    <link rel="canonical" href="https://seven-leven.github.io/folio/sem5.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/sem5.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="Yield, Register, Transmit: a floating settlement for a Maldivian lagoon in 2050. Design Studio V portfolio and live process journal.">
+    <meta property="og:title" content="Yield, Register, Transmit - Gaahis Yaugoob">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem5.webp">
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="assets/css/pages/sem5.css">
+  </head>
+  <body class="project-page project-yield">
+    <nav id="navbar" aria-label="Main">
+      <div class="container">
+        <a href="index.html" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+          <span class="nav-mark" aria-hidden="true">GY</span>
+          <span class="nav-name">Gaahis Yaugoob</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li class="nav-group">
+            <button type="button" class="nav-group__btn is-active" aria-expanded="false" aria-controls="nav-academic">Academic</button>
+            <ul class="nav-group__menu" id="nav-academic">
+              <li><a href="index.html#architecture" class="is-active" aria-current="true">Architecture</a></li>
+              <li><a href="engineering.html">Engineering</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#professional">Professional</a></li>
+          <li class="nav-group">
+            <button type="button" class="nav-group__btn" aria-expanded="false" aria-controls="nav-personal">Personal</button>
+            <ul class="nav-group__menu" id="nav-personal">
+              <li><a href="index.html#illustrations">Illustrations</a></li>
+              <li><a href="index.html#coding">Coding</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+          <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero -->
+      <header class="yr-hero">
+        <div class="yr-wrap yr-hero__grid">
+          <div class="yr-hero__text">
+            <p class="yr-kicker">Semester 5 · Architectural Design V · 2026</p>
+            <h1 class="yr-title">Yield, Register, <span>Transmit</span></h1>
+            <p class="yr-subtitle">A floating settlement for the lagoon, 2050</p>
+            <blockquote class="yr-principle">
+              “The floating settlement is not an object placed upon water — but a responsive system
+              negotiating between human habitation and marine dynamics.”
+            </blockquote>
+            <dl class="yr-facts">
+              <div><dt>Projected units needed</dt><dd>140<small>in 25 years</small></dd></div>
+              <div><dt>Lagoon units</dt><dd>90<small>for expansion</small></dd></div>
+              <div><dt>Est. population</dt><dd>450<small>people</small></dd></div>
+              <div><dt>Settlement area</dt><dd>2.26<small>hectares</small></dd></div>
+            </dl>
+          </div>
+          <figure class="yr-hero__media">
+            <img src="assets/projects/sem5/section-render.webp" alt="Sectional render of a floating dwelling: hull below the waterline, living levels and planted core above" width="458" height="541" fetchpriority="high">
+            <figcaption>The dwelling in section: hull, living platform, open roof</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <!-- Chapter nav -->
+      <nav class="yr-subnav" aria-label="On this page" data-spy>
+        <div class="yr-wrap yr-subnav__row">
+          <a href="#context">Island context</a>
+          <a href="#searching">I · Searching</a>
+          <a href="#testing">II · Testing</a>
+          <a href="#yielding">III · Yielding</a>
+          <a href="#looking-back">Looking back</a>
+          <a href="#journal">Process journal</a>
+        </div>
+      </nav>
+
+      <!-- Island context -->
+      <section class="yr-chapter" id="context" aria-labelledby="ch-context">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head animate-on-scroll-target">
+            <p class="yr-kicker">Island context</p>
+            <h2 class="yr-chapter__title" id="ch-context">Why the lagoon</h2>
+          </div>
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__text">
+              <p>
+                During the group analysis phase, population projections were mapped against existing
+                land capacity using UN development guidelines. The findings were straightforward: at
+                current growth rates, Gaafaru’s residential plots will be exhausted before 2050. The
+                lagoon was not chosen as a site of opportunity — it was identified as the only available
+                direction for expansion. Climatic forces, ecological systems, and bathymetric conditions
+                were then overlaid to determine where within the lagoon a settlement could responsibly
+                sit. The western pocket did not offer opportunity. It offered constraint — and that is
+                where this project begins.
+              </p>
+              <ul class="yr-list" aria-label="Site forces">
+                <li><b>A</b> High current zones along outer reef edge</li>
+                <li><b>B</b> Erosion pockets at eastern shoreline</li>
+                <li><b>C</b> Swell exposure on eastern reef pass</li>
+                <li><b>D</b> Tsunami risk corridor, east face</li>
+                <li><b>1</b> Seagrass beds — protected, no anchor</li>
+                <li><b>2</b> Sand bank, shallowest zone, south</li>
+                <li><b>3</b> Coral outlines — reef structure zones</li>
+              </ul>
+              <table class="yr-table">
+                <caption>Footprint breakdown</caption>
+                <tbody>
+                  <tr><th scope="row">Units footprint</th><td>81,000 sqft</td></tr>
+                  <tr><th scope="row">Paths</th><td>16,200 sqft</td></tr>
+                  <tr><th scope="row">Decks</th><td>24,300 sqft</td></tr>
+                  <tr><th scope="row">Waterflow area</th><td>121,500 sqft</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="yr-entry__media">
+              <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-site.webp" alt="Site map of the lagoon with site forces marked" width="1400" height="1400" loading="lazy"><figcaption>Site forces mapped across the lagoon</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- I Searching -->
+      <section class="yr-chapter yr-chapter--tint" id="searching" aria-labelledby="ch-searching">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head animate-on-scroll-target">
+            <p class="yr-kicker">Chapter I</p>
+            <h2 class="yr-chapter__title" id="ch-searching">Searching <i>— letting the imagination run</i></h2>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig yr-fig--small"><img src="assets/projects/sem5/sketches.webp" alt="Sketches and studies in mixed media" width="322" height="341" loading="lazy"><figcaption>Sketches &amp; studies</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Sketches &amp; Studies</h3>
+              <p>
+                These came after the field trip. Something about being physically on the water shifted
+                the thinking — the question stopped being “what should this look like” and became “how
+                would people actually live here in 2050.” How would they earn. How would they move. What
+                would feel normal after a generation. The sketches that came out of that period were
+                looser and more varied than anything before — different media, different scales,
+                different programmes. That variety was not indecision. It was the project refusing to
+                close too early.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/collage.webp" alt="Collage of a coconut arriving in the lagoon" width="559" height="396" loading="lazy"><figcaption>The collage</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">The Collage</h3>
+              <p>
+                The brief was to map the problem of the island through image. The idea was clear enough:
+                before an island is an island, something arrives. Usually a coconut — carried by current,
+                landing on a sandbank, beginning a process that takes centuries. What happened instead
+                was that the coconut took over. It became too literal, too dominant, and the collage
+                stopped being an argument about settlement and became an image about a seed.
+              </p>
+              <p>
+                What I understand now is that the coconut was never wrong as an idea. It was just not yet
+                translated. The settlement that eventually emerged still carries it — a hull that
+                arrives, anchors, and slowly becomes part of the place it landed in.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig yr-fig--small"><img src="assets/projects/sem5/concept-visions.webp" alt="Pin-up board of concept visions" width="269" height="523" loading="lazy"><figcaption>Concept visions pin-up</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Concept Visions</h3>
+              <p>
+                The pin-up was incomplete. Some of what mattered most that semester never made it to the
+                board — the social questions, how a floating settlement avoids becoming a separate
+                community from the island it sits beside, who controls it, how it is governed, whether
+                the people who need it most can actually access it. What the pin-up exposed was the gap
+                between thinking and communicating. The ideas were further along than the boards
+                suggested. That gap is what Chapter II had to close.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/journal-notes.webp" alt="Sticky notes from the journal" width="222" height="274" loading="lazy"><figcaption>Journal notes</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/journal-touchstone-sketch.webp" alt="Pencil sketch working out the touchstone anchoring" width="264" height="294" loading="lazy"><figcaption>Touchstone sketch</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Journal &amp; Touchstone</h3>
+              <p>
+                The sticky notes came before the drawings. Programme, anchoring logic, the two-core
+                structure, the word cultivate — these were the questions the journal was holding while
+                the design was still too uncertain to commit to paper. Small format forces economy. You
+                only write what you actually think.
+              </p>
+              <p>
+                The touchstone model started here — a pencil sketch working out what anchoring could
+                look like before the foam and cardboard made it physical.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- II Testing -->
+      <section class="yr-chapter" id="testing" aria-labelledby="ch-testing">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head animate-on-scroll-target">
+            <p class="yr-kicker">Chapter II</p>
+            <h2 class="yr-chapter__title" id="ch-testing">Testing <i>— making to find out</i></h2>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/sketch-masterplan.webp" alt="Sketch masterplan model" width="271" height="195" loading="lazy"><figcaption>Sketch masterplan</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/touchstone.webp" alt="Touchstone model shaped by applied forces" width="256" height="235" loading="lazy"><figcaption>Touchstone</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Sketch Masterplan &amp; Touchstone</h3>
+              <p>
+                Designing from the unit up is instinctive — you know the room, then the floor, then the
+                building. At 150 units the brain stops working that way. The only way through was
+                abstraction: place something, react to it, place something else, until what started as
+                marks on paper became a settlement with logic.
+              </p>
+              <p>
+                The touchstone was an exercise in letting go of authorship. The forms were not designed —
+                they were the result of forces applied to material: pressure, fold, resistance. Not what
+                should this look like. What would this become if the forces decided.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/cluster-early.webp" alt="Early cluster model with bulky, closely spaced units" width="234" height="220" loading="lazy"><figcaption>Early cluster</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/cluster-later.webp" alt="Later cluster model of circular hulls and pathways" width="279" height="253" loading="lazy"><figcaption>Later cluster</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Cluster Models</h3>
+              <p>
+                The cluster read as bulky. Units too close, too uniform, the shared space between them
+                unclear. Modelling it at this scale made that visible in a way drawing hadn’t — the
+                settlement felt dense rather than inhabited.
+              </p>
+              <p>
+                The later cluster is the same idea resolved: circular hulls finding their spacing,
+                pathways emerging between them rather than being imposed. The relationship between units
+                is legible. A neighbourhood is starting to exist.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/dwelling-model.webp" alt="Dwelling development model with curved form" width="266" height="350" loading="lazy"><figcaption>Dwelling model</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/dwelling-model-2.webp" alt="Second dwelling development model" width="246" height="236" loading="lazy"><figcaption>Dwelling study</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Dwelling Development</h3>
+              <p>
+                The curved form made this model structurally difficult to hold together. Every joint was
+                fighting the geometry. That fragility was information: if the model couldn’t hold the
+                curves, the design needed to earn them structurally before it could claim them formally.
+              </p>
+              <p>
+                It arrived damaged from transport and the hull shows it. But despite that — this model
+                communicated the form and some spatial sequence more clearly than the large drawings on
+                the board did.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/structure-model.webp" alt="Structural model of radial beams and rings" width="250" height="275" loading="lazy"><figcaption>The structure</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/structure-node.webp" alt="Connection node model bending to the geometry" width="240" height="313" loading="lazy"><figcaption>The connection</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Structure &amp; Detail</h3>
+              <p>
+                Several people asked if this was a conceptual model. It isn’t — it is the structure. The
+                radial beams and ring geometry produce a rhythm that most structural models don’t have,
+                because most structures are designed first and formed around afterward. Here the form
+                came first and the structure had to find its way through it. The building moves because
+                the bones move.
+              </p>
+              <p>
+                If the structure yields to the form, and the form yields to the water, then even the
+                smallest fixing has to carry that logic.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/process-timeline.webp" alt="Every model and drawing laid out on a long table" width="525" height="295" loading="lazy"><figcaption>Two weeks of work laid flat</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Process Timeline</h3>
+              <p>
+                This table is the two weeks of non-stop work laid flat. Every model in sequence, every
+                drawing taped out below it. Seeing it this way — everything made, everything that failed,
+                everything that almost worked — was the first time the process looked like a process
+                rather than a series of separate attempts.
+              </p>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll-target">
+            <h3 class="yr-entry__title" style="margin-bottom: 1.5rem">What the Making Taught</h3>
+            <div class="yr-parts">
+              <div class="yr-part">
+                <h3><span>I</span>On the model submission</h3>
+                <p>
+                  The pin-up hadn’t gone well. I put more into the model submission thinking that would
+                  turn things around. It didn’t. If you don’t know which one is failing you — the making
+                  or the concept — you don’t know what to fix. Both needed to change. They had to be
+                  worked simultaneously, not in sequence.
+                </p>
+              </div>
+              <div class="yr-part">
+                <h3><span>II</span>On what needed to change</h3>
+                <p>
+                  The final submission required a different approach entirely. Less building to see what
+                  happens, more deciding what the project actually was and then building to prove it. The
+                  form, the cluster logic, the section — these needed to be settled before the model
+                  started, not discovered through it.
+                </p>
+              </div>
+              <div class="yr-part">
+                <h3><span>III</span>On getting there</h3>
+                <p>
+                  The water kept pushing back. At some point I stopped treating that as a problem to be
+                  solved and started treating it as the design. That shift — from resisting the
+                  constraint to working inside it — is what yield actually means. Not as a concept. As a
+                  practice.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- III Yielding -->
+      <section class="yr-chapter yr-chapter--tint" id="yielding" aria-labelledby="ch-yielding">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head animate-on-scroll-target">
+            <p class="yr-kicker">Chapter III</p>
+            <h2 class="yr-chapter__title" id="ch-yielding">Yielding <i>— the proposal</i></h2>
+          </div>
+
+          <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
+            <h3 class="yr-entry__title">Yield, Register, Transmit</h3>
+            <p style="max-width: 70ch">
+              Three conditions, not three steps. The settlement yields to force — wave direction, tide,
+              wind — rather than resisting it. It registers the environment — light, humidity, current —
+              as lived experience rather than filtered noise. It transmits what it learns to the people
+              inside it.
+            </p>
+            <p class="yr-principles-label">The problem</p>
+            <div class="yr-principles yr-principles--problem">
+              <div><small>01 — a thousand years</small><b>Life in equilibrium</b><p>A finite island holds its people — land and life in balance.</p></div>
+              <div><small>02 — overpopulation</small><b>The island reaches its limit</b><p>Population presses past what the land can naturally hold.</p></div>
+              <div><small>03 — migration</small><b>Some must move to the lagoon</b><p>A forced departure — and a threshold is crossed.</p></div>
+            </div>
+            <p class="yr-principles-label">The principle</p>
+            <div class="yr-principles">
+              <div><small>I — yield</small><b>Form follows force</b><p>Structure bends to water and tide — yielding is the load-bearing act.</p></div>
+              <div><small>II — register</small><b>The environment is the calendar</b><p>Tides and currents read at every scale become the rhythm of daily life.</p></div>
+              <div><small>III — transmit</small><b>The built world teaches</b><p>Architecture instructs without words; generations inherit instincts, not rules.</p></div>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/tutorial-sketch.webp" alt="Tutorial sketch of the dwelling with vegetation through the core" width="410" height="329" loading="lazy"><figcaption>The tutorial sketch</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">The Problem</h3>
+              <p>
+                At this point the dwelling had an outer organic shell — marine concrete, metallic,
+                protective — and nothing else. It felt like armour, closer to a bunker than a home. The
+                suggestion came simply: put something living through the centre of it. Vegetation
+                running vertically through the core — not as decoration, but as the counterweight to the
+                hardness of the shell. Soft against hard. Growing against fixed.
+              </p>
+              <p>
+                That one addition completed the argument — a building that registers its environment
+                from the outside and transmits it, filtered and alive, to the inside.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/masterplan.webp" alt="Masterplan of the settlement with two cores and radial pathways" width="525" height="362" loading="lazy"><figcaption>Masterplan</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Masterplan</h3>
+              <p>
+                The settlement is organised around two cores. The northern core holds heritage and
+                administrative programmes — the civic weight of the community. The southern core serves
+                tourism and retreat — quieter, more permeable to the lagoon edge. Radial pathways extend
+                from each core to the perimeter, keeping every unit within walking distance of shared
+                facilities and the island ferry terminal, while commercial programme at the ends of each
+                arm distributes economic activity to the edges.
+              </p>
+              <p>The ferry connection is not an afterthought; it is the spine the whole settlement orients around.</p>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/cluster-plan.webp" alt="Cluster of six units around a shared pathway node" width="526" height="339" loading="lazy"><figcaption>Cluster</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Cluster</h3>
+              <p>
+                Each cluster groups six units around a shared pathway node. Six clusters form a
+                neighbourhood. The pathways are doubled — parallel routes so that if one is blocked or
+                damaged, movement continues. The space between routes is planted with mangrove, fitted
+                with benches, fishing platforms, shaded decks. The redundancy that was designed for
+                resilience becomes, in practice, the social infrastructure of the settlement.
+              </p>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
+            <h3 class="yr-entry__title">Floor Plans &amp; Elevation</h3>
+            <div class="yr-parts" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+              <div>
+                <figure class="yr-fig"><img src="assets/projects/sem5/plan-ground.webp" alt="Ground floor plan: livelihood level" width="281" height="239" loading="lazy"><figcaption>Ground floor: livelihood</figcaption></figure>
+                <p style="margin-top: 0.9rem">The ground floor is not storage. It is the household economy — workshop, small trade, aquaculture staging, craft production.</p>
+              </div>
+              <div>
+                <figure class="yr-fig"><img src="assets/projects/sem5/plan-living.webp" alt="Living level plan behind the louvred facade" width="281" height="239" loading="lazy"><figcaption>Living level</figcaption></figure>
+                <p style="margin-top: 0.9rem">Kitchen, dining and living arranged around the central core without fixed division. The louvres do not block the lagoon; they pace it.</p>
+              </div>
+              <div>
+                <figure class="yr-fig"><img src="assets/projects/sem5/plan-upper.webp" alt="Upper level plan with three cantilevered private rooms" width="281" height="238" loading="lazy"><figcaption>Upper level</figcaption></figure>
+                <p style="margin-top: 0.9rem">Three private rooms cantilever outward toward the lagoon. The space between them is where the family actually gathers.</p>
+              </div>
+              <div>
+                <figure class="yr-fig"><img src="assets/projects/sem5/elevation-exterior.webp" alt="Exterior elevation of the hull form" width="281" height="239" loading="lazy"><figcaption>Elevation</figcaption></figure>
+                <p style="margin-top: 0.9rem">An organic metallic exoskeleton rising from waterline to roof — the one that protects — around the one that grows.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/section.webp" alt="Section through the living tier" width="416" height="348" loading="lazy"><figcaption>Section</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Section</h3>
+              <p>
+                The section is where the settlement stops performing and starts breathing. Read
+                vertically, the dwelling is a single continuous movement: lagoon surface, hull void,
+                living platform, open roof — each layer yielding to what comes from above or below.
+                Ventilation is not designed in; it is the consequence of not blocking it.
+              </p>
+              <p>
+                The floor plane, set 400mm above the hull deck, creates the threshold: below is the
+                lagoon’s logic, above is the dwelling’s. The structure does not filter the climate — it
+                registers it.
+              </p>
+            </div>
+          </div>
+
+          <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
+            <h3 class="yr-entry__title">Exploded Assembly</h3>
+            <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-exploded.webp" alt="Exploded axonometric of the dwelling across two pages" width="2800" height="1400" loading="lazy"><figcaption>Exploded axonometric: hull to occupant layers</figcaption></figure>
+            <p style="margin-top: 1.5rem; max-width: 72ch">
+              The unit is not built by one contractor. It is distributed across the trades that already
+              exist within the island economy — marine concrete specialists, local timber workers, prefab
+              composite fabricators, carpentry cooperatives, PV installers. A single unit reaches
+              completion in approximately twelve weeks. Across 150+ lagoon units, that parallelism becomes
+              an economic strategy.
+            </p>
+            <div class="yr-gantt" role="img" aria-label="Twelve-week assembly sequence: hull weeks 1 to 3, structural frame 3 to 5, deck 5 to 8, prefab FRP envelope 5 to 7 offsite, flooring 5 to 7, timber facade 7 to 9, private pods 7 to 9, roof and services 10 to 12, occupant layers ongoing.">
+              <span></span>
+              <span class="yr-gantt__wk">1</span><span class="yr-gantt__wk">2</span><span class="yr-gantt__wk">3</span><span class="yr-gantt__wk">4</span><span class="yr-gantt__wk">5</span><span class="yr-gantt__wk">6</span><span class="yr-gantt__wk">7</span><span class="yr-gantt__wk">8</span><span class="yr-gantt__wk">9</span><span class="yr-gantt__wk">10</span><span class="yr-gantt__wk">11</span><span class="yr-gantt__wk">12</span>
+              <span class="yr-gantt__label">1.0 Hull system</span><span class="yr-gantt__bar" style="grid-column: 2 / 5"></span>
+              <span class="yr-gantt__label">2.0 Structural frame</span><span class="yr-gantt__bar" style="grid-column: 4 / 7"></span>
+              <span class="yr-gantt__label">3.0 Deck</span><span class="yr-gantt__bar" style="grid-column: 6 / 10"></span>
+              <span class="yr-gantt__label">4.0 Prefab FRP envelope</span><span class="yr-gantt__bar yr-gantt__bar--off" style="grid-column: 6 / 9"></span>
+              <span class="yr-gantt__label">5.0 Flooring</span><span class="yr-gantt__bar" style="grid-column: 6 / 9"></span>
+              <span class="yr-gantt__label">6.0 Timber facade</span><span class="yr-gantt__bar" style="grid-column: 8 / 11"></span>
+              <span class="yr-gantt__label">7.0 Private pods</span><span class="yr-gantt__bar" style="grid-column: 8 / 11"></span>
+              <span class="yr-gantt__label">8.0 Roof &amp; services</span><span class="yr-gantt__bar" style="grid-column: 11 / 14"></span>
+              <span class="yr-gantt__label">9.0 Occupant layers</span><span class="yr-gantt__bar yr-gantt__bar--ongoing" style="grid-column: 13 / 14"></span>
+            </div>
+            <p class="yr-gantt-note">Striped: made off-site. Fading: ongoing, as occupants add their own layers.</p>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-details-hull.webp" alt="Hull and marine systems details" width="1400" height="1400" loading="lazy"><figcaption>Details: deck, hull &amp; marine systems</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Details: below the waterline</h3>
+              <p>
+                The detail below the waterline is where yield becomes engineering. The anchoring wire
+                carries oyster attachment points — the structure doesn’t just sit in the lagoon, it
+                begins to become part of it over time. The coral cage at the base is the same logic: not
+                mitigation, but integration. The hull protects above; below, it invites.
+              </p>
+              <ul class="yr-list">
+                <li><b>Deck</b> bollard, teak decking, access hatch, sub-deck structure</li>
+                <li><b>Hull</b> ring beam, marine fender, reinforced marine concrete, water stopper</li>
+                <li><b>Marine systems</b> pump-out, anchoring wire with oyster, coral cage, ballast</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-details-roof.webp" alt="Roof, shading and energy details" width="1400" height="1400" loading="lazy"><figcaption>Details: roof, shading &amp; energy</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Details: at the top</h3>
+              <p>
+                At the top of the building the same principle applies in reverse. The tensile greening
+                mesh holds planting against the FRP roof panel. The exterior light shelf bounces
+                afternoon light deeper into the interior without heat. The PV array above powers the
+                unit. Nothing here is added on — each element is doing two things at once, which is the
+                only way a building this exposed to salt, sun, and water can afford to be detailed.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry animate-on-scroll-target">
+            <div class="yr-entry__media" style="--cols: 2">
+              <figure class="yr-fig"><img src="assets/projects/sem5/atmosphere-balcony.webp" alt="Balcony overlooking the settlement at sunrise" width="270" height="227" loading="lazy"><figcaption>The balcony</figcaption></figure>
+              <figure class="yr-fig"><img src="assets/projects/sem5/atmosphere-core.webp" alt="Interior with vertical planting along the core" width="268" height="225" loading="lazy"><figcaption>The planted core</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <h3 class="yr-entry__title">Atmosphere</h3>
+              <p>
+                The balcony overlooks the settlement. There is no railing high enough to hide the
+                horizon. The settlement does not frame the ocean as a view — it places you inside it.
+              </p>
+              <p>
+                Vertical planting runs along the core not as decoration but as a daily register of the
+                environment. Moving through the building means moving through something alive.
+              </p>
+            </div>
+          </div>
+
+          <div class="yr-entry yr-entry--flip animate-on-scroll-target">
+            <div class="yr-entry__media">
+              <figure class="yr-fig"><img src="assets/projects/sem5/atmosphere-cluster.webp" alt="Units in the lagoon facing away from the swell" width="344" height="289" loading="lazy"><figcaption>Joining the lagoon’s logic</figcaption></figure>
+            </div>
+            <div class="yr-entry__text">
+              <p class="yr-bigquote" style="margin-top: 0">
+                “The gaps between them are not leftover space — they are channels that allow water, wind,
+                and light to move through the cluster the way current moves through reef structure. The
+                settlement does not interrupt the lagoon’s logic. It joins it.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Looking back -->
+      <section class="yr-chapter" id="looking-back" aria-labelledby="ch-looking-back">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head animate-on-scroll-target">
+            <p class="yr-kicker">Introspection</p>
+            <h2 class="yr-chapter__title" id="ch-looking-back">Looking back</h2>
+          </div>
+          <div class="yr-parts animate-on-scroll-target">
+            <div class="yr-part">
+              <h3><span>I</span>On communication</h3>
+              <p>
+                The collage submission failed twice. Not because the idea was wrong, but because I was
+                using different media for different parts without asking whether they spoke the same
+                language. A collage is not a collection of things you find interesting. It is an argument
+                made through images. If I were to make it again, every element would be chosen because it
+                could not be replaced by any other.
+              </p>
+            </div>
+            <div class="yr-part">
+              <h3><span>II</span>On process visibility</h3>
+              <p>
+                The Part 2 feedback noted that the design appeared to jump straight to a final form without
+                showing how it developed. The models existed, but they were not arranged to tell that
+                story. A process is only evidence if it is made legible. Documentation is not separate from
+                design. It is part of how design justifies itself to others, and eventually to yourself.
+              </p>
+            </div>
+            <div class="yr-part">
+              <h3><span>III</span>On yielding</h3>
+              <p>
+                Yield, register, transmit came from the accumulated pressure of iteration: forms too rigid,
+                structures that imposed too much on the seabed, a settlement logic that tried to control
+                rather than respond. The water kept pushing back. That shift is what I want to carry
+                forward — not as a method, but as a disposition.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live process journal (Tumblr) -->
+      <section class="yr-chapter yr-journal" id="journal" aria-labelledby="ch-journal">
+        <div class="yr-wrap">
+          <div class="yr-chapter__head">
+            <p class="yr-kicker">Process journal · live from Tumblr</p>
+            <h2 class="yr-chapter__title" id="ch-journal">The studio, week by week</h2>
+            <p>The journal kept alongside the project: models, sketches, site visits and the odd broken print. New entries appear here as they’re posted.</p>
+          </div>
+          <div data-tumblr-feed="gaahis" data-count="9">
+            <div class="tf-list">
+              <p class="tf-status" role="status">Loading the latest entries…</p>
+            </div>
+          </div>
+          <div class="yr-journal__foot">
+            <p>Read <span class="tf-total">every entry</span> on the blog.</p>
+            <a class="btn btn--light" href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">
+              Open the journal on Tumblr
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
+          <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Academic</p>
+          <nav class="site-footer__links" aria-label="Academic work">
+            <a href="sem1.html" data-label="Semester 1 · 2023">Enchanting Reading Nook</a>
+            <a href="sem2.html" data-label="Semester 2 · 2024">Blue Canvas</a>
+            <a href="sem3.html" data-label="Semester 3 · 2025">Urban Acupuncture</a>
+            <a href="sem4.html" data-label="Semester 4 · 2025">Measured Embrace</a>
+            <a href="sem5.html" data-label="Semester 5 · 2026">Yield, Register, Transmit</a>
+            <a href="engineering.html">Engineering work</a>
+          </nav>
+        </div>
+        <div>
+          <p class="site-footer__heading">More</p>
+          <nav class="site-footer__links" aria-label="More work">
+            <a href="index.html#professional">Professional work</a>
+            <a href="index.html#illustrations">Illustrations</a>
+            <a href="index.html#coding">Coding</a>
+          </nav>
+        </div>
+        <div>
+          <p class="site-footer__heading">Contact</p>
+          <div class="site-footer__links">
+            <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+            <a href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">Process journal on Tumblr</a>
+            <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="container site-footer__bottom">
+        <p class="site-footer__copy">
+          © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+          <a class="site-footer__version" href="https://github.com/seven-leven/folio/blob/main/CHANGELOG.md" title="What changed in each version">v1.5.73</a>
+        </p>
+        <a class="site-footer__top" href="#">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
