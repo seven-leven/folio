@@ -31,6 +31,12 @@ folio/
 └── deno.json                 tasks
 ```
 
+`main.css` starts with a numbered contents list. Colours come from tokens in
+two layers: a palette (`--ink`, `--paper`, `--accent`…) and semantic roles
+(`--text`, `--text-muted`, `--rule`, `--accent-text`…) that components use.
+Dark areas (the Personal band, footer, CV card) just redefine the roles, so
+components adapt without overrides; a site-wide dark mode would do the same.
+
 Page URLs (`/folio/sem1.html` etc.) are stable. Only assets live under
 `assets/`. `dist/` is build output and is not committed.
 

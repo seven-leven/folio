@@ -59,9 +59,6 @@
                         </a>
                         <a class="btn btn--ghost" href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
                     </div>
-                    <dl class="hero__facts rise" style="--i: 4">
-                        <div><dt>5</dt><dd>Studio design projects</dd></div>
-                    </dl>
                 </div>
 
                 <div class="hero__media rise" style="--i: 2">
@@ -833,11 +830,13 @@
                                         dataset: logistic regression, k-nearest neighbours, SVMs, random forests, gradient
                                         boosting and a small neural network in PyTorch. Rerun today on the same held-out
                                         passengers, the simplest of them, logistic regression, still comes out on top.
+                                        The animation first shows how each model splits passengers on just two
+                                        features, age and fare, then the real scores.
                                     </p>
                                 </div>
                                 <figure class="tl-vis">
-                                    <canvas data-vis="titanic" role="img" aria-label="Bar chart of validation accuracy: logistic regression 84.4%, SVM 83.8%, gradient boosting 81.6%, k-nearest neighbours 81.0%, neural network 79.9%, random forest 79.3%"></canvas>
-                                    <figcaption>Accuracy on 179 held-out passengers</figcaption>
+                                    <canvas data-vis="titanic" role="img" aria-label="Each model's decision regions on age and fare in turn (a straight line, nearest neighbours, a margin, voting trees, boosting rounds, a network training), then a bar chart of validation accuracy: logistic regression 84.4%, SVM 83.8%, gradient boosting 81.6%, k-nearest neighbours 81.0%, neural network 79.9%, random forest 79.3%"></canvas>
+                                    <figcaption>How each model splits, then the real scores</figcaption>
                                 </figure>
                             </div>
                         </li>
