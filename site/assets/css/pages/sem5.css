@@ -1,0 +1,543 @@
+/* Page styles for sem5.html (extracted from the page). */
+
+/* Board identity: white paper, lagoon blue-grey, italic Myriad-style
+   text and Georgia italic quotes, as on the Design V boards. */
+.project-yield {
+  --yr-ink: #121212;
+  --yr-text: #2e2e2d;
+  --yr-muted: #575756;
+  --yr-lagoon: #728b97;
+  --yr-deep: #4a616c;
+  --yr-mist: #b8c4c9;
+  --yr-foam: #f1f3f3;
+  --yr-line: #dfe4e6;
+  --yr-sun: #b8743d;
+  --yr-sans: "Source Sans 3", "Myriad Pro", system-ui, sans-serif;
+  --yr-quote: Georgia, "Times New Roman", serif;
+  --yr-subnav-h: 50px;
+
+  background: #fff;
+  color: var(--yr-text);
+  font-family: var(--yr-sans);
+}
+:where(.project-yield) section {
+  padding: 0;
+  scroll-margin-top: calc(var(--nav-h) + var(--yr-subnav-h) + 16px);
+}
+:where(.project-yield) :is(h1, h2, h3, h4) {
+  margin: 0;
+  color: var(--yr-ink);
+  font-family: var(--yr-sans);
+  letter-spacing: 0;
+}
+:where(.project-yield) p {
+  margin: 0 0 1rem;
+  color: var(--yr-text);
+  font-size: 1.07rem;
+  font-style: italic;
+  line-height: 1.7;
+}
+:where(.project-yield) p:last-child {
+  margin-bottom: 0;
+}
+.yr-wrap {
+  width: min(1180px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+.yr-kicker {
+  font-size: 0.82rem;
+  font-style: normal !important;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yr-deep) !important;
+}
+
+/* --- Hero ---------------------------------------------------------- */
+.yr-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 85% 30%, rgba(114, 139, 151, 0.18), transparent 70%),
+    linear-gradient(180deg, #fff 0%, var(--yr-foam) 100%);
+  border-bottom: 1px solid var(--yr-line);
+}
+.yr-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.yr-hero__text > * {
+  animation: rise 0.9s var(--ease) both;
+}
+.yr-hero__text > :nth-child(2) { animation-delay: 80ms; }
+.yr-hero__text > :nth-child(3) { animation-delay: 160ms; }
+.yr-hero__text > :nth-child(4) { animation-delay: 240ms; }
+.yr-hero__text > :nth-child(5) { animation-delay: 320ms; }
+.project-yield .yr-title {
+  margin: 0.9rem 0 0.5rem;
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+}
+.yr-title span {
+  display: block;
+  color: var(--yr-lagoon);
+}
+.project-yield .yr-subtitle {
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  color: var(--yr-muted);
+}
+.project-yield .yr-principle {
+  margin: 0 0 1.75rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--yr-lagoon);
+  font-family: var(--yr-quote);
+  font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+  line-height: 1.5;
+  color: var(--yr-ink);
+}
+.yr-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.yr-facts div {
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--yr-ink);
+  border-radius: 14px;
+  background: #fff;
+}
+.yr-facts dt {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--yr-muted);
+}
+.yr-facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--yr-ink);
+}
+.yr-facts dd small {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--yr-muted);
+}
+.yr-hero__media {
+  margin: 0;
+  justify-self: center;
+  max-width: 460px;
+  animation: rise 1s var(--ease) 0.15s both;
+}
+.project-yield .yr-hero__media img {
+  width: 100%;
+  height: auto;
+  border-radius: 999px 999px 18px 18px;
+  box-shadow: 0 30px 60px -30px rgba(74, 97, 108, 0.6);
+}
+.yr-fig figcaption,
+.yr-hero__media figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--yr-muted);
+}
+
+/* --- Chapter nav --------------------------------------------------- */
+.yr-subnav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 900;
+  height: var(--yr-subnav-h);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--yr-line);
+}
+.yr-subnav__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.yr-subnav__row::-webkit-scrollbar { display: none; }
+.yr-subnav a {
+  flex: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--yr-muted);
+  white-space: nowrap;
+}
+.yr-subnav a:hover {
+  color: var(--yr-ink);
+  background: var(--yr-foam);
+}
+.yr-subnav a.is-active {
+  color: #fff;
+  background: var(--yr-deep);
+}
+
+/* --- Chapters ------------------------------------------------------ */
+.yr-chapter {
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+  border-bottom: 1px solid var(--yr-line);
+}
+.yr-chapter--tint {
+  background: var(--yr-foam);
+}
+.yr-chapter__head {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 760px;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+.project-yield .yr-chapter__title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1;
+}
+.yr-chapter__title i {
+  font-weight: 400;
+  color: var(--yr-lagoon);
+}
+
+/* Entry: images + text, alternating sides */
+.yr-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+.yr-entry:last-child {
+  margin-bottom: 0;
+}
+.yr-entry--flip .yr-entry__media {
+  order: 2;
+}
+.yr-entry__media {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.project-yield .yr-entry__title {
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 700;
+}
+.yr-fig {
+  margin: 0;
+}
+.project-yield .yr-fig img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 10px;
+  background: var(--yr-foam);
+  box-shadow: 0 16px 36px -26px rgba(18, 18, 18, 0.55);
+}
+.project-yield .yr-fig--board img {
+  border: 1px solid var(--yr-line);
+  border-radius: 6px;
+  background: #fff;
+}
+/* Source photos are small; don't stretch them far past native size. */
+.yr-fig--small {
+  max-width: 420px;
+}
+
+.yr-list {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin: 1.1rem 0 0;
+  font-style: italic;
+}
+.yr-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+}
+.yr-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--yr-lagoon);
+}
+.yr-list b {
+  font-style: normal;
+  color: var(--yr-ink);
+}
+.yr-table {
+  width: 100%;
+  margin-top: 1.25rem;
+  border-collapse: collapse;
+  font-style: italic;
+}
+.yr-table caption {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--yr-muted);
+  text-align: left;
+}
+.yr-table th,
+.yr-table td {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--yr-line);
+  font-weight: 400;
+  text-align: left;
+}
+.yr-table td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--yr-ink);
+}
+
+/* Three-part texts (What the making taught / Looking back) */
+.yr-parts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+.yr-part {
+  padding-top: 1rem;
+  border-top: 2px solid var(--yr-ink);
+}
+.project-yield .yr-part h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.yr-part h3 span {
+  margin-right: 0.4rem;
+  color: var(--yr-lagoon);
+}
+
+/* Principle: problem -> principle */
+.yr-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--yr-deep);
+  border-radius: 14px;
+  background: var(--yr-deep);
+}
+.yr-principles > div {
+  padding: 1.1rem 1.2rem;
+  background: var(--yr-lagoon);
+  color: #fff;
+}
+.yr-principles--problem > div {
+  background: #8a9ea8;
+}
+.yr-principles small {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.yr-principles b {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+}
+.project-yield .yr-principles p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #f4f7f8;
+}
+.yr-principles-label {
+  margin: 1.5rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yr-deep);
+}
+.project-yield .yr-bigquote {
+  margin: 2rem 0 0;
+  font-family: var(--yr-quote);
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  line-height: 1.45;
+  color: var(--yr-ink);
+}
+
+/* Assembly timeline (12 weeks) */
+.yr-gantt {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.4fr) repeat(12, minmax(0, 1fr));
+  gap: 6px 3px;
+  align-items: center;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+.yr-gantt__wk {
+  font-size: 0.72rem;
+  color: var(--yr-muted);
+  text-align: center;
+}
+.yr-gantt__label {
+  grid-column: 1;
+  padding-right: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--yr-ink);
+}
+.yr-gantt__bar {
+  height: 20px;
+  border-radius: 999px;
+  background: var(--yr-lagoon);
+}
+.yr-gantt__bar--off {
+  background: repeating-linear-gradient(45deg, var(--yr-lagoon) 0 6px, var(--yr-mist) 6px 12px);
+}
+.yr-gantt__bar--ongoing {
+  background: linear-gradient(90deg, var(--yr-sun), transparent);
+}
+.yr-gantt-note {
+  margin-top: 0.8rem;
+  font-size: 0.85rem !important;
+  color: var(--yr-muted) !important;
+}
+
+/* --- Live journal -------------------------------------------------- */
+.yr-journal {
+  background: var(--yr-ink);
+}
+.yr-journal .yr-kicker {
+  color: var(--yr-mist) !important;
+}
+.project-yield .yr-journal .yr-chapter__title {
+  color: #fff;
+}
+.project-yield .yr-journal p {
+  color: #d5dcdf;
+}
+.tf-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.project-yield .tf-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: #1d1f20;
+  color: #f1f3f3;
+  transition: transform 0.25s var(--ease), border-color 0.25s ease;
+}
+.project-yield .tf-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--yr-lagoon);
+  color: #fff;
+}
+.tf-media {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #2a2d2e;
+}
+.project-yield .tf-media img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.6s var(--ease);
+}
+.project-yield .tf-card:hover .tf-media img {
+  transform: scale(1.04);
+}
+.tf-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem 0.2rem;
+  font-size: 0.8rem;
+  color: var(--yr-mist);
+}
+.tf-caption {
+  padding: 0 1rem 1.1rem;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+.project-yield .tf-status {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  text-align: center;
+}
+.yr-journal__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* --- Responsive ---------------------------------------------------- */
+@media (max-width: 960px) {
+  .yr-hero__grid,
+  .yr-entry {
+    grid-template-columns: 1fr;
+  }
+  .yr-entry--flip .yr-entry__media {
+    order: 0;
+  }
+  .yr-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .yr-parts,
+  .yr-principles {
+    grid-template-columns: 1fr;
+  }
+  .tf-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .tf-list {
+    grid-template-columns: 1fr;
+  }
+  .yr-entry__media {
+    grid-template-columns: 1fr;
+  }
+  .yr-gantt {
+    grid-template-columns: minmax(110px, 1.3fr) repeat(12, minmax(0, 1fr));
+    gap: 5px 2px;
+  }
+  .yr-gantt__label {
+    font-size: 0.78rem;
+  }
+  .yr-gantt__wk:nth-child(even) {
+    visibility: hidden;
+  }
+}

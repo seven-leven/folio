@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "serve": "deno run --allow-net --allow-read=site jsr:@std/http@^1/file-server site --port 8000",
+    "check": "deno run --allow-read=site tools/check.ts"
+  },
+  "fmt": {
+    "include": ["tools/"]
+  },
+  "lint": {
+    "include": ["tools/"]
+  }
+}

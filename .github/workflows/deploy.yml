@@ -1,31 +1,50 @@
-name: Deploy to GitHub Pages
+name: Check & deploy
 
-# gh-pages is a build artifact of main: never commit to it directly.
-# Every push to main republishes the static site as a fresh orphan commit.
+# Every push and PR is checked. Only main deploys, and only if the check passes.
+# gh-pages is a build artifact of main: never commit to it directly. Each
+# deploy publishes site/ as a fresh orphan commit.
 on:
   push:
-    branches:
-      - main
+    branches: [main, dev]
+  pull_request:
   workflow_dispatch: {}
 
-permissions:
-  contents: write
-
 concurrency:
-  group: pages-deploy
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  check:
+    name: Check site
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: Deploy to GitHub Pages
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - name: Check links, images, anchors and page metadata
+        run: deno task check
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Publish site/ to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          exclude_assets: ".github"
+          publish_dir: ./site
           force_orphan: true

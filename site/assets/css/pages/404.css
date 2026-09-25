@@ -1,0 +1,41 @@
+/* Page styles for 404.html */
+
+.nf {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - var(--nav-h) - 80px);
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.nf__inner {
+  padding-block: 4rem;
+  text-align: center;
+}
+.home .nf__title {
+  margin: 1rem 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1;
+}
+.home .nf__title em {
+  color: var(--accent);
+}
+.home .nf__text {
+  max-width: 44ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.not-found .site-footer__bottom {
+  border-top: 0;
+}
