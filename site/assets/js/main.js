@@ -185,11 +185,17 @@
       groupButtons.forEach((b) => b.classList.toggle("is-active", !!link && b.parentElement.contains(link)));
     };
 
+    // Sections can nest (#engineering sits inside the academic timeline), so
+    // highlight the last one in nav order that is currently in view.
+    const inView = new Set();
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(bySection.get(entry.target));
+          if (entry.isIntersecting) inView.add(entry.target);
+          else inView.delete(entry.target);
         });
+        const current = [...bySection.keys()].filter((s) => inView.has(s)).pop();
+        if (current) setActive(bySection.get(current));
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );

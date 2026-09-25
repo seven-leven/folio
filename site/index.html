@@ -91,22 +91,33 @@
                 <span class="group-intro__num" aria-hidden="true">01</span>
                 <div>
                     <h2 class="group-intro__title">Academic</h2>
-                    <p class="group-intro__text">University work: architecture studio projects and civil engineering.</p>
+                    <p class="group-intro__text">University work, in order: civil engineering first, then architecture.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Architecture -->
-        <section id="architecture">
+        <!-- Academic timeline: engineering and architecture in date order.
+             #architecture is the whole timeline; #engineering is the engineering entry. -->
+        <section id="architecture" class="academic">
             <span id="projects" class="anchor-alias" aria-hidden="true"></span>
             <div class="container">
                 <header class="section-head reveal">
-                    <p class="eyebrow">Studio design</p>
-                    <h3 class="section-title">Architecture</h3>
-                    <p class="section-intro">Five studio projects from the architectural design programme, from a single reading nook to a floating settlement in the lagoon, with a sixth under way.</p>
+                    <p class="eyebrow">2019 – 2026</p>
+                    <h3 class="section-title">Engineering, then architecture</h3>
+                    <p class="section-intro">A civil engineering degree first, then six architecture studio projects, from a single reading nook to social housing for Malé.</p>
                 </header>
 
                 <div class="project-list">
+                    <p class="ac-year reveal"><span>2019</span></p>
+
+                    <article class="ac-start reveal">
+                        <p class="project-row__meta">Civil engineering · 2019</p>
+                        <h3 class="ac-start__title">Started the Bachelor of Civil Engineering (Hons) at The Maldives National University</h3>
+                        <p class="project-row__desc">Four years of core coursework, leading up to the final-semester projects below.</p>
+                    </article>
+
+                    <p class="ac-year reveal"><span>2023</span></p>
+
                     <article class="project-row reveal">
                         <a class="project-row__media" href="sem1.html" tabindex="-1" aria-hidden="true">
                             <img src="assets/img/cover-sem1.webp" alt="" width="1600" height="1412" loading="lazy">
@@ -129,7 +140,48 @@
                         </div>
                     </article>
 
-                    <article class="project-row reveal">
+                    <article id="engineering" class="ac-eng reveal">
+                        <span id="engineering-work" class="anchor-alias" aria-hidden="true"></span>
+                        <div class="ac-eng__head">
+                            <p class="project-row__meta">Civil engineering · final semester · 2023 Term II</p>
+                            <h3 class="project-row__title"><a href="engineering.html">Engineering</a></h3>
+                            <p class="project-row__desc">Structural design, analysis and field work from the last semester of the degree, where it all came together into full projects.</p>
+                        </div>
+                        <div class="eng-cards">
+                            <a class="eng-card" href="engineering.html#capstone">
+                                <span class="eng-card__img"><img src="assets/img/cover-engineering.webp" alt="" width="1600" height="900" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Capstone · BES 401</small>
+                                    <b>Proposed 14-storey mixed-use building, Villimalé</b>
+                                    <span>Site survey, structural design down to a raft foundation, drawing set, cost estimate and schedule.</span>
+                                </span>
+                            </a>
+                            <a class="eng-card" href="engineering.html#thesis">
+                                <span class="eng-card__img eng-card__img--plot"><img src="assets/projects/engineering/wind-polar.webp" alt="" width="457" height="442" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Thesis</small>
+                                    <b>Wind-load analysis of a 14-storey building</b>
+                                    <span>Analytical vs STAAD.Pro, with 40 years of Hulhulé wind data processed in Python.</span>
+                                </span>
+                            </a>
+                            <a class="eng-card" href="engineering.html#coastal">
+                                <span class="eng-card__img"><img src="assets/projects/engineering/coastal-drone-map.webp" alt="" width="1250" height="953" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Coastal engineering</small>
+                                    <b>Field study &amp; breakwater design, K. Thulusdhoo</b>
+                                    <span>Beach survey, drone mapping, soil sieve analysis and a layered breakwater.</span>
+                                </span>
+                            </a>
+                        </div>
+                        <a class="link-arrow ac-eng__more" href="engineering.html">
+                            View all engineering work
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </a>
+                    </article>
+
+                    <p class="ac-year reveal"><span>2024</span></p>
+
+                    <article class="project-row project-row--flip reveal">
                         <a class="project-row__media" href="sem2.html" tabindex="-1" aria-hidden="true">
                             <img src="assets/img/cover-sem2.webp" alt="" width="1600" height="1013" loading="lazy">
                         </a>
@@ -150,6 +202,8 @@
                             </a>
                         </div>
                     </article>
+
+                    <p class="ac-year reveal"><span>2025</span></p>
 
                     <article class="project-row reveal">
                         <a class="project-row__media" href="sem3.html" tabindex="-1" aria-hidden="true">
@@ -173,7 +227,7 @@
                         </div>
                     </article>
 
-                    <article class="project-row reveal">
+                    <article class="project-row project-row--flip reveal">
                         <a class="project-row__media" href="sem4.html" tabindex="-1" aria-hidden="true">
                             <img src="assets/img/cover-sem4.webp" alt="" width="1600" height="1600" loading="lazy">
                         </a>
@@ -194,6 +248,8 @@
                             </a>
                         </div>
                     </article>
+
+                    <p class="ac-year reveal"><span>2026</span></p>
 
                     <article class="project-row reveal">
                         <a class="project-row__media" href="sem5.html" tabindex="-1" aria-hidden="true">
@@ -223,61 +279,19 @@
                         </div>
                     </article>
 
-                    <article class="project-row project-row--soon reveal" aria-label="Design 6, coming soon">
+                    <article class="project-row project-row--soon project-row--flip reveal" aria-label="Design 6, in progress">
                         <div class="project-row__media project-row__placeholder" aria-hidden="true">
                             <span>06</span>
                         </div>
                         <div class="project-row__body">
                             <span class="project-row__index" aria-hidden="true">06</span>
-                            <p class="project-row__meta">Semester 6 · 2026 Term II</p>
+                            <p class="project-row__meta">Semester 6 · 2026 Term II · final semester</p>
                             <h3 class="project-row__title">Design 6</h3>
-                            <p class="project-row__desc">The next studio project is in progress.</p>
-                            <span class="soon-badge">Coming soon</span>
+                            <p class="project-row__desc"><em>To be known is to be loved.</em> Social housing for Malé, eight to ten floors, built around one question: would your neighbours know your name?</p>
+                            <span class="soon-badge">In progress</span>
                         </div>
                     </article>
                 </div>
-            </div>
-        </section>
-
-        <!-- Engineering -->
-        <section id="engineering" class="eng-strip">
-            <span id="engineering-work" class="anchor-alias" aria-hidden="true"></span>
-            <div class="container">
-                <header class="section-head reveal">
-                    <p class="eyebrow">Civil engineering</p>
-                    <h3 class="section-title">Engineering</h3>
-                    <p class="section-intro">Structural design, analysis and field work from the final semester (2023, Term II) of the Bachelor of Civil Engineering (Hons), where the degree came together into full projects.</p>
-                </header>
-                <div class="eng-cards">
-                    <a class="eng-card reveal" style="--i: 0" href="engineering.html#capstone">
-                        <span class="eng-card__img"><img src="assets/img/cover-engineering.webp" alt="" width="1600" height="900" loading="lazy"></span>
-                        <span class="eng-card__body">
-                            <small>Capstone · BES 401 · 2023 Term II</small>
-                            <b>Proposed 14-storey mixed-use building, Villimalé</b>
-                            <span>Site survey, structural design down to a raft foundation, drawing set, cost estimate and schedule.</span>
-                        </span>
-                    </a>
-                    <a class="eng-card reveal" style="--i: 1" href="engineering.html#thesis">
-                        <span class="eng-card__img eng-card__img--plot"><img src="assets/projects/engineering/wind-polar.webp" alt="" width="457" height="442" loading="lazy"></span>
-                        <span class="eng-card__body">
-                            <small>Thesis · 2023 Term II</small>
-                            <b>Wind-load analysis of a 14-storey building</b>
-                            <span>Analytical vs STAAD.Pro, with 40 years of Hulhulé wind data processed in Python.</span>
-                        </span>
-                    </a>
-                    <a class="eng-card reveal" style="--i: 2" href="engineering.html#coastal">
-                        <span class="eng-card__img"><img src="assets/projects/engineering/coastal-drone-map.webp" alt="" width="1250" height="953" loading="lazy"></span>
-                        <span class="eng-card__body">
-                            <small>Coastal engineering · 2023 Term II</small>
-                            <b>Field study &amp; breakwater design, K. Thulusdhoo</b>
-                            <span>Beach survey, drone mapping, soil sieve analysis and a layered breakwater.</span>
-                        </span>
-                    </a>
-                </div>
-                <a class="link-arrow eng-strip__more" href="engineering.html">
-                    View all engineering work
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                </a>
             </div>
         </section>
 
@@ -759,18 +773,21 @@
                             <p class="tl-date"><time datetime="2024-12">Dec 2024</time></p>
                             <div class="tl-body tl-body--split">
                                 <div class="tl-copy">
-                                    <p class="tl-meta">Work tool · JavaScript</p>
-                                    <h4 class="tl-title">A ventilation schedule tool</h4>
+                                    <p class="tl-meta">Work tool · HTML and JavaScript</p>
+                                    <h4 class="tl-title">A natural ventilation checker</h4>
                                     <p class="tl-text">
-                                        At the office, ventilation schedules lived in Excel, and every item had to be
-                                        entered twice: once for the drawings and once for the schedule. I wrote a
-                                        JavaScript tool instead, with dropdown menus and automatic parsing of each entry,
-                                        so an item is typed once and fills in both.
+                                        At the office, natural ventilation was checked in Excel: each room's openings
+                                        have to add up to at least 10% of its floor area. The openings were listed in
+                                        one cell, and I had to type how many of each into separate cells for a
+                                        SUMPRODUCT to total the open area and say OK. I built an HTML and JavaScript
+                                        version instead. The opening types and their areas are set up once, then each
+                                        room is just a name, a floor area and its openings typed as one line of text.
+                                        It parses the line, works out the percentage, and exports it all to Excel.
                                     </p>
                                 </div>
                                 <figure class="tl-vis">
-                                    <canvas data-vis="ventilation" role="img" aria-label="Illustration: an item type is picked from a dropdown and one line is typed; it is parsed into a schedule row and a drawing tag at the same time"></canvas>
-                                    <figcaption>One entry, both outputs</figcaption>
+                                    <canvas data-vis="ventilation" role="img" aria-label="Illustration: rooms are entered with a floor area and a line of openings such as W1 x2; the tool totals the open area, checks it is at least 10% of the floor area, and exports to Excel"></canvas>
+                                    <figcaption>One line per room, checked against 10%</figcaption>
                                 </figure>
                             </div>
                         </li>

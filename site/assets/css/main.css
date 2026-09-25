@@ -1261,7 +1261,7 @@ body.home {
   gap: clamp(1.75rem, 4vw, 4rem);
   align-items: center;
 }
-.home .project-row:nth-child(even) .project-row__media {
+.home .project-row--flip .project-row__media {
   order: 2;
 }
 .home .project-row__media {
@@ -1405,13 +1405,51 @@ body.home {
   border-color: var(--accent);
 }
 
-/* --- Engineering strip -------------------------------------------------- */
-.home .eng-strip {
-  border-top: 1px solid var(--line);
+/* --- Academic timeline ------------------------------------------------- */
+/* Year markers between entries; pulled up so each sits close to its entry. */
+.home .ac-year {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0 0 calc(-1 * clamp(2.25rem, 5.5vw, 4.5rem));
+  color: var(--accent);
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1;
+}
+.home .ac-year::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+}
+.home .ac-start {
+  max-width: 46rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent-fill);
+}
+.home .ac-start__title {
+  margin: 0.4rem 0 0.6rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+/* The engineering entry keeps its drafting-paper look */
+.home .ac-eng {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
   background-color: #fbfbf9;
   background-image: linear-gradient(#eceef1 1px, transparent 1px),
     linear-gradient(90deg, #eceef1 1px, transparent 1px);
   background-size: 28px 28px;
+}
+.home .ac-eng__head {
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+}
+.home .ac-eng__head .project-row__title a {
+  color: inherit;
 }
 .home .eng-cards {
   display: grid;
@@ -1469,8 +1507,8 @@ body.home {
   font-size: 0.92rem;
   line-height: 1.5;
 }
-.home .eng-strip__more {
-  margin-top: 1.75rem;
+.home .ac-eng__more {
+  margin-top: 1.5rem;
 }
 
 /* --- Skills ------------------------------------------------------------- */
@@ -1990,7 +2028,7 @@ html.lb-lock {
   .home .hero__media {
     aspect-ratio: 16 / 11;
   }
-  .home .project-row:nth-child(even) .project-row__media {
+  .home .project-row--flip .project-row__media {
     order: 0;
   }
   .home .skills-grid {

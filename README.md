@@ -50,7 +50,9 @@ off. Links inside a dropdown group (Academic: architecture, engineering;
 Personal: illustrations, coding) also highlight the group. On the homepage the
 navbar links to its own sections; on other pages it links to `index.html#…`.
 
-The homepage is organised as **01 Academic** (Architecture, Engineering),
+The homepage is organised as **01 Academic** (one timeline, in date order:
+the engineering degree, then the architecture studio projects; `#architecture`
+is the timeline and `#engineering` the engineering entry inside it),
 **02 Professional** (map of projects per atoll) and **03 Personal**
 (Illustrations, Coding). Old anchors (`#projects`, `#wildlife`,
 `#engineering-work`) still work as aliases.
