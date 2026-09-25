@@ -508,6 +508,27 @@
                         </li>
 
                         <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2021-10">Oct 2021</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Maths · Python and Julia</p>
+                                    <h4 class="tl-title">A maths spree</h4>
+                                    <p class="tl-text">
+                                        Right after the donut I went on a maths spree, and it was some of the most fun I've
+                                        had coding. A sieve of Eratosthenes that counts the 455,052,511 primes below ten
+                                        billion, written in Python and again in Julia. The Mandelbrot set. Digits of π from
+                                        the BBP formula. A converter into non-integer bases, and a program that spells out
+                                        any number in words, all the way up to the -illions.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="sieve" role="img" aria-label="A grid of numbers 1 to 120; multiples of 2, 3, 5 and 7 are crossed out in turn, leaving the primes"></canvas>
+                                    <figcaption>The sieve of Eratosthenes, step by step</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
                             <p class="tl-date"><time datetime="2021-11">Nov 2021</time></p>
                             <div class="tl-body tl-body--split">
                                 <div class="tl-copy">
@@ -516,14 +537,14 @@
                                     <p class="tl-text">
                                         Next I pointed Python at something I had years of data on: my MyAnimeList
                                         exports. I parsed the XML, built tables comparing my list with my friends',
-                                        and played with ways to show how much I'd actually watched. It turned out to
-                                        be a lot: 1,293 titles and 12,644 episodes, around 200 days of nonstop
-                                        watching.
+                                        and played with ways to show how much I'd actually watched. Rerun on my
+                                        latest export, it's a lot: 1,360 titles and 13,304 episodes, around 212 days
+                                        of nonstop watching.
                                     </p>
                                 </div>
                                 <figure class="tl-vis">
-                                    <canvas data-vis="anime" role="img" aria-label="Bar chart of anime episodes finished per year from 2017 to 2024, peaking at 3,297 in 2019, 12,644 in total"></canvas>
-                                    <figcaption>Episodes finished per year, from my 2024 export</figcaption>
+                                    <canvas data-vis="anime" role="img" aria-label="Bar chart of anime episodes finished per year from 2017 to 2026, peaking at 3,297 in 2019, 13,304 in total"></canvas>
+                                    <figcaption>Episodes finished per year, from my September 2026 export</figcaption>
                                 </figure>
                             </div>
                         </li>
@@ -555,22 +576,25 @@
                         </li>
 
                         <li class="tl-item reveal">
-                            <p class="tl-date"><time datetime="2022-11">Nov 2022</time></p>
+                            <p class="tl-date"><time datetime="2022-12">Dec 2022</time></p>
                             <div class="tl-body tl-body--split">
                                 <div class="tl-copy">
-                                    <p class="tl-meta">Coursework · Python</p>
-                                    <h4 class="tl-title">A whole assignment in Python</h4>
+                                    <p class="tl-meta">Data cleaning · Plotting</p>
+                                    <h4 class="tl-title">Forty years of wind</h4>
                                     <p class="tl-text">
-                                        Out of sheer boredom, I did an entire coastal engineering assignment in
-                                        Python: depth of closure, breaking wave height, longshore sediment transport
-                                        by both the CERC and Kamphuis formulas, and how long a groyne takes to fill
-                                        before sand starts to pass it. Writing each formula out as code made me
-                                        understand it properly.
+                                        I had forty years of daily wind data, 1980 to 2019. The first challenge was cleaning
+                                        it up, and then cleaning it up again with as little, and as elegant, code as I could.
+                                        Next was a wind rose, which somehow was a real challenge at the time. Once I'd
+                                        cracked it I went on a spree: a rose for every year, animated, to see whether the
+                                        pattern was shifting, and an arrow that circles the plot through the year, pointing
+                                        the way the wind blows, so the monsoon switching over shows up at a glance.
+                                        The same data later went into the
+                                        <a href="engineering.html#thesis">wind-load analysis</a> for my final-year thesis.
                                     </p>
                                 </div>
                                 <figure class="tl-vis">
-                                    <canvas data-vis="groyne" role="img" aria-label="Waves arrive at an angle and carry sand along the shore; it builds up behind a groyne until the groyne fills and sand passes it"></canvas>
-                                    <figcaption>Longshore drift filling a groyne</figcaption>
+                                    <canvas data-vis="wind" role="img" aria-label="An animated wind rose for each year from 1980 to 2019, with an arrow circling the months showing the average wind direction each week"></canvas>
+                                    <figcaption>Real data: a rose per year, the arrow by week</figcaption>
                                 </figure>
                             </div>
                         </li>
@@ -623,17 +647,41 @@
                             <div class="tl-body tl-body--split">
                                 <div class="tl-copy">
                                     <p class="tl-meta">Games · Ratings</p>
-                                    <h4 class="tl-title">Coup, online and ranked</h4>
+                                    <h4 class="tl-title">Coup, coded and ranked</h4>
                                     <p class="tl-text">
-                                        I got hooked on Coup, the bluffing card game, so I started
-                                        building a version to play online, through several rewrites. To settle who
-                                        was actually best, I made an Elo rating system for multiplayer games that
-                                        scores each finishing order as a set of head-to-head results.
+                                        I got hooked on Coup, the bluffing card game, and wrote it as a command-line
+                                        game in Python, through several rewrites. I never got it online, but we kept
+                                        playing with real cards, so I built an Elo rating system for multiplayer
+                                        games to rank every game we played, scoring each finishing order as a set of
+                                        head-to-head results.
                                     </p>
                                 </div>
                                 <figure class="tl-vis">
                                     <canvas data-vis="coup" role="img" aria-label="Line chart of seven players' Elo ratings across 22 real games; Player A finishes top at 1,117"></canvas>
-                                    <figcaption>22 real games, names hidden</figcaption>
+                                    <figcaption>22 real card games, names hidden</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2023-11">Nov 2023</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Coursework · Python</p>
+                                    <h4 class="tl-title">Coastal engineering, in Python</h4>
+                                    <p class="tl-text">
+                                        It started out of sheer boredom, and in my final engineering semester I did the
+                                        coastal engineering assignments in Python: longshore sediment transport and how long
+                                        a groyne takes to fill; beach profiles after three storms, where I spent far too long
+                                        getting the integration and end conditions right to measure the sand eroded and
+                                        deposited, and just as long making the plots look their best (this was before LLMs);
+                                        and a rubble-mound breakwater, worked from run-up and overtopping through to armour
+                                        stone weights, underlayers and the toe.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="coastal" role="img" aria-label="Three scenes: sand building up behind a groyne; a beach profile changing after three storms with eroded and deposited sand shaded; a breakwater cross-section built layer by layer"></canvas>
+                                    <figcaption>Groyne, storm profiles and breakwater</figcaption>
                                 </figure>
                             </div>
                         </li>
@@ -690,7 +738,8 @@
                                     <p class="tl-meta">Milestone · Search</p>
                                     <h4 class="tl-title">The mancala bot, finally</h4>
                                     <p class="tl-text">
-                                        Twenty months later I came back to it. This time I worked out depth-first
+                                        My grandmother passed away before I managed it. Twenty months after that
+                                        game, I came back to it. This time I worked out depth-first
                                         search myself, without AI help, and wrote a bot that looks ahead through the
                                         possible moves and picks the best one. I built it in Google Colab and shared
                                         it with a few people, then later made a playable web version with AI's help,
@@ -702,6 +751,26 @@
                                 <figure class="tl-vis">
                                     <canvas data-vis="mancalaBot" role="img" aria-label="Two bots play ohvalhugondi: one looks four moves ahead, the other one move; seeds are sown pit by pit"></canvas>
                                     <figcaption>The real rules, bot against bot</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2024-12">Dec 2024</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Work tool · JavaScript</p>
+                                    <h4 class="tl-title">A ventilation schedule tool</h4>
+                                    <p class="tl-text">
+                                        At the office, ventilation schedules lived in Excel, and every item had to be
+                                        entered twice: once for the drawings and once for the schedule. I wrote a
+                                        JavaScript tool instead, with dropdown menus and automatic parsing of each entry,
+                                        so an item is typed once and fills in both.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="ventilation" role="img" aria-label="Illustration: an item type is picked from a dropdown and one line is typed; it is parsed into a schedule row and a drawing tag at the same time"></canvas>
+                                    <figcaption>One entry, both outputs</figcaption>
                                 </figure>
                             </div>
                         </li>
@@ -736,6 +805,27 @@
                         </li>
 
                         <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2025-07">Jul 2025</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Machine learning · Python</p>
+                                    <h4 class="tl-title">Learning machine learning on the Titanic</h4>
+                                    <p class="tl-text">
+                                        I got interested in machine learning and spent a few weeks working through an
+                                        O'Reilly book for beginners, trying the basic models one by one on Kaggle's Titanic
+                                        dataset: logistic regression, k-nearest neighbours, SVMs, random forests, gradient
+                                        boosting and a small neural network in PyTorch. Rerun today on the same held-out
+                                        passengers, the simplest of them, logistic regression, still comes out on top.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="titanic" role="img" aria-label="Bar chart of validation accuracy: logistic regression 84.4%, SVM 83.8%, gradient boosting 81.6%, k-nearest neighbours 81.0%, neural network 79.9%, random forest 79.3%"></canvas>
+                                    <figcaption>Accuracy on 179 held-out passengers</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
                             <p class="tl-date"><time datetime="2025-08">Aug 2025</time></p>
                             <div class="tl-body tl-body--split">
                                 <div class="tl-copy">
@@ -752,6 +842,24 @@
                                 <figure class="tl-vis">
                                     <canvas data-vis="radar" role="img" aria-label="A radar scope sweeps over four targets; approaching ones show a positive Doppler shift, receding ones a negative shift"></canvas>
                                     <figcaption>Range from the echo, speed from the Doppler shift</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2025-10">Oct 2025</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Work tool · AutoCAD scripting</p>
+                                    <h4 class="tl-title">Drawing layouts by script</h4>
+                                    <p class="tl-text">
+                                        Setting up drawing layouts in AutoCAD by hand took about 45 minutes a time. I
+                                        wrote a script that sets them up automatically, and the same job now takes about 10.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="autocad" role="img" aria-label="Illustration: drawing sheets are generated one after another while a bar compares about 45 minutes by hand with about 10 by script"></canvas>
+                                    <figcaption>About 45 minutes down to 10</figcaption>
                                 </figure>
                             </div>
                         </li>

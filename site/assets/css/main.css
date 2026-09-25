@@ -1141,6 +1141,15 @@ body.home {
   margin: 0;
   color: rgba(246, 244, 239, 0.72);
 }
+.home .tl-text a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: rgba(227, 154, 134, 0.6);
+  text-underline-offset: 3px;
+}
+.home .tl-text a:hover {
+  color: #e39a86;
+}
 .home .tl-text code,
 .home .donut {
   font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;

@@ -207,8 +207,9 @@
 
   // --- Nov 2021: anime list in numbers -----------------------------------------
   VISUALS.anime = (canvas) => {
-    const years = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
-    const eps = [133, 1642, 3297, 2521, 2326, 1545, 930, 250];
+    // Completed titles by finish year, from the September 2026 export (2026 is partial).
+    const years = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+    const eps = [133, 1642, 3297, 2521, 2326, 1545, 930, 581, 257, 72];
     const total = eps.reduce((a, b) => a + b, 0);
     const max = Math.max(...eps);
     const PERIOD = 10;
@@ -217,23 +218,23 @@
       draw(time) {
         const t = time % PERIOD;
         const ctx = surface(canvas);
-        const grow = (i) => ease((t - 0.4 - i * 0.45) / 0.7);
+        const grow = (i) => ease((t - 0.4 - i * 0.35) / 0.7);
         let shown = 0;
         eps.forEach((e, i) => (shown += e * grow(i)));
 
         text(ctx, Math.round(shown).toLocaleString("en-US"), 18, 30, { size: 30, color: COL.paper, font: SANS, weight: 600 });
         text(ctx, "episodes finished", 20, 54, { size: 11, color: COL.dim });
         const doneFrac = shown / total;
-        text(ctx, `1,293 titles · ≈ ${Math.round(200 * doneFrac)} days of watching`, 342, 30, {
+        text(ctx, `1,360 titles · ≈ ${Math.round(212 * doneFrac)} days of watching`, 342, 30, {
           size: 10,
           color: COL.accent,
           align: "right",
         });
 
         const base = 236;
-        const bw = 30;
+        const bw = 25;
         years.forEach((y, i) => {
-          const x = 24 + i * 40;
+          const x = 22 + i * 32.5;
           const h = (eps[i] / max) * 150 * grow(i);
           ctx.fillStyle = i === 2 ? COL.accent : COL.accentSoft;
           roundRect(ctx, x, base - h, bw, h, 3);
@@ -284,9 +285,9 @@
     };
   };
 
-  // --- Nov 2022: longshore drift filling a groyne ------------------------------
-  VISUALS.groyne = (canvas) => {
-    const PERIOD = 12;
+  // --- Nov 2023: coastal engineering assignments ------------------------------
+  // Scene 1: longshore drift filling a groyne (time t in seconds, p = 0..1 filled).
+  function groyneScene() {
     const GX = 190; // groyne position
     const SHORE = 150; // original shoreline
     const rand = rng(7);
@@ -294,68 +295,578 @@
     const shoreAt = (x, p) =>
       x < GX ? SHORE - 46 * p * Math.exp(-(GX - x) / 70) : SHORE + 22 * p * Math.exp(-(x - GX) / 60);
 
-    return {
-      still: 10,
-      draw(time) {
-        const t = time % PERIOD;
-        const p = ease(t / 10);
-        const ctx = surface(canvas);
+    return (ctx, time, p) => {
+      // Sea
+      const sea = ctx.createLinearGradient(0, 0, 0, SHORE);
+      sea.addColorStop(0, "#15324a");
+      sea.addColorStop(1, "#2d5877");
+      ctx.fillStyle = sea;
+      ctx.fillRect(0, 0, W, H);
 
-        // Sea
-        const sea = ctx.createLinearGradient(0, 0, 0, SHORE);
-        sea.addColorStop(0, "#15324a");
-        sea.addColorStop(1, "#2d5877");
-        ctx.fillStyle = sea;
-        ctx.fillRect(0, 0, W, H);
-
-        // Wave crests arriving at an angle
-        ctx.strokeStyle = "rgba(246, 244, 239, 0.28)";
-        ctx.lineWidth = 1.5;
-        for (let i = 0; i < 7; i++) {
-          const off = ((time * 18 + i * 34) % 238) - 20;
-          ctx.beginPath();
-          ctx.moveTo(-40 + off * 0.35, off - 40);
-          ctx.lineTo(W + 40 + off * 0.35, off - 40 + 70);
-          ctx.stroke();
-        }
-
-        // Beach, with the shoreline built up updrift and eroded downdrift
-        ctx.fillStyle = COL.sand;
+      // Wave crests arriving at an angle
+      ctx.strokeStyle = "rgba(246, 244, 239, 0.28)";
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 7; i++) {
+        const off = ((time * 18 + i * 34) % 238) - 20;
         ctx.beginPath();
-        ctx.moveTo(0, H);
-        for (let x = 0; x <= W; x += 6) ctx.lineTo(x, shoreAt(x, p));
-        ctx.lineTo(W, H);
+        ctx.moveTo(-40 + off * 0.35, off - 40);
+        ctx.lineTo(W + 40 + off * 0.35, off - 40 + 70);
+        ctx.stroke();
+      }
+
+      // Beach, with the shoreline built up updrift and eroded downdrift
+      ctx.fillStyle = COL.sand;
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for (let x = 0; x <= W; x += 6) ctx.lineTo(x, shoreAt(x, p));
+      ctx.lineTo(W, H);
+      ctx.closePath();
+      ctx.fill();
+      // Original shoreline
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "rgba(0, 0, 0, 0.3)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, SHORE);
+      ctx.lineTo(W, SHORE);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Groyne
+      ctx.fillStyle = "#6f6a62";
+      roundRect(ctx, GX - 5, 70, 10, 150, 3);
+      ctx.fill();
+
+      // Sand grains drifting along the shore; they pile up until the groyne fills
+      const bypass = p > 0.85;
+      grains.forEach((g) => {
+        let x = (g.x + time * 22 * g.s) % (W + 20);
+        if (!bypass && x > GX - 8 && x < GX + 30) x = GX - 8 - g.o * 3;
+        const y = shoreAt(x, p) - 4 - g.o;
+        ctx.fillStyle = "rgba(246, 236, 210, 0.9)";
+        ctx.fillRect(x, y, 2, 2);
+      });
+
+      // Drift arrow and labels
+      text(ctx, "longshore drift →", 16, 18, { size: 10, color: COL.paper });
+      text(ctx, `year ${Math.round(p * 20)}`, 344, 18, { size: 10, color: COL.paper, align: "right", font: MONO });
+      text(ctx, bypass ? "full: sand bypasses the groyne" : "sand trapped updrift", 16, 236, { size: 10, color: "#3a3226" });
+    };
+  }
+
+  // Scene 2: beach profile after each of three storms (assignment data), with the
+  // sand eroded and deposited shaded. Volumes are the integrated areas, in m³/m.
+  function profileScene() {
+    const X = [-100.0, -90.0, -80.1, -70.1, -60.1, -50.2, -40.2, -30.2, -20.3, -10.3, -0.3, 9.6, 19.6, 29.6, 39.5, 49.5, 59.5, 69.4, 79.4, 89.4, 99.3, 109.3, 119.3, 129.2, 139.2, 149.2, 159.1, 169.1, 179.1, 189.0, 199.0, 209.0, 218.9, 228.9, 238.9, 248.8, 258.8, 268.8, 278.7, 288.7, 298.7, 308.6, 318.6, 328.6, 338.5, 348.5, 358.5, 368.4, 378.4, 388.4, 398.3, 408.3, 418.3, 428.2, 438.2, 448.2, 458.1, 468.1, 478.1, 488.0, 498.0];
+    const P = [
+      [5.0, 5.0, 5.0, 5.0, 4.99, 4.99, 4.99, 4.99, 4.99, 4.99, 4.99, 4.34, 3.43, 2.55, 1.62, 0.15, -0.03, -0.15, -0.17, -0.5, -0.9, -1.44, -1.96, -3.1, -4.01, -4.84, -5.21, -5.52, -5.76, -5.92, -6.08, -6.23, -6.36, -6.48, -6.59, -6.69, -6.75, -6.79, -6.8, -6.81, -6.8, -6.77, -6.77, -6.82, -6.9, -6.99, -7.14, -7.34, -7.56, -7.99, -8.44, -8.89, -9.33, -9.76, -10.19, -10.62, -11.08, -11.56, -12.04, -12.52, -13.0],
+      [5.0, 5.0, 5.0, 5.0, 4.99, 4.99, 4.99, 4.99, 4.99, 4.99, 4.99, 3.64, 1.48, 0.76, 0.16, -0.38, -0.85, -1.25, -1.6, -1.93, -2.25, -2.54, -2.82, -3.09, -3.35, -3.61, -3.86, -4.11, -4.35, -4.6, -4.84, -5.08, -5.32, -5.55, -5.78, -6.0, -6.21, -6.41, -6.65, -6.87, -7.05, -7.17, -7.28, -7.38, -7.5, -7.61, -7.74, -7.87, -8.0, -8.15, -8.32, -8.48, -8.65, -8.9, -9.33, -9.95, -10.62, -11.25, -11.83, -12.38, -13.0],
+      [5.0, 5.0, 5.0, 5.0, 4.99, 4.99, 4.99, 4.99, 5.0, 3.39, 2.74, 1.54, 0.37, -0.35, -0.25, -0.31, -0.64, -1.06, -1.37, -1.64, -1.91, -2.3, -2.78, -2.98, -2.8, -3.01, -3.54, -3.94, -3.99, -3.91, -4.31, -4.58, -4.79, -5.06, -5.26, -5.5, -5.9, -6.33, -6.73, -7.05, -7.17, -7.26, -7.36, -7.47, -7.58, -7.7, -7.83, -7.97, -8.11, -8.27, -8.45, -8.64, -8.81, -9.02, -9.34, -9.8, -10.36, -10.98, -11.61, -12.2, -12.81],
+      [5.0, 5.0, 5.0, 5.0, 4.99, 4.99, 4.6, 2.83, 2.74, 1.21, 0.88, 0.49, 0.29, -0.17, -0.57, -0.84, -1.12, -1.39, -1.58, -1.83, -2.01, -2.21, -2.37, -2.55, -2.73, -2.89, -3.06, -3.26, -3.42, -3.59, -3.76, -3.95, -4.16, -4.38, -4.64, -5.0, -5.37, -5.67, -5.93, -6.17, -6.4, -6.63, -6.85, -7.08, -7.29, -7.52, -7.75, -7.95, -8.13, -8.29, -8.46, -8.65, -8.83, -8.99, -9.18, -9.52, -10.08, -10.83, -11.55, -12.18, -12.82],
+    ];
+    const VOL = [null, [192, 191], [280, 258], [363, 362]];
+    const x0 = 34, x1 = 346, y0 = 44, y1 = 228;
+    const px = (x) => x0 + ((x + 100) / 598) * (x1 - x0);
+    const py = (z) => y0 + ((5 - z) / 18) * (y1 - y0);
+
+    return (ctx, t) => {
+      const storm = 1 + Math.min(2, Math.floor(t / 2.7));
+      const k = ease((t - (storm - 1) * 2.7) / 1.4);
+      const cur = P[0].map((z, i) => lerp(z, P[storm][i], k));
+
+      // Water between sea level and the seabed
+      ctx.fillStyle = "rgba(45, 88, 119, 0.35)";
+      for (let i = 0; i < X.length - 1; i++) {
+        if (cur[i] >= 0 && cur[i + 1] >= 0) continue;
+        ctx.beginPath();
+        ctx.moveTo(px(X[i]), py(0));
+        ctx.lineTo(px(X[i + 1]), py(0));
+        ctx.lineTo(px(X[i + 1]), py(Math.min(0, cur[i + 1])));
+        ctx.lineTo(px(X[i]), py(Math.min(0, cur[i])));
         ctx.closePath();
         ctx.fill();
-        // Original shoreline
-        ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.3)";
-        ctx.lineWidth = 1;
+      }
+      ctx.fillStyle = "rgba(143, 189, 230, 0.6)";
+      ctx.fillRect(x0, py(0), x1 - x0, 1);
+      text(ctx, "sea level", x1 - 4, py(0) - 7, { size: 8, align: "right", color: COL.dim });
+
+      // Eroded (red) and deposited (blue) areas between the profiles
+      for (let i = 0; i < X.length - 1; i++) {
+        const a0 = P[0][i], a1 = P[0][i + 1], b0 = cur[i], b1 = cur[i + 1];
+        const eroded = a0 + a1 > b0 + b1;
+        if (Math.abs(a0 - b0) + Math.abs(a1 - b1) < 0.02) continue;
+        ctx.fillStyle = eroded ? "rgba(217, 105, 95, 0.55)" : "rgba(143, 189, 230, 0.55)";
         ctx.beginPath();
-        ctx.moveTo(0, SHORE);
-        ctx.lineTo(W, SHORE);
+        ctx.moveTo(px(X[i]), py(a0));
+        ctx.lineTo(px(X[i + 1]), py(a1));
+        ctx.lineTo(px(X[i + 1]), py(b1));
+        ctx.lineTo(px(X[i]), py(b0));
+        ctx.closePath();
+        ctx.fill();
+      }
+      const line = (zs, color, width, dash) => {
+        ctx.setLineDash(dash || []);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        zs.forEach((z, i) => (i ? ctx.lineTo : ctx.moveTo).call(ctx, px(X[i]), py(z)));
         ctx.stroke();
         ctx.setLineDash([]);
+      };
+      line(P[0], COL.dim, 1, [4, 3]);
+      line(cur, COL.sand, 2);
 
-        // Groyne
-        ctx.fillStyle = "#6f6a62";
-        roundRect(ctx, GX - 5, 70, 10, 150, 3);
+      text(ctx, `Beach profile after storm ${storm}`, 16, 18, { size: 10, color: COL.paper, weight: 600 });
+      text(ctx, "dashed: before", 344, 18, { size: 9, align: "right", color: COL.dim });
+      if (k > 0.9) {
+        const [er, de] = VOL[storm];
+        text(ctx, `${er} m³/m eroded`, 16, 34, { size: 9, color: COL.red });
+        text(ctx, `${de} m³/m deposited`, 108, 34, { size: 9, color: COL.blue });
+      }
+    };
+  }
+
+  // Scene 3: rubble-mound breakwater cross-section, built layer by layer from the
+  // design results (crest +9.27 m, 1.2 t armour in a 1.56 m layer, 1:2 slopes).
+  function breakwaterScene() {
+    const Hc = 9.27, a = 2.35, SWL = 7.2;
+    const SX = 7, SY = 14, CX = 180, BED = 222;
+    const X = (m) => CX + m * SX;
+    const Y = (m) => BED - m * SY;
+    const shape = (t) => {
+      const top = a - 0.236 * t;
+      const base = a + 2 * Hc - 2.236 * t;
+      return [[-base, 0], [-top, Hc - t], [top, Hc - t], [base, 0]];
+    };
+    const layers = [
+      { t: 2.56, color: "#d2c9b6", label: "core" },
+      { t: 2.29, color: "#bdb5a6", label: "underlayer 2 · 0.27 m" },
+      { t: 1.56, color: "#a39b8e", label: "underlayer 1 · 0.73 m" },
+      { t: 0, color: "#7f786d", label: "armour · 1.2 t stones · 1.56 m" },
+    ];
+
+    return (ctx, t) => {
+      // Water to the design level, then the seabed
+      ctx.fillStyle = "rgba(45, 88, 119, 0.45)";
+      ctx.fillRect(0, Y(SWL), W, BED - Y(SWL));
+      ctx.fillStyle = "rgba(143, 189, 230, 0.7)";
+      ctx.fillRect(0, Y(SWL), W, 1);
+      text(ctx, "design water +7.2 m", 344, Y(SWL) - 7, { size: 8, align: "right", color: COL.blue });
+      ctx.fillStyle = "#5b5146";
+      ctx.fillRect(0, BED, W, H - BED);
+
+      // Layers appear from the core outwards; draw the outermost shown first.
+      const shown = layers.map((_, i) => ease((t - 0.3 - i * 0.9) / 0.7));
+      for (let i = layers.length - 1; i >= 0; i--) {
+        if (shown[i] <= 0) continue;
+        ctx.globalAlpha = shown[i];
+        ctx.fillStyle = layers[i].color;
+        ctx.beginPath();
+        shape(layers[i].t).forEach(([x, y], j) => (j ? ctx.lineTo : ctx.moveTo).call(ctx, X(x), Y(y)));
+        ctx.closePath();
         ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      // Toe berm on the seaward side
+      const toe = ease((t - 4) / 0.6);
+      if (toe > 0) {
+        ctx.globalAlpha = toe;
+        ctx.fillStyle = "#7f786d";
+        roundRect(ctx, X(a + 2 * Hc - 1.5), Y(1.45), 4.5 * SX, 1.45 * SY, 3);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
 
-        // Sand grains drifting along the shore; they pile up until the groyne fills
-        const bypass = p > 0.85;
-        grains.forEach((g) => {
-          let x = (g.x + time * 22 * g.s) % (W + 20);
-          if (!bypass && x > GX - 8 && x < GX + 30) x = GX - 8 - g.o * 3;
-          const y = shoreAt(x, p) - 4 - g.o;
-          ctx.fillStyle = "rgba(246, 236, 210, 0.9)";
-          ctx.fillRect(x, y, 2, 2);
+      text(ctx, "Rubble-mound breakwater", 16, 18, { size: 10, color: COL.paper, weight: 600 });
+      text(ctx, "crest +9.27 m", X(0), Y(Hc) - 9, { size: 9, align: "center", color: COL.paper });
+      layers.forEach((l, i) => {
+        if (shown[i] < 0.9) return;
+        const y = 36 + (layers.length - 1 - i) * 13;
+        ctx.fillStyle = l.color;
+        ctx.fillRect(16, y - 4, 8, 8);
+        text(ctx, l.label, 30, y, { size: 8.5, color: COL.dim });
+      });
+      if (toe > 0.9) {
+        ctx.fillStyle = "#7f786d";
+        ctx.fillRect(16, 36 + 4 * 13 - 4, 8, 8);
+        text(ctx, "toe · 1.45 m high", 30, 36 + 4 * 13, { size: 8.5, color: COL.dim });
+      }
+    };
+  }
+
+  VISUALS.coastal = (canvas) => {
+    const scenes = [
+      ["Groyne", groyneScene()],
+      ["Storm profiles", profileScene()],
+      ["Breakwater", breakwaterScene()],
+    ];
+    const SCENE = 8.5;
+    return {
+      still: SCENE * 2 + 6,
+      draw(time) {
+        const t = time % (SCENE * scenes.length);
+        const i = Math.floor(t / SCENE);
+        const local = t - i * SCENE;
+        const ctx = surface(canvas);
+        const [, scene] = scenes[i];
+        if (i === 0) scene(ctx, time, ease(local / 7));
+        else scene(ctx, local);
+        // Fade between scenes
+        const edge = Math.min(local, SCENE - local);
+        if (edge < 0.35) {
+          ctx.fillStyle = `rgba(18, 17, 16, ${1 - edge / 0.35})`;
+          ctx.fillRect(0, 0, W, H);
+        }
+        // Scene tabs
+        ctx.fillStyle = "rgba(18, 17, 16, 0.7)";
+        ctx.fillRect(0, H - 22, W, 22);
+        scenes.forEach(([name], j) => {
+          const x = 16 + j * 116;
+          text(ctx, `${j + 1} · ${name}`, x, H - 11, { size: 9, color: j === i ? COL.paper : COL.dim, weight: j === i ? 600 : 400 });
+          if (j === i) {
+            ctx.fillStyle = COL.accent;
+            ctx.fillRect(x, H - 3, 100 * (local / SCENE), 2);
+          }
+        });
+      },
+    };
+  };
+
+  // --- Oct 2021: sieve of Eratosthenes -------------------------------------------
+  VISUALS.sieve = (canvas) => {
+    const N = 120, COLS = 15;
+    const PRIMES = [2, 3, 5, 7];
+    const PHASE = 2;
+    const PERIOD = PRIMES.length * PHASE + 4.5;
+    // When each composite gets crossed out, by its smallest prime factor
+    const crossAt = new Array(N + 1).fill(Infinity);
+    PRIMES.forEach((p, k) => {
+      const multiples = [];
+      for (let m = p * p; m <= N; m += p) if (crossAt[m] === Infinity) multiples.push(m);
+      multiples.forEach((m, j) => (crossAt[m] = k * PHASE + 0.5 + (j / multiples.length) * 1.3));
+    });
+    const cell = (n) => [18 + ((n - 1) % COLS) * 21.6, 38 + Math.floor((n - 1) / COLS) * 25];
+
+    return {
+      still: PERIOD - 1,
+      draw(time) {
+        const t = time % PERIOD;
+        const ctx = surface(canvas);
+        const phase = Math.min(PRIMES.length - 1, Math.floor(t / PHASE));
+        const done = t > PRIMES.length * PHASE;
+        text(ctx, done ? "What's left is prime" : `Crossing out multiples of ${PRIMES[phase]}`, 16, 18, { size: 10, color: COL.paper, weight: 600 });
+        for (let n = 1; n <= N; n++) {
+          const [x, y] = cell(n);
+          const crossed = n === 1 || t >= crossAt[n];
+          const active = !done && n === PRIMES[phase];
+          const prime = !crossed && (done || PRIMES.slice(0, phase + 1).includes(n) || n <= PRIMES[phase]);
+          if (active || (done && !crossed)) {
+            ctx.fillStyle = active ? COL.accent : COL.accentSoft;
+            ctx.beginPath();
+            ctx.arc(x + 9, y + 8, 9, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          text(ctx, String(n), x + 9, y + 8.5, {
+            size: 9,
+            align: "center",
+            font: MONO,
+            color: active ? "#161514" : crossed ? "rgba(246, 244, 239, 0.18)" : prime ? COL.paper : COL.dim,
+            weight: active || (done && !crossed) ? 700 : 400,
+          });
+        }
+        if (done) {
+          const k = ease((t - PRIMES.length * PHASE - 0.6) / 0.8);
+          ctx.globalAlpha = k;
+          text(ctx, "…and 455,052,511 primes below ten billion", 16, 252, { size: 10, color: COL.accent, weight: 600 });
+          ctx.globalAlpha = 1;
+        }
+      },
+    };
+  };
+
+  // --- Dec 2022: forty years of wind -----------------------------------------------
+  // A wind rose for each year 1980-2019 (days the wind came from each of 16
+  // directions), and an arrow circling through the year pointing the way the
+  // wind blows that week, averaged over all forty years.
+  VISUALS.wind = (canvas) => {
+    const ROSE = [[15,21,45,35,5,5,1,3,1,5,12,70,79,42,16,11],[9,18,33,53,12,4,0,3,3,6,15,42,75,57,25,10],[12,12,34,61,21,2,3,1,3,12,22,55,53,42,22,10],[27,37,30,27,4,3,0,0,3,4,10,38,75,56,33,18],[27,21,25,28,10,4,1,1,2,3,11,32,77,70,37,16],[10,21,33,34,14,4,1,0,0,1,11,44,78,74,23,17],[6,18,37,42,19,4,0,1,2,4,6,32,99,63,19,13],[8,19,32,43,12,3,2,0,3,10,18,49,70,54,34,8],[9,13,29,52,9,10,1,1,1,3,4,45,75,61,41,12],[2,19,46,53,10,5,1,1,1,5,13,41,72,65,19,11],[8,16,35,38,13,5,3,3,1,4,17,47,70,59,34,12],[10,12,36,44,13,10,0,4,2,2,17,54,65,47,34,15],[10,21,49,47,10,3,0,2,1,2,9,56,82,45,20,9],[9,22,24,37,13,8,3,2,1,13,7,26,97,53,33,17],[9,22,33,50,13,9,3,4,10,11,31,46,59,30,20,14],[8,21,33,54,8,4,1,0,2,3,7,48,107,44,17,8],[3,14,31,43,11,2,1,1,1,5,6,45,87,78,29,9],[9,23,20,47,35,23,10,10,10,12,31,44,41,31,16,3],[13,21,29,45,15,3,3,1,3,3,9,44,66,76,25,9],[16,26,16,33,10,2,4,1,1,3,17,62,84,59,18,12],[19,19,22,29,10,5,1,1,1,3,9,32,98,67,30,20],[16,15,23,30,18,13,0,1,0,8,13,47,69,73,29,10],[11,13,28,45,25,8,1,1,3,4,17,33,63,86,20,7],[9,19,42,51,24,4,3,0,1,1,19,44,58,52,25,13],[11,15,31,50,20,9,4,2,1,9,15,43,63,62,20,11],[6,17,22,43,11,3,0,1,0,4,23,54,73,64,35,9],[9,17,36,47,12,4,7,2,10,18,22,36,63,49,25,8],[7,10,21,67,9,4,1,1,3,6,20,50,75,53,26,12],[15,12,21,30,16,5,1,1,1,7,21,38,74,63,44,17],[11,8,25,50,15,10,1,3,5,5,13,52,87,52,20,7],[7,8,26,38,5,6,0,3,0,2,11,55,89,70,27,18],[20,22,16,26,8,11,4,0,3,8,20,54,64,65,26,18],[15,15,35,28,17,9,5,5,6,5,12,32,51,80,38,13],[15,12,26,41,16,7,2,3,5,4,16,44,73,53,28,20],[3,9,29,51,17,7,3,1,4,6,11,62,66,64,24,7],[8,12,23,49,15,12,9,5,4,13,16,36,69,60,24,10],[12,13,36,40,13,7,4,3,1,0,5,21,77,96,32,6],[14,15,18,33,15,0,2,3,0,6,8,42,97,59,32,21],[14,15,23,45,18,11,6,3,3,4,22,33,78,55,20,15],[8,12,30,64,24,10,6,4,15,20,10,30,52,47,22,10]];
+    // Weekly mean wind [direction it comes from (degrees), speed m/s]
+    const WEEK = [[54,4.35],[56,4.52],[62,4.86],[56,4.86],[53,4.59],[50,4.21],[47,4],[48,3.69],[46,3.23],[43,2.78],[42,2.52],[9,1.61],[344,1.54],[319,1.51],[294,1.78],[284,2.44],[285,3.07],[272,3.5],[274,4.5],[264,5.24],[263,5.68],[261,6.25],[258,6.33],[260,5.8],[262,5.43],[266,5.36],[271,5.18],[273,5.16],[271,5.02],[274,4.28],[269,4.25],[269,4.34],[276,4.4],[285,4.8],[281,4.49],[281,4.33],[281,4.62],[279,5.14],[280,5.12],[272,5.32],[268,4.46],[273,3.91],[273,3.15],[272,3.24],[284,2.7],[302,1.25],[4,0.75],[41,1.13],[56,1.82],[51,2.47],[65,3.57],[58,4.05]];
+    const NAMES = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    const MONTHS = "JFMAMJJASOND";
+    const cx = 128, cy = 136, R = 84;
+    const MAX = 107;
+    const LOOP = 13; // one year of the arrow, and one pass through all forty roses
+    const rad = (deg) => ((deg - 90) * Math.PI) / 180;
+
+    return {
+      still: LOOP * 0.55,
+      draw(time) {
+        const t = (time % LOOP) / LOOP;
+        const ctx = surface(canvas);
+        const yf = t * (ROSE.length - 1);
+        const yi = Math.floor(yf);
+        const counts = ROSE[yi].map((c, s) => lerp(c, ROSE[Math.min(ROSE.length - 1, yi + 1)][s], yf - yi));
+
+        // Rings and compass
+        ctx.strokeStyle = COL.ghost;
+        ctx.lineWidth = 1;
+        [0.33, 0.66, 1].forEach((f) => {
+          ctx.beginPath();
+          ctx.arc(cx, cy, R * f, 0, Math.PI * 2);
+          ctx.stroke();
         });
 
-        // Drift arrow and labels
-        text(ctx, "longshore drift →", 16, 18, { size: 10, color: COL.paper });
-        text(ctx, `year ${Math.round(p * 20)}`, 344, 18, { size: 10, color: COL.paper, align: "right", font: MONO });
-        text(ctx, bypass ? "full: sand bypasses the groyne" : "sand trapped updrift", 16, 252, { size: 10, color: "#3a3226" });
+        // Rose wedges, one per direction
+        counts.forEach((c, s) => {
+          const r = Math.sqrt(c / MAX) * R;
+          const a = rad(s * 22.5);
+          ctx.fillStyle = s >= 10 && s <= 13 ? COL.accent : COL.accentSoft;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, r, a - 0.17, a + 0.17);
+          ctx.closePath();
+          ctx.fill();
+        });
+
+        // Month ring and the arrow travelling around it
+        const ORBIT = R + 24;
+        for (let m = 0; m < 12; m++) {
+          const a = -Math.PI / 2 + (m / 12) * Math.PI * 2;
+          text(ctx, MONTHS[m], cx + Math.cos(a) * (ORBIT + 13), cy + Math.sin(a) * (ORBIT + 13), { size: 7.5, align: "center", color: COL.dim });
+        }
+        const wk = Math.floor(t * 52) % 52;
+        const [from, speed] = WEEK[wk];
+        const oa = -Math.PI / 2 + t * Math.PI * 2;
+        const ox = cx + Math.cos(oa) * ORBIT, oy = cy + Math.sin(oa) * ORBIT;
+        const to = rad(from + 180);
+        const len = 5 + speed * 2.6;
+        const tx = ox + Math.cos(to) * len, ty = oy + Math.sin(to) * len;
+        ctx.strokeStyle = COL.blue;
+        ctx.fillStyle = COL.blue;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(ox - Math.cos(to) * len, oy - Math.sin(to) * len);
+        ctx.lineTo(tx, ty);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(tx + Math.cos(to) * 4, ty + Math.sin(to) * 4);
+        ctx.lineTo(tx + Math.cos(to + 2.4) * 6, ty + Math.sin(to + 2.4) * 6);
+        ctx.lineTo(tx + Math.cos(to - 2.4) * 6, ty + Math.sin(to - 2.4) * 6);
+        ctx.closePath();
+        ctx.fill();
+
+        // Readout
+        text(ctx, String(1980 + Math.round(yf)), 262, 60, { size: 26, color: COL.paper, weight: 600 });
+        text(ctx, "days by direction", 263, 82, { size: 9, color: COL.dim });
+        text(ctx, `week ${wk + 1}`, 263, 128, { size: 9, color: COL.dim, font: MONO });
+        text(ctx, `from ${NAMES[Math.round(from / 22.5) % 16]}`, 263, 146, { size: 12, color: COL.blue, weight: 600 });
+        text(ctx, `${speed.toFixed(1)} m/s avg`, 263, 162, { size: 9, color: COL.dim, font: MONO });
+        text(ctx, "North is up", 263, 220, { size: 8.5, color: COL.dim });
+        text(ctx, "NE ↔ W monsoons", 263, 234, { size: 8.5, color: COL.dim });
+      },
+    };
+  };
+
+  // --- Jul 2025: first machine learning models on the Titanic ----------------------
+  // Validation accuracy of each model on the same 179 held-out passengers (rerun).
+  VISUALS.titanic = (canvas) => {
+    const models = [
+      ["Logistic regression", 84.4, 28],
+      ["SVM", 83.8, 29],
+      ["Gradient boosting", 81.6, 33],
+      ["k-nearest neighbours", 81.0, 34],
+      ["Neural network", 79.9, 36],
+      ["Random forest", 79.3, 37],
+    ];
+    const lo = 75, hi = 86;
+    const PERIOD = 9;
+    return {
+      still: 6,
+      draw(time) {
+        const t = time % PERIOD;
+        const ctx = surface(canvas);
+        text(ctx, "Accuracy on 179 held-out passengers", 16, 18, { size: 10, color: COL.paper, weight: 600 });
+        models.forEach(([name, acc, wrong], i) => {
+          const y = 52 + i * 30;
+          const k = ease((t - 0.3 - i * 0.3) / 0.9);
+          const best = i === 0;
+          text(ctx, name, 132, y, { size: 9.5, align: "right", color: best ? COL.paper : COL.dim, weight: best ? 600 : 400 });
+          ctx.fillStyle = COL.ghost;
+          roundRect(ctx, 140, y - 6, 150, 12, 3);
+          ctx.fill();
+          ctx.fillStyle = best ? COL.accent : COL.accentSoft;
+          roundRect(ctx, 140, y - 6, Math.max(2, ((acc - lo) / (hi - lo)) * 150 * k), 12, 3);
+          ctx.fill();
+          if (k > 0.95) {
+            text(ctx, `${acc.toFixed(1)}%`, 296, y - 1, { size: 9.5, color: best ? COL.accent : COL.paper, weight: 600 });
+            text(ctx, `${wrong} wrong`, 296, y + 10, { size: 7.5, color: COL.dim });
+          }
+        });
+        const v = ease((t - 3) / 0.8);
+        if (v > 0) {
+          ctx.globalAlpha = v;
+          text(ctx, "The simplest model won.", 16, 244, { size: 10, color: COL.accent, weight: 600 });
+          ctx.globalAlpha = 1;
+        }
+        text(ctx, `axis ${lo}–${hi}%`, 344, 244, { size: 8, align: "right", color: COL.dim });
+      },
+    };
+  };
+
+  // --- Dec 2024: ventilation schedule tool (illustration) ---------------------------
+  // Pick a type, type one line, and it is parsed into the schedule and the tag at once.
+  VISUALS.ventilation = (canvas) => {
+    const entries = [
+      ["Supply diffuser", "SD-01 600x600 350"],
+      ["Return grille", "RG-02 400x200 180"],
+      ["Exhaust fan", "EF-03 250 120"],
+    ];
+    const TYPES = ["Supply diffuser", "Return grille", "Exhaust fan"];
+    const parse = (str) => {
+      const [tag, size, flow] = str.split(" ");
+      return flow ? { tag, size: size.includes("x") ? size.replace("x", "×") : `Ø${size}`, flow: `${flow} L/s` } : null;
+    };
+    const STEP = 4.2;
+    const PERIOD = STEP * entries.length + 1.5;
+
+    return {
+      still: PERIOD - 1,
+      draw(time) {
+        const t = time % PERIOD;
+        const idx = Math.min(entries.length - 1, Math.floor(t / STEP));
+        const local = t - idx * STEP;
+        const [type, str] = entries[idx];
+        const ctx = surface(canvas);
+
+        // Inputs: type dropdown and one text line
+        const chosen = local > 0.9 || t > STEP * entries.length ? type : "Type";
+        ctx.fillStyle = COL.ghost;
+        roundRect(ctx, 16, 14, 128, 26, 5);
+        ctx.fill();
+        text(ctx, chosen, 26, 27, { size: 9.5, color: COL.paper });
+        text(ctx, "▾", 134, 27, { size: 9, align: "right", color: COL.dim });
+        const typed = t > STEP * entries.length ? str : str.slice(0, Math.max(0, Math.floor((local - 1) * 16)));
+        ctx.fillStyle = COL.ghost;
+        roundRect(ctx, 152, 14, 192, 26, 5);
+        ctx.fill();
+        text(ctx, typed || "tag  size  flow", 162, 27, { size: 9.5, font: MONO, color: typed ? COL.paper : COL.faint });
+
+        // The dropdown menu opens briefly
+        if (local > 0.15 && local < 0.9 && t < STEP * entries.length) {
+          ctx.fillStyle = "#26231f";
+          roundRect(ctx, 16, 42, 128, 64, 5);
+          ctx.fill();
+          TYPES.forEach((name, i) => {
+            const hit = name === type && local > 0.55;
+            if (hit) {
+              ctx.fillStyle = COL.accentSoft;
+              ctx.fillRect(18, 45 + i * 20, 124, 18);
+            }
+            text(ctx, name, 26, 54 + i * 20, { size: 9, color: hit ? COL.paper : COL.dim });
+          });
+        }
+
+        // Parsed once, written to both outputs
+        const rowsDone = t > STEP * entries.length ? entries.length : idx + (local > 2.9 ? 1 : 0);
+        text(ctx, "Schedule", 16, 124, { size: 9, color: COL.dim, weight: 600 });
+        const head = ["Tag", "Type", "Size", "Flow"];
+        const colX = [16, 60, 140, 190];
+        head.forEach((h, i) => text(ctx, h, colX[i], 142, { size: 8, color: COL.dim }));
+        ctx.fillStyle = COL.faint;
+        ctx.fillRect(16, 150, 220, 1);
+        entries.slice(0, rowsDone).forEach(([ty, s], r) => {
+          const p = parse(s);
+          const y = 164 + r * 20;
+          [p.tag, ty.split(" ")[0], p.size, p.flow].forEach((v, i) => text(ctx, v, colX[i], y, { size: 8.5, color: COL.paper, font: i === 1 ? SANS : MONO }));
+        });
+
+        text(ctx, "Drawing tags", 250, 124, { size: 9, color: COL.dim, weight: 600 });
+        entries.slice(0, rowsDone).forEach(([, s], r) => {
+          const p = parse(s);
+          const y = 142 + r * 34;
+          ctx.strokeStyle = COL.blue;
+          ctx.lineWidth = 1;
+          roundRect(ctx, 250, y, 94, 28, 4);
+          ctx.stroke();
+          text(ctx, p.tag, 258, y + 9, { size: 8.5, color: COL.blue, font: MONO, weight: 700 });
+          text(ctx, `${p.size} · ${p.flow}`, 258, y + 20, { size: 7.5, color: COL.dim, font: MONO });
+        });
+
+        if (local > 2.1 && local < 2.9 && t < STEP * entries.length) {
+          text(ctx, "parsing…", 344, 52, { size: 8.5, align: "right", color: COL.accent });
+        }
+        text(ctx, "illustration · entered once, filled in twice", 16, 256, { size: 8, color: COL.dim });
+      },
+    };
+  };
+
+  // --- Oct 2025: AutoCAD layouts by script (illustration) ------------------------------
+  VISUALS.autocad = (canvas) => {
+    const SHEETS = 8;
+    const PERIOD = 10;
+    const rand = rng(21);
+    const plans = Array.from({ length: SHEETS }, () =>
+      Array.from({ length: 5 }, () => [rand(), rand(), rand() > 0.5])
+    );
+    return {
+      still: 9,
+      draw(time) {
+        const t = time % PERIOD;
+        const ctx = surface(canvas);
+        // One clock for both: 45 minutes of work plays out over 8 seconds.
+        const minutes = 45 * clamp(t / 8, 0, 1);
+        const k = Math.min(minutes, 10) / 10; // the script's progress
+        text(ctx, "Sheets set up", 16, 18, { size: 10, color: COL.paper, weight: 600 });
+
+        // Sheets appear as the script runs
+        const made = Math.floor(k * SHEETS + 0.001);
+        for (let i = 0; i < SHEETS; i++) {
+          const x = 16 + (i % 4) * 84;
+          const y = 32 + Math.floor(i / 4) * 70;
+          ctx.strokeStyle = i < made ? COL.faint : COL.ghost;
+          ctx.lineWidth = 1;
+          roundRect(ctx, x, y, 76, 58, 3);
+          ctx.stroke();
+          if (i >= made) continue;
+          // Viewport with a scrap of plan, and the title block
+          ctx.strokeStyle = COL.blueSoft;
+          ctx.strokeRect(x + 5, y + 5, 50, 48);
+          ctx.strokeStyle = COL.dim;
+          plans[i].forEach(([a, b, vertical]) => {
+            ctx.beginPath();
+            if (vertical) {
+              ctx.moveTo(x + 9 + a * 42, y + 9);
+              ctx.lineTo(x + 9 + a * 42, y + 9 + b * 40);
+            } else {
+              ctx.moveTo(x + 9, y + 9 + a * 40);
+              ctx.lineTo(x + 9 + b * 42, y + 9 + a * 40);
+            }
+            ctx.stroke();
+          });
+          ctx.fillStyle = COL.accentSoft;
+          ctx.fillRect(x + 59, y + 5, 12, 48);
+          text(ctx, String(i + 1).padStart(2, "0"), x + 65, y + 46, { size: 7, align: "center", color: COL.paper, font: MONO });
+        }
+
+        // Time bars: by hand vs by script
+        const bars = [
+          ["by hand", 45, COL.dim],
+          ["script", 10, COL.accent],
+        ];
+        bars.forEach(([name, mins, color], i) => {
+          const y = 196 + i * 26;
+          text(ctx, name, 16, y, { size: 9, color: COL.paper });
+          ctx.fillStyle = COL.ghost;
+          roundRect(ctx, 66, y - 5, 230, 10, 3);
+          ctx.fill();
+          const w = (Math.min(minutes, mins) / 45) * 230;
+          ctx.fillStyle = color;
+          roundRect(ctx, 66, y - 5, Math.max(2, w), 10, 3);
+          ctx.fill();
+          text(ctx, `${Math.round(Math.min(minutes, mins))} min`, 302, y, { size: 9, color: i === 1 ? COL.accent : COL.dim, font: MONO });
+        });
+        text(ctx, "illustration", 344, 18, { size: 8, align: "right", color: COL.dim });
       },
     };
   };
