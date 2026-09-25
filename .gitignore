@@ -19,3 +19,6 @@ dist/
 node_modules/
 *.log
 /tmp/
+
+# Python bytecode (tools/data scripts)
+__pycache__/

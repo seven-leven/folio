@@ -20,7 +20,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout code (full history: the version number is the commit count)
+      - name: Checkout code with full history (the version number is the commit count)
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
@@ -50,7 +50,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout code (full history: the version number is the commit count)
+      - name: Checkout code with full history (the version number is the commit count)
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
