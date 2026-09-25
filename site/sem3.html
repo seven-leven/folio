@@ -33,27 +33,7 @@
     <!-- Added body classes -->
 
     <!-- Global Navbar -->
-    <nav id="navbar" aria-label="Main">
-      <div class="container">
-        <a href="index.html" class="nav-logo" aria-label="Gaahis Yaugoob, home">
-          <span class="nav-mark" aria-hidden="true">GY</span>
-          <span class="nav-name">Gaahis Yaugoob</span>
-        </a>
-        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
-          <span></span><span></span>
-        </button>
-        <ul class="nav-links" id="nav-links">
-          <li><a href="index.html#home">Home</a></li>
-          <li><a href="index.html#wildlife">Wildlife</a></li>
-          <li><a href="index.html#projects" class="is-active" aria-current="true">Projects</a></li>
-          <li><a href="engineering.html">Engineering</a></li>
-          <li><a href="index.html#skills">Skills</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#contact-me">Contact</a></li>
-          <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
-        </ul>
-      </div>
-    </nav>
+    <!-- @include navbar active="projects" -->
 
     <!-- Page specific content for Acupuncture project -->
     <div class="page-content-container">
@@ -324,37 +304,7 @@
     <!-- End .page-content-container -->
 
     <!-- Global Footer -->
-    <footer class="site-footer">
-      <div class="container site-footer__inner">
-        <div class="site-footer__brand">
-          <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
-          <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
-        </div>
-        <div>
-          <p class="site-footer__heading">Projects</p>
-          <nav class="site-footer__links" aria-label="Projects">
-            <a href="sem1.html">Enchanting Reading Nook</a>
-            <a href="sem2.html">Blue Canvas</a>
-            <a href="sem3.html">Urban Acupuncture</a>
-            <a href="sem4.html">Measured Embrace</a>
-            <a href="sem5.html">Yield, Register, Transmit</a>
-            <a href="engineering.html">Engineering work</a>
-          </nav>
-        </div>
-        <div>
-          <p class="site-footer__heading">Contact</p>
-          <div class="site-footer__links">
-            <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
-            <a href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">Process journal on Tumblr</a>
-            <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
-          </div>
-        </div>
-      </div>
-      <div class="container site-footer__bottom">
-        <p class="site-footer__copy">© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
-        <a class="site-footer__top" href="#">Back to top ↑</a>
-      </div>
-    </footer>
+    <!-- @include footer -->
 
     <!-- Centralized JavaScript -->
     <script src="assets/js/main.js"></script>

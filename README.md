@@ -10,7 +10,8 @@ draw every bird of the Maldives.
 
 ```
 folio/
-├── site/                     ← everything that gets published
+├── site/                     ← source; built into dist/ and published
+│   ├── _partials/            shared navbar.html and footer.html (not published)
 │   ├── index.html            homepage
 │   ├── sem1.html … sem5.html architecture studio projects
 │   ├── engineering.html      capstone, wind-load thesis, coastal study
@@ -23,28 +24,50 @@ folio/
 │       ├── js/main.js        shared behaviour (see below)
 │       ├── img/              favicon and homepage covers
 │       └── projects/<page>/  images for each project page
-├── tools/check.ts            site checker, run locally and in CI
+├── tools/build.ts            site/ → dist/, stamping in the partials
+├── tools/check.ts            checker for dist/, run locally and in CI
 ├── .github/workflows/        check on every push, deploy from main
 └── deno.json                 tasks
 ```
 
 Page URLs (`/folio/sem1.html` etc.) are stable. Only assets live under
-`assets/`.
+`assets/`. `dist/` is build output and is not committed.
+
+## Shared navbar and footer
+
+The navbar and footer live once, in `site/_partials/`. Pages include them with
+a comment on its own line:
+
+```html
+<!-- @include navbar active="projects" -->   <!-- highlights "Projects" -->
+<!-- @include footer -->
+```
+
+`active` takes a nav link name (`home`, `wildlife`, `projects`, `engineering`,
+`skills`, `about`, `contact`) or can be left off. On the homepage the navbar
+links to its own sections; on other pages it links to `index.html#…`.
+`404.html` keeps its own minimal navbar and footer because GitHub Pages serves
+it at any URL. The build fails on an unknown partial, an unknown `active` name,
+or an include that isn't alone on its line.
 
 ## Working locally
 
 Requires [Deno](https://deno.com) 2.x.
 
 ```sh
-deno task serve   # http://localhost:8000
-deno task check   # broken links/images/anchors, alt text, page metadata
+deno task dev     # build, watch site/, serve at http://localhost:8000/folio/
+deno task build   # build dist/ once
+deno task check   # build, then check links/images/anchors, alt text, metadata
 ```
+
+`deno task dev` mirrors GitHub Pages: the site lives under `/folio/` and
+missing paths get `404.html`.
 
 ## Deploying
 
-1. Work on `dev`. Every push runs the checker.
+1. Work on `dev`. Every push runs the build and checker.
 2. Merge `dev` into `main` and push.
-3. CI runs the checker, then publishes `site/` to the `gh-pages` branch as a
+3. CI builds and checks, then publishes `dist/` to the `gh-pages` branch as a
    fresh commit. GitHub Pages serves that branch.
 
 `gh-pages` is a build artifact, so never commit to it directly. A failing check
@@ -54,12 +77,13 @@ blocks the deploy.
 
 1. Put its images in `site/assets/projects/<name>/` as WebP, at most 2400 px on
    the long side, with lowercase-dashed file names.
-2. Copy an existing page (such as `sem5.html`) for the navbar, footer and
-   `<head>`; give it a `<title>`, meta description, canonical URL and
+2. Copy an existing page (such as `sem5.html`) for the `<head>` and the
+   `@include` lines; give it a `<title>`, meta description, canonical URL and
    `og:image`.
 3. Put page-specific styles in `site/assets/css/pages/<name>.css`.
-4. Add it to the homepage project list, the footer links on every page,
-   `PROJECTS` in `main.js` (previous/next links), and `sitemap.xml`.
+4. Add it to the homepage project list, the footer's project list in
+   `site/_partials/footer.html` (once, for every page), `PROJECTS` in
+   `main.js` (previous/next links), and `sitemap.xml`.
 5. Run `deno task check`.
 
 ## What `main.js` does

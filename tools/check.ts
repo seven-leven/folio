@@ -1,5 +1,6 @@
 /**
- * Static site checker for site/.
+ * Static site checker for the built site in dist/ (run `deno task build` first;
+ * `deno task check` does that automatically).
  *
  * Errors (fail CI): broken local links/images/scripts/styles, missing
  * #anchors, <img> without alt, pages missing <title>, meta description,
@@ -9,7 +10,7 @@
  * Run: deno task check
  */
 
-const SITE = new URL("../site/", import.meta.url);
+const SITE = new URL("../dist/", import.meta.url);
 const BASE_PATH = "/folio/"; // GitHub Pages project path, used by 404.html
 const SIZE_BUDGET = 1.5 * 1024 * 1024;
 

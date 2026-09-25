@@ -9,6 +9,9 @@ desktop.ini
 .claude/
 *.swp
 
+# Build output (CI rebuilds it; never commit)
+dist/
+
 # Dependencies and scratch output
 node_modules/
 *.log

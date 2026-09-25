@@ -1,7 +1,11 @@
 {
   "tasks": {
-    "serve": "deno run --allow-net --allow-read=site jsr:@std/http@^1/file-server site --port 8000",
-    "check": "deno run --allow-read=site tools/check.ts"
+    "build": "deno run --allow-read=site,dist --allow-write=dist tools/build.ts",
+    "dev": "deno run --allow-read=site,dist --allow-write=dist --allow-net tools/build.ts --watch --serve",
+    "check": {
+      "command": "deno run --allow-read=dist tools/check.ts",
+      "dependencies": ["build"]
+    }
   },
   "fmt": {
     "include": ["tools/"]

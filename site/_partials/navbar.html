@@ -1,0 +1,29 @@
+<!--
+  Shared navbar, stamped into each page by tools/build.ts.
+  Use in a page: an HTML comment reading  @include navbar
+  (optionally  @include navbar active="projects"  to highlight a link).
+  Placeholders ({{home}}, {{index}}, {{engineering}}) are filled per page: the
+  homepage links to its own sections, other pages link to index.html#...
+  data-nav names the link that `active` highlights; the build removes it.
+-->
+<nav id="navbar" aria-label="Main">
+  <div class="container">
+    <a href="{{home}}" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+      <span class="nav-mark" aria-hidden="true">GY</span>
+      <span class="nav-name">Gaahis Yaugoob</span>
+    </a>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{{index}}#home" data-nav="home">Home</a></li>
+      <li><a href="{{index}}#wildlife" data-nav="wildlife">Wildlife</a></li>
+      <li><a href="{{index}}#projects" data-nav="projects">Projects</a></li>
+      <li><a href="{{engineering}}" data-nav="engineering">Engineering</a></li>
+      <li><a href="{{index}}#skills" data-nav="skills">Skills</a></li>
+      <li><a href="{{index}}#about" data-nav="about">About</a></li>
+      <li><a href="{{index}}#contact-me" data-nav="contact">Contact</a></li>
+      <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
+    </ul>
+  </div>
+</nav>
