@@ -8,11 +8,11 @@
 
   // Order used for the previous/next links at the bottom of project pages.
   const PROJECTS = [
-    { href: "sem1.html", title: "Enchanting Reading Nook", label: "Semester 1" },
-    { href: "sem2.html", title: "Blue Canvas", label: "Semester 2" },
-    { href: "sem3.html", title: "Urban Acupuncture", label: "Semester 3" },
-    { href: "sem4.html", title: "Measured Embrace", label: "Semester 4" },
-    { href: "sem5.html", title: "Yield, Register, Transmit", label: "Semester 5" },
+    { href: "sem1.html", title: "Enchanting Reading Nook", label: "Semester 1 · 2023" },
+    { href: "sem2.html", title: "Blue Canvas", label: "Semester 2 · 2024" },
+    { href: "sem3.html", title: "Urban Acupuncture", label: "Semester 3 · 2025" },
+    { href: "sem4.html", title: "Measured Embrace", label: "Semester 4 · 2025" },
+    { href: "sem5.html", title: "Yield, Register, Transmit", label: "Semester 5 · 2026" },
   ];
 
   const ICON = {
@@ -40,6 +40,7 @@
     initContactForm();
     initTumblrFeed();
     initWildlife();
+    initDonut();
 
     if (document.body.classList.contains("project-page")) {
       initBrokenImages();
@@ -304,6 +305,72 @@
 
     card.append(meta, cap);
     return card;
+  }
+
+  // --- Coding timeline: the spinning ASCII donut ------------------------------
+  // A torus sampled in (theta, phi), rotated about two axes, projected with a
+  // z-buffer and shaded by the surface normal, like the original Python version.
+  function initDonut() {
+    const pre = document.querySelector("[data-donut]");
+    if (!pre) return;
+    const W = 56, H = 28, R1 = 1, R2 = 2, K2 = 5;
+    const K1 = (W * K2 * 3) / (8 * (R1 + R2));
+    const CHARS = ".,-~:;=!*#$@";
+    const out = new Array(W * H);
+    const z = new Float32Array(W * H);
+
+    function frame(A, B) {
+      out.fill(" ");
+      z.fill(0);
+      const cA = Math.cos(A), sA = Math.sin(A), cB = Math.cos(B), sB = Math.sin(B);
+      for (let t = 0; t < 6.283; t += 0.07) {
+        const ct = Math.cos(t), st = Math.sin(t);
+        for (let p = 0; p < 6.283; p += 0.02) {
+          const cp = Math.cos(p), sp = Math.sin(p);
+          const cx = R2 + R1 * ct, cy = R1 * st;
+          const x = cx * (cB * cp + sA * sB * sp) - cy * cA * sB;
+          const y = cx * (sB * cp - sA * cB * sp) + cy * cA * cB;
+          const ooz = 1 / (K2 + cA * cx * sp + cy * sA);
+          const xp = Math.floor(W / 2 + K1 * ooz * x);
+          const yp = Math.floor(H / 2 - K1 * 0.5 * ooz * y);
+          if (xp < 0 || xp >= W || yp < 0 || yp >= H) continue;
+          const L = cp * ct * sB - cA * ct * sp - sA * st + cB * (cA * st - ct * sA * sp);
+          const i = xp + W * yp;
+          if (L > 0 && ooz > z[i]) {
+            z[i] = ooz;
+            out[i] = CHARS[Math.min(CHARS.length - 1, Math.floor(L * 8))];
+          }
+        }
+      }
+      let s = "";
+      for (let r = 0; r < H; r++) s += out.slice(r * W, r * W + W).join("") + "\n";
+      pre.textContent = s;
+    }
+
+    let A = 1, B = 0.6;
+    frame(A, B);
+    if (reduceMotion) return;
+
+    let visible = false, last = 0, raf = 0;
+    const tick = (now) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      if (now - last > 33) {
+        last = now;
+        A += 0.04;
+        B += 0.02;
+        frame(A, B);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    const start = () => {
+      if (!raf && visible && !document.hidden) raf = requestAnimationFrame(tick);
+    };
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      start();
+    }).observe(pre);
+    document.addEventListener("visibilitychange", start);
   }
 
   // --- Wildlife Illustrated: live progress from the bird_dash data ---------
