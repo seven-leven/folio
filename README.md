@@ -39,13 +39,25 @@ The navbar and footer live once, in `site/_partials/`. Pages include them with
 a comment on its own line:
 
 ```html
-<!-- @include navbar active="projects" -->   <!-- highlights "Projects" -->
+<!-- @include navbar active="architecture" -->   <!-- highlights Academic › Architecture -->
 <!-- @include footer -->
 ```
 
-`active` takes a nav link name (`home`, `wildlife`, `projects`, `engineering`,
-`skills`, `about`, `contact`) or can be left off. On the homepage the navbar
-links to its own sections; on other pages it links to `index.html#…`.
+`active` takes a nav link name (`home`, `architecture`, `engineering`,
+`professional`, `illustrations`, `coding`, `about`, `contact`) or can be left
+off. Links inside a dropdown group (Academic: architecture, engineering;
+Personal: illustrations, coding) also highlight the group. On the homepage the
+navbar links to its own sections; on other pages it links to `index.html#…`.
+
+The homepage is organised as **01 Academic** (Architecture, Engineering),
+**02 Professional** (map of projects per atoll) and **03 Personal**
+(Illustrations, Coding). Old anchors (`#projects`, `#wildlife`,
+`#engineering-work`) still work as aliases.
+
+The Professional map is a placeholder: `site/assets/img/maldives-map.svg` is a
+schematic atoll map, and the arrows and `xx` counts are inline SVG in
+`index.html` (each `<g class="pm-marker" data-atoll="…">`). Replace `xx` in
+both the map markers and the list beside it.
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
 it at any URL. The build fails on an unknown partial, an unknown `active` name,
 or an include that isn't alone on its line.

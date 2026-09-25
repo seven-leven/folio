@@ -1,10 +1,11 @@
 <!--
   Shared navbar, stamped into each page by tools/build.ts.
   Use in a page: an HTML comment reading  @include navbar
-  (optionally  @include navbar active="projects"  to highlight a link).
+  (optionally  @include navbar active="architecture"  to highlight a link;
+  a link inside a group also highlights its group).
   Placeholders ({{home}}, {{index}}, {{engineering}}) are filled per page: the
   homepage links to its own sections, other pages link to index.html#...
-  data-nav names the link that `active` highlights; the build removes it.
+  data-nav / data-group are used by the build and removed from the output.
 -->
 <nav id="navbar" aria-label="Main">
   <div class="container">
@@ -17,10 +18,21 @@
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="{{index}}#home" data-nav="home">Home</a></li>
-      <li><a href="{{index}}#wildlife" data-nav="wildlife">Wildlife</a></li>
-      <li><a href="{{index}}#projects" data-nav="projects">Projects</a></li>
-      <li><a href="{{engineering}}" data-nav="engineering">Engineering</a></li>
-      <li><a href="{{index}}#skills" data-nav="skills">Skills</a></li>
+      <li class="nav-group">
+        <button type="button" class="nav-group__btn" aria-expanded="false" aria-controls="nav-academic" data-nav="academic">Academic</button>
+        <ul class="nav-group__menu" id="nav-academic">
+          <li><a href="{{index}}#architecture" data-nav="architecture" data-group="academic">Architecture</a></li>
+          <li><a href="{{engineering}}" data-nav="engineering" data-group="academic">Engineering</a></li>
+        </ul>
+      </li>
+      <li><a href="{{index}}#professional" data-nav="professional">Professional</a></li>
+      <li class="nav-group">
+        <button type="button" class="nav-group__btn" aria-expanded="false" aria-controls="nav-personal" data-nav="personal">Personal</button>
+        <ul class="nav-group__menu" id="nav-personal">
+          <li><a href="{{index}}#illustrations" data-nav="illustrations" data-group="personal">Illustrations</a></li>
+          <li><a href="{{index}}#coding" data-nav="coding" data-group="personal">Coding</a></li>
+        </ul>
+      </li>
       <li><a href="{{index}}#about" data-nav="about">About</a></li>
       <li><a href="{{index}}#contact-me" data-nav="contact">Contact</a></li>
       <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>

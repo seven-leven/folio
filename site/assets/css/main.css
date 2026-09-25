@@ -266,6 +266,85 @@ body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
   color: #fff;
 }
 
+/* Dropdown groups (Academic, Personal) */
+#navbar .nav-group {
+  position: relative;
+}
+#navbar .nav-group__btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+#navbar .nav-group__btn::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+#navbar .nav-group__btn:hover,
+#navbar .nav-group:focus-within .nav-group__btn,
+#navbar .nav-group.is-open .nav-group__btn {
+  color: var(--ink);
+  background: rgba(22, 21, 20, 0.05);
+}
+#navbar .nav-group__btn.is-active {
+  color: var(--ink);
+  background: rgba(22, 21, 20, 0.07);
+}
+#navbar .nav-group.is-open .nav-group__btn::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+#navbar .nav-group__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  list-style: none;
+  min-width: 190px;
+  padding: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s var(--ease), visibility 0.18s;
+}
+#navbar .nav-group__menu::before {
+  /* hover bridge across the gap under the button */
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+#navbar .nav-group:hover .nav-group__menu,
+#navbar .nav-group__menu:focus-within,
+#navbar .nav-group.is-open .nav-group__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+#navbar .nav-group__menu a {
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+}
+
 #navbar .nav-toggle {
   display: none;
   width: 42px;
@@ -728,10 +807,212 @@ body.home {
   white-space: nowrap;
 }
 
-/* --- Projects ----------------------------------------------------------- */
-.home #projects {
+/* --- Work groups: 01 Academic / 02 Professional / 03 Personal ----------- */
+.anchor-alias {
+  display: block;
+  height: 0;
+}
+.home .group-intro {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0 0;
   border-top: 1px solid var(--line);
 }
+.home .group-intro__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+.home .group-intro__num {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--accent-fill);
+}
+.home .group-intro__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+.home .group-intro__text {
+  max-width: 52ch;
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.home .group-intro + section {
+  padding-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+/* Professional: map placeholder */
+.home .professional {
+  border-top: 1px solid var(--line);
+  background: var(--paper-2);
+}
+.home .pro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+.home .pro-map {
+  margin: 0;
+}
+.home .pro-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  background: #eaf1f3;
+  box-shadow: var(--shadow);
+}
+.pm-arrow {
+  fill: none;
+  stroke: #6b6760;
+  stroke-width: 1.5;
+  marker-end: url(#pm-head);
+}
+.pm-dot {
+  fill: var(--ink);
+}
+.pm-name {
+  fill: var(--ink-2);
+  font: 600 21px var(--font-sans);
+}
+.pm-count {
+  fill: var(--muted);
+  font: 700 19px var(--font-sans);
+  letter-spacing: 0.04em;
+}
+.pm-marker--male .pm-arrow {
+  stroke: var(--accent-fill);
+  stroke-width: 2.4;
+  marker-end: url(#pm-head-male);
+}
+.pm-marker--male .pm-dot {
+  fill: var(--accent-fill);
+}
+.pm-marker--male .pm-name,
+.pm-marker--male .pm-count {
+  fill: var(--accent);
+  font-size: 25px;
+}
+.pm-marker {
+  transition: opacity 0.2s ease;
+}
+.pm-markers:hover .pm-marker {
+  opacity: 0.3;
+}
+.pm-markers .pm-marker:hover {
+  opacity: 1;
+}
+.home .pro-side .section-title {
+  margin-top: 0.8rem;
+}
+.home .pro-side .section-intro {
+  margin-top: 0.9rem;
+}
+.home .pro-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.75rem 0;
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--line);
+}
+.home .pro-stats dt {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.home .pro-stats dd {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.home .pro-legend {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.home .pro-legend li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.9rem;
+}
+.home .pro-legend b {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.home .pro-legend .is-male {
+  color: var(--accent);
+  font-weight: 600;
+}
+.home .pro-legend .is-male b {
+  color: var(--accent);
+}
+
+/* Coding */
+.home .coding {
+  background: var(--paper);
+}
+.home .code-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.home .code-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+.home .code-card--soon {
+  border-style: dashed;
+  background: transparent;
+}
+.home .code-card__meta {
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.home .code-card__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.home .code-card__text {
+  flex: 1;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+.home .code-card .link-arrow {
+  align-self: flex-start;
+}
+.home .code-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+.home .code-card .soon-badge {
+  align-self: flex-start;
+  margin-top: 0;
+}
+
+/* --- Projects ----------------------------------------------------------- */
 .home .project-list {
   display: grid;
   gap: clamp(3.5rem, 8vw, 6.5rem);
@@ -1199,7 +1480,7 @@ body.home {
 }
 .site-footer .site-footer__inner {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr 0.8fr 1fr;
   gap: 2rem;
   padding-top: 3.5rem;
   padding-bottom: 2.5rem;
@@ -1457,7 +1738,9 @@ html.lb-lock {
    Responsive
    ========================================================================== */
 @media (max-width: 960px) {
-  .home .eng-cards {
+  .home .eng-cards,
+  .home .pro-grid,
+  .home .code-cards {
     grid-template-columns: 1fr;
   }
   .home .wildlife__grid,
@@ -1519,6 +1802,35 @@ html.lb-lock {
   .js #navbar .nav-links .nav-cta a {
     margin: 0.4rem 0 0;
     text-align: center;
+  }
+  .js #navbar .nav-links {
+    max-height: calc(100vh - var(--nav-h));
+    overflow-y: auto;
+  }
+  /* In the mobile menu, groups become labelled sections that are always open. */
+  .js #navbar .nav-group__btn {
+    width: 100%;
+    padding: 0.9rem 1rem 0.25rem;
+    background: none;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  .js #navbar .nav-group__btn::after {
+    display: none;
+  }
+  .js #navbar .nav-group__menu {
+    position: static;
+    min-width: 0;
+    padding: 0 0 0 0.75rem;
+    border: 0;
+    background: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
   /* Without JS, let the links wrap under the name instead. */
   html:not(.js) #navbar {

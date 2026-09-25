@@ -33,6 +33,7 @@
   onReady(() => {
     setYear();
     initNav();
+    initNavGroups();
     initReveal();
     initScrollSpy();
     initSectionNav();
@@ -90,6 +91,50 @@
     });
   }
 
+  // --- Navbar dropdown groups (desktop; the mobile menu shows them open) ----
+  function initNavGroups() {
+    const groups = [...document.querySelectorAll("#navbar .nav-group")];
+    if (!groups.length) return;
+    const desktop = window.matchMedia("(min-width: 1081px)");
+
+    const setOpen = (group, open) => {
+      group.classList.toggle("is-open", open);
+      group.querySelector(".nav-group__btn").setAttribute("aria-expanded", String(open));
+    };
+    const closeAll = (except) => groups.forEach((g) => g !== except && setOpen(g, false));
+
+    groups.forEach((group) => {
+      const button = group.querySelector(".nav-group__btn");
+      button.addEventListener("click", () => {
+        if (!desktop.matches) return;
+        closeAll(group);
+        setOpen(group, !group.classList.contains("is-open"));
+      });
+      group.addEventListener("mouseleave", () => desktop.matches && setOpen(group, false));
+      // Close when keyboard focus leaves the group.
+      group.addEventListener("focusout", (e) => {
+        if (!group.contains(e.relatedTarget)) setOpen(group, false);
+      });
+      // After choosing a link, drop focus so :focus-within doesn't hold the menu open.
+      group.querySelectorAll(".nav-group__menu a").forEach((a) =>
+        a.addEventListener("click", () => {
+          setOpen(group, false);
+          a.blur();
+        })
+      );
+    });
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#navbar .nav-group")) closeAll();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const open = groups.find((g) => g.classList.contains("is-open") || g.contains(document.activeElement));
+      closeAll();
+      // Return focus to the group's button; the menu stays closed.
+      if (open) open.querySelector(".nav-group__btn").focus();
+    });
+  }
+
   // --- Fade/slide sections in as they scroll into view ----------------------
   function initReveal() {
     const hero = document.getElementById("project-showcase-hero");
@@ -129,12 +174,15 @@
       if (section) bySection.set(section, a);
     });
 
+    const groupButtons = [...document.querySelectorAll("#navbar .nav-group__btn")];
     const setActive = (link) => {
       links.forEach((l) => {
         l.classList.toggle("is-active", l === link);
         if (l === link) l.setAttribute("aria-current", "true");
         else l.removeAttribute("aria-current");
       });
+      // Highlight the dropdown group that contains the active link.
+      groupButtons.forEach((b) => b.classList.toggle("is-active", !!link && b.parentElement.contains(link)));
     };
 
     const io = new IntersectionObserver(
@@ -563,7 +611,7 @@
     const pager = document.createElement("nav");
     pager.id = "project-pager";
     pager.setAttribute("aria-label", "More projects");
-    pager.innerHTML = `<div class="pp-inner">${link(PROJECTS[i - 1], "prev")}<a class="pp-all" href="index.html#projects">All projects</a>${link(PROJECTS[i + 1], "next")}</div>`;
+    pager.innerHTML = `<div class="pp-inner">${link(PROJECTS[i - 1], "prev")}<a class="pp-all" href="index.html#architecture">All architecture</a>${link(PROJECTS[i + 1], "next")}</div>`;
 
     const footer = document.querySelector(".site-footer, footer");
     if (footer) footer.before(pager);

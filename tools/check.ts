@@ -103,6 +103,7 @@ for (const [page, html] of pageText) {
 for (const css of files.filter((f) => f.endsWith(".css"))) {
   const text = await Deno.readTextFile(new URL(css, SITE));
   for (const m of text.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
+    if (m[1].startsWith("#")) continue; // in-document reference, e.g. an SVG marker
     const target = resolveLocal(m[1], css);
     if (!target) continue;
     if (!fileSet.has(target.path)) errors.push(`${css}: broken url() -> ${m[1]}`);

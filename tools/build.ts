@@ -39,7 +39,7 @@ function placeholders(page: string): Record<string, string> {
   return {
     home: home ? "#home" : "index.html",
     index: home ? "" : "index.html",
-    engineering: home ? "#engineering-work" : "engineering.html",
+    engineering: home ? "#engineering" : "engineering.html",
   };
 }
 
@@ -48,13 +48,20 @@ function renderPartial(name: string, body: string, page: string, attrs: Record<s
   if (/\{\{\w+\}\}/.test(out)) throw new Error(`${page}: unfilled placeholder in partial "${name}"`);
 
   if (attrs.active) {
-    const link = new RegExp(`<a href="([^"]*)" data-nav="${attrs.active}">`);
+    const link = new RegExp(`<a href="([^"]*)" data-nav="${attrs.active}"(?: data-group="([^"]*)")?>`);
     const m = out.match(link);
     if (!m) throw new Error(`${page}: no nav link "${attrs.active}" in partial "${name}"`);
     const current = m[1] === page ? "page" : "true";
     out = out.replace(link, `<a href="${m[1]}" class="is-active" aria-current="${current}">`);
+    // A link inside a dropdown group also highlights the group's button.
+    const group = m[2];
+    if (group) {
+      const button = new RegExp(`(<button[^>]*class="nav-group__btn)("[^>]*data-nav="${group}")`);
+      if (!button.test(out)) throw new Error(`${page}: no nav group "${group}" in partial "${name}"`);
+      out = out.replace(button, "$1 is-active$2");
+    }
   }
-  return out.replace(/ data-nav="[^"]*"/g, "");
+  return out.replace(/ data-(?:nav|group)="[^"]*"/g, "");
 }
 
 async function copyDir(from: URL, to: URL) {
@@ -107,7 +114,18 @@ if (import.meta.main) {
   if (args.has("--serve")) {
     // Mirror GitHub Pages: site under /folio/, 404.html for missing paths.
     const notFound = () => Deno.readTextFile(new URL("404.html", DIST));
-    Deno.serve({ port: 8000, onListen: () => console.log("Serving http://localhost:8000/folio/") }, async (req) => {
+    const port = 8000;
+    try {
+      const probe = Deno.listen({ port });
+      probe.close();
+    } catch (err) {
+      if (err instanceof Deno.errors.AddrInUse) {
+        console.error(`Port ${port} is already in use. Is another \`deno task dev\` still running?`);
+        Deno.exit(1);
+      }
+      throw err;
+    }
+    Deno.serve({ port, onListen: () => console.log(`Serving http://localhost:${port}/folio/`) }, async (req) => {
       const { pathname } = new URL(req.url);
       if (!pathname.startsWith("/folio")) return Response.redirect(new URL("/folio/", req.url), 302);
       const res = await serveDir(req, { fsRoot: fromFileUrl(DIST), urlRoot: "folio", quiet: true });
