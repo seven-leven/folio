@@ -1072,9 +1072,39 @@ body.home {
   background: #e39a86;
   box-shadow: 0 0 0 5px rgba(227, 154, 134, 0.18);
 }
-.home .tl-item--gap::before {
-  border-style: dashed;
-  border-color: rgba(246, 244, 239, 0.4);
+.home .tl-item--milestone::before {
+  width: 17px;
+  height: 17px;
+  left: calc(var(--tl-rail) - 8px);
+  top: 0.45rem;
+  background: #e39a86;
+  box-shadow: 0 0 0 6px rgba(227, 154, 134, 0.2), 0 0 24px rgba(227, 154, 134, 0.5);
+}
+.home .tl-item--milestone .tl-body {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid rgba(227, 154, 134, 0.3);
+  border-radius: 14px;
+  background: rgba(227, 154, 134, 0.06);
+}
+.home .tl-chapter {
+  position: relative;
+  padding: 0 0 clamp(2rem, 5vw, 2.75rem) calc(var(--tl-date) + var(--tl-gap));
+}
+.home .tl-chapter::before {
+  content: "";
+  position: absolute;
+  top: 0.8rem;
+  left: calc(var(--tl-rail) - 10px);
+  width: 21px;
+  height: 1px;
+  background: rgba(246, 244, 239, 0.4);
+}
+.home .tl-chapter p {
+  margin: 0;
+  color: rgba(246, 244, 239, 0.55);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  font-style: italic;
 }
 .home .tl-date {
   margin: 0;
@@ -1083,10 +1113,6 @@ body.home {
   font-size: 1.45rem;
   line-height: 1.2;
   text-align: right;
-}
-.home .tl-item--gap .tl-date {
-  color: rgba(246, 244, 239, 0.45);
-  font-size: 1.1rem;
 }
 .home .tl-body {
   display: flex;
@@ -1115,12 +1141,7 @@ body.home {
   margin: 0;
   color: rgba(246, 244, 239, 0.72);
 }
-.home .tl-item--gap .tl-text {
-  color: rgba(246, 244, 239, 0.5);
-  font-style: italic;
-}
 .home .tl-text code,
-.home .tl-code,
 .home .donut {
   font-family: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
 }
@@ -1128,46 +1149,47 @@ body.home {
   font-size: 0.9em;
   color: var(--paper);
 }
-.home .tl-code {
-  align-self: flex-start;
-  max-width: 100%;
-  margin: 0.25rem 0 0;
-  padding: 0.9rem 1.1rem;
-  overflow-x: auto;
-  border: 1px solid rgba(246, 244, 239, 0.14);
-  border-radius: 8px;
-  background: rgba(0, 0, 0, 0.35);
-  color: rgba(246, 244, 239, 0.85);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
 .home .tl-body--split {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
   gap: 1.5rem clamp(1.5rem, 4vw, 3rem);
   align-items: start;
 }
-.home .tl-body--split > div {
+.home .tl-copy {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
-.home .tl-donut {
+
+/* Timeline visuals: a canvas (or the donut's <pre>) in a 4:3 frame */
+.home .tl-vis {
   margin: 0;
-  text-align: center;
+  min-width: 0;
+}
+.home .tl-vis canvas,
+.home .tl-vis .donut {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(246, 244, 239, 0.1);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.28);
 }
 .home .donut {
+  display: grid;
+  place-content: center;
   margin: 0;
+  overflow: hidden;
   color: #f1c1b2;
-  font-size: 10px;
+  font-size: min(8.5px, calc((100vw - 6rem) / 36));
   line-height: 1;
   white-space: pre;
   text-shadow: 0 0 12px rgba(227, 154, 134, 0.35);
 }
-.home .tl-donut figcaption {
-  margin-top: 0.5rem;
+.home .tl-vis figcaption {
+  margin-top: 0.55rem;
   color: rgba(246, 244, 239, 0.45);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1189,10 +1211,10 @@ body.home {
 }
 @media (max-width: 960px) {
   .home .tl-body--split {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
-  .home .tl-donut {
-    justify-self: start;
+  .home .tl-vis {
+    max-width: 420px;
   }
 }
 @media (max-width: 640px) {
@@ -1204,6 +1226,9 @@ body.home {
     row-gap: 0.4rem;
     padding-left: 2rem;
   }
+  .home .tl-chapter {
+    padding-left: 2rem;
+  }
   .home .tl-date {
     text-align: left;
     font-size: 1.2rem;
@@ -1211,8 +1236,8 @@ body.home {
   .home .tl-item::before {
     top: 0.35rem;
   }
-  .home .donut {
-    font-size: min(10px, calc((100vw - 5rem) / 34));
+  .home .tl-item--milestone::before {
+    top: 0.25rem;
   }
 }
 

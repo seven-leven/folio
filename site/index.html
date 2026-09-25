@@ -454,34 +454,42 @@
                     <header class="section-head reveal">
                         <p class="eyebrow">Code</p>
                         <h3 class="section-title">Coding</h3>
-                        <p class="section-intro">How I got into code: one small problem at a time, starting with a messy manga folder.</p>
+                        <p class="section-intro">
+                            I learned to code one small problem at a time: a messy manga folder, a spinning donut,
+                            and a grandmother who kept beating me at mancala.
+                        </p>
                     </header>
 
+                    <!-- Timeline, oldest first. Each entry's animation is a <canvas data-vis="…">
+                         drawn by assets/js/coding-visuals.js. -->
                     <ol class="code-tl">
+                        <li class="tl-chapter reveal"><p>2021 · Scratching an itch</p></li>
+
                         <li class="tl-item reveal">
                             <p class="tl-date"><time datetime="2021-05">May 2021</time></p>
-                            <div class="tl-body">
-                                <p class="tl-meta">First attempt · Windows batch</p>
-                                <h4 class="tl-title">Archiver, a .bat for my manga collection</h4>
-                                <p class="tl-text">
-                                    My manga collection needed a folder for every volume and a comic archive for every
-                                    folder, and doing that by hand got old fast. I put together a batch script from
-                                    Stack Overflow answers, working out what each line did as I went. It makes
-                                    numbered volume folders, zips them with 7-Zip into <code>.cbz</code> files and
-                                    converts them back again. It is on version 4.0 now and I still use it.
-                                </p>
-                                <pre class="tl-code" aria-label="The Archiver menu"><code>1. Create Folders
-2. Folders to cbr
-3. Misc
-4. Exit
-Enter your selection (1-4):</code></pre>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">First attempt · Windows batch</p>
+                                    <h4 class="tl-title">Archiver, a .bat for my manga collection</h4>
+                                    <p class="tl-text">
+                                        My manga collection needed a folder for every volume and a comic archive for
+                                        every folder, and doing that by hand got old fast. I put together a batch
+                                        script from Stack Overflow answers, working out what each line did as I went.
+                                        It makes numbered volume folders, zips them with 7-Zip into <code>.cbz</code>
+                                        files and converts them back again. It is on version 4.0 now and I still use it.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="archiver" role="img" aria-label="The Archiver menu: choosing 1 creates eight numbered volume folders, choosing 2 zips them into .cbz archives"></canvas>
+                                    <figcaption>Folders in, comic archives out</figcaption>
+                                </figure>
                             </div>
                         </li>
 
                         <li class="tl-item reveal">
                             <p class="tl-date"><time datetime="2021-09">Sep 2021</time></p>
                             <div class="tl-body tl-body--split">
-                                <div>
+                                <div class="tl-copy">
                                     <p class="tl-meta">Learning Python · Graphics</p>
                                     <h4 class="tl-title">The spinning ASCII donut</h4>
                                     <p class="tl-text">
@@ -492,57 +500,284 @@ Enter your selection (1-4):</code></pre>
                                         rebuild that runs in the browser.
                                     </p>
                                 </div>
-                                <figure class="tl-donut">
-                                    <pre class="donut" data-donut role="img" aria-label="A spinning donut drawn with ASCII characters"></pre>
+                                <figure class="tl-vis tl-vis--donut">
+                                    <pre class="donut" data-vis="donut" role="img" aria-label="A spinning donut drawn with ASCII characters"></pre>
                                     <figcaption>Live, rebuilt in JavaScript</figcaption>
                                 </figure>
                             </div>
                         </li>
 
-                        <li class="tl-item tl-item--gap reveal">
-                            <p class="tl-date"><span>2022–2024</span></p>
-                            <div class="tl-body">
-                                <p class="tl-text">More entries coming: the projects in between are still being written up.</p>
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2021-11">Nov 2021</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Data · Python</p>
+                                    <h4 class="tl-title">My anime list, as data</h4>
+                                    <p class="tl-text">
+                                        Next I pointed Python at something I had years of data on: my MyAnimeList
+                                        exports. I parsed the XML, built tables comparing my list with my friends',
+                                        and played with ways to show how much I'd actually watched. It turned out to
+                                        be a lot: 1,293 titles and 12,644 episodes, around 200 days of nonstop
+                                        watching.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="anime" role="img" aria-label="Bar chart of anime episodes finished per year from 2017 to 2024, peaking at 3,297 in 2019, 12,644 in total"></canvas>
+                                    <figcaption>Episodes finished per year, from my 2024 export</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-chapter reveal"><p>2022–2023 · Code for everything</p></li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2022-06">Jun 2022</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Engineering · Benchmarking</p>
+                                    <h4 class="tl-title">A traffic model that became my AI benchmark</h4>
+                                    <p class="tl-text">
+                                        A traffic analysis question (a doubly constrained gravity model) meant
+                                        repeating a balancing step until the numbers settled, one Excel cell per
+                                        iteration. I wrote it in Python instead, looping until it converged to an
+                                        exact answer. Then the function took on a second life: whenever a new AI
+                                        model came out, I asked it to make my code faster. Sixteen versions later,
+                                        three were faster but wrong, one was slower than my original, and the latest,
+                                        written by Claude Fable, runs 16 times faster than mine. I don't think it can
+                                        be beaten.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="traffic" role="img" aria-label="Benchmark of 16 versions of the function: mine takes 108.9 microseconds per run, the latest takes 6.8; three versions gave wrong answers"></canvas>
+                                    <figcaption>Real timings, averaged over 10,000 runs</figcaption>
+                                </figure>
                             </div>
                         </li>
 
                         <li class="tl-item reveal">
-                            <p class="tl-date"><time datetime="2025-01">Jan 2025</time></p>
-                            <div class="tl-body">
-                                <p class="tl-meta">Web app · Vue</p>
-                                <h4 class="tl-title">Wildlife Illustrated</h4>
-                                <p class="tl-text">
-                                    The illustration project needed a home, so I built one. It started as a simple
-                                    page and in May 2025 I rewrote it from scratch in Vue. It is now a species
-                                    browser for birds, sharks and shells, with English, Dhivehi and scientific
-                                    names, grouped by family, with drawing progress.
-                                </p>
-                                <div class="tl-links">
-                                    <a class="link-arrow" href="https://seven-leven.github.io/bird_dash/" target="_blank" rel="noopener noreferrer">
-                                        Open the app
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-                                    </a>
-                                    <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/bird_dash" target="_blank" rel="noopener noreferrer">Source</a>
+                            <p class="tl-date"><time datetime="2022-11">Nov 2022</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Coursework · Python</p>
+                                    <h4 class="tl-title">A whole assignment in Python</h4>
+                                    <p class="tl-text">
+                                        Out of sheer boredom, I did an entire coastal engineering assignment in
+                                        Python: depth of closure, breaking wave height, longshore sediment transport
+                                        by both the CERC and Kamphuis formulas, and how long a groyne takes to fill
+                                        before sand starts to pass it. Writing each formula out as code made me
+                                        understand it properly.
+                                    </p>
                                 </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="groyne" role="img" aria-label="Waves arrive at an angle and carry sand along the shore; it builds up behind a groyne until the groyne fills and sand passes it"></canvas>
+                                    <figcaption>Longshore drift filling a groyne</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2022-12">Dec 2022</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Games · Python CLI</p>
+                                    <h4 class="tl-title">Losing at ohvalhugondi</h4>
+                                    <p class="tl-text">
+                                        I played ohvalhugondi, the Maldivian mancala, with my grandmother again, and
+                                        she won again. I decided to use code to build a bot that could beat her. At
+                                        the time I only got as far as the game itself: a command-line version with
+                                        the real rules, seven pits a side, seven seeds in each, and relay sowing. The
+                                        bot would have to wait.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="mancalaCli" role="img" aria-label="A text-mode mancala board in a terminal, with players picking pits and the board updating"></canvas>
+                                    <figcaption>The command-line game loop</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2022-12">Dec 2022</time> – <time datetime="2023-01">Jan 2023</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Discord bot · Async Python</p>
+                                    <h4 class="tl-title">An archiving bot for manga and fan art</h4>
+                                    <p class="tl-text">
+                                        Probably the project I've spent the most time on. It's a Discord bot that
+                                        takes a queue of manga pages and fan art, sorts each one by title into a
+                                        forum thread and logs every post, so a whole collection lives in one server.
+                                        It turned out far bigger than I expected, and it's where I learned how bots
+                                        talk to online services, concurrency, and how to design a command system. I
+                                        have rewritten it a dozen times since, from r0 in 2023 to v12 in 2026.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="discord" role="img" aria-label="Image files leave a queue one at a time and are posted into the thread for their title, whose post count goes up"></canvas>
+                                    <figcaption>Queue in, sorted threads out</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2023-05">May 2023</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Games · Ratings</p>
+                                    <h4 class="tl-title">Coup, online and ranked</h4>
+                                    <p class="tl-text">
+                                        I got hooked on Coup, the bluffing card game, so I started
+                                        building a version to play online, through several rewrites. To settle who
+                                        was actually best, I made an Elo rating system for multiplayer games that
+                                        scores each finishing order as a set of head-to-head results.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="coup" role="img" aria-label="Line chart of seven players' Elo ratings across 22 real games; Player A finishes top at 1,117"></canvas>
+                                    <figcaption>22 real games, names hidden</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-chapter reveal"><p>2024 · Problems I couldn't let go</p></li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2024-01">Jan 2024</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Scraping · Regression</p>
+                                    <h4 class="tl-title">When will the translation catch up?</h4>
+                                    <p class="tl-text">
+                                        I read light novels in English and wanted to know when the translations
+                                        would catch up with Japan. I scraped the volume lists from Wikipedia and
+                                        fitted a linear regression to predict the missing English dates. Rerun on
+                                        today's data for Re:Zero, the fit is almost perfect, and the answer is never:
+                                        English volumes come out about every 4.2 months and Japanese ones about every
+                                        3.3, so the gap keeps growing. Volume 46, out in Japan this month, should
+                                        reach English around the end of 2031.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="lightNovels" role="img" aria-label="Scatter plot of Re:Zero volume release dates in Japan and in English, with a regression line predicting volume 46 in English around late 2031"></canvas>
+                                    <figcaption>Re:Zero volumes: Japan, English and predicted</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2024-06">Jun 2024</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Puzzle · Visualisation</p>
+                                    <h4 class="tl-title">The trapped knight</h4>
+                                    <p class="tl-text">
+                                        A Numberphile video showed a chess knight on a board numbered in a spiral,
+                                        always jumping to the lowest-numbered square it hasn't visited yet. After
+                                        2,015 moves it's stuck on square 2,084. I wanted to see that spiral for myself, so I
+                                        recreated it, first in Python and then in Go.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="knight" role="img" aria-label="The knight's path spiralling outward over 2,015 moves until it is trapped on square 2,084"></canvas>
+                                    <figcaption>Every move, drawn live</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item tl-item--milestone reveal">
+                            <p class="tl-date"><time datetime="2024-08">Aug 2024</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Milestone · Search</p>
+                                    <h4 class="tl-title">The mancala bot, finally</h4>
+                                    <p class="tl-text">
+                                        Twenty months later I came back to it. This time I worked out depth-first
+                                        search myself, without AI help, and wrote a bot that looks ahead through the
+                                        possible moves and picks the best one. I built it in Google Colab and shared
+                                        it with a few people, then later made a playable web version with AI's help,
+                                        plus a Go API and a Go program to measure how big the game really is. It's
+                                        the one I'm proudest of: the first time I set out to solve a problem that
+                                        was genuinely hard for me, and did.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="mancalaBot" role="img" aria-label="Two bots play ohvalhugondi: one looks four moves ahead, the other one move; seeds are sown pit by pit"></canvas>
+                                    <figcaption>The real rules, bot against bot</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-chapter reveal"><p>2025–2026 · Building for real</p></li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2025-01">Jan 2025</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Web app · Vue</p>
+                                    <h4 class="tl-title">Wildlife Illustrated</h4>
+                                    <p class="tl-text">
+                                        The illustration project needed a home, so I built one. It started as a
+                                        simple page and in May 2025 I rewrote it from scratch in Vue. It's now a
+                                        species browser for birds, sharks and shells, with English, Dhivehi and
+                                        scientific names, grouped by family, with drawing progress.
+                                    </p>
+                                    <div class="tl-links">
+                                        <a class="link-arrow" href="https://seven-leven.github.io/bird_dash/" target="_blank" rel="noopener noreferrer">
+                                            Open the app
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+                                        </a>
+                                        <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/bird_dash" target="_blank" rel="noopener noreferrer">Source</a>
+                                    </div>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="wildlife" role="img" aria-label="Drawing progress: species drawn out of the total, split into birds, shells and sharks"></canvas>
+                                    <figcaption>Live progress from the app's data</figcaption>
+                                </figure>
+                            </div>
+                        </li>
+
+                        <li class="tl-item reveal">
+                            <p class="tl-date"><time datetime="2025-08">Aug 2025</time></p>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Physics · Simulation</p>
+                                    <h4 class="tl-title">How radar works</h4>
+                                    <p class="tl-text">
+                                        I got curious about how radar actually works, so I built a simulation with AI
+                                        as a tutor: a sweeping scope, echo timing for range, and the Doppler shift
+                                        that gives away how fast a target is moving towards or away from you.
+                                        Building it piece by piece was the best way I found to understand the
+                                        physics.
+                                    </p>
+                                </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="radar" role="img" aria-label="A radar scope sweeps over four targets; approaching ones show a positive Doppler shift, receding ones a negative shift"></canvas>
+                                    <figcaption>Range from the echo, speed from the Doppler shift</figcaption>
+                                </figure>
                             </div>
                         </li>
 
                         <li class="tl-item tl-item--now reveal">
                             <p class="tl-date"><time datetime="2026-09">Sep 2026</time></p>
-                            <div class="tl-body">
-                                <p class="tl-meta">Web · Deno</p>
-                                <h4 class="tl-title">This portfolio</h4>
-                                <p class="tl-text">
-                                    The site you're reading. It's hand-built static HTML with a small Deno build
-                                    step for shared partials, link and asset checks in CI, and live data from
-                                    Tumblr and the illustration collection.
-                                </p>
-                                <div class="tl-links">
-                                    <a class="link-arrow" href="https://github.com/seven-leven/folio" target="_blank" rel="noopener noreferrer">
-                                        Source on GitHub
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-                                    </a>
+                            <div class="tl-body tl-body--split">
+                                <div class="tl-copy">
+                                    <p class="tl-meta">Web · Deno</p>
+                                    <h4 class="tl-title">This portfolio</h4>
+                                    <p class="tl-text">
+                                        The site you're reading. It's hand-built static HTML with a small Deno build
+                                        step for shared partials, link and asset checks in CI, and live data from
+                                        Tumblr and the illustration collection.
+                                    </p>
+                                    <div class="tl-links">
+                                        <a class="link-arrow" href="https://github.com/seven-leven/folio" target="_blank" rel="noopener noreferrer">
+                                            Source on GitHub
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+                                        </a>
+                                    </div>
                                 </div>
+                                <figure class="tl-vis">
+                                    <canvas data-vis="pipeline" role="img" aria-label="Every push to main is built, checked and deployed to GitHub Pages"></canvas>
+                                    <figcaption>From a push to the live site</figcaption>
+                                </figure>
                             </div>
                         </li>
                     </ol>
@@ -723,5 +958,6 @@ Enter your selection (1-4):</code></pre>
     <!-- @include footer -->
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/coding-visuals.js"></script>
 </body>
 </html>

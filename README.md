@@ -22,6 +22,7 @@ folio/
 │       ├── css/main.css      shared styles (nav, footer, homepage, viewer)
 │       ├── css/pages/*.css   per-page styles (each project keeps its own look)
 │       ├── js/main.js        shared behaviour (see below)
+│       ├── js/coding-visuals.js  animations in the homepage Coding timeline
 │       ├── img/              favicon and homepage covers
 │       └── projects/<page>/  images for each project page
 ├── tools/build.ts            site/ → dist/, stamping in the partials
@@ -62,9 +63,12 @@ The arrows and `xx` counts are inline SVG in `index.html` (each
 `<g class="pm-marker" data-atoll="…">`). Replace `xx` in both the map markers
 and the list beside it.
 
-The Coding section is a timeline (`<ol class="code-tl">`, oldest first). Add an
-entry as another `<li class="tl-item">` in date order; the dashed
-`tl-item--gap` entry marks the 2022–2024 stretch still to be written up.
+The Coding section is a timeline (`<ol class="code-tl">`, oldest first, split
+by `tl-chapter` headings). Add an entry as another `<li class="tl-item">` in
+date order. Each entry's animation is a `<canvas data-vis="name">` drawn by
+`site/assets/js/coding-visuals.js`: add a matching `VISUALS.name` factory there.
+Visuals only animate while on screen and show a single still frame when the
+viewer prefers reduced motion.
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
 it at any URL. The build fails on an unknown partial, an unknown `active` name,
 or an include that isn't alone on its line.
