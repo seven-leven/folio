@@ -1019,6 +1019,9 @@ body.home {
   fill: var(--accent);
   font-size: 25px;
 }
+.pm-marker--none {
+  opacity: 0.35; /* atolls with no projects yet */
+}
 .home .pro-side .section-title {
   margin-top: 0.8rem;
 }
@@ -1066,7 +1069,37 @@ body.home {
   color: var(--accent-text);
 }
 .home .pro-legend .is-male {
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
   font-weight: 600;
+}
+/* Greater Malé, broken down by ward and Hulhumalé phase */
+.home .pro-legend__sub {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.5rem;
+  list-style: none;
+  flex-basis: 100%;
+  margin: 0.35rem 0 0.1rem;
+  padding-left: 0.8rem;
+  border-left: 1px solid var(--accent-line);
+  font-weight: 400;
+}
+.home .pro-legend .pro-legend__sub li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.15rem 0;
+  border: 0;
+  color: var(--text-2);
+  font-size: 0.82rem;
+}
+.home .pro-legend .pro-legend__sub b {
+  color: var(--text-muted);
+}
+.home .pro-note {
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 /* --- 03 Personal: one dark band from the intro through Coding ----------- */

@@ -108,13 +108,12 @@ the studio projects in date order), **02 Professional** (map
 of projects per atoll) and **03 Personal** (Illustrations, Coding). Old anchors
 (`#projects`, `#wildlife`, `#engineering-work`) still work as aliases.
 
-The Professional map is a placeholder. The base map,
-`site/assets/img/maldives-map.svg`, is
+The Professional map counts projects per atoll from the work project register.
+`tools/data/professional.py` writes the counts, the Greater Malé breakdown (by
+ward and Hulhumalé phase) and the stats into `index.html`; see
+`tools/data/README.md`. The base map, `site/assets/img/maldives-map.svg`, is
 [Maldives location map](https://commons.wikimedia.org/wiki/File:Maldives_location_map.svg)
 by Ziansh (Wikimedia Commons, CC BY-SA 3.0), credited under the map on the page.
-The arrows and `xx` counts are inline SVG in `index.html` (each
-`<g class="pm-marker" data-atoll="…">`). Replace `xx` in both the map markers
-and the list beside it; `deno task check` lists what's left.
 
 ### The Coding timeline
 

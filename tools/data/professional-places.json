@@ -1,0 +1,278 @@
+{
+  "_about": "Where each project in the register is. 'locations' maps the register's Location column to an atoll and island; 'projects' overrides single projects by their exact Project name (use 'sites' for a project on several islands, or 'area' to set a Malé ward / Hulhumalé phase). Atoll null = not placed on the map yet.",
+  "locations": {
+    "Malé": {
+      "atoll": "Malé",
+      "island": "Malé"
+    },
+    "Hulhumalé": {
+      "atoll": "Malé",
+      "island": "Hulhumalé"
+    },
+    "Villimale": {
+      "atoll": "Malé",
+      "island": "Villimalé"
+    },
+    "Thilafushi": {
+      "atoll": "Malé",
+      "island": "Thilafushi"
+    },
+    "Hulhule": {
+      "atoll": "Malé",
+      "island": "Hulhulé"
+    },
+    "Kihavah Huravalhi (B.)": {
+      "atoll": "Baa",
+      "island": "Kihavah Huravalhi"
+    },
+    "GDh. Thinadhoo": {
+      "atoll": "Gaafu Dhaalu",
+      "island": "Thinadhoo"
+    },
+    "Madaveli": {
+      "atoll": "Gaafu Dhaalu",
+      "island": "Madaveli"
+    },
+    "GDh. Gadhoo": {
+      "atoll": "Gaafu Dhaalu",
+      "island": "Gadhoo"
+    },
+    "Havodda Resort": {
+      "atoll": "Gaafu Dhaalu",
+      "island": "Havodda"
+    },
+    "Gn. (Fuvahmulah) Fuvahmulah": {
+      "atoll": "Gnaviyani",
+      "island": "Fuvahmulah"
+    },
+    "Reethi Faru (R.)": {
+      "atoll": "Raa",
+      "island": "Reethi Faru"
+    },
+    "R Maduvari": {
+      "atoll": "Raa",
+      "island": "Maduvari"
+    },
+    "Randheli (N.)": {
+      "atoll": "Noonu",
+      "island": "Randheli"
+    },
+    "K. (Kaafu) Guraidhoo": {
+      "atoll": "Kaafu",
+      "island": "Guraidhoo"
+    },
+    "K. (Kaafu) Maafushi": {
+      "atoll": "Kaafu",
+      "island": "Maafushi"
+    },
+    "K. (Kaafu) Thulusdhoo": {
+      "atoll": "Kaafu",
+      "island": "Thulusdhoo"
+    },
+    "K. (Kaafu) Himmafushi": {
+      "atoll": "Kaafu",
+      "island": "Himmafushi"
+    },
+    "K. (Kaafu) Dhifushi": {
+      "atoll": "Kaafu",
+      "island": "Dhiffushi"
+    },
+    "K. (Kaafu) Thulhadhoo": {
+      "atoll": "Kaafu",
+      "island": "Thulusdhoo",
+      "note": "register typo for Thulusdhoo"
+    },
+    "Kuda huraa": {
+      "atoll": "Kaafu",
+      "island": "Kuda Huraa"
+    },
+    "Olhahali": {
+      "atoll": "Kaafu",
+      "island": "Olhahali"
+    },
+    "AA. Thoddoo": {
+      "atoll": "Alif Alif",
+      "island": "Thoddoo"
+    },
+    "AA. Ukulhas": {
+      "atoll": "Alif Alif",
+      "island": "Ukulhas"
+    },
+    "Sirru Fenfushi": {
+      "atoll": "Shaviyani",
+      "island": "Sirru Fen Fushi"
+    },
+    "HA. Kelaa": {
+      "atoll": "Haa Alif",
+      "island": "Kelaa"
+    },
+    "Hdh. Hanimadhoo": {
+      "atoll": "Haa Dhaalu",
+      "island": "Hanimaadhoo"
+    },
+    "Dh. Kudahuvadhoo": {
+      "atoll": "Dhaalu",
+      "island": "Kudahuvadhoo"
+    },
+    "M. Kolhufushi": {
+      "atoll": "Meemu",
+      "island": "Kolhufushi"
+    },
+    "S. (Addu) Hithadhoo": {
+      "atoll": "Addu",
+      "island": "Hithadhoo"
+    },
+    "Resort": {
+      "atoll": null,
+      "note": "resort not named in the register"
+    },
+    "Maniya Faru": {
+      "atoll": "Kaafu",
+      "island": "Maniya Faru"
+    },
+    "Makrendhoo": {
+      "atoll": null,
+      "note": "a warehouse whose atoll isn't recorded"
+    },
+    "Conceptual": {
+      "atoll": null,
+      "note": "a conceptual design with no site"
+    },
+    "Multiple Island (11)": {
+      "atoll": null,
+      "note": "11 islands, list to add"
+    },
+    "Multiple Island (11+)": {
+      "atoll": null,
+      "note": "11+ islands, list to add"
+    },
+    "Multiple Island (55)": {
+      "atoll": null,
+      "note": "local councils across 55 islands (list to add)"
+    }
+  },
+  "projects": {
+    "IUM Capmuses": {
+      "sites": [
+        {
+          "atoll": "Thaa",
+          "island": "Veymandoo"
+        },
+        {
+          "atoll": "Shaviyani",
+          "island": "Funadhoo"
+        },
+        {
+          "atoll": "Lhaviyani",
+          "island": "Naifaru"
+        },
+        {
+          "atoll": "Lhaviyani",
+          "island": "Hinnavaru"
+        }
+      ]
+    },
+    "labor accommodation (50pax)": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "toilet (1 per 6 person)": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "kitchen and pantry": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "dinning facility": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "4x store": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "laundry": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "mosque": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "site office": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "Temp buildings": {
+      "atoll": "Kaafu",
+      "island": "Baccarat (resort island)"
+    },
+    "2d render Floor Plans": {
+      "atoll": "Vaavu",
+      "island": "Accor (resort island)"
+    },
+    "Lot 1 2 and 3 Airports Designs": {
+      "sites": [
+        {
+          "atoll": "Shaviyani"
+        },
+        {
+          "atoll": "Raa"
+        },
+        {
+          "atoll": "Faafu"
+        },
+        {
+          "atoll": "Alif Alif"
+        },
+        {
+          "atoll": "Laamu"
+        },
+        {
+          "atoll": "Gaafu Dhaalu"
+        }
+      ],
+      "note": "islands to add; the atolls are from memory"
+    },
+    "Stamping": {
+      "sites": [
+        {
+          "atoll": "Raa"
+        },
+        {
+          "atoll": "Addu"
+        },
+        {
+          "atoll": "Faafu"
+        },
+        {
+          "atoll": "Malé",
+          "island": "Hulhumalé"
+        }
+      ],
+      "note": "islands to add"
+    },
+    "Majeediyya school School": {
+      "area": "Henveiru"
+    },
+    "Medina School": {
+      "island": "Hulhumalé"
+    },
+    "Alimathaage": {
+      "area": "Galolhu"
+    },
+    "Alimathaage Theater Design": {
+      "area": "Galolhu"
+    },
+    "Kelaavi": {
+      "area": "Galolhu"
+    },
+    "Hulhumale Fire Station": {
+      "area": "Hulhumalé Phase 2"
+    },
+    "AIS Hulhumale": {
+      "area": "Hulhumalé Phase 1"
+    }
+  }
+}
