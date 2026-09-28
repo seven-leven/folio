@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- A colour for each architecture semester, drawn from its own work: a page edge on its homepage row and project page, its label and number, its reading-progress bar and a dot in the footer
 - Professional map filled in from the project register: 156 projects across 19 atolls and 33 islands, with Greater Malé broken down by ward and Hulhumalé phase (`tools/data/professional.py`)
 - Engineering and Architecture are separate sections again, Engineering first
 - Coding shows three featured projects; the full story is behind "See the full story"

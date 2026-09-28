@@ -28,6 +28,7 @@ interface Project {
   page: string;
   title: string;
   label: string;
+  semester: number;
 }
 
 async function loadPartials(): Promise<Map<string, string>> {
@@ -61,7 +62,11 @@ function placeholders(page: string, projects: Project[], version: string): Recor
     version,
     // One link per line; the partial supplies the first line's indent.
     projectLinks: projects
-      .map((p) => `<a href="${p.page}" data-label="${escapeHtml(p.label)}">${escapeHtml(p.title)}</a>`)
+      .map((p) =>
+        `<a href="${p.page}" data-label="${
+          escapeHtml(p.label)
+        }" data-semester="${p.semester}" style="--sem: var(--sem-${p.semester})">${escapeHtml(p.title)}</a>`
+      )
       .join("\n        "),
   };
 }

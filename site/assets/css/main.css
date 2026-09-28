@@ -35,6 +35,15 @@
   --draft-grid: #eceef1;
   --map-sea: #c7eafb; /* the Maldives map's sea colour */
 
+  /* One accent per architecture semester, from each project's own palette;
+     the same values are meant for the book's page edges. All text-safe on paper. */
+  --sem-1: #955823; /* I    Reading Nook: ochre */
+  --sem-2: #206988; /* II   Blue Canvas: cyan-blue */
+  --sem-3: #43529d; /* III  Urban Acupuncture: indigo */
+  --sem-4: #9e3d2e; /* IV   Measured Embrace: brick */
+  --sem-5: #1a7064; /* V    Yield, Register, Transmit: lagoon teal */
+  --sem-6: #89436f; /* VI   Design 6: plum */
+
   /* Semantic roles. Components use these, so a dark context only has to
      redefine them (see .personal-band below). */
   --text: var(--ink);
@@ -749,6 +758,7 @@ body.home {
   gap: clamp(3.5rem, 8vw, 6.5rem);
 }
 .home .project-row {
+  --sem: var(--accent-text); /* each row sets its semester's colour */
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   gap: clamp(1.75rem, 4vw, 4rem);
@@ -766,6 +776,16 @@ body.home {
   background: var(--paper-2);
   box-shadow: var(--shadow);
 }
+/* The semester's colour down the image edge, like the book's page edges */
+.home .project-row__media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 6px;
+  background: var(--sem);
+}
 .home .project-row__media img {
   width: 100%;
   height: 100%;
@@ -779,10 +799,11 @@ body.home {
   display: block;
   margin-bottom: 1rem;
   font-size: clamp(3rem, 6vw, 4.5rem);
+  -webkit-text-stroke-color: var(--sem);
 }
 .home .project-row__meta {
   margin-bottom: 0.8rem;
-  color: var(--accent-text);
+  color: var(--sem, var(--accent-text));
 }
 .home .project-row__title {
   margin-bottom: 1rem;
@@ -792,8 +813,9 @@ body.home {
 .home .project-row__title a {
   color: inherit;
 }
-.home .project-row__title a:hover {
-  color: var(--accent-text);
+.home .project-row__title a:hover,
+.home .project-row .link-arrow:hover {
+  color: var(--sem);
 }
 .home .project-row__desc {
   max-width: 42ch;
@@ -852,7 +874,7 @@ body.home {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--accent-fill);
+  background: var(--sem, var(--accent-fill));
   animation: pulse 1.8s ease-in-out infinite;
 }
 
@@ -1753,6 +1775,17 @@ body.home {
   font-size: 0.93rem;
   overflow-wrap: anywhere;
 }
+/* Project links get their semester's colour as a small dot */
+.site-footer .site-footer__links a[data-semester]::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sem) 65%, white); /* lifted to show on the dark footer */
+  vertical-align: 0.08em;
+}
 .site-footer .site-footer__links a:hover,
 .site-footer .site-footer__top:hover {
   color: #fff;
@@ -1789,6 +1822,37 @@ body.home {
 /* 9. Project pages =========================================================
    Reading progress, zoomable images, lightbox and pager. ID-scoped so each
    page's own board styles can't bleed in. */
+/* Each project page carries its semester's colour (engineering: blueprint blue) */
+.project-reading-nook {
+  --sem: var(--sem-1);
+}
+.project-blue-canvas {
+  --sem: var(--sem-2);
+}
+.project-acupuncture {
+  --sem: var(--sem-3);
+}
+.project-measured-embrace {
+  --sem: var(--sem-4);
+}
+.project-yield {
+  --sem: var(--sem-5);
+}
+.project-engineering {
+  --sem: var(--eng-blue);
+}
+/* A coloured page edge down the right of the screen, as in the book */
+.project-page::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1001;
+  width: 6px;
+  background: var(--sem, transparent);
+  pointer-events: none;
+}
 #read-progress {
   position: fixed;
   top: 0;
@@ -1796,7 +1860,7 @@ body.home {
   z-index: 1100;
   width: 100%;
   height: 3px;
-  background: var(--accent-fill);
+  background: var(--sem, var(--accent-fill));
   transform: scaleX(0);
   transform-origin: 0 50%;
   pointer-events: none;
