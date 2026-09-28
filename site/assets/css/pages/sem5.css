@@ -6,9 +6,9 @@
   --yr-ink: #121212;
   --yr-text: #2e2e2d;
   --yr-muted: #575756;
-  --yr-lagoon: #728b97;
-  --yr-deep: #4a616c;
-  --yr-mist: #b8c4c9;
+  --yr-lagoon: var(--sem-5); /* was #728b97; now Semester V Lagoon */
+  --yr-deep: var(--sem-5-text); /* was #4a616c */
+  --yr-mist: color-mix(in srgb, var(--sem-5) 35%, white); /* was #b8c4c9 */
   --yr-foam: #f1f3f3;
   --yr-line: #dfe4e6;
   --yr-sun: #b8743d;

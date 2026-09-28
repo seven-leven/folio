@@ -1,7 +1,7 @@
 /* Page styles for sem1.html (extracted from the page). */
 
 :root {
-  --project-sem1-primary-blue: #65a9d3; /* Extracted from plans */
+  --project-sem1-primary-blue: var(--sem-1-text); /* was #65a9d3; now Semester I Ink */ /* Extracted from plans */
   --project-sem1-text-dark: #333;
   --project-sem1-text-light: #555;
   --project-sem1-bg-light: #fdfaf3; /* Light beige from board bg */

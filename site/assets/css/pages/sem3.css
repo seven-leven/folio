@@ -70,7 +70,7 @@
   margin-bottom: 30px;
   padding: 20px;
   background-color: #f9f9f9;
-  border-left: 4px solid #0056b3;
+  border-left: 4px solid var(--sem-3); /* Semester III Mauve (was #0056b3) */
 }
 .project-acupuncture .project-narrative p {
   margin-bottom: 1em;

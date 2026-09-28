@@ -6,14 +6,14 @@
   --project-card-bg: #ffffff;
   --project-text-color: #333333;
   --project-heading-color: #2c3e50;
-  --project-accent-blue: #3498db;
+  --project-accent-blue: var(--sem-2-text); /* was #3498db; now Semester II Ember */
   --project-accent-red: #e74c3c;
   --project-accent-terracotta: #c07a51;
   --project-font-primary: "Lato", sans-serif;
   --project-font-headings: "Montserrat", sans-serif;
   --project-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   --project-border-radius: 8px;
-  --project-sub-project-bg: #eaf2f8;
+  --project-sub-project-bg: color-mix(in srgb, var(--sem-2) 10%, white); /* was #eaf2f8 */
 }
 
 .project-blue-canvas {

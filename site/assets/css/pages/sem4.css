@@ -8,7 +8,7 @@
   --me-muted: #6c6863;
   --me-slate: #2f4f4f;
   --me-steel: #6a8d9f;
-  --me-terra: #be543c;
+  --me-terra: var(--sem-4-text); /* was #be543c; now Semester IV Olive */
   --me-terra-text: #a4432e;
   --me-navy: #1d4d8b;
   --me-paper: #faf8f4;

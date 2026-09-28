@@ -63,9 +63,7 @@ function placeholders(page: string, projects: Project[], version: string): Recor
     // One link per line; the partial supplies the first line's indent.
     projectLinks: projects
       .map((p) =>
-        `<a href="${p.page}" data-label="${
-          escapeHtml(p.label)
-        }" data-semester="${p.semester}" style="--sem: var(--sem-${p.semester})">${escapeHtml(p.title)}</a>`
+        `<a href="${p.page}" data-label="${escapeHtml(p.label)}" data-sem="${p.semester}">${escapeHtml(p.title)}</a>`
       )
       .join("\n        "),
   };
