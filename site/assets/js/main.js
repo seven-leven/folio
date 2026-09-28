@@ -180,8 +180,7 @@
       groupButtons.forEach((b) => b.classList.toggle("is-active", !!link && b.parentElement.contains(link)));
     };
 
-    // Sections can nest (#engineering sits inside the academic timeline), so
-    // highlight the last one in nav order that is currently in view.
+    // If sections ever nest, the last one in nav order that's in view wins.
     const inView = new Set();
     const io = new IntersectionObserver(
       (entries) => {

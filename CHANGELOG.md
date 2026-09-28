@@ -15,6 +15,8 @@ commit.
 
 ## Unreleased
 
+- Engineering and Architecture are separate sections again, Engineering first
+- Coding shows three featured projects; the full story is behind "See the full story"
 - Removed the phone tap test (`deno task tap-test` and its CI step)
 
 ## v1.5 (Tooling & versioning) · 2026-09-25

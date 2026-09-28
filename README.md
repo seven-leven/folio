@@ -103,9 +103,8 @@ an unfilled placeholder, or an include that isn't alone on its line.
 
 ## The homepage
 
-It's organised as **01 Academic** (one timeline, in date order: the engineering
-degree, then the architecture studio projects; `#architecture` is the timeline
-and `#engineering` the engineering entry inside it), **02 Professional** (map
+It's organised as **01 Academic** (`#engineering`, then `#architecture` with
+the studio projects in date order), **02 Professional** (map
 of projects per atoll) and **03 Personal** (Illustrations, Coding). Old anchors
 (`#projects`, `#wildlife`, `#engineering-work`) still work as aliases.
 
@@ -119,9 +118,11 @@ and the list beside it; `deno task check` lists what's left.
 
 ### The Coding timeline
 
-`<ol class="code-tl">`, oldest first, split by `tl-chapter` headings. Add an
-entry as another `<li class="tl-item">` in date order. Each entry's animation
-is a `<canvas data-vis="name">`:
+Three featured entries (`<ol class="code-tl">`), then the full story, oldest
+first and split by `tl-chapter` headings, inside `<details class="code-more">`
+(closed by default). Add an entry as another `<li class="tl-item">` in date
+order, and update the count in its summary. Each entry's animation is a
+`<canvas data-vis="name">`:
 
 1. Write `site/assets/js/coding/visuals/<name>.js`, whose default export is
    `factory(canvas, data) => { draw(t), still }` (see the others, and the

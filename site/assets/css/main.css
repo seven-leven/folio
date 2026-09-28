@@ -526,7 +526,6 @@ body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
 .home .project-row__index,
 .home .project-row__placeholder span,
 .home .ac-year,
-.home .ac-start__title,
 .home .tl-title,
 .home .tl-date,
 .home .tl-chapter p,
@@ -744,7 +743,7 @@ body.home {
   padding-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-/* --- 01 Academic: one timeline of project rows ------------------------- */
+/* --- 01 Academic: Engineering, then the architecture project rows ------- */
 .home .project-list {
   display: grid;
   gap: clamp(3.5rem, 8vw, 6.5rem);
@@ -873,16 +872,6 @@ body.home {
   height: 1px;
   background: var(--rule-strong);
 }
-.home .ac-start {
-  max-width: 46rem;
-  padding-left: 1.25rem;
-  border-left: 2px solid var(--accent-line);
-}
-.home .ac-start__title {
-  margin: 0.4rem 0 0.6rem;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.15;
-}
 
 /* The engineering entry keeps its drafting-paper look */
 .home .ac-eng {
@@ -892,10 +881,6 @@ body.home {
   background-image: linear-gradient(var(--draft-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--draft-grid) 1px, transparent 1px);
   background-size: 28px 28px;
-}
-.home .ac-eng__head {
-  max-width: 44rem;
-  margin-bottom: 1.5rem;
 }
 .home .ac-eng__more {
   margin-top: 1.5rem;
@@ -1381,6 +1366,57 @@ body.home {
   gap: 1.25rem;
   margin-top: 0.25rem;
 }
+/* "See the full story": the rest of the timeline, closed by default */
+.home .code-more {
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+}
+.home .code-more__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: 10.5rem; /* lines up with the entries' text column */
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.home .code-more__toggle::-webkit-details-marker {
+  display: none;
+}
+.home .code-more__toggle::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.home .code-more[open] .code-more__toggle::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+.home .code-more__toggle:hover {
+  border-color: var(--accent-text);
+  color: var(--accent-text);
+}
+.home .code-more__open,
+.home .code-more[open] .code-more__closed {
+  display: none;
+}
+.home .code-more[open] .code-more__open {
+  display: inline;
+}
+.home .code-more__intro {
+  max-width: 56ch;
+  margin: 2rem 0 0 10.5rem;
+  color: var(--text-muted);
+}
+
 /* Timeline visuals: a canvas (or the donut's <pre>) in a 4:3 frame */
 .home .tl-vis {
   min-width: 0;
@@ -2068,6 +2104,10 @@ html.lb-lock {
   }
   .home .tl-chapter {
     padding-left: 2rem;
+  }
+  .home .code-more__toggle,
+  .home .code-more__intro {
+    margin-left: 2rem;
   }
   .home .tl-date {
     text-align: left;
