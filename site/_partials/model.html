@@ -1,0 +1,34 @@
+<!--
+  3D model viewer (assets/js/model-viewer.js), stamped into a project page by tools/build.ts.
+  Use it inside the page's own section, under its own heading: an HTML comment reading  @include model
+  The model file, poster, alt text, caption and "clay" (start as a white card model) come from the page's "model" entry in site/_data/projects.json,
+  and the download sizes are measured at build time. Make the model and poster with
+  deno task model semN path/to/model.skp (or .3dm); see tools/models/README.md.
+-->
+<figure class="model-viewer" data-model-viewer data-label="{{modelLabel}}">
+  <div class="model-viewer__stage">
+    <img class="model-viewer__poster" src="{{modelPoster}}" alt="{{modelAlt}}"
+      width="1600" height="1000" loading="lazy" decoding="async">
+    <div class="model-viewer__start">
+      <button type="button" class="model-viewer__load" data-mv-load>Explore in 3D</button>
+      <span class="model-viewer__size">{{viewerSize}}, loads on click</span>
+      <p class="model-viewer__status" data-mv-status role="status"></p>
+    </div>
+  </div>
+  <div class="model-viewer__bar">
+    <div class="model-viewer__views" role="group" aria-label="Views">
+      <button type="button" data-mv-view="outside" aria-pressed="true">Outside</button>
+      <button type="button" data-mv-view="inside" aria-pressed="false">Inside</button>
+      <button type="button" data-mv-view="above" aria-pressed="false">Above</button>
+    </div>
+    <button type="button" data-mv-clay aria-pressed="{{modelClay}}">Clay</button>
+    <button type="button" data-mv-cut aria-pressed="false">Section cut</button>
+    <button type="button" data-mv-full aria-pressed="false" hidden>Full screen</button>
+  </div>
+  <figcaption>
+    {{modelCaption}} Drag to turn it, scroll or pinch to zoom, and right-drag or use two fingers to move.
+    <a data-mv-src href="{{modelFile}}" download>Download the model (.glb, {{modelSize}})</a>
+  </figcaption>
+</figure>
+<script type="importmap">{"imports": {"three": "./assets/vendor/three/three.module.min.js", "three/addons/": "./assets/vendor/three/addons/"}}</script>
+<script type="module" src="assets/js/model-viewer.js"></script>

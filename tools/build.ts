@@ -8,6 +8,8 @@
  *
  * Partials can use {{placeholders}} (see placeholders() below), including the
  * site version and the project list from site/_data/projects.json.
+ *   <!-- @include model -->                      (the page's 3D model viewer, from its
+ *                                                  "model" entry in projects.json)
  * Folders starting with "_" (partials, data) are build inputs, not published.
  * The build also writes dist/sitemap.xml from the pages it finds.
  *
@@ -29,6 +31,45 @@ interface Project {
   title: string;
   label: string;
   semester: number;
+  /** A 3D model for the viewer (the model partial); paths are relative to site/ */
+  model?: { file: string; poster: string; alt: string; caption: string; clay?: boolean };
+}
+
+const megabytes = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`;
+
+async function totalSize(dir: URL): Promise<number> {
+  let bytes = 0;
+  for await (const entry of Deno.readDir(dir)) {
+    const url = new URL(entry.name + (entry.isDirectory ? "/" : ""), dir);
+    if (entry.isDirectory) bytes += await totalSize(url);
+    else if (entry.name !== "LICENSE") bytes += (await Deno.stat(url)).size;
+  }
+  return bytes;
+}
+
+/** Placeholders for the model partial: the files, and what a visitor downloads (viewer + model). */
+async function modelValues(project: Project | undefined, lenient: boolean): Promise<Record<string, string>> {
+  if (!project?.model) return {};
+  const { file, poster, alt, caption, clay = false } = project.model;
+  const model = await Deno.stat(new URL(file, SITE)).then((s) => s.size, () => {
+    const message = `${project.page}: no model at site/${file} (make it with deno task model)`;
+    if (!lenient) throw new Error(message);
+    console.warn(`  (skipping the viewer) ${message}`);
+    return -1;
+  });
+  if (model < 0) return { modelSize: "missing" };
+  const viewer = await totalSize(new URL("assets/vendor/three/", SITE)) +
+    (await Deno.stat(new URL("assets/js/model-viewer.js", SITE))).size;
+  return {
+    modelFile: file,
+    modelPoster: poster,
+    modelAlt: escapeHtml(alt),
+    modelCaption: escapeHtml(caption),
+    modelLabel: escapeHtml(`3D model of ${project.title}`),
+    modelClay: String(clay),
+    modelSize: megabytes(model),
+    viewerSize: megabytes(viewer + model),
+  };
 }
 
 async function loadPartials(): Promise<Map<string, string>> {
@@ -77,7 +118,11 @@ function renderPartial(
   values: Record<string, string>,
 ): string {
   let out = body.replace(/\{\{(\w+)\}\}/g, (token, key) => values[key] ?? token);
-  if (/\{\{\w+\}\}/.test(out)) throw new Error(`${page}: unfilled placeholder in partial "${name}"`);
+  const missing = out.match(/\{\{(\w+)\}\}/);
+  if (missing) {
+    const hint = name === "model" ? ` (give ${page} a "model" entry in site/_data/projects.json)` : "";
+    throw new Error(`${page}: unfilled placeholder {{${missing[1]}}} in partial "${name}"${hint}`);
+  }
 
   if (attrs.active) {
     const link = new RegExp(`<a href="([^"]*)" data-nav="${attrs.active}"(?: data-group="([^"]*)")?>`);
@@ -124,7 +169,8 @@ async function writeSitemap(pages: string[]) {
   await Deno.writeTextFile(new URL("sitemap.xml", DIST), xml);
 }
 
-export async function build(): Promise<number> {
+/** `lenient`: leave out viewers whose model isn't made yet, instead of failing (for deno task model). */
+export async function build({ lenient = false } = {}): Promise<number> {
   const started = performance.now();
   const [partials, projects, version] = await Promise.all([loadPartials(), loadProjects(), siteVersion()]);
   await Deno.remove(DIST, { recursive: true }).catch(() => {});
@@ -136,11 +182,15 @@ export async function build(): Promise<number> {
     if (!entry.isFile || !entry.name.endsWith(".html")) continue;
     const page = entry.name;
     pages.push(page);
-    const values = placeholders(page, projects, version.label);
+    const values = {
+      ...placeholders(page, projects, version.label),
+      ...await modelValues(projects.find((p) => p.page === page), lenient),
+    };
     const html = await Deno.readTextFile(new URL(page, SITE));
     const out = html.replace(INCLUDE, (_all, indent: string, name: string, attrSrc: string) => {
       const body = partials.get(name);
       if (body === undefined) throw new Error(`${page}: unknown partial "${name}"`);
+      if (name === "model" && values.modelSize === "missing") return "";
       includes++;
       return renderPartial(name, body, page, parseAttrs(attrSrc), values)
         .split("\n")

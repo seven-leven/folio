@@ -24,6 +24,7 @@
     "version": "deno run --allow-read=version.json --allow-run=git tools/version.ts",
     "changelog": "deno run --allow-read=CHANGELOG.md,version.json --allow-write=CHANGELOG.md --allow-run=git tools/changelog.ts",
     "images": "deno run --allow-read --allow-write --allow-env --allow-ffi --allow-sys tools/images.ts",
+    "model": "deno run -A tools/models/model.ts",
     "links": {
       "command": "deno run --allow-read=dist --allow-net tools/links.ts",
       "dependencies": [

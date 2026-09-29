@@ -1,7 +1,32 @@
 [
-  {"page": "sem1.html", "title": "Enchanting Reading Nook", "label": "Semester 1 · 2023", "semester": 1},
-  {"page": "sem2.html", "title": "Blue Canvas", "label": "Semester 2 · 2024", "semester": 2},
-  {"page": "sem3.html", "title": "Urban Acupuncture", "label": "Semester 3 · 2025", "semester": 3},
+  {
+    "page": "sem1.html", "title": "Enchanting Reading Nook", "label": "Semester 1 · 2023", "semester": 1,
+    "model": {
+      "file": "assets/projects/sem1/model.glb",
+      "poster": "assets/projects/sem1/model-poster.webp",
+      "alt": "The reading nook model: a timber and blue-glass box with a sloped glass roof",
+      "caption": "The final SketchUp model."
+    }
+  },
+  {
+    "page": "sem2.html", "title": "Blue Canvas", "label": "Semester 2 · 2024", "semester": 2,
+    "model": {
+      "file": "assets/projects/sem2/model.glb",
+      "poster": "assets/projects/sem2/model-poster.webp",
+      "alt": "The Blue Canvas model: a hexagonal building on hexagonal piers, wrapped in a diagonal frame",
+      "caption": "The final Rhino model, shown as a clay model; turn Clay off for its layer colours.",
+      "clay": true
+    }
+  },
+  {
+    "page": "sem3.html", "title": "Urban Acupuncture", "label": "Semester 3 · 2025", "semester": 3,
+    "model": {
+      "file": "assets/projects/sem3/model.glb",
+      "poster": "assets/projects/sem3/model-poster.webp",
+      "alt": "The Urban Acupuncture model",
+      "caption": "The final Rhino model, with its Enscape materials."
+    }
+  },
   {"page": "sem4.html", "title": "Measured Embrace", "label": "Semester 4 · 2025", "semester": 4},
   {"page": "sem5.html", "title": "Yield, Register, Transmit", "label": "Semester 5 · 2026", "semester": 5}
 ]

@@ -1,17 +1,24 @@
-"""Turn a glTF exported from Rhino into a small, web-ready .glb for the 3D viewer
+"""Turn a glTF or FBX exported from Rhino into a small, web-ready .glb for the 3D viewer
 (site/assets/js/model-viewer.js). Runs inside Blender:
 
-    blender -b --python tools/models/web-model.py -- in.glb out.glb [--ground 5]
+    blender -b --python tools/models/web-model.py -- in.glb out.glb [--ground 5] [--max-tris 400000]
 
+- Drops stray objects far from the rest of the model (a leftover line of geometry 200 m away
+  would otherwise set the framing).
 - Drops the site/ground plane: horizontal faces at the model's lowest level larger than
   --ground square metres (default 5). SketchUp models often sit on one.
-- SketchUp's default material comes through pure black; it becomes a dark grey.
+- SketchUp's default material comes through pure black; it becomes a dark grey. Materials
+  that aren't metal are made matte (FBX brings them in glossy).
 - Joins everything into one object, welds duplicate vertices, and puts the model's centre
   on the origin with its lowest point at 0 (the viewer frames from that).
-- Scales textures down to 1024 px, saves them as WebP, and Draco-compresses the mesh.
+- Keeps the triangle count under --max-tris: first merges flat faces, then, if still over,
+  simplifies the densest parts (detailed rails and meshes) the most.
+- Keeps only colour textures (roughness, normal and displacement maps add weight the web
+  view doesn't show), scales them down to 1024 px as WebP, and Draco-compresses the mesh.
 
 See tools/models/README.md for the whole route from a .skp or .3dm file.
 """
+import re
 import sys
 
 import bmesh
@@ -21,11 +28,57 @@ import mathutils
 args = sys.argv[sys.argv.index("--") + 1:]
 src, out = args[0], args[1]
 ground = float(args[args.index("--ground") + 1]) if "--ground" in args else 5.0
+max_tris = int(args[args.index("--max-tris") + 1]) if "--max-tris" in args else 400_000
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
-bpy.ops.import_scene.gltf(filepath=src)
+if src.lower().endswith(".fbx"):
+    bpy.ops.import_scene.fbx(filepath=src)  # FBX carries its units; Blender scales to metres
+else:
+    bpy.ops.import_scene.gltf(filepath=src)
 scene = bpy.context.scene
 objs = [o for o in scene.objects if o.type == "MESH"]
+
+
+def triangles(meshes):
+    return sum(len(p.vertices) - 2 for o in meshes for p in o.data.polygons)
+
+
+# Stray objects: centres over 30 m (or 3x the model's spread) outside the box that holds the
+# middle 90% of object centres
+centres = {o: o.matrix_world @ (sum((mathutils.Vector(c) for c in o.bound_box), mathutils.Vector()) / 8)
+           for o in objs}
+keep = []
+for o in objs:
+    far = False
+    for i in range(3):
+        values = sorted(c[i] for c in centres.values())
+        p5, p95 = values[len(values) // 20], values[-1 - len(values) // 20]
+        margin = max(3 * (p95 - p5), 30.0)  # metres
+        far |= not (p5 - margin <= centres[o][i] <= p95 + margin)
+    if far:
+        print(f"Dropped stray object {o.name} at {tuple(round(v, 1) for v in centres[o])}")
+        bpy.data.objects.remove(o)
+    else:
+        keep.append(o)
+objs = keep
+
+# Only colour textures: drop image nodes that don't feed a Base Color, and data maps whatever
+# they're wired to (exporters sometimes put a roughness map in the colour slot)
+DATA_MAP = re.compile(r"rough|normal|nrm|bump|disp|height|metal|spec|gloss|_ao|occlusion", re.I)
+
+def feeds_base_colour(node, depth=0):
+    for out in node.outputs:
+        for link in out.links:
+            if link.to_socket.name == "Base Color" or (depth < 3 and feeds_base_colour(link.to_node, depth + 1)):
+                return True
+    return False
+
+
+for m in bpy.data.materials:
+    if m.node_tree:
+        for n in [n for n in m.node_tree.nodes if n.type == "TEX_IMAGE"
+                  and (not feeds_base_colour(n) or (n.image and DATA_MAP.search(n.image.filepath)))]:
+            m.node_tree.nodes.remove(n)
 
 # Lowest point of the whole model, in world space
 low = min((o.matrix_world @ v.co).z for o in objs for v in o.data.vertices)
@@ -47,6 +100,15 @@ for o in objs:
     bm.free()
 objs = [o for o in objs if len(o.data.polygons)]
 
+# FBX materials come in glossy; only metals should shine
+METAL = re.compile(r"metal|iron|steel|alumin|chrome|brass|copper|zinc", re.I)
+for m in bpy.data.materials:
+    bsdf = m.node_tree and next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
+    if bsdf and not METAL.search(m.name):
+        for socket, value in (("Metallic", 0.0), ("Roughness", 0.75)):
+            if not bsdf.inputs[socket].is_linked:
+                bsdf.inputs[socket].default_value = max(bsdf.inputs[socket].default_value, value) if socket == "Roughness" else value
+
 # Pure black materials (SketchUp's default) become dark grey
 for m in bpy.data.materials:
     bsdf = m.node_tree and next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
@@ -67,6 +129,22 @@ bpy.ops.object.mode_set(mode="EDIT")
 bpy.ops.mesh.select_all(action="SELECT")
 bpy.ops.mesh.remove_doubles(threshold=0.0005)
 bpy.ops.object.mode_set(mode="OBJECT")
+
+# Triangle budget
+tris = triangles([model])
+if tris > max_tris:
+    bpy.ops.object.mode_set(mode="EDIT")
+    bpy.ops.mesh.select_all(action="SELECT")
+    bpy.ops.mesh.dissolve_limited(angle_limit=0.0175)  # merge faces that are flat to within 1 degree
+    bpy.ops.mesh.quads_convert_to_tris()
+    bpy.ops.object.mode_set(mode="OBJECT")
+    flat = triangles([model])
+    print(f"Merged flat faces: {tris} -> {flat} triangles")
+    if flat > max_tris:
+        dec = model.modifiers.new("budget", "DECIMATE")
+        dec.ratio = max_tris / flat
+        bpy.ops.object.modifier_apply(modifier=dec.name)
+        print(f"Simplified: {flat} -> {triangles([model])} triangles (budget {max_tris})")
 for o in [o for o in scene.objects if o != model]:
     bpy.data.objects.remove(o)
 
@@ -83,7 +161,7 @@ for img in bpy.data.images:
         img.scale(*(int(s * 1024 / max(img.size)) for s in img.size))
 
 size = hi - lo
-tris = sum(len(p.vertices) - 2 for p in model.data.polygons)
+tris = triangles([model])
 print(f"{size.x:.2f} x {size.y:.2f} x {size.z:.2f} m, {tris} triangles, {len(bpy.data.materials)} materials")
 
 bpy.ops.export_scene.gltf(

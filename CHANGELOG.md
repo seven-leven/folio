@@ -15,6 +15,9 @@ commit.
 
 ## Unreleased
 
+- 3D models for Semesters 2 (Blue Canvas) and 3 (Urban Acupuncture), with the viewer now shared by every project page: a `model` entry in `site/_data/projects.json` plus `<!-- @include model -->`, and `deno task model semN file.3dm` makes the model and its poster (Rhino, then Blender, then a headless screenshot)
+- Viewer: a Clay mode (a white card model with ink edges; the default for models with only layer colours), views framed to each model's actual silhouette, and Inside aimed at the building rather than its site
+
 - The Reading Nook's SketchUp model on its page, in a three.js viewer: turn, zoom and move around it, jump to outside, inside and top views, cut a section through it, go full screen, or download the .glb. three.js (vendored) loads only on request. Models are converted with `tools/models/`
 
 - A colour for each architecture semester, matching the book (Ink, Ember, Mauve, Olive, Lagoon, Red): a page edge on its homepage row and project page, its label and number, its reading-progress bar, a dot in the footer, and the accents inside each project page

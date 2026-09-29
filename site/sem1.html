@@ -27,7 +27,6 @@
       rel="stylesheet"
     >
     <link rel="stylesheet" href="assets/css/pages/sem1.css">
-    <script type="importmap">{"imports": {"three": "./assets/vendor/three/three.module.min.js", "three/addons/": "./assets/vendor/three/addons/"}}</script>
   </head>
   <body class="project-page project-reading-nook">
     <!-- Added body classes -->
@@ -187,31 +186,7 @@
 
       <section class="section animate-on-scroll-target">
         <h2 class="section-title">The Model</h2>
-        <figure class="model-viewer" data-model-viewer data-label="3D model of the reading nook">
-          <div class="model-viewer__stage">
-            <img class="model-viewer__poster" src="assets/projects/sem1/model-poster.webp"
-              alt="The reading nook model: a timber and blue-glass box with a sloped glass roof"
-              width="1600" height="1000" loading="lazy" decoding="async">
-            <div class="model-viewer__start">
-              <button type="button" class="model-viewer__load" data-mv-load>Explore in 3D</button>
-              <span class="model-viewer__size">About 1 MB, loads on click</span>
-              <p class="model-viewer__status" data-mv-status role="status"></p>
-            </div>
-          </div>
-          <div class="model-viewer__bar">
-            <div class="model-viewer__views" role="group" aria-label="Views">
-              <button type="button" data-mv-view="outside" aria-pressed="true">Outside</button>
-              <button type="button" data-mv-view="inside" aria-pressed="false">Inside</button>
-              <button type="button" data-mv-view="above" aria-pressed="false">Above</button>
-            </div>
-            <button type="button" data-mv-cut aria-pressed="false">Section cut</button>
-            <button type="button" data-mv-full aria-pressed="false" hidden>Full screen</button>
-          </div>
-          <figcaption>
-            The final SketchUp model. Drag to turn it, scroll or pinch to zoom, and right-drag or use
-            two fingers to move. <a data-mv-src href="assets/projects/sem1/reading-nook.glb" download>Download the model (.glb, 0.4 MB)</a>
-          </figcaption>
-        </figure>
+        <!-- @include model -->
       </section>
 
       <section class="section animate-on-scroll-target">
@@ -282,6 +257,5 @@
 
     <!-- Centralized JavaScript -->
     <script src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/model-viewer.js"></script>
   </body>
 </html>

@@ -137,6 +137,10 @@ async function start(fig) {
         m.roughness = 0.05;
         m.metalness = 0;
         o.castShadow = false;
+      } else if (m.transparent) {
+        // Already see-through (e.g. Rhino/Enscape glass): don't hide what's behind it
+        m.depthWrite = false;
+        o.castShadow = false;
       }
     }
   });
@@ -169,24 +173,63 @@ async function start(fig) {
   controls.maxDistance = span * 5;
 
   cut.constant = box.min.y + Math.min(1.2, size.y * 0.45);
-  // Far enough back that the whole model fits: its bounding sphere against the field of view
-  const fit = 1.08 * (size.length() / 2) / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2));
-  const from = (x, y, z) => new THREE.Vector3(x, y, z).normalize().multiplyScalar(fit).add(centre).toArray();
+  // Look from direction (x, y, z), just far enough back that the model
+  // fills 85% of the frame (a few rounds of: project its points, move to fit)
+  camera.aspect = stage.clientWidth / stage.clientHeight || 1.6;
+  // A sample of real vertices, not the box's corners: a site drawn at an angle has a much bigger
+  // box than silhouette
+  const corners = [];
+  model.updateMatrixWorld(true);
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    const pos = o.geometry.attributes.position;
+    const step = Math.max(1, Math.floor(pos.count / 1500));
+    for (let i = 0; i < pos.count; i += step) {
+      corners.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(o.matrixWorld));
+    }
+  });
+  const probe = camera.clone();
+  const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  const fitView = (x, y, z) => {
+    const dir = new THREE.Vector3(x, y, z).normalize();
+    const target = centre.clone();
+    let dist = size.length();
+    for (let i = 0; i < 8; i++) {
+      probe.position.copy(dir).multiplyScalar(dist).add(target);
+      probe.lookAt(target);
+      probe.updateMatrixWorld();
+      probe.updateProjectionMatrix();
+      let [x0, x1, y0, y1] = [Infinity, -Infinity, Infinity, -Infinity];
+      for (const c of corners) {
+        const p = c.clone().project(probe);
+        [x0, x1, y0, y1] = [Math.min(x0, p.x), Math.max(x1, p.x), Math.min(y0, p.y), Math.max(y1, p.y)];
+      }
+      // Aim at the middle of what's seen, then move to fit it
+      const right = new THREE.Vector3().setFromMatrixColumn(probe.matrixWorld, 0);
+      const up = new THREE.Vector3().setFromMatrixColumn(probe.matrixWorld, 1);
+      target.addScaledVector(right, ((x0 + x1) / 2) * dist * tanHalf * probe.aspect)
+        .addScaledVector(up, ((y0 + y1) / 2) * dist * tanHalf);
+      dist *= Math.max((x1 - x0) / 2, (y1 - y0) / 2) / 0.85;
+    }
+    return { position: dir.multiplyScalar(dist).add(target).toArray(), target: target.toArray() };
+  };
   const eye = Math.min(1.5, size.y * 0.5);
+  // The building itself, not its site: where most of the detail (vertices) is. Its middle is the
+  // median point, its size the spread of the middle 80% (a street or context blocks are sparse)
+  const pct = (axis, q) => corners.map((c) => c[axis]).sort((a, b) => a - b)[Math.floor(q * (corners.length - 1))];
+  const core = {
+    x: pct("x", 0.5),
+    z: pct("z", 0.5),
+    span: Math.max(pct("x", 0.9) - pct("x", 0.1), pct("z", 0.9) - pct("z", 0.1)),
+  };
   const views = {
-    outside: {
-      position: from(0.85, 0.5, 1.1),
-      target: centre.toArray(),
-    },
+    outside: fitView(0.85, 0.5, 1.1),
     inside: {
-      // From one corner, looking across to the other, at seated eye height
-      position: [centre.x + span * 0.3, box.min.y + eye, centre.z + span * 0.3],
-      target: [centre.x - span * 0.25, box.min.y + eye * 0.85, centre.z - span * 0.25],
+      // From one corner of the building, looking across to the other, at seated eye height
+      position: [core.x + core.span * 0.3, box.min.y + eye, core.z + core.span * 0.3],
+      target: [core.x - core.span * 0.25, box.min.y + eye * 0.85, core.z - core.span * 0.25],
     },
-    above: {
-      position: from(0, 1, 0.001),
-      target: centre.toArray(),
-    },
+    above: fitView(0, 1, 0.001),
   };
 
   function goTo(name) {
@@ -217,6 +260,48 @@ async function start(fig) {
   for (const b of fig.querySelectorAll("[data-mv-view]")) b.addEventListener("click", () => goTo(b.dataset.mvView));
   // Grabbing the model cancels a view change in progress
   controls.addEventListener("start", () => (tween = null));
+
+  // Clay: every surface in one warm white, like a card model (glass stays see-through).
+  // Useful for models whose colours are only Rhino layer colours; on at the start when the
+  // button starts pressed (the project's "clay" setting).
+  const clay = new THREE.MeshStandardMaterial({ color: 0xe2dccf, roughness: 1, side: THREE.DoubleSide });
+  const clayGlass = new THREE.MeshStandardMaterial({
+    color: 0xdde6ec,
+    roughness: 0.1,
+    transparent: true,
+    opacity: 0.25,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const originals = new Map();
+  model.traverse((o) => o.isMesh && originals.set(o, o.material));
+  const toClay = (m) => (m.transparent ? clayGlass : clay);
+  // Ink lines on the creases, as on a drawing; made the first time clay is turned on
+  let edges = null;
+  const setClay = (on) => {
+    for (const [mesh, mat] of originals) {
+      mesh.material = on ? (Array.isArray(mat) ? mat.map(toClay) : toClay(mat)) : mat;
+    }
+    if (on && !edges) {
+      edges = [];
+      const ink = new THREE.LineBasicMaterial({ color: 0x34322f, transparent: true, opacity: 0.45 });
+      for (const mesh of originals.keys()) {
+        const lines = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry, 30), ink);
+        mesh.add(lines);
+        edges.push(lines);
+      }
+    }
+    for (const lines of edges ?? []) lines.visible = on;
+    scene.environmentIntensity = on ? 0.35 : 0.7; // less fill light, so the planes read
+    request();
+  };
+  const clayBtn = fig.querySelector("[data-mv-clay]");
+  if (clayBtn?.getAttribute("aria-pressed") === "true") setClay(true);
+  clayBtn?.addEventListener("click", () => {
+    const on = clayBtn.getAttribute("aria-pressed") !== "true";
+    clayBtn.setAttribute("aria-pressed", on);
+    setClay(on);
+  });
 
   const cutBtn = fig.querySelector("[data-mv-cut]");
   cutBtn?.addEventListener("click", () => {
