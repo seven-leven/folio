@@ -421,7 +421,8 @@
   function initBrokenImages() {
     const hide = (img) => {
       img.dataset.broken = "true";
-      (img.closest("figure") || img).hidden = true;
+      // The 3D viewer still works without its poster, so hide only the picture there
+      ((!img.closest(".model-viewer") && img.closest("figure")) || img).hidden = true;
     };
     document.querySelectorAll("img").forEach((img) => {
       if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) hide(img);
@@ -457,7 +458,7 @@
   // --- Project pages: click any drawing/render to view it full screen -------
   function initLightbox() {
     const images = [...document.querySelectorAll("img")].filter(
-      (img) => !img.closest("#navbar, .site-footer, #project-pager, #lightbox"),
+      (img) => !img.closest("#navbar, .site-footer, #project-pager, #lightbox, .model-viewer"),
     );
     if (!images.length) return;
 

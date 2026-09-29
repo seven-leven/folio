@@ -15,6 +15,8 @@ commit.
 
 ## Unreleased
 
+- The Reading Nook's SketchUp model on its page, in a three.js viewer: turn, zoom and move around it, jump to outside, inside and top views, cut a section through it, go full screen, or download the .glb. three.js (vendored) loads only on request. Models are converted with `tools/models/`
+
 - A colour for each architecture semester, matching the book (Ink, Ember, Mauve, Olive, Lagoon, Red): a page edge on its homepage row and project page, its label and number, its reading-progress bar, a dot in the footer, and the accents inside each project page
 - Professional map filled in from the project register: 156 projects across 19 atolls and 33 islands, with Greater Malé broken down by ward and Hulhumalé phase (`tools/data/professional.py`)
 - Engineering and Architecture are separate sections again, Engineering first

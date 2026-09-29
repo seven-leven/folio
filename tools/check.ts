@@ -3,7 +3,7 @@
  * `deno task check` does that automatically).
  *
  * Errors (fail CI): broken local links/images/scripts/styles, broken JS module
- * imports and data URLs, missing #anchors, <img> without alt, pages missing
+ * imports (bare ones through the pages' import maps) and data URLs, missing #anchors, <img> without alt, pages missing
  * <title>, meta description, lang or canonical, duplicate ids, raster images
  * that aren't WebP, and projects in site/_data/projects.json without a page or
  * a homepage entry.
@@ -117,16 +117,43 @@ for (const css of files.filter((f) => f.endsWith(".css"))) {
   }
 }
 
+// Import maps (<script type="importmap">); every page's map must point at real files
+const importMap = new Map<string, string>();
+for (const [page, html] of pageText) {
+  for (const m of html.matchAll(/<script type="importmap">([\s\S]*?)<\/script>/g)) {
+    for (const [key, value] of Object.entries<string>(JSON.parse(m[1]).imports ?? {})) {
+      const target = resolveLocal(value, page);
+      if (target && !value.endsWith("/") && !fileSet.has(target.path)) {
+        errors.push(`${page}: import map "${key}" -> missing ${value}`);
+      }
+      importMap.set(key, value);
+    }
+  }
+}
+
 // JS module imports and module-relative URLs (new URL("…", import.meta.url))
 for (const js of files.filter((f) => f.endsWith(".js"))) {
   const text = await Deno.readTextFile(new URL(js, SITE));
-  const specs = [
-    ...text.matchAll(/\bfrom\s+["']([^"']+)["']/g),
-    ...text.matchAll(/\bimport\(\s*["']([^"']+)["']\s*\)/g),
-    ...text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g),
-  ].map((m) => m[1]);
+  // Vendored libraries mention paths in their docs; only their top-level imports count
+  const specs = js.startsWith("assets/vendor/")
+    ? [...text.matchAll(/^(?:import|export)\b[^;]*?\bfrom\s*["']([^"']+)["']/gm)].map((m) => m[1])
+    : [
+      ...text.matchAll(/\bfrom\s+["']([^"']+)["']/g),
+      ...text.matchAll(/\bimport\(\s*["']([^"']+)["']\s*\)/g),
+      ...text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g),
+    ].map((m) => m[1]);
   for (const spec of specs) {
-    const target = resolveLocal(spec, js);
+    let target;
+    if (/^[\w@]/.test(spec) && !/^\w+:/.test(spec)) {
+      // Bare specifier ("three", "three/addons/…"): resolve through a page's import map
+      const key = [...importMap.keys()].sort((a, b) => b.length - a.length)
+        .find((k) => k === spec || (k.endsWith("/") && spec.startsWith(k)));
+      if (key === undefined) {
+        errors.push(`${js}: bare import "${spec}" is not in any page's import map`);
+        continue;
+      }
+      target = resolveLocal(importMap.get(key) + spec.slice(key.length), "index.html");
+    } else target = resolveLocal(spec, js);
     if (!target) continue;
     if (!fileSet.has(target.path)) errors.push(`${js}: broken import/URL -> ${spec}`);
     else referenced.add(target.path);
@@ -176,7 +203,10 @@ for (const f of files) {
   if (f.startsWith("assets/") && size > SIZE_BUDGET) {
     warnings.push(`${f} is ${(size / 1048576).toFixed(1)} MB (budget ${SIZE_BUDGET / 1048576} MB)`);
   }
-  if (f.startsWith("assets/") && !referenced.has(f)) warnings.push(`unreferenced asset: ${f}`);
+  // Vendored libraries load some of their own files at run time (e.g. the Draco decoder)
+  if (f.startsWith("assets/") && !f.startsWith("assets/vendor/") && !referenced.has(f)) {
+    warnings.push(`unreferenced asset: ${f}`);
+  }
 }
 
 // Placeholders still on the site: a reminder, not a failure
