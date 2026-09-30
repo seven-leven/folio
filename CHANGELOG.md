@@ -15,6 +15,8 @@ commit.
 
 ## Unreleased
 
+- Section cut is movable and turns: Plan, Section A or Section B, a slider to move it through the model, and Flip for the other half. The camera turns to face the cut and frames what's left, a thin outline in the semester colour marks the plane, and only the model is cut (the ground and shadows follow it)
+
 - 3D models for Semesters 2 (Blue Canvas) and 3 (Urban Acupuncture), with the viewer now shared by every project page: a `model` entry in `site/_data/projects.json` plus `<!-- @include model -->`, and `deno task model semN file.3dm` makes the model and its poster (Rhino, then Blender, then a headless screenshot)
 - Viewer: a Clay mode (a white card model with ink edges; the default for models with only layer colours), views framed to each model's actual silhouette, and Inside aimed at the building rather than its site
 

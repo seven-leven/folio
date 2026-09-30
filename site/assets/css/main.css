@@ -2092,15 +2092,41 @@ html.lb-lock {
   opacity: 0;
   pointer-events: none;
 }
-.model-viewer__bar {
+.model-viewer__bar,
+.model-viewer__cut {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.75rem;
 }
-.model-viewer:not(.is-live) .model-viewer__bar {
+.model-viewer:not(.is-live) .model-viewer__bar,
+.model-viewer:not(.is-live) .model-viewer__cut,
+.model-viewer__cut[hidden] {
   display: none;
+}
+/* The section cut's own row: direction, position, flip */
+.model-viewer__cut {
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--paper-2);
+}
+.model-viewer__cut .model-viewer__views {
+  margin-right: 0;
+  background: var(--paper);
+}
+.model-viewer__slider {
+  display: flex;
+  flex: 1 1 12rem;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  font: 500 0.8rem/1 var(--font-sans);
+}
+.model-viewer__slider input {
+  flex: 1;
+  min-width: 0;
+  accent-color: var(--sem-text, var(--ink));
 }
 .model-viewer__views {
   display: flex;
@@ -2110,7 +2136,8 @@ html.lb-lock {
   border: 1px solid var(--rule);
   border-radius: 999px;
 }
-.model-viewer__bar button {
+.model-viewer__bar button,
+.model-viewer__cut button {
   padding: 0.45rem 0.95rem;
   border: 1px solid transparent;
   border-radius: 999px;
@@ -2120,14 +2147,17 @@ html.lb-lock {
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.model-viewer__bar > button {
+.model-viewer__bar > button,
+.model-viewer__cut > button {
   border-color: var(--rule);
 }
-.model-viewer__bar button:hover {
+.model-viewer__bar button:hover,
+.model-viewer__cut button:hover {
   color: var(--text);
   background: var(--paper-2);
 }
-.model-viewer__bar button[aria-pressed="true"] {
+.model-viewer__bar button[aria-pressed="true"],
+.model-viewer__cut button[aria-pressed="true"] {
   background: var(--sem-text, var(--ink));
   color: #fff;
 }

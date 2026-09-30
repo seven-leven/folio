@@ -25,6 +25,18 @@
     <button type="button" data-mv-cut aria-pressed="false">Section cut</button>
     <button type="button" data-mv-full aria-pressed="false" hidden>Full screen</button>
   </div>
+  <div class="model-viewer__cut" hidden>
+    <div class="model-viewer__views" role="group" aria-label="Cut direction">
+      <button type="button" data-mv-axis="y" aria-pressed="true">Plan</button>
+      <button type="button" data-mv-axis="x" aria-pressed="false">Section A</button>
+      <button type="button" data-mv-axis="z" aria-pressed="false">Section B</button>
+    </div>
+    <label class="model-viewer__slider">
+      <span>Move the cut</span>
+      <input type="range" min="0" max="1000" value="450" data-mv-cut-at>
+    </label>
+    <button type="button" data-mv-flip>Flip</button>
+  </div>
   <figcaption>
     {{modelCaption}} Drag to turn it, scroll or pinch to zoom, and right-drag or use two fingers to move.
     <a data-mv-src href="{{modelFile}}" download>Download the model (.glb, {{modelSize}})</a>

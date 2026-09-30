@@ -3,7 +3,9 @@
  *
  *   <figure class="model-viewer" data-model-viewer>
  *     <div class="model-viewer__stage"> poster <img> + a [data-mv-load] button </div>
- *     <div class="model-viewer__bar"> [data-mv-view="outside|inside|above"], [data-mv-cut], [data-mv-full] </div>
+ *     <div class="model-viewer__bar"> [data-mv-view="outside|inside|above"], [data-mv-clay], [data-mv-cut],
+ *       [data-mv-full] </div>
+ *     <div class="model-viewer__cut"> [data-mv-axis="y|x|z"], [data-mv-cut-at] (range 0–1000), [data-mv-flip] </div>
  *     <a data-mv-src href="model.glb" download>…</a>   (the model to load)
  *   </figure>
  *
@@ -77,9 +79,6 @@ async function start(fig) {
   renderer.domElement.addEventListener("pointerleave", (e) => {
     if (e.pointerType === "mouse") controls.enableZoom = false;
   });
-
-  // Section cut: a horizontal plane, to look down into the plan (height set once the model is in)
-  const cut = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1.2);
 
   // --- Render on demand -----------------------------------------------------------
   let queued = false;
@@ -172,7 +171,6 @@ async function start(fig) {
   controls.minDistance = 0.3;
   controls.maxDistance = span * 5;
 
-  cut.constant = box.min.y + Math.min(1.2, size.y * 0.45);
   // Look from direction (x, y, z), just far enough back that the model
   // fills 85% of the frame (a few rounds of: project its points, move to fit)
   camera.aspect = stage.clientWidth / stage.clientHeight || 1.6;
@@ -190,7 +188,10 @@ async function start(fig) {
   });
   const probe = camera.clone();
   const tanHalf = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-  const fitView = (x, y, z) => {
+  // `keep` narrows the points to fit, e.g. to the half a section cut leaves
+  const fitView = (x, y, z, keep = () => true) => {
+    const kept = corners.filter(keep);
+    const points = kept.length > 20 ? kept : corners;
     const dir = new THREE.Vector3(x, y, z).normalize();
     const target = centre.clone();
     let dist = size.length();
@@ -200,7 +201,7 @@ async function start(fig) {
       probe.updateMatrixWorld();
       probe.updateProjectionMatrix();
       let [x0, x1, y0, y1] = [Infinity, -Infinity, Infinity, -Infinity];
-      for (const c of corners) {
+      for (const c of points) {
         const p = c.clone().project(probe);
         [x0, x1, y0, y1] = [Math.min(x0, p.x), Math.max(x1, p.x), Math.min(y0, p.y), Math.max(y1, p.y)];
       }
@@ -232,8 +233,7 @@ async function start(fig) {
     above: fitView(0, 1, 0.001),
   };
 
-  function goTo(name) {
-    const v = views[name];
+  function goTo(name, v = views[name]) {
     const to = { position: new THREE.Vector3(...v.position), target: new THREE.Vector3(...v.target) };
     for (const b of fig.querySelectorAll("[data-mv-view]")) b.setAttribute("aria-pressed", b.dataset.mvView === name);
     if (reduceMotion || (!tween && !camera.userData.placed)) {
@@ -261,6 +261,10 @@ async function start(fig) {
   // Grabbing the model cancels a view change in progress
   controls.addEventListener("start", () => (tween = null));
 
+  // The section cut's plane list, shared by every model material (empty = no cut); see below
+  const plane = new THREE.Plane();
+  const planes = [];
+
   // Clay: every surface in one warm white, like a card model (glass stays see-through).
   // Useful for models whose colours are only Rhino layer colours; on at the start when the
   // button starts pressed (the project's "clay" setting).
@@ -285,6 +289,7 @@ async function start(fig) {
     if (on && !edges) {
       edges = [];
       const ink = new THREE.LineBasicMaterial({ color: 0x34322f, transparent: true, opacity: 0.45 });
+      ink.clippingPlanes = planes;
       for (const mesh of originals.keys()) {
         const lines = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry, 30), ink);
         mesh.add(lines);
@@ -303,12 +308,107 @@ async function start(fig) {
     setClay(on);
   });
 
+  // --- Section cut --------------------------------------------------------------------
+  // One plane through the model only (the ground and its shadow stay whole): horizontal for a
+  // plan, or vertical along either side for a section. The slider moves it through the model,
+  // Flip keeps the other half, and a thin outline in the semester's colour shows where it is.
+  const cut = { on: false, axis: "y", at: { y: 0, x: 0.5, z: 0.5 }, flip: false };
+  // Plan cut at sill height to start with; sections through the middle
+  cut.at.y = Math.min(1.2, size.y * 0.45) / size.y;
+  renderer.localClippingEnabled = true;
+  const clipped = new Set([clay, clayGlass]);
+  for (const mat of originals.values()) for (const m of [mat].flat()) clipped.add(m);
+  const clipAll = () => {
+    for (const m of clipped) {
+      m.clippingPlanes = planes;
+      m.clipShadows = true;
+    }
+  };
+  clipAll();
+
+  const semColour = getComputedStyle(fig).getPropertyValue("--sem").trim() || "#34322f";
+  const outline = new THREE.LineLoop(
+    new THREE.BufferGeometry().setFromPoints([0, 1, 2, 3].map(() => new THREE.Vector3())),
+    new THREE.LineBasicMaterial({ color: new THREE.Color(semColour), transparent: true, opacity: 0.9 }),
+  );
+  outline.visible = false;
+  scene.add(outline);
+
+  const cutRow = fig.querySelector(".model-viewer__cut");
+  const slider = fig.querySelector("[data-mv-cut-at]");
+  const axisBtns = fig.querySelectorAll("[data-mv-axis]");
+
+  function applyCut() {
+    const a = cut.axis;
+    const lo = box.min[a], hi = box.max[a];
+    const pos = lo + cut.at[a] * (hi - lo);
+    // Clipping keeps the side the normal points to: below the plan cut, or before the section
+    const normal = new THREE.Vector3();
+    normal[a] = cut.flip ? 1 : -1;
+    plane.set(normal, cut.flip ? -pos : pos);
+    planes.length = 0;
+    if (cut.on) planes.push(plane);
+    // Outline: the model's box, sliced at the plane, a hair to the kept side
+    const [u, v] = ["x", "y", "z"].filter((k) => k !== a);
+    const pad = 0.03 * span;
+    const corner = (cu, cv) => {
+      const p = new THREE.Vector3();
+      p[a] = pos + normal[a] * 0.01;
+      p[u] = cu;
+      p[v] = cv;
+      return p;
+    };
+    outline.geometry.setFromPoints([
+      corner(box.min[u] - pad, box.min[v] - pad),
+      corner(box.max[u] + pad, box.min[v] - pad),
+      corner(box.max[u] + pad, box.max[v] + pad),
+      corner(box.min[u] - pad, box.max[v] + pad),
+    ]);
+    outline.visible = cut.on;
+    request();
+  }
+
+  // Turn to face the cut: down onto a plan, or square-ish onto the section's face
+  function faceCut() {
+    const s = cut.flip ? -1 : 1;
+    const dir = cut.axis === "y" ? [0.45, 1.3, 0.65] : cut.axis === "x" ? [s, 0.45, 0.35] : [0.35, 0.45, s];
+    goTo(null, fitView(...dir, (p) => plane.distanceToPoint(p) >= 0));
+  }
+
+  function showCutControls() {
+    for (const b of axisBtns) b.setAttribute("aria-pressed", b.dataset.mvAxis === cut.axis);
+    if (slider) {
+      slider.value = String(Math.round(cut.at[cut.axis] * 1000));
+      slider.setAttribute("aria-valuetext", `${(cut.at[cut.axis] * size[cut.axis]).toFixed(1)} m in`);
+    }
+  }
+
   const cutBtn = fig.querySelector("[data-mv-cut]");
   cutBtn?.addEventListener("click", () => {
-    const on = cutBtn.getAttribute("aria-pressed") !== "true";
-    cutBtn.setAttribute("aria-pressed", on);
-    renderer.clippingPlanes = on ? [cut] : [];
-    request();
+    cut.on = cutBtn.getAttribute("aria-pressed") !== "true";
+    cutBtn.setAttribute("aria-pressed", cut.on);
+    if (cutRow) cutRow.hidden = !cut.on;
+    showCutControls();
+    applyCut();
+    if (cut.on) faceCut();
+  });
+  for (const b of axisBtns) {
+    b.addEventListener("click", () => {
+      cut.axis = b.dataset.mvAxis;
+      showCutControls();
+      applyCut();
+      faceCut();
+    });
+  }
+  slider?.addEventListener("input", () => {
+    cut.at[cut.axis] = Number(slider.value) / 1000;
+    showCutControls();
+    applyCut();
+  });
+  fig.querySelector("[data-mv-flip]")?.addEventListener("click", () => {
+    cut.flip = !cut.flip;
+    applyCut();
+    faceCut();
   });
 
   const fullBtn = fig.querySelector("[data-mv-full]");
