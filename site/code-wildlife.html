@@ -157,7 +157,8 @@
               </p>
               <p class="pk-thread">
                 <b>A thread that returns</b>
-                These tests did not survive the next rewrite. The site then went without any until
+                Neither these tests nor this build survived. Three months later the site was down,
+                and the next version started from an empty folder. It then went without tests until
                 version 0.9, seventeen months later.
               </p>
             </div>
@@ -169,15 +170,27 @@
           <h2 data-label="v0.4 · May to December 2025">Starting over in Vue</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>A framework and components; image formats; keeping data as JSON</dd></div>
+              <div><dt>New to me</dt><dd>Locking dependency versions; one-file components; image formats; data as JSON</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">3 <small>→</small> 14</dd></div>
             </dl>
             <div class="pk-arc__body">
-              <!-- WHY: why I threw the first version away and rewrote it in Vue -->
               <p>
-                In May I rewrote the site from scratch in Vue. This is the oldest code still in the
-                repository, and the first version I can rebuild and show.
+                The version before this one was written as React components. I left it alone for a
+                few months, and when I came back the site was down. React had moved on a version,
+                I had never locked the versions the project depended on, and the build no longer
+                worked. I tried hard to fix it and could not.
+              </p>
+              <p>
+                So in May I started again in Vue, with Vite, and never looked back. What won me
+                over was that a component is one file: its HTML, its CSS and its JavaScript
+                together, where I can see all of it. The first Vue commit has a lock file in it.
+                The next five are named "tried fixing", "tried fixing v2", "hopefully", "hoper
+                fully" and "hoper fully v3".
+              </p>
+              <p>
+                This is the oldest code still in the repository, and the first version I can
+                rebuild and show.
               </p>
               <figure>
                 <img
