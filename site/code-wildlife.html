@@ -368,7 +368,7 @@
           <h2 data-label="v0.9 · July to October 2026">Safe to change</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>State in stores; testing in depth; a design system; writing things down</dd></div>
+              <div><dt>New to me</dt><dd>State in stores; testing in depth; drawing my own icons; a design guide to build against</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno, fast-check</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -422,13 +422,29 @@
 <b>2. The site</b>         types ← helpers ← composables ← stores ← components
 
 <b>3. Tests and CI</b>     the same checks on every pull request and every deploy</pre>
+              <h3>Every icon, drawn the same way</h3>
+              <p>
+                The realisation that set off the last burst was a small one. The site used emoji
+                for its collections and a mix of borrowed icons everywhere else. On 5 October it
+                struck me that I could simply draw all of them myself, in one style, however
+                mundane the icon: a menu, a close button, an arrow. One grid, one stroke, round
+                ends, no fills.
+              </p>
+              <figure class="pk-figure--narrow">
+                <img
+                  src="assets/projects/wildlife/icons.webp"
+                  alt="The icon sheet: line icons in one stroke, grouped by purpose, from the bird, shark and shell of the collections down to menu, close, arrows and zoom"
+                  width="1000" height="1052" loading="lazy" decoding="async"
+                >
+                <figcaption>Every icon in the app, the mundane ones included</figcaption>
+              </figure>
               <h3>A look, written down</h3>
               <p>
-                For most of its life the site looked like whatever I had last changed. In October I
-                wrote the look down: one neutral ramp, one accent per collection from twelve
-                contrast-checked hues, six text sizes, two corner radii, and line icons in place of
-                emoji. The guide is drawn by a script from the real colours and icons, an idea I
-                then used for
+                Once the icons matched, everything around them looked inconsistent, so I spent the
+                next day writing a design guide to build against: one neutral ramp, one accent per
+                collection from twelve contrast-checked hues, six text sizes, two corner radii. It
+                is there to make the next thing I build agree with the last. The guide is drawn by
+                a script from the real colours and icons, an idea I then used for
                 <a href="https://github.com/seven-leven/folio/blob/main/DESIGN.md">this portfolio's guide</a>.
               </p>
               <div class="pk-grid pk-grid--half">

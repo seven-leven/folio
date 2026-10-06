@@ -15,7 +15,7 @@ commit.
 
 ## Unreleased
 
-- Wildlife Illustrated page: the deploy lesson (build first, publish only if it succeeds) added to versions 0.2 and 0.8
+- Wildlife Illustrated page: the deploy lesson (build first, publish only if it succeeds) added to versions 0.2 and 0.8; the icon and design-guide story added to 0.9
 - The Wildlife Illustrated page retold as an ongoing project: nine stretches of work in order, each with what was new to learn and the drawing count at the end
 - A page of its own for the first coding project: how the Wildlife Illustrated site was built, from its changelog, with screenshots of three versions (`code-wildlife.html`)
 - An ink page context (`page-ink`) so a Personal project can use the project page kit; version lists, code blocks and big-number rows for it
