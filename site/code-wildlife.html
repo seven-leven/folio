@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Wildlife Illustrated - Gaahis Yaugoob</title>
+    <meta name="description" content="How the Wildlife Illustrated website was built and rebuilt over two years: nine lines of work, from a plain page in 2024 to a tested, documented Vue app.">
+    <meta property="og:title" content="Building Wildlife Illustrated - Gaahis Yaugoob">
+    <meta property="og:description" content="How the Wildlife Illustrated website was built and rebuilt over two years: nine lines of work, from a plain page in 2024 to a tested, documented Vue app.">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/wildlife/now-dark.webp">
+    <link rel="canonical" href="https://seven-leven.github.io/folio/code-wildlife.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/code-wildlife.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+  </head>
+  <body class="project-page page-ink pk">
+    <!-- @include navbar active="coding" -->
+
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Oct 2024 to now · Web app · Vue and Deno</p>
+            <h1 class="pk-title">Building <em>Wildlife Illustrated</em></h1>
+            <p class="pk-sub">A home for the drawings, rebuilt nine times</p>
+            <p class="pk-standfirst">
+              I am drawing every bird recorded in the Maldives, and the drawings needed somewhere to
+              live. I built a page for them, and then kept rebuilding it. This is the story its
+              changelog tells: what each version changed, what the site does now, how it is put
+              together, and what two years of over-engineering a gallery taught me.
+            </p>
+            <dl class="pk-facts">
+              <div><dt>Started</dt><dd>October 2024</dd></div>
+              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
+              <div><dt>Drawn so far</dt><dd>18 of 276 species</dd></div>
+            </dl>
+            <div class="pk-actions">
+              <a class="btn btn--light" href="https://seven-leven.github.io/bird_dash/" target="_blank" rel="noopener noreferrer">
+                Open the site
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+              <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/bird_dash" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            </div>
+          </div>
+          <figure class="pk-hero__media">
+            <img
+              src="assets/projects/wildlife/now-dark.webp"
+              alt="The Wildlife Illustrated site in its dark theme: a sidebar of bird families with counts, and a grid of drawings of ducks beside outlined placeholders for the species not yet drawn"
+              width="2400" height="1500" fetchpriority="high" decoding="async"
+            >
+            <figcaption>The site in October 2026, dark theme</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#itch">The itch</a>
+          <a href="#versions">Nine versions</a>
+          <a href="#now">What it does</a>
+          <a href="#how">How it works</a>
+          <a href="#trust">Trusting it</a>
+          <a href="#look">The look</a>
+          <a href="#learned">What I learned</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+        <section id="itch" class="animate-on-scroll-target">
+          <h2>The itch</h2>
+          <div class="pk-grid pk-grid--split">
+            <div>
+              <p>
+                The list is long: 204 birds, and since then 42 sharks and 30 shells. A folder of
+                image files does not show how far along I am, which family I have been avoiding,
+                or what each bird is called in Dhivehi. I wanted the whole list on one page, with a
+                grey outline for every species I had not drawn yet, so that the gaps were as visible
+                as the drawings.
+              </p>
+              <p style="margin-top: var(--space-4)">
+                The first version went up in October 2024 with one drawing on it, the Lesser
+                Whistling-Duck. It was a plain page of HTML, CSS and JavaScript.
+              </p>
+            </div>
+            <figure>
+              <img
+                src="assets/projects/wildlife/2025-05.webp"
+                alt="An early version titled Bird Watchlist: a plain grey page with a grid of cards, three ducks drawn and the rest grey bird silhouettes, with family names as cards in the same grid"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>May 2025, rebuilt from the oldest code still in the repository. Three drawings, 201 silhouettes.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="versions" class="animate-on-scroll-target">
+          <h2>Nine versions</h2>
+          <p>
+            The changelog groups the work into nine lines. Three of them were rewrites or
+            migrations that changed almost nothing a visitor could see.
+          </p>
+          <ol class="pk-steps">
+            <li><b>0.1</b><time datetime="2024-10">Oct 2024</time><div><strong>A first page</strong><span>Two drawings on a hand-written page.</span></div></li>
+            <li><b>0.2</b><time datetime="2025-01">Jan 2025</time><div><strong>Deployment</strong><span>GitHub Actions publishes the site on every push. A favicon and a title card.</span></div></li>
+            <li><b>0.3</b><time datetime="2025-02">Feb 2025</time><div><strong>Deno and build tools</strong><span>Moved to Deno and esbuild, and wrote the first tests.</span></div></li>
+            <li><b>0.4</b><time datetime="2025-05">May 2025</time><div><strong>Rewritten in Vue</strong><span>Started again from scratch. PNG to WebP, thumbnails, the bird list moved from a text file to JSON, a progress counter.</span></div></li>
+            <li><b>0.5</b><time datetime="2026-01">Jan 2026</time><div><strong>Tailwind and dark mode</strong><span>Restyled with Tailwind, a theme toggle and a footer.</span></div></li>
+            <li><b>0.6</b><time datetime="2026-02">Feb 2026</time><div><strong>Search and data</strong><span>A full-size view with an information panel, search, sorting by date, my notes on each drawing, and Dhivehi names.</span></div></li>
+            <li><b>0.7</b><time datetime="2026-03">Mar 2026</time><div><strong>More than birds</strong><span>Restructured so a collection is data, not code. Sharks and shells followed within days.</span></div></li>
+            <li><b>0.8</b><time datetime="2026-07">Jul 2026</time><div><strong>Redesign and performance</strong><span>Search across every collection, a performance pass, Lighthouse accessibility and SEO to 100, checks on every pull request.</span></div></li>
+            <li><b>0.9</b><time datetime="2026-10">Oct 2026</time><div><strong>Stores, tests, accessibility, design</strong><span>State split into four stores, shareable links, a real test suite, a design guide, its own icons and a logo.</span></div></li>
+          </ol>
+          <div class="pk-grid pk-grid--2">
+            <figure>
+              <img
+                src="assets/projects/wildlife/2026-01.webp"
+                alt="The January 2026 version in dark mode: a sidebar titled Bird Groups listing families, a counter reading 13 of 204 drawn, and cards with the English and scientific name over each drawing"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>January 2026 (v0.5): Tailwind, a sidebar and dark mode. 13 of 204 drawn.</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/wildlife/now-light.webp"
+                alt="The October 2026 version in its light theme: a header with the logo, tabs for Birds, Sharks and Shells, a search field and view switches, above the same grid of ducks"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>October 2026 (v0.9): collections, search, two views, line icons for what is not yet drawn.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="now" class="animate-on-scroll-target">
+          <h2>What it does now</h2>
+          <p>
+            It is still a gallery. Everything added since is there to answer one of three
+            questions: what is this, how far along am I, and where is the one I am looking for.
+          </p>
+          <div class="pk-grid pk-grid--half">
+            <figure>
+              <img
+                src="assets/projects/wildlife/lightbox.webp"
+                alt="The full-size view of the House Crow drawing, with a panel giving its number, family, Dhivehi name in Thaana and romanised, scientific name, a note from the illustrator and links to eBird, BirdLife and Wikipedia"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>What is this: the full-size view, with the Dhivehi, English and scientific names, my note on the drawing, and links to read more.</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/wildlife/search.webp"
+                alt="Searching for heron: a dropdown lists 14 matching birds with their scientific and Dhivehi names, while the grid behind filters to the herons, egrets and bitterns"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>Where is it: one search across every collection, by English, scientific or Dhivehi name, in either script.</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/wildlife/timeline.webp"
+                alt="The date view: drawings grouped by the month they were made, from October 2024, with a sidebar of months and how many drawings each has"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>How far along: the same drawings by the month they were made. The empty months are honest.</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/wildlife/shells.webp"
+                alt="The shells collection: a grid of spiral placeholder icons for sea snails not yet drawn, with a rose accent colour in place of the birds' teal"
+                width="2400" height="1500" loading="lazy" decoding="async"
+              >
+              <figcaption>Shells, with its own icon and accent colour. A new collection is one JSON entry, a list and some images.</figcaption>
+            </figure>
+          </div>
+          <div class="pk-grid pk-grid--split" style="align-items: center">
+            <div>
+              <h3>On a phone</h3>
+              <p>
+                The phone layout got its own pass in October 2026: search
+                moves to its own row, the grid drops to two columns, names are always visible
+                because there is no hover, and the full-size view takes pinch, pan and swipe.
+              </p>
+              <p style="margin-top: var(--space-4)">
+                Every drawing has its own address, so a link can open the site straight at one
+                bird.
+              </p>
+            </div>
+            <div class="pk-grid pk-grid--half pk-grid--keep" style="margin: 0">
+              <figure class="pk-figure--phone">
+                <img
+                  src="assets/projects/wildlife/phone.webp"
+                  alt="The site on a phone in dark theme: icon tabs for the collections, a search field on its own row, and the drawings two to a row"
+                  width="780" height="1688" loading="lazy" decoding="async"
+                >
+              </figure>
+              <figure class="pk-figure--phone">
+                <img
+                  src="assets/projects/wildlife/phone-lightbox.webp"
+                  alt="The full-size view on a phone: the drawing on top, and below it the information panel with names, the illustrator's note and links"
+                  width="780" height="1688" loading="lazy" decoding="async"
+                >
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section id="how" class="pk-section--tint animate-on-scroll-target">
+          <h2>How it works</h2>
+          <p>
+            There is no server and no database. The repository holds three small programs, and
+            they meet only at a folder of plain files.
+          </p>
+          <pre class="pk-code" role="img" aria-label="Diagram: source drawings go through the asset pipeline into the public folder of JSON lists and images; the site fetches those files at runtime; a test harness and CI gate every merge">raw_png/  <b>(the drawings, not in git)</b>
+      │
+      ▼
+<b>1. Asset pipeline</b>   scan → plan → execute → report
+      │              PNG to WebP, dates new drawings, flags anything missing
+      ▼
+   public/   collections.json · lists/birds.json · full/ · thumb/
+      │              <b>the contract:</b> fetched at runtime, never imported
+      ▼
+<b>2. The site</b>         types ← helpers ← composables ← stores ← components
+
+<b>3. Tests and CI</b>     the same checks on every pull request and every deploy</pre>
+          <div class="pk-grid pk-grid--2">
+            <div>
+              <h3>The data decides</h3>
+              <p>
+                A bird is a few lines of JSON. It counts as drawn once it has a date; without one
+                it shows as an outline. Adding a drawing means dropping a PNG in a folder and
+                running one command, which converts it, makes its thumbnail and dates the entry.
+              </p>
+              <pre class="pk-code">{
+  <b>"id"</b>: "001",
+  <b>"name"</b>: "Lesser Whistling-Duck",
+  <b>"sci"</b>: "Dendrocygna javanica",
+  <b>"dhiv"</b>: "Reyru",
+  <b>"dhiv_script"</b>: "ރޭރު",
+  <b>"drawn"</b>: "2024-10-10"
+}</pre>
+            </div>
+            <div>
+              <h3>Nothing stored that can be worked out</h3>
+              <p>
+                The footer of the site reads something like <code>v0.9.161 · 18 drawings · 4f0f400</code>.
+                Only the <code>0.9</code> is written down anywhere. The patch number is the number
+                of commits, the drawing count is read from the lists, and the last part is the
+                commit it was built from. It cannot drift, because there is nothing to forget to
+                update.
+              </p>
+              <p style="margin-top: var(--space-4)">
+                The same rule runs through the app: the counts, the grouped views and the order of
+                the full-size view are all computed from the lists, never saved.
+              </p>
+            </div>
+          </div>
+          <h3>Rules I ended up writing down</h3>
+          <div class="pk-grid pk-grid--3">
+            <div class="pk-tile"><h3>One way</h3><ul class="pk-list"><li>State lives in four stores: search, interface, collections, and the open drawing.</li><li>Components read them and change them only through actions.</li></ul></div>
+            <div class="pk-tile"><h3>One owner</h3><ul class="pk-list"><li>One piece of code reads and writes the address bar.</li><li>One file holds every icon. One place words the counts.</li></ul></div>
+            <div class="pk-tile"><h3>Pure first</h3><ul class="pk-list"><li>Logic goes in a plain function when it can.</li><li>The pipeline's planning step is only set arithmetic, so it can be tested without touching a disk.</li></ul></div>
+          </div>
+        </section>
+
+        <section id="trust" class="animate-on-scroll-target">
+          <h2>Trusting it</h2>
+          <p>
+            After the Vue rewrite the site had no tests until July 2026, and every change was
+            checked by clicking around. Most of version 0.9 was making it safe to change.
+          </p>
+          <dl class="pk-stats">
+            <div><dt>44 <small>→</small> 166</dt><dd>tests between July and early October 2026, with 41 more added since</dd></div>
+            <div><dt>47.8 <small>→</small> 93.0%</dt><dd>of lines covered; the build fails below 88%</dd></div>
+            <div><dt>4</dt><dd>time zones the tests run in, from west of UTC to UTC+14</dd></div>
+            <div><dt>100</dt><dd>Lighthouse score for accessibility and for SEO</dd></div>
+          </dl>
+          <div class="pk-grid pk-grid--2">
+            <div>
+              <h3>What the tests found</h3>
+              <ul class="pk-list">
+                <li>A drawing dated the 1st of a month showed under the previous month for anyone west of UTC. That is why the tests now run in four time zones.</li>
+                <li>A slow collection could finish loading after you had switched away, and show its items under the wrong heading.</li>
+                <li>If the list of collections failed to load, the spinner turned forever. It now shows an error and a retry button.</li>
+                <li>Searching for "amp" could cut an "&amp;" in half and break the highlighted name.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What gates a change</h3>
+              <ul class="pk-list">
+                <li>Lint, format and type-check.</li>
+                <li>Every test, in four tiers: plain functions, a fake browser, property-based tests that try hundreds of random inputs, and a check of the real data files.</li>
+                <li>An integrity check that fails on a missing or orphaned image.</li>
+                <li>The production build. Pull requests and the deploy run the same list, and nothing ships unless it all passes.</li>
+              </ul>
+            </div>
+          </div>
+          <h3>Usable without a mouse</h3>
+          <p>
+            The full-size view is a real dialog: focus moves into it, Tab stays inside, and focus
+            returns to the drawing you opened. Search announces how many results it found. The
+            theme is applied before the first paint, so a dark-theme visitor never sees a white
+            flash, and the site honours the reduce-motion setting.
+          </p>
+        </section>
+
+        <section id="look" class="animate-on-scroll-target">
+          <h2>The look</h2>
+          <div class="pk-grid pk-grid--split" style="align-items: start">
+            <div>
+              <p>
+                For most of its life the site looked like whatever I had last changed. In October
+                2026 I wrote the look down as a system: one neutral ramp, one accent per collection
+                from a menu of twelve contrast-checked hues, six text sizes, two corner radii, two
+                animation speeds, and one look for "this is the current one".
+              </p>
+              <p style="margin-top: var(--space-4)">
+                The guide is drawn by a script from the real colours and icons, so it cannot say
+                one thing while the site does another. I used the same idea for
+                <a href="https://github.com/seven-leven/folio/blob/main/DESIGN.md">this portfolio's guide</a>.
+              </p>
+              <h3>Icons and a logo</h3>
+              <p>
+                Emoji were replaced with line icons on a 24 px grid, and the placeholders for
+                undrawn species are redrawn from each collection's icon. The logo is a bird perched
+                on the open edge of an unfinished frame, in the same stroke as the icons.
+              </p>
+            </div>
+            <figure>
+              <img
+                src="assets/projects/wildlife/design-guide.webp"
+                alt="The Wildlife Illustrated design guide: colour ramps and roles, the accent menu, the type scale, shapes and spacing, states, and the icon set"
+                width="1400" height="2060" loading="lazy" decoding="async"
+              >
+              <figcaption>The design guide, generated from the site's own tokens</figcaption>
+            </figure>
+          </div>
+          <div class="pk-grid pk-grid--2">
+            <figure>
+              <img
+                src="assets/projects/wildlife/logo.webp"
+                alt="The logo sheet: the mark of a bird on an open frame in dark and light, a solid tile for small sizes, lockups with the wordmark, sizes, clear space and what not to do"
+                width="1400" height="900" loading="lazy" decoding="async"
+              >
+              <figcaption>The mark, its tile for small sizes, and the lockups</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/wildlife/icons.webp"
+                alt="The icon sheet: line icons grouped by purpose, including bird, shark and shell for the collections"
+                width="1000" height="1052" loading="lazy" decoding="async"
+              >
+              <figcaption>Every icon in the app, from one file</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="learned" class="animate-on-scroll-target">
+          <h2>What I learned</h2>
+          <p class="pk-quote">
+            A lot of it was over-engineered and rewritten for the sake of it, and that is exactly
+            how I learned web development.
+          </p>
+          <div class="pk-grid pk-grid--2">
+            <div>
+              <ul class="pk-list">
+                <li><strong>Rewrites feel like progress.</strong> Three of the nine versions changed the tools and not the site. Each taught me the tool; none of them added a drawing.</li>
+                <li><strong>Tests came late.</strong> Every bug in the list above was live when a test found it.</li>
+                <li><strong>Derive, do not store.</strong> The version number drifted while I kept it by hand, and cannot now that it is worked out from the repository.</li>
+                <li><strong>Write the rules down.</strong> The architecture, data, testing and design guides are short, and each one settled questions I kept reopening.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What is still missing</h3>
+              <ul class="pk-list">
+                <li>258 drawings. The site is far ahead of the project it serves.</li>
+                <li>Conservation status and seasonality for each species.</li>
+                <li>More than one drawing per species.</li>
+                <li>Tests for the components themselves; they are still checked by hand.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pk-actions">
+            <a class="btn btn--light" href="https://seven-leven.github.io/bird_dash/" target="_blank" rel="noopener noreferrer">
+              Open Wildlife Illustrated
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+            <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/bird_dash/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Its full changelog</a>
+            <a class="link-arrow link-arrow--quiet" href="index.html#coding">All coding projects</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include footer -->
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

@@ -123,7 +123,8 @@
 /* Dark contexts: the Personal band, the footer and the CV card */
 .home .personal-band,
 .site-footer,
-.home .cv-card {
+.home .cv-card,
+.page-ink {
   --text: var(--paper);
   --text-2: rgba(246, 244, 239, 0.75);
   --text-muted: rgba(246, 244, 239, 0.62);
@@ -2688,6 +2689,173 @@ html.lb-lock {
   }
   .pk-hero__media {
     order: -1;
+  }
+}
+
+/* An ink page: a Personal project opened out into a page of its own
+   (docs/design-personal.md, section 05). The kit above, on the dark roles,
+   with light terracotta where a studio page has its semester colour. */
+body.page-ink {
+  --sem: var(--accent-light);
+  --sem-text: var(--accent-light);
+  background: var(--ink);
+}
+.page-ink::after {
+  content: none; /* no page edge: that belongs to the semesters */
+}
+.page-ink .pk-hero {
+  position: relative;
+  overflow: hidden;
+}
+.page-ink .pk-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 8% 20%, rgba(91, 155, 213, 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 60% at 96% 70%, rgba(184, 84, 80, 0.14), transparent 70%);
+  pointer-events: none;
+}
+.page-ink .pk-hero > * {
+  position: relative;
+}
+.page-ink .pk-subnav {
+  background: rgba(22, 21, 20, 0.92);
+}
+.page-ink .pk-subnav a:hover {
+  background: var(--surface);
+}
+.page-ink .pk-subnav a.is-active {
+  color: var(--ink);
+}
+.page-ink .pk-body > .pk-section--tint {
+  background: #1f1e1c;
+  box-shadow: 0 0 0 100vmax #1f1e1c;
+}
+.page-ink .pk-body a:not(.btn) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(227, 154, 134, 0.6);
+  text-underline-offset: 3px;
+}
+.page-ink .pk-body a:not(.btn):hover {
+  color: var(--accent-text);
+}
+.page-ink .pk-body :is(p, li) code {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+.pk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+  margin-top: 1.75rem;
+}
+/* Code and plain-text diagrams, on the dark panel */
+.pk-code {
+  margin: var(--space-5) 0;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.32);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  white-space: pre;
+  tab-size: 2;
+}
+.pk-code b {
+  color: var(--accent-light);
+  font-weight: 400;
+}
+/* A dated list of steps: the version history of a project */
+.pk-steps {
+  margin: var(--space-5) 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.pk-steps li {
+  display: grid;
+  grid-template-columns: 4.5rem 7rem minmax(0, 1fr);
+  gap: var(--space-2) var(--gutter);
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pk-steps b {
+  color: var(--sem-text);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.pk-steps time {
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk-steps strong {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+.pk-steps span {
+  color: var(--text-2);
+  font-size: var(--fs-small);
+}
+/* Big numbers with a label under each */
+.pk-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--gutter);
+  margin: var(--space-5) 0;
+}
+.pk-stats div {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule-strong);
+}
+.pk-stats dt {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  line-height: 1;
+}
+.pk-stats dt small {
+  color: var(--text-muted);
+  font-size: 0.45em;
+}
+.pk-stats dd {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+/* Exactly two across, for a set of four */
+.pk-grid--half {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 600px) {
+  .pk-grid--half:not(.pk-grid--keep) {
+    grid-template-columns: 1fr;
+  }
+}
+/* A phone screenshot keeps to a phone's width */
+.pk-body .pk-figure--phone {
+  max-width: 17rem;
+  margin-inline: auto;
+}
+@media (max-width: 600px) {
+  .pk-steps li {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+  .pk-steps li > div {
+    grid-column: 1 / -1;
   }
 }
 

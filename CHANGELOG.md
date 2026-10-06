@@ -15,6 +15,8 @@ commit.
 
 ## Unreleased
 
+- A page of its own for the first coding project: how the Wildlife Illustrated site was built, from its changelog, with screenshots of three versions (`code-wildlife.html`)
+- An ink page context (`page-ink`) so a Personal project can use the project page kit; version lists, code blocks and big-number rows for it
 - One design system for the whole site, written down in DESIGN.md (with the audit that led to it in docs/design-audit.md): `main.css` now holds every colour, the six font families and the type, space and corner scales; each project page's own palette moved there too, as a named voice
 - Semesters 1 to 3 rebuilt on a shared project page kit: the same kicker, serif title, fact tiles, lead image, chapter nav and numbered chapters as the newer pages, on the site's paper and type. Their words and drawings are unchanged; Montserrat, Oswald, Lato and a dead request for Helvetica Neue are gone
 - The book's progress bar on every project page and in the previous/next pager
