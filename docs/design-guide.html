@@ -3,225 +3,432 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Folio design guide</title>
-    <!-- The one-sheet version of DESIGN.md. It reads every colour, size and radius from
-         the site's own main.css, so it cannot drift from the site.
-         Render it to design-guide.png with: deno task guide -->
+    <title>Folio design system</title>
+    <!-- The one-sheet map of DESIGN.md: for remembering, not for learning every detail.
+         It reads its colours, sizes and radii from the site's own main.css, so it cannot
+         drift from the site. Render it to design-guide.png with: deno task guide -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital@1&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thaana:wght@500&display=swap">
     <link rel="stylesheet" href="../site/assets/css/main.css">
     <style>
       body {
-        width: 1360px;
+        width: 1440px;
         margin: 0 auto;
-        padding: 44px 56px 56px;
+        padding: 64px 72px 72px;
         background: var(--paper);
         color: var(--text);
-        font: 13px/1.45 var(--font-sans);
-      }
-      .dg h1 {
-        font: 400 44px/1 var(--font-serif);
-      }
-      .dg h1 em {
-        color: var(--accent-text);
-      }
-      .dg .lede {
-        margin-top: 8px;
-        color: var(--text-muted);
-        font-size: 14px;
-      }
-      .dg section {
-        margin-top: 38px;
-        padding: 0;
-      }
-      .dg h2 {
-        font: 400 27px/1.1 var(--font-serif);
-      }
-      .dg h2 b {
-        margin-right: 10px;
-        color: var(--accent-text);
-        font: 600 12px/1 var(--font-sans);
-        letter-spacing: var(--track-label);
-        vertical-align: 4px;
-      }
-      .dg .note {
-        max-width: none;
-        margin: 4px 0 16px;
-        color: var(--text-muted);
-      }
-      .dg h3 {
-        margin: 0 0 8px;
-        color: var(--text-muted);
-        font: 600 10.5px/1 var(--font-sans);
-        letter-spacing: var(--track-label);
-        text-transform: uppercase;
+        font: 15px/1.5 var(--font-sans);
       }
       .dg p {
         max-width: none;
         margin: 0;
         color: var(--text-2);
-        font-size: 13px;
-        line-height: 1.45;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      .dg ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .dg code {
+        font: 500 12.5px var(--font-data);
+      }
+      .muted,
+      .dg p.muted {
+        color: var(--text-muted);
+      }
+      .lab,
+      .dg h4 {
+        margin: 0;
+        color: var(--text-muted);
+        font: 600 11.5px/1.2 var(--font-sans);
+        letter-spacing: var(--track-label);
+        text-transform: uppercase;
+      }
+      .dg h4 {
+        margin-bottom: 12px;
+      }
+      .cols {
+        display: grid;
+        gap: 48px;
       }
       .cols > * {
         min-width: 0;
       }
-      .dg .btn,
-      .dg .panel span {
-        white-space: nowrap;
-      }
-      .dg .btn {
-        padding: 0.7rem 1.05rem;
-        font-size: 0.86rem;
-      }
-      .states {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px 18px;
-      }
-      .bars .sem-bar {
-        width: 5.3rem;
-      }
-      .dg code {
-        font: 500 11.5px var(--font-data);
-      }
       .row {
         display: grid;
-        gap: 10px;
+        gap: 12px;
       }
-      .cols {
+
+      /* masthead */
+      .mast {
         display: grid;
-        gap: 36px;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 64px;
+        align-items: end;
+        padding-bottom: 44px;
+        border-bottom: 1px solid var(--text);
       }
-      .muted {
-        color: var(--text-muted);
+      .mast .id {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 30px;
       }
-
-      /* swatches */
-      .sw {
-        border: 1px solid var(--rule);
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        background: var(--card);
-      }
-      .sw i {
-        display: block;
-        height: 50px;
-        background: var(--c);
-      }
-      .sw div {
-        padding: 6px 8px 7px;
-        line-height: 1.3;
-      }
-      .sw b {
-        display: block;
-        font: 500 11.5px var(--font-data);
-      }
-      .sw span {
-        color: var(--text-muted);
-        font: 400 11px var(--font-data);
-      }
-      .sw small {
-        display: block;
-        margin-top: 3px;
-        color: var(--text-muted);
-        font-size: 11px;
-      }
-      .sem i {
-        height: 64px;
-        background: linear-gradient(90deg, var(--c) 0 68%, var(--t) 68%);
-      }
-      .sem strong {
-        display: block;
-        margin-bottom: 2px;
-        font: 400 19px/1.1 var(--font-serif);
-      }
-
-      /* tables */
-      .dg table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .dg th {
-        padding: 0 10px 6px 0;
-        color: var(--text-muted);
-        font: 600 10.5px var(--font-sans);
-        letter-spacing: var(--track-label);
-        text-align: left;
-        text-transform: uppercase;
-      }
-      .dg td {
-        padding: 6px 10px 6px 0;
-        border-top: 1px solid var(--rule);
-        vertical-align: middle;
-      }
-      .dg td:first-child code {
+      .mast .id b {
         color: var(--text);
       }
-      .dot {
-        display: inline-block;
-        width: 11px;
-        height: 11px;
-        margin-right: 6px;
+      .dg h1 {
+        font: 400 78px/0.98 var(--font-serif);
+        letter-spacing: -0.01em;
+      }
+      .dg h1 span,
+      .dg h1 em {
+        display: block;
+        color: var(--accent-text);
+      }
+      .mast .sub {
+        margin-top: 22px;
+        color: var(--text);
+        font: italic 400 28px/1.2 var(--font-serif);
+      }
+      .mast li {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 11px 0;
+        border-top: 1px solid var(--rule-strong);
+        font-size: 16px;
+      }
+      .mast li b {
+        font-weight: 600;
+      }
+      .mast li span {
+        color: var(--text-muted);
+      }
+      .map {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-top: 20px;
+        color: var(--text-muted);
+        font: 600 11.5px var(--font-sans);
+        letter-spacing: var(--track-label);
+        text-transform: uppercase;
+      }
+      .map b {
+        color: var(--accent-text);
+      }
+
+      /* sections */
+      .dg section {
+        margin-top: 72px;
+        padding: 0;
+      }
+      .head {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-bottom: 30px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--rule-strong);
+      }
+      .head .n {
+        color: var(--accent-text);
+        font: 600 13px var(--font-sans);
+        letter-spacing: var(--track-label);
+      }
+      .dg h2 {
+        font: 400 46px/1 var(--font-serif);
+      }
+      .head .part {
+        margin-left: auto;
+      }
+      .head .say {
+        color: var(--text-muted);
+        font: italic 400 21px var(--font-serif);
+      }
+      .dg h3 {
+        margin: 0 0 18px;
+        font: 400 30px/1 var(--font-serif);
+      }
+      .block + .block {
+        margin-top: 48px;
+        padding-top: 36px;
+        border-top: 1px solid var(--rule);
+      }
+      .big {
+        color: var(--text);
+        font: 400 27px/1.15 var(--font-serif);
+      }
+      .dg p.big {
+        color: var(--text);
+        font: 400 27px/1.15 var(--font-serif);
+      }
+
+      /* colour */
+      .ratio {
+        display: flex;
+        height: 76px;
+        border: 1px solid var(--text);
+      }
+      .ratio > div {
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+      }
+      .ratio .q {
+        flex: 90;
+        gap: 14px;
+        background: var(--paper);
+      }
+      .ratio .q i {
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--rule-strong);
+      }
+      .ratio .c {
+        flex: 10;
+        padding: 0;
+      }
+      .ratio .c i {
+        flex: 1;
+        align-self: stretch;
+        background: var(--c);
+      }
+      .grp {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        align-items: center;
+        gap: 14px;
+        padding: 9px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .grp:first-of-type {
+        border-top: 0;
+      }
+      .chips {
+        display: flex;
+        gap: 18px;
+      }
+      .chipc {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font: 500 13.5px var(--font-data);
+      }
+      .chipc i {
+        width: 34px;
+        height: 34px;
         border: 1px solid var(--rule-strong);
         border-radius: 50%;
         background: var(--c);
-        vertical-align: -1px;
+      }
+      .chipc small {
+        display: block;
+        color: var(--text-muted);
+        font-size: 11.5px;
+      }
+      .sems {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .sems i {
+        display: block;
+        height: 70px;
+        background: linear-gradient(90deg, var(--sem) 0 72%, var(--sem-text) 72%);
+      }
+      .sems b {
+        display: block;
+        margin-top: 8px;
+        font: 400 23px/1.1 var(--font-serif);
+      }
+      .sems small {
+        color: var(--text-muted);
+        font: 400 11.5px var(--font-data);
       }
 
-      /* shape, space */
-      .shape {
-        height: 54px;
+      /* type */
+      .spec {
+        display: grid;
+        grid-template-columns: 1fr 190px;
+        gap: 0 28px;
+        align-items: center;
+        padding: 28px 30px;
+        border: 1px solid var(--rule);
+        background: var(--card);
+      }
+      .spec > span {
+        padding-left: 14px;
+        border-left: 2px solid var(--accent-fill);
+        color: var(--text-muted);
+        font-size: 12.5px;
+        line-height: 1.35;
+      }
+      .spec > span code {
+        display: block;
+        color: var(--text);
+      }
+      .spec > div {
+        padding: 7px 0;
+      }
+      .fam {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: baseline;
+        gap: 12px;
+        padding: 10px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .fam:first-of-type {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .fam span {
+        color: var(--text-muted);
+        font-size: 13px;
+        text-align: right;
+      }
+
+      /* grid */
+      .gridbox {
+        position: relative;
+        padding: 18px 0 12px;
+      }
+      .gridbox .cols12 {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+      .gridbox .cols12 i {
+        background: color-mix(in srgb, var(--accent-fill) 9%, transparent);
+      }
+      .span {
+        position: relative;
+        display: grid;
+        gap: 14px;
+        margin-bottom: 12px;
+      }
+      .span div {
+        display: grid;
+        place-items: center;
+        height: 44px;
+        border: 1px solid var(--text);
+        background: var(--card);
+        font: 500 12.5px var(--font-data);
+      }
+      .dev {
+        display: grid;
+        gap: 5px;
+        padding: 9px;
+        border: 1px solid var(--text);
+        background: var(--card);
+      }
+      .dev i {
+        height: 24px;
+        background: var(--paper-2);
         border: 1px solid var(--rule-strong);
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 28px;
+      }
+      .facts div {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 9px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .facts b {
+        font-weight: 600;
+      }
+      .facts span {
+        color: var(--text-muted);
+        text-align: right;
+      }
+
+      /* form + motion */
+      .shape {
+        height: 70px;
+        margin-bottom: 10px;
+        border: 1px solid var(--text);
         background: var(--card);
       }
       .steps {
         display: flex;
         align-items: flex-end;
-        gap: 22px;
+        gap: 20px;
       }
       .steps div {
+        color: var(--text-muted);
+        font: 500 12.5px var(--font-data);
         text-align: center;
       }
       .steps i {
         display: block;
-        margin: 0 auto 6px;
+        margin: 0 auto 8px;
         background: var(--text);
       }
-
-      /* states */
-      .panel {
-        display: flex;
+      .speed {
+        display: grid;
+        grid-template-columns: 74px 1fr;
         align-items: center;
-        gap: 10px;
-        padding: 14px 16px;
-        border: 1px solid var(--rule);
-        border-radius: var(--radius);
-        background: var(--card);
+        gap: 12px;
+        padding: 8px 0;
       }
-      .panel.dark {
-        border-color: transparent;
-        background: var(--ink);
-      }
-      .panel > small {
+      .speed i {
         display: block;
-        margin-top: 5px;
+        height: 8px;
+        background: var(--text);
+      }
+      .speed small {
+        display: block;
         color: var(--text-muted);
-        font-size: 10.5px;
-        text-align: center;
+        font-size: 13px;
+      }
+
+      /* components */
+      .comp {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        align-items: center;
+        gap: 18px;
+        padding: 18px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .comp:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .states {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 12px 22px;
       }
       .st {
         text-align: center;
       }
       .st small {
         display: block;
-        margin-top: 6px;
+        margin-top: 8px;
         color: var(--muted);
-        font-size: 10.5px;
+        font-size: 12px;
       }
-      .dark .st small {
-        color: rgba(246, 244, 239, 0.62);
+      .dg .btn,
+      .st span {
+        white-space: nowrap;
+      }
+      .dg .btn {
+        padding: 0.72rem 1.1rem;
+        font-size: 0.9rem;
       }
       .navlink {
         display: inline-block;
@@ -266,163 +473,324 @@
         outline: 2px solid var(--accent-fill);
         outline-offset: 3px;
       }
-
-      /* devices */
-      .bars {
-        display: grid;
-        grid-template-columns: repeat(6, auto);
-        gap: 10px 16px;
-        justify-content: start;
-        align-items: center;
+      .btn.d {
+        opacity: 0.4;
       }
-      .bars small {
+      .ondark {
+        display: inline-block;
+        padding: 8px 10px;
+        border-radius: var(--radius-pill);
+        background: var(--ink);
+      }
+      .crd {
+        width: 150px;
+        height: 62px;
+        padding: 10px 12px;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius);
+        background: var(--card);
+        text-align: left;
+      }
+      .crd.h {
+        border-color: var(--rule-strong);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
+      }
+      .crd.tile {
+        border-radius: var(--radius-sm);
+      }
+      .crd b {
         display: block;
-        margin-top: 5px;
-        color: var(--text-muted);
-        font-size: 10.5px;
+        margin-top: 4px;
+        font-size: 14px;
       }
+      .a11y li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        padding: 10px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .a11y li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .a11y b {
+        font-weight: 600;
+      }
+      .a11y span {
+        color: var(--text-muted);
+        text-align: right;
+      }
+
+      /* project page miniature */
       .mock {
         position: relative;
         overflow: hidden;
-        border: 1px solid var(--rule-strong);
+        border: 1px solid var(--text);
         background: var(--paper);
       }
       .mock .edge {
         position: absolute;
         inset: 0 0 0 auto;
-        width: 5px;
+        width: 6px;
         background: var(--sem);
       }
-      .mock .read {
+      .mk {
         position: absolute;
-        inset: 0 auto auto 0;
-        width: 46%;
-        height: 3px;
-        background: var(--sem);
-      }
-
-      /* birds */
-      .birds {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 12px;
-      }
-      .bird {
-        border-top: 3px solid var(--sem);
-        padding-top: 8px;
-      }
-      .bird .pic {
+        z-index: 2;
         display: grid;
         place-items: center;
-        height: 150px;
-        margin-bottom: 8px;
-        background: #fff;
-        border: 1px solid var(--rule);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        font: 600 11.5px var(--font-sans);
       }
-      .bird img {
-        max-width: 84%;
-        max-height: 130px;
-        width: auto;
-        height: auto;
+      .pg .bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 34px;
+        padding: 0 26px;
+        border-bottom: 1px solid var(--rule);
       }
-      .bird b {
-        display: block;
-        font-weight: 600;
+      .pg .bar i {
+        width: 46px;
+        height: 7px;
+        border-radius: 4px;
+        background: var(--rule-strong);
       }
-      .bird span {
-        color: var(--text-muted);
-        font-size: 11.5px;
+      .pg .bar i:first-child {
+        width: 18px;
+        height: 18px;
+        margin-right: auto;
+        border-radius: 50%;
+        background: var(--ink);
       }
-      .hero {
-        height: 268px;
-        padding: 26px 26px 0 24px;
+      .pg .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 34px;
+        align-items: center;
+        padding: 30px 32px 30px 46px;
       }
-      .hero .txt {
+      .pg .txt {
         position: relative;
         isolation: isolate;
-        width: 54%;
-        height: 216px;
       }
-      .hero .txt > img {
+      .pg .txt > img {
         position: absolute;
         z-index: -1;
         top: 0;
-        right: -18px;
+        right: -22px;
         height: 100%;
         width: auto;
         opacity: var(--bird-opacity);
       }
-      .hero .k {
+      .pg .k {
         color: var(--sem-text);
-        font: 600 8px var(--font-sans);
+        font: 600 9px var(--font-sans);
         letter-spacing: var(--track-label);
         text-transform: uppercase;
       }
-      .hero .t {
-        margin: 8px 0 9px;
-        font: 400 42px/0.98 var(--font-serif);
+      .pg .t {
+        margin: 9px 0 11px;
+        font: 400 50px/0.98 var(--font-serif);
       }
-      .hero .t em {
+      .pg .t em {
         display: block;
         color: var(--sem-text);
       }
-      .hero .sem-bar {
-        width: 86px;
+      .pg .sem-bar {
+        width: 96px;
+        height: 6px;
+      }
+      .pg .s {
+        margin: 11px 0 12px;
+        font: italic 400 16px var(--font-serif);
+      }
+      .ln {
+        display: block;
         height: 5px;
+        margin-top: 6px;
+        border-radius: 3px;
+        background: var(--rule-strong);
       }
-      .hero .s {
-        margin: 9px 0 10px;
-        color: var(--text);
-        font: italic 400 14px var(--font-serif);
-      }
-      .hero .f {
+      .pg .f {
         display: flex;
-        gap: 6px;
+        gap: 7px;
+        margin-top: 14px;
       }
-      .hero .f i {
-        width: 74px;
-        height: 34px;
+      .pg .f i {
+        width: 84px;
+        height: 38px;
         border: 1px solid var(--rule);
         border-radius: 5px;
         background: var(--card);
       }
-      .hero .lead {
-        position: absolute;
-        top: 46px;
-        right: 26px;
-        width: 37%;
-        height: 170px;
+      .pg .lead {
+        height: 196px;
         border-left: 3px solid var(--sem);
         border-radius: 5px;
         background: #fff;
         box-shadow: var(--shadow);
       }
-      .hero .sub {
-        position: absolute;
-        inset: auto 0 0;
-        height: 24px;
+      .pg .sub {
+        position: relative;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        height: 32px;
+        padding: 0 46px;
+        border-block: 1px solid var(--rule);
+      }
+      .pg .sub i {
+        width: 52px;
+        height: 16px;
+        border-radius: 9px;
+        background: var(--paper-2);
+      }
+      .pg .sub i:first-child {
+        background: var(--sem-text);
+      }
+      .pg .ch {
+        position: relative;
+        padding: 22px 32px 22px 46px;
+        border-bottom: 1px solid var(--rule);
+      }
+      .pg .ch .no {
+        color: var(--sem-text);
+        font: 600 9px var(--font-sans);
+        letter-spacing: var(--track-label);
+      }
+      .pg .ch .h {
+        margin: 5px 0 12px;
+        font: 400 26px/1 var(--font-serif);
+      }
+      .pg .dr {
+        display: grid;
+        gap: 12px;
+      }
+      .pg .dr > i {
+        height: 70px;
+        border: 1px solid var(--rule);
+        border-radius: 2px;
+        background: #fff;
+      }
+      .pg .pgr {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 32px 16px 46px;
+      }
+      .pg .pgr > i {
+        height: 34px;
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        background: var(--card);
+      }
+      .anat li {
+        display: grid;
+        grid-template-columns: 30px 150px 1fr;
+        align-items: baseline;
+        padding: 10px 0;
         border-top: 1px solid var(--rule);
       }
-      .dim {
-        position: absolute;
-        color: var(--accent-text);
-        font: 500 9.5px var(--font-data);
-        white-space: nowrap;
+      .anat li:first-child {
+        border-top: 0;
+        padding-top: 0;
       }
-      .dim::before {
+      .anat li i {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        font: 600 11.5px var(--font-sans);
+      }
+      .anat b {
+        font-weight: 600;
+      }
+      .anat span {
+        color: var(--text-muted);
+      }
+
+      /* signature */
+      .shout {
+        font: 400 64px/0.98 var(--font-serif);
+      }
+      .shout em {
+        color: var(--accent-text);
+      }
+      .birds {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+        margin: 34px 0 38px;
+      }
+      .bird {
+        padding-top: 12px;
+        border-top: 4px solid var(--sem);
+      }
+      .bird .pic {
+        display: grid;
+        place-items: center;
+        height: 208px;
+        margin-bottom: 12px;
+        border: 1px solid var(--rule);
+        background: #fff;
+      }
+      .bird img {
+        width: auto;
+        max-width: 86%;
+        height: auto;
+        max-height: 182px;
+      }
+      .bird b {
+        display: block;
+        font: 400 22px/1.1 var(--font-serif);
+      }
+      .bird span {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+      .yn li {
+        padding: 8px 0 8px 24px;
+        border-top: 1px solid var(--rule);
+        text-indent: -24px;
+      }
+      .yn li:first-child {
+        border-top: 0;
+      }
+      .yn li::before {
         content: "";
-        position: absolute;
-        background: var(--accent-fill);
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 14px;
+        background: var(--text);
+      }
+      .yn.no li::before {
+        border-radius: 50%;
+        background: none;
+        box-shadow: inset 0 0 0 2px var(--accent-fill);
       }
       .opener {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        height: 268px;
+        height: 250px;
         background: #fff;
       }
       .opener > div {
         position: relative;
-        padding: 20px 18px;
+        padding: 22px 20px;
       }
       .opener > div + div {
         border-left: 1px dashed var(--rule-strong);
@@ -435,7 +803,7 @@
         gap: 3px;
       }
       .opener .tabs i {
-        width: 6px;
+        width: 7px;
         height: 26px;
         background: var(--c);
         opacity: 0.25;
@@ -444,76 +812,88 @@
         opacity: 1;
       }
       .opener .num {
-        font: 700 62px/0.9 var(--font-book);
         color: var(--sem);
+        font: 700 70px/0.9 var(--font-book);
       }
       .opener .ttl {
-        margin: 8px 0 8px;
-        font: 700 17px/1.1 var(--font-book);
+        margin: 8px 0 10px;
+        font: 700 19px/1.1 var(--font-book);
       }
       .opener img {
         position: absolute;
-        right: 14px;
+        right: 20px;
         bottom: 0;
-        height: 80%;
         width: auto;
+        height: 84%;
       }
-      .rules {
+      .sitebird {
+        position: relative;
+        height: 250px;
+        padding: 26px;
+        isolation: isolate;
+      }
+      .sitebird img {
+        position: absolute;
+        z-index: -1;
+        top: 22px;
+        left: 150px;
+        width: auto;
+        height: 212px;
+        opacity: var(--bird-opacity);
+      }
+      .sitebird .t {
+        margin: 8px 0 10px;
+        font: 400 48px/0.98 var(--font-serif);
+      }
+      .sitebird .t em {
+        display: block;
+        color: var(--sem-text);
+      }
+      .bars {
         display: grid;
-        gap: 5px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        color: var(--text-2);
+        grid-template-columns: repeat(3, auto);
+        gap: 14px 22px;
+        justify-content: start;
       }
-      .rules li {
-        padding-left: 14px;
-        text-indent: -14px;
+      .bars small {
+        display: block;
+        margin-top: 6px;
+        color: var(--text-muted);
+        font-size: 12px;
       }
-      .rules li::before {
-        content: "";
-        display: inline-block;
-        width: 6px;
-        height: 6px;
-        margin-right: 8px;
-        background: var(--text);
-        vertical-align: 1px;
-      }
-      .rules.no li::before {
-        background: none;
-        box-shadow: inset 0 0 0 1.5px var(--accent-fill);
-        border-radius: 50%;
+      .bars .sem-bar {
+        width: 7.4rem;
       }
 
-      /* template */
-      .tpl {
+      /* voices */
+      .shell {
         display: grid;
-        gap: 0;
-        border: 1px solid var(--rule-strong);
+        place-items: center;
+        padding: 18px;
+        border: 1px solid var(--text);
         background: var(--card);
+        text-align: center;
       }
-      .tpl div {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 7px 12px;
-        border-top: 1px solid var(--rule);
-      }
-      .tpl div:first-child {
+      .tree {
+        height: 30px;
+        margin: 0 12.5%;
+        border: 1px solid var(--text);
+        border-bottom: 0;
         border-top: 0;
-      }
-      .tpl span {
-        color: var(--text-muted);
-        text-align: right;
+        background: linear-gradient(var(--text), var(--text)) 50% 0 / 1px 15px no-repeat,
+          linear-gradient(var(--text), var(--text)) 0 15px / 100% 1px no-repeat,
+          linear-gradient(var(--text), var(--text)) 33.33% 15px / 1px 15px no-repeat,
+          linear-gradient(var(--text), var(--text)) 66.66% 15px / 1px 15px no-repeat;
+        border-image: linear-gradient(transparent 15px, var(--text) 15px) 1;
       }
       .voice {
-        padding: 14px 16px 15px;
-        border: 1px solid var(--rule);
+        padding: 18px 20px 20px;
+        border: 1px solid var(--rule-strong);
         border-radius: var(--radius);
         background: var(--bg);
       }
       .voice .vt {
-        margin: 6px 0 6px;
+        margin: 12px 0 10px;
         color: var(--fg);
       }
       .voice .vt span {
@@ -522,114 +902,200 @@
       .voice small {
         display: block;
         color: var(--muted);
-        font-size: 11.5px;
+        font-size: 13px;
+        line-height: 1.4;
       }
-      .foot {
-        margin-top: 34px;
-        padding-top: 12px;
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .tags span {
+        padding: 6px 13px;
+        border: 1px solid var(--text);
+        border-radius: var(--radius-pill);
+        font-size: 13.5px;
+        font-weight: 500;
+      }
+      .tags.no span {
+        border-color: var(--accent-fill);
+        color: var(--accent-text);
+      }
+
+      /* do / don't */
+      .dd {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 40px;
+      }
+      .dd div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 14px 0;
         border-top: 1px solid var(--rule-strong);
+      }
+      .dd b {
+        font-weight: 600;
+      }
+      .dd span {
+        color: var(--accent-text);
+        text-decoration: line-through;
+        text-decoration-color: color-mix(in srgb, var(--accent-fill) 55%, transparent);
+      }
+      .src {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+      .src div {
+        padding-top: 12px;
+        border-top: 3px solid var(--text);
+      }
+      .src code {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--text);
+        font-size: 13.5px;
+      }
+      .src span {
         color: var(--text-muted);
-        font-size: 11.5px;
+        font-size: 13.5px;
       }
     </style>
   </head>
   <body class="dg">
-    <h1>Folio <em>design guide</em></h1>
-    <p class="lede">
-      One shell, six semesters, a few voices. The drawings carry the colour; everything around them stays quiet.
-      For the website and the printed book together. Full text in DESIGN.md.
-    </p>
-
-    <!-- 1 -->
-    <section>
-      <h2><b>01</b>Colour</h2>
-      <p class="note">One warm neutral ramp, one accent, and one colour per semester. Nothing else, except inside a voice (section 8).</p>
-      <div class="row" style="grid-template-columns: repeat(11, 1fr)">
-        <div class="sw" data-t="--paper"><small>Page ground</small></div>
-        <div class="sw" data-t="--paper-2"><small>Tinted bands</small></div>
-        <div class="sw" data-t="--card"><small>Cards, tiles</small></div>
-        <div class="sw" data-t="--line"><small>Rules</small></div>
-        <div class="sw" data-t="--line-strong"><small>Strong rules</small></div>
-        <div class="sw" data-t="--muted"><small>Captions, labels</small></div>
-        <div class="sw" data-t="--ink-2"><small>Body text</small></div>
-        <div class="sw" data-t="--ink"><small>Headings, dark bands</small></div>
-        <div class="sw" data-t="--accent"><small>Accent as text</small></div>
-        <div class="sw" data-t="--accent-fill"><small>Accent fill, focus</small></div>
-        <div class="sw" data-t="--accent-light"><small>Accent on dark</small></div>
+    <!-- 00 Principle -->
+    <header class="mast">
+      <div>
+        <div class="id lab"><b>Folio</b><span>Design system</span><span>v1.0</span><span>2026</span><span>Website + printed book</span></div>
+        <h1><span>One shell.</span><span>Six semesters.</span><em>A few voices.</em></h1>
+        <p class="sub">The drawings carry the colour. Everything around them stays quiet.</p>
       </div>
+      <div>
+        <ul>
+          <li><b>Colour</b><span>marks where you are</span></li>
+          <li><b>Type</b><span>gives the hierarchy</span></li>
+          <li><b>Grid</b><span>gives the consistency</span></li>
+          <li><b>Birds</b><span>give the memory</span></li>
+        </ul>
+        <div class="map"><b>01</b>Foundations <b>02</b>Form <b>03</b>Components <b>04</b>Page <b>05</b>Signature <b>06</b>Voices</div>
+      </div>
+    </header>
 
-      <div class="cols" style="grid-template-columns: 1.15fr 1fr; margin-top: 22px">
-        <div>
-          <h3>Semester colours · fill (wide) and its text shade (narrow)</h3>
-          <div class="row" style="grid-template-columns: repeat(6, 1fr)">
-            <div class="sw sem" data-s="1"><strong>I · Ink</strong><small>C80 M65 Y10 K5</small></div>
-            <div class="sw sem" data-s="2"><strong>II · Ember</strong><small>C10 M60 Y90 K0</small></div>
-            <div class="sw sem" data-s="3"><strong>III · Mauve</strong><small>C30 M70 Y20 K5</small></div>
-            <div class="sw sem" data-s="4"><strong>IV · Olive</strong><small>C55 M30 Y95 K10</small></div>
-            <div class="sw sem" data-s="5"><strong>V · Lagoon</strong><small>C80 M25 Y45 K5</small></div>
-            <div class="sw sem" data-s="6"><strong>VI · Red</strong><small>C25 M85 Y70 K15</small></div>
+    <!-- 01 Foundations -->
+    <section>
+      <div class="head"><span class="n">01</span><h2>Foundations</h2><span class="say">Colour, type, grid</span><span class="lab part">Principles</span></div>
+
+      <div class="block">
+        <div class="cols" style="grid-template-columns: 1fr 1fr">
+          <div>
+            <h3>Colour</h3>
+            <div class="ratio">
+              <div class="q"><span class="big">90% quiet</span><i style="background: var(--paper)"></i><i style="background: var(--card)"></i><i style="background: var(--line)"></i><i style="background: var(--ink)"></i></div>
+              <div class="c"><i style="--c: var(--accent-fill)"></i><i style="--c: var(--sem-1)"></i><i style="--c: var(--sem-2)"></i><i style="--c: var(--sem-3)"></i><i style="--c: var(--sem-4)"></i><i style="--c: var(--sem-5)"></i><i style="--c: var(--sem-6)"></i></div>
+            </div>
+            <p class="lab" style="margin-top: 8px; display: flex; justify-content: space-between"><span>Neutrals: paper, card, line, ink</span><span>10% colour</span></p>
+            <p class="big" style="margin-top: 26px">One neutral ground, one accent, one colour per semester.</p>
+            <p class="muted" style="margin-top: 8px">Never introduce another colour to solve a local problem. On a project page the semester colour replaces the accent.</p>
           </div>
-          <p class="muted" style="margin-top: 10px">
-            Fill is for edges, bars and dots. The text shade is for anything that is read: the fills of II to V are too
-            light for text on paper (4.5:1 minimum). On a project page the semester colour replaces the accent.
-          </p>
+          <div>
+            <div class="grp"><span class="lab">Surface</span><div class="chips" data-chips="paper paper-2 card"></div></div>
+            <div class="grp"><span class="lab">Text</span><div class="chips" data-chips="ink ink-2 muted"></div></div>
+            <div class="grp"><span class="lab">Structure</span><div class="chips" data-chips="line line-strong"></div></div>
+            <div class="grp"><span class="lab">Accent</span><div class="chips" data-chips="accent accent-fill accent-light"></div></div>
+          </div>
         </div>
-        <div>
-          <table>
-            <tr><th>Role</th><th>On paper</th><th>On a dark band</th></tr>
-            <tr><td><code>--text</code> headings</td><td><i class="dot" style="--c: var(--ink)"></i>ink</td><td><i class="dot" style="--c: var(--paper)"></i>paper</td></tr>
-            <tr><td><code>--text-2</code> body</td><td><i class="dot" style="--c: var(--ink-2)"></i>ink-2</td><td><i class="dot" style="--c: #bdbbb7"></i>paper 75%</td></tr>
-            <tr><td><code>--text-muted</code> captions</td><td><i class="dot" style="--c: var(--muted)"></i>muted</td><td><i class="dot" style="--c: #a09e9a"></i>paper 62%</td></tr>
-            <tr><td><code>--rule</code> borders</td><td><i class="dot" style="--c: var(--line)"></i>line</td><td><i class="dot" style="--c: #353432"></i>paper 14%</td></tr>
-            <tr><td><code>--surface</code> cards</td><td><i class="dot" style="--c: var(--card)"></i>card</td><td><i class="dot" style="--c: #1f1e1d"></i>paper 4%</td></tr>
-            <tr><td><code>--accent-text</code></td><td><i class="dot" style="--c: var(--accent)"></i>accent</td><td><i class="dot" style="--c: var(--accent-light)"></i>accent-light</td></tr>
-            <tr><td><code>--sem</code> / <code>--sem-text</code></td><td colspan="2">the current semester's fill / text shade</td></tr>
-          </table>
+        <div class="sems">
+          <div data-sem="1"><i></i><b>I · Ink</b><small></small></div>
+          <div data-sem="2"><i></i><b>II · Ember</b><small></small></div>
+          <div data-sem="3"><i></i><b>III · Mauve</b><small></small></div>
+          <div data-sem="4"><i></i><b>IV · Olive</b><small></small></div>
+          <div data-sem="5"><i></i><b>V · Lagoon</b><small></small></div>
+          <div data-sem="6"><i></i><b>VI · Red</b><small></small></div>
+        </div>
+        <p class="muted" style="margin-top: 10px">Wide: the fill, for edges, bars and dots. Narrow: its darker text shade, for anything that is read.</p>
+      </div>
+
+      <div class="block">
+        <div class="cols" style="grid-template-columns: 1.35fr 1fr">
+          <div>
+            <h3>Type</h3>
+            <div class="spec" data-sem="3">
+              <div style="font: 600 var(--fs-label) var(--font-sans); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--sem-text)">Semester 3 · Architectural Design III · 2025</div>
+              <span><code>--fs-label</code>uppercase, +0.14 em</span>
+              <div style="font: 400 76px/0.98 var(--font-serif)">Urban <em style="color: var(--sem-text)">Acupuncture</em></div>
+              <span><code>--fs-h1</code>serif, regular; one word italic in the semester colour</span>
+              <div style="font: 400 40px/1.05 var(--font-serif)">The building</div>
+              <span><code>--fs-h2</code>chapter title</span>
+              <div style="font: 600 var(--fs-h3) var(--font-sans)">Ground floor: the printshop</div>
+              <span><code>--fs-h3</code>sans, 600</span>
+              <div style="font-size: var(--fs-body); line-height: 1.7; color: var(--text-2)">Malé has become a monotonous concrete jungle. This project works by precise, strategic insertions.</div>
+              <span><code>--fs-body</code>1 rem / 1.7, 68 characters a line at most</span>
+              <div style="font-size: var(--fs-caption); color: var(--text-muted)">Section through the stair core, looking east</div>
+              <span><code>--fs-caption</code>muted, upright, left</span>
+            </div>
+          </div>
+          <div>
+            <h4>Six families, no others</h4>
+            <div class="fam"><b style="font: 500 21px var(--font-sans)">Inter</b><span>text, labels, controls</span></div>
+            <div class="fam"><b style="font: 400 30px/1 var(--font-serif)">Instrument Serif <em>Italic</em></b><span>titles, numerals, quotes</span></div>
+            <div class="fam"><b style="font: 700 21px var(--font-book)">Source Sans 3</b><span>the book's voice (Myriad Pro in print)</span></div>
+            <div class="fam"><b style="font: italic 400 24px var(--font-book-serif)">EB Garamond Italic</b><span>Sem 4 standfirsts</span></div>
+            <div class="fam"><b style="font: 400 17px var(--font-data)">IBM Plex Mono</b><span>data on drafted pages</span></div>
+            <div class="fam"><b style="font: 500 22px var(--font-thaana)">ދިވެހި</b><span>Dhivehi names</span></div>
+            <p class="big" style="margin-top: 22px">Uppercase is for labels, metadata and navigation. Never for titles.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="cols" style="grid-template-columns: 1.35fr 1fr">
+          <div>
+            <h3>Grid</h3>
+            <p class="lab" style="display: flex; justify-content: space-between; margin-bottom: 8px"><span>Desktop · 12 columns · 24 px gutter</span><span>1180 px maximum</span></p>
+            <div class="gridbox">
+              <div class="cols12"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="span" style="grid-template-columns: 1fr 1fr"><div>6 · title and facts</div><div>6 · lead image</div></div>
+              <div class="span" style="grid-template-columns: 5fr 7fr"><div>5 · text</div><div>7 · drawing</div></div>
+              <div class="span" style="grid-template-columns: repeat(3, 1fr)"><div>4</div><div>4</div><div>4 · drawing set</div></div>
+              <div class="span" style="grid-template-columns: 2fr 8fr 2fr; margin-bottom: 0"><i></i><div>8 · body text, 68 characters</div><i></i></div>
+            </div>
+          </div>
+          <div>
+            <div class="cols" style="grid-template-columns: 1.5fr 1fr; gap: 24px; align-items: end; margin-bottom: 22px">
+              <div><div class="dev" style="grid-template-columns: 1fr 1fr"><i></i><i></i><i></i><i></i></div><p class="lab" style="margin-top: 8px">Tablet · 820 px and under · 2 columns</p></div>
+              <div><div class="dev" style="width: 78px"><i></i><i></i><i></i></div><p class="lab" style="margin-top: 8px">Phone · 1 column</p></div>
+            </div>
+            <div class="facts">
+              <div><b>Gutter</b><span>24 px · 16 on a phone</span></div>
+              <div><b>Margin</b><span>20 px each side, at least</span></div>
+              <div><b>Between chapters</b><span>40 to 68 px and a rule</span></div>
+              <div><b>Inside a chapter</b><span>steps of 4 px</span></div>
+              <div><b>Images</b><span>own ratio, never cropped</span></div>
+              <div><b>Lead image</b><span>beside the title; above it on a phone</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 2 -->
+    <!-- 02 Form + motion -->
     <section>
-      <h2><b>02</b>Type</h2>
-      <p class="note">Six families, eight sizes. Display is serif at regular weight, never bold; labels and sub-headings are sans. A heading is never both serif and uppercase.</p>
-      <div class="cols" style="grid-template-columns: 1.25fr 1fr">
-        <table>
-          <tr><th style="width: 108px">Token</th><th style="width: 92px">Size</th><th>Sample</th><th style="width: 190px">Use</th></tr>
-          <tr><td><code>--fs-h1</code></td><td>2.9 – 5.4 rem</td><td style="font: 400 46px/1 var(--font-serif)">Urban <em style="color: var(--sem-3-text)">Acupuncture</em></td><td class="muted">Page title; one word italic in the semester colour</td></tr>
-          <tr><td><code>--fs-h2</code></td><td>2 – 2.9 rem</td><td style="font: 400 32px/1.05 var(--font-serif)">Site analysis</td><td class="muted">Chapter title</td></tr>
-          <tr><td><code>--fs-h3</code></td><td>1.05 rem · 600</td><td style="font: 600 1.05rem/1.3 var(--font-sans)">Roof design</td><td class="muted">Sub-heading</td></tr>
-          <tr><td><code>--fs-lead</code></td><td>1.08 rem</td><td style="font-size: 1.08rem; color: var(--text-2)">A space that invites book lovers in.</td><td class="muted">Standfirst</td></tr>
-          <tr><td><code>--fs-body</code></td><td>1 rem / 1.7</td><td style="font-size: 1rem; color: var(--text-2)">The form evolves from a simple allocated space.</td><td class="muted">Body, 68 characters a line at most</td></tr>
-          <tr><td><code>--fs-small</code></td><td>0.9 rem</td><td style="font-size: 0.9rem; color: var(--text-2)">Natural light for daytime lighting</td><td class="muted">Lists, secondary text</td></tr>
-          <tr><td><code>--fs-caption</code></td><td>0.82 rem</td><td style="font-size: 0.82rem; color: var(--text-muted)">Ground floor plan (scale 1:20)</td><td class="muted">Captions: muted, upright, left</td></tr>
-          <tr><td><code>--fs-label</code></td><td>0.76 rem · 600</td><td style="font: 600 0.76rem var(--font-sans); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--sem-3-text)">Semester 3 · 2025</td><td class="muted">Kickers, chips, tile headings; +0.14 em</td></tr>
-        </table>
-        <table>
-          <tr><th style="width: 132px">Token</th><th>Family</th><th style="width: 170px">Role</th></tr>
-          <tr><td><code>--font-sans</code></td><td style="font: 500 17px var(--font-sans)">Inter</td><td class="muted">Text, labels, controls</td></tr>
-          <tr><td><code>--font-serif</code></td><td style="font: 400 23px/1 var(--font-serif)">Instrument Serif <em>Italic</em></td><td class="muted">Titles, numerals, quotes</td></tr>
-          <tr><td><code>--font-book</code></td><td style="font: 700 17px var(--font-book)">Source Sans 3 <i style="font-weight: 400">Italic</i></td><td class="muted">The book's voice (Myriad Pro in print): Sem 4, 5</td></tr>
-          <tr><td><code>--font-book-serif</code></td><td style="font: italic 400 19px var(--font-book-serif)">EB Garamond Italic</td><td class="muted">Sem 4 standfirsts</td></tr>
-          <tr><td><code>--font-data</code></td><td style="font: 400 14px var(--font-data)">IBM Plex Mono</td><td class="muted">Data and labels on drafted pages</td></tr>
-          <tr><td><code>--font-thaana</code></td><td style="font: 500 18px var(--font-thaana)" dir="rtl">ދިވެހި</td><td class="muted">Dhivehi names</td></tr>
-          <tr><td>Book</td><td style="font: 400 14px var(--font-book)">Myriad Pro throughout</td><td class="muted">11 pt minimum text; running heads 6.5 pt caps +100</td></tr>
-        </table>
-      </div>
-    </section>
-
-    <!-- 3 -->
-    <section>
-      <h2><b>03</b>Shape, spacing and motion</h2>
-      <p class="note">Four corners, six steps of space, one shadow, one curve.</p>
-      <div class="cols" style="grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.9fr)">
-        <div class="row" style="grid-template-columns: repeat(4, 1fr)">
-          <div><div class="shape" style="border-radius: var(--radius-xs)"></div><p><code>--radius-xs</code><br>4px</p><p class="muted">Drawings, drafted pages</p></div>
-          <div><div class="shape" style="border-radius: var(--radius-sm)"></div><p><code>--radius-sm</code><br>8px</p><p class="muted">Photos, lead image, tiles</p></div>
-          <div><div class="shape" style="border-radius: var(--radius)"></div><p><code>--radius</code><br>14px</p><p class="muted">Cards</p></div>
-          <div><div class="shape" style="border-radius: var(--radius-pill)"></div><p><code>--radius-pill</code><br>999px</p><p class="muted">Buttons, tags, chips</p></div>
+      <div class="head"><span class="n">02</span><h2>Form + motion</h2><span class="say">Never restyled, rounded or animated for effect</span><span class="lab part">Principles</span></div>
+      <div class="cols" style="grid-template-columns: 1.15fr 1fr 0.55fr 1fr">
+        <div>
+          <h4>Radius · four</h4>
+          <div class="row" style="grid-template-columns: repeat(4, 1fr)">
+            <div><div class="shape" style="border-radius: var(--radius-xs)"></div><b>4</b><p class="muted" style="font-size: 13px">drawings</p></div>
+            <div><div class="shape" style="border-radius: var(--radius-sm)"></div><b>8</b><p class="muted" style="font-size: 13px">photos, tiles</p></div>
+            <div><div class="shape" style="border-radius: var(--radius)"></div><b>14</b><p class="muted" style="font-size: 13px">cards</p></div>
+            <div><div class="shape" style="border-radius: var(--radius-pill)"></div><b>pill</b><p class="muted" style="font-size: 13px">buttons, chips</p></div>
+          </div>
         </div>
         <div>
+          <h4>Spacing · six steps, then sections</h4>
           <div class="steps">
             <div><i style="width: var(--space-1); height: var(--space-1)"></i>4</div>
             <div><i style="width: var(--space-2); height: var(--space-2)"></i>8</div>
@@ -639,134 +1105,174 @@
             <div><i style="width: var(--space-6); height: var(--space-6)"></i>36</div>
             <div><i style="width: 68px; height: 68px"></i>40 – 68</div>
           </div>
-          <p style="margin-top: 8px"><code>--space-1</code> … <code>--space-6</code> (px) and <code>--space-section</code></p>
-          <p class="muted">Chapters are separated by a rule and space, not by cards. Content is 1180 px wide at most.</p>
         </div>
         <div>
-          <div class="shape" style="height: 40px; border: 0; border-radius: var(--radius-sm); box-shadow: var(--shadow)"></div>
-          <p style="margin-top: 14px"><code>--shadow</code> lead images and hovered cards only</p>
-          <p><code>--ease</code> content rises 26 px over 0.8 s, 80 ms apart</p>
-          <p class="muted">Hover moves 1 to 4 px. Nothing scales, spins or bounces.</p>
+          <h4>Shadow · one</h4>
+          <div class="shape" style="border: 0; border-radius: var(--radius-sm); box-shadow: var(--shadow)"></div>
+          <p class="muted" style="font-size: 13px">lead images, hovered cards</p>
+        </div>
+        <div>
+          <h4>Motion · one curve, three speeds</h4>
+          <div class="speed"><b>200 ms</b><div><i style="width: 25%"></i><small>fast · hover, colour</small></div></div>
+          <div class="speed"><b>250 ms</b><div><i style="width: 31%"></i><small>medium · cards, buttons, menus</small></div></div>
+          <div class="speed"><b>800 ms</b><div><i style="width: 100%"></i><small>slow · content entering, rising 26 px</small></div></div>
+        </div>
+      </div>
+      <p class="big" style="margin-top: 30px">Hover moves a thing 1 to 4 px. Nothing bounces, stretches, scales or spins.</p>
+    </section>
+
+    <!-- 03 Components -->
+    <section>
+      <div class="head"><span class="n">03</span><h2>Components</h2><span class="say">One look for hover, one for current, one for focus</span><span class="lab part">Core system</span></div>
+      <div class="cols" style="grid-template-columns: 1.75fr 1fr">
+        <div>
+          <div class="comp">
+            <span class="lab">Navigation</span>
+            <div class="states">
+              <div class="st"><span class="navlink">Home</span><small>default</small></div>
+              <div class="st"><span class="navlink h">Home</span><small>hover</small></div>
+              <div class="st"><span class="navlink a">Academic</span><small>current</small></div>
+              <div class="st"><span class="btn btn--primary">Download CV</span><small>the one dark pill</small></div>
+            </div>
+          </div>
+          <div class="comp" data-sem="3">
+            <span class="lab">Chapter chips</span>
+            <div class="states">
+              <div class="st"><span class="chip">Concept</span><small>default</small></div>
+              <div class="st"><span class="chip h">Concept</span><small>hover</small></div>
+              <div class="st"><span class="chip a">Context</span><small>current · semester colour</small></div>
+            </div>
+          </div>
+          <div class="comp">
+            <span class="lab">Buttons</span>
+            <div class="states">
+              <div class="st"><span class="btn btn--primary">View project</span><small>default</small></div>
+              <div class="st"><span class="btn btn--primary h">View project</span><small>hover</small></div>
+              <div class="st"><span class="btn btn--primary f">View project</span><small>focus</small></div>
+              <div class="st"><span class="btn btn--primary d">View project</span><small>disabled</small></div>
+              <div class="st"><span class="btn btn--ghost">View project</span><small>ghost</small></div>
+              <div class="st"><span class="ondark"><span class="btn btn--light">Get in touch</span></span><small>on dark</small></div>
+            </div>
+          </div>
+          <div class="comp" data-sem="3">
+            <span class="lab">Cards and tiles</span>
+            <div class="states">
+              <div class="st"><div class="crd"><span class="lab">Card</span><b>A separate object</b></div><small>default</small></div>
+              <div class="st"><div class="crd h"><span class="lab">Card</span><b>Lifts 2 px</b></div><small>hover, if it is a link</small></div>
+              <div class="st"><div class="crd tile"><span class="lab">Site</span><b>Henveiru, Malé</b></div><small>fact tile · label + one value</small></div>
+            </div>
+          </div>
+          <div class="comp">
+            <span class="lab">Progress</span>
+            <div class="states">
+              <div class="st"><span class="sem-bar" data-at="3"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>filled to the current semester</small></div>
+              <div class="st"><span style="font-weight: 600; text-decoration: underline; text-underline-offset: 4px">Read more →</span><small>text link · always underlined</small></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4>Accessibility · the eight checks</h4>
+          <ul class="a11y">
+            <li><b>Body text</b><span>16 px; nothing under 12</span></li>
+            <li><b>Contrast</b><span>4.5 : 1 for all text</span></li>
+            <li><b>Focus</b><span>2 px terracotta ring, 3 px off</span></li>
+            <li><b>Links</b><span>underlined, not colour alone</span></li>
+            <li><b>Reduced motion</b><span>honoured; nothing moves</span></li>
+            <li><b>Alt text</b><span>what the drawing shows</span></li>
+            <li><b>Keyboard</b><span>everything reachable, in order</span></li>
+            <li><b>Touch target</b><span>44 px on a phone</span></li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- 4 -->
+    <!-- 04 Project page -->
     <section>
-      <h2><b>04</b>States</h2>
-      <p class="note">Hover is a slightly darker ground. "Current" is the same shape, filled. Keyboard focus is always a 2 px terracotta ring, 3 px off the element.</p>
-      <div class="states">
-        <div>
-          <h3>Navbar link</h3>
-          <div class="panel">
-            <div class="st"><span class="navlink">Home</span><small>default</small></div>
-            <div class="st"><span class="navlink h">Home</span><small>hover</small></div>
-            <div class="st"><span class="navlink a">Academic</span><small>current</small></div>
-          </div>
-        </div>
-        <div data-sem="3">
-          <h3>Chapter chip (in the semester's text shade)</h3>
-          <div class="panel">
-            <div class="st"><span class="chip">Concept</span><small>default</small></div>
-            <div class="st"><span class="chip h">Concept</span><small>hover</small></div>
-            <div class="st"><span class="chip a">Context</span><small>current</small></div>
-          </div>
-        </div>
-        <div>
-          <h3>Buttons</h3>
-          <div class="panel">
-            <div class="st"><span class="btn btn--primary">Download CV</span><small>primary</small></div>
-            <div class="st"><span class="btn btn--primary h">Download CV</span><small>hover</small></div>
-            <div class="st"><span class="btn btn--ghost">View project</span><small>ghost</small></div>
-            <div class="st"><span class="btn btn--ghost f">View project</span><small>focus</small></div>
-          </div>
-        </div>
-        <div>
-          <h3>On a dark band</h3>
-          <div class="panel dark">
-            <div class="st"><span class="btn btn--light">Get in touch</span><small>light</small></div>
-            <div class="st"><span style="color: var(--accent-light); font-weight: 600; text-decoration: underline; text-underline-offset: 4px">Read more →</span><small>text link</small></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5 -->
-    <section>
-      <h2><b>05</b>Signature devices</h2>
-      <p class="note">The four things that make the book and the site the same work. Never restyled, rounded or animated.</p>
-      <div class="cols" style="grid-template-columns: minmax(0, 1.7fr) minmax(0, 0.9fr) minmax(0, 0.9fr)">
-        <div>
-          <h3>Progress bar · six segments, filled to the current semester</h3>
-          <div class="bars">
-            <div><span class="sem-bar" data-at="1"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>Sem I</small></div>
-            <div><span class="sem-bar" data-at="2"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>II</small></div>
-            <div><span class="sem-bar" data-at="3"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>III</small></div>
-            <div><span class="sem-bar" data-at="4"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>IV</small></div>
-            <div><span class="sem-bar" data-at="5"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>V · interim cover</small></div>
-            <div><span class="sem-bar" data-at="6"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>VI · final cover</small></div>
-          </div>
-          <p class="muted" style="margin-top: 10px">
-            Site: under every project title and in the pager. Book: cover and each opener. 1 px ink outline, square
-            ends, one fixed length per medium. Used for semester progress and nothing else.
-          </p>
-        </div>
-        <div data-sem="5">
-          <h3>Page edge</h3>
-          <div class="mock" style="height: 62px"><i class="read"></i><i class="edge"></i></div>
-          <p class="muted" style="margin-top: 10px">
-            Site: 6 px down the right edge and a 3 px reading bar on top, both <code>--sem</code>. Book: six tabs on the
-            outer edge, the current one at full strength.
-          </p>
-        </div>
-        <div>
-          <h3>Figure numbers (book)</h3>
-          <p style="font: 400 15px var(--font-book)"><b style="color: var(--sem-3)">FIG 3.4</b> Massing study, street side</p>
-          <p class="muted" style="margin-top: 10px">The number takes the semester colour; the caption stays black. Group drawings carry a <code>GROUP WORK</code> tag.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 -->
-    <section>
-      <h2><b>06</b>The birds</h2>
-      <p class="note">One bird per semester, from the Wildlife Illustrated drawings. It appears once per semester: on the book's opener, and behind the top of that project's page.</p>
-      <div class="birds">
-        <div class="bird" data-sem="1"><div class="pic"><img src="../site/assets/img/birds/sem1.webp" alt=""></div><b>I · Lesser Whistling-Duck</b><span>pen · 001</span></div>
-        <div class="bird" data-sem="2"><div class="pic"><img src="../site/assets/img/birds/sem2.webp" alt=""></div><b>II · Grey waterbird</b><span>watercolour · 032</span></div>
-        <div class="bird" data-sem="3"><div class="pic"><img src="../site/assets/img/birds/sem3.webp" alt=""></div><b>III · Flamingo</b><span>digital · 011</span></div>
-        <div class="bird" data-sem="4"><div class="pic"><img src="../site/assets/img/birds/sem4.webp" alt=""></div><b>IV · House Crow</b><span>ink wash · 177</span></div>
-        <div class="bird" data-sem="5"><div class="pic"><img src="../site/assets/img/birds/sem5.webp" alt=""></div><b>V · Grey Heron</b><span>digital · 133</span></div>
-        <div class="bird" data-sem="6"><div class="pic muted">to be chosen</div><b>VI</b><span>with the final project</span></div>
-      </div>
-
-      <div class="cols" style="grid-template-columns: 1.25fr 0.75fr 1fr; margin-top: 22px; gap: 28px">
-        <div data-sem="3">
-          <h3>On the site · behind the title, large and faint</h3>
-          <div class="mock hero">
+      <div class="head"><span class="n">04</span><h2>Project page</h2><span class="say">Every studio project has this shape, in this order</span><span class="lab part">Application</span></div>
+      <div class="cols" style="grid-template-columns: 1.2fr 1fr; align-items: start">
+        <div class="mock pg" data-sem="3">
+          <div class="bar"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="hero">
             <div class="txt">
               <img src="../site/assets/img/birds/sem3.webp" alt="">
+              <span class="mk" style="left: -34px; top: -6px">1</span>
               <div class="k">Semester 3 · Design III · 2025</div>
+              <span class="mk" style="left: -34px; top: 34px">2</span>
               <div class="t">Urban <em>Acupuncture</em></div>
+              <span class="mk" style="left: 276px; top: 8px">3</span>
+              <span class="mk" style="left: 108px; top: 116px">4</span>
               <span class="sem-bar" data-at="3"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="mk" style="left: -34px; top: 146px">5</span>
               <div class="s">Strategic intervention in the urban fabric</div>
+              <i class="ln" style="width: 92%"></i><i class="ln" style="width: 84%"></i><i class="ln" style="width: 60%"></i>
               <div class="f"><i></i><i></i><i></i></div>
             </div>
             <div class="lead"></div>
-            <div class="sub"></div>
+            <span class="mk" style="right: 40px; top: 40px">6</span>
+          </div>
+          <div class="sub"><span class="mk" style="left: 12px">7</span><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="ch">
+            <span class="mk" style="left: 12px; top: 20px">8</span>
+            <div class="no">01</div>
+            <div class="h">The brief</div>
+            <div class="dr" style="grid-template-columns: 5fr 7fr"><div><i class="ln" style="width: 95%"></i><i class="ln" style="width: 88%"></i><i class="ln" style="width: 92%"></i><i class="ln" style="width: 50%"></i></div><i></i></div>
+          </div>
+          <div class="ch">
+            <div class="no">02</div>
+            <div class="h">Drawings</div>
+            <div class="dr" style="grid-template-columns: repeat(3, 1fr)"><i></i><i></i><i></i></div>
+          </div>
+          <div class="pgr"><span class="mk" style="left: 12px">9</span><i></i><span class="sem-bar" data-at="3" style="width: 96px; height: 6px"><i></i><i></i><i></i><i></i><i></i><i></i></span><i></i></div>
+          <i class="edge"></i>
+        </div>
+        <ul class="anat">
+          <li><i>1</i><b>Semester</b><span>Semester N · course · year</span></li>
+          <li><i>2</i><b>Title</b><span>serif; the last word italic, in the semester colour</span></li>
+          <li><i>3</i><b>Bird</b><span>behind the title, large and faint</span></li>
+          <li><i>4</i><b>Progress</b><span>the six-segment bar, filled to N</span></li>
+          <li><i>5</i><b>Sub-line, standfirst, facts</b><span>the project's own words; two to four fact tiles</span></li>
+          <li><i>6</i><b>Lead image</b><span>one, with the semester colour down its left edge</span></li>
+          <li><i>7</i><b>Chapter nav</b><span>sticky; one chip per chapter</span></li>
+          <li><i>8</i><b>Chapters</b><span>numbered; a rule between, no cards; drawings on white with a caption under</span></li>
+          <li><i>9</i><b>Pager</b><span>previous · progress · next</span></li>
+          <li><i style="background: var(--sem-3)"></i><b>Page edge</b><span>6 px of the semester colour, all the way down</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05 Signature devices -->
+    <section>
+      <div class="head"><span class="n">05</span><h2>Signature devices</h2><span class="say">What makes the book and the site the same work</span><span class="lab part">Signature</span></div>
+      <div class="cols" style="grid-template-columns: 1.3fr 1fr; align-items: end">
+        <div class="shout">One bird <em>per semester.</em></div>
+        <p class="lab" style="font-size: 14px; text-align: right">Index · memory · not decoration</p>
+      </div>
+      <div class="birds">
+        <div class="bird" data-sem="1"><div class="pic"><img src="../site/assets/img/birds/sem1.webp" alt=""></div><b>I · Lesser Whistling-Duck</b><span>pen</span></div>
+        <div class="bird" data-sem="2"><div class="pic"><img src="../site/assets/img/birds/sem2.webp" alt=""></div><b>II · Grey waterbird</b><span>watercolour</span></div>
+        <div class="bird" data-sem="3"><div class="pic"><img src="../site/assets/img/birds/sem3.webp" alt=""></div><b>III · Flamingo</b><span>digital</span></div>
+        <div class="bird" data-sem="4"><div class="pic"><img src="../site/assets/img/birds/sem4.webp" alt=""></div><b>IV · House Crow</b><span>ink wash</span></div>
+        <div class="bird" data-sem="5"><div class="pic"><img src="../site/assets/img/birds/sem5.webp" alt=""></div><b>V · Grey Heron</b><span>digital</span></div>
+        <div class="bird" data-sem="6"><div class="pic muted">to be chosen</div><b>VI</b><span>with the final project</span></div>
+      </div>
+      <div class="cols" style="grid-template-columns: 1fr 1fr 0.8fr 0.8fr; gap: 32px">
+        <div data-sem="3">
+          <h4>Site · behind the title, 26%</h4>
+          <div class="mock sitebird">
+            <img src="../site/assets/img/birds/sem3.webp" alt="">
+            <div class="lab" style="color: var(--sem-text); font-size: 9px">Semester 3 · 2025</div>
+            <div class="t">Urban <em>Acupuncture</em></div>
+            <span class="sem-bar" data-at="3" style="width: 96px; height: 6px"><i></i><i></i><i></i><i></i><i></i><i></i></span>
             <i class="edge"></i>
-            <span class="dim" style="top: 8px; left: 245px">top = top of kicker</span>
-            <span class="dim" style="top: 226px; left: 286px">right edge 2 rem into the gutter</span>
-            <span class="dim" style="top: 226px; left: 24px">height 13 – 25 rem · opacity 26%</span>
           </div>
         </div>
         <div data-sem="3">
-          <h3>In the book · opener, full strength</h3>
+          <h4>Book · the opener, 100%</h4>
           <div class="mock opener">
             <div>
               <div class="num">03</div>
               <div class="ttl">Urban Acupuncture</div>
-              <span class="sem-bar" data-at="3" style="width: 80px; height: 5px"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="sem-bar" data-at="3" style="width: 86px; height: 6px"><i></i><i></i><i></i><i></i><i></i><i></i></span>
             </div>
             <div>
               <img src="../site/assets/img/birds/sem3.webp" alt="">
@@ -778,99 +1284,129 @@
           </div>
         </div>
         <div>
-          <h3>Always</h3>
-          <ul class="rules">
-            <li>One bird per semester, used once per medium.</li>
-            <li>As drawn: its own colours, its own direction.</li>
-            <li>Site: last in the layer order. Text, tiles and the lead image sit over it; it never covers anything.</li>
-            <li>Site: 26% strength, 13 to 25 rem tall, never taller than the text beside it. Phone: same, flush right.</li>
-            <li>Book: 100% strength, outer half of the opener, 5 mm clear of all text. May bleed.</li>
-            <li>File: white paper removed, WebP, 760 px at most, <code>alt=""</code>.</li>
+          <h4>Allowed</h4>
+          <ul class="yn">
+            <li>The book's semester opener</li>
+            <li>Behind a project page's title</li>
+            <li>A semester index</li>
+            <li>As drawn: own colours, own direction</li>
           </ul>
-          <h3 style="margin-top: 14px">Never</h3>
-          <ul class="rules no">
-            <li>Mirrored, recoloured, outlined, boxed or cropped into.</li>
-            <li>On the homepage, navbar, footer, cover or chapter pages.</li>
-            <li>Clickable, zoomable or animated.</li>
-            <li>Two birds in one view.</li>
+        </div>
+        <div>
+          <h4>Not allowed</h4>
+          <ul class="yn no">
+            <li>Navbar, footer, chapter nav</li>
+            <li>Filling an empty corner</li>
+            <li>Two birds in one view</li>
+            <li>Mirrored, recoloured, boxed, cropped</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="cols" style="grid-template-columns: 1.25fr 1fr 1fr; margin-top: 44px; padding-top: 34px; border-top: 1px solid var(--rule)">
+        <div>
+          <h4>Progress bar · semester lines</h4>
+          <div class="bars">
+            <div><span class="sem-bar" data-at="1"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>Semester I</small></div>
+            <div><span class="sem-bar" data-at="3"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>III</small></div>
+            <div><span class="sem-bar" data-at="6"><i></i><i></i><i></i><i></i><i></i><i></i></span><small>VI · the final cover</small></div>
+          </div>
+          <p class="muted" style="margin-top: 12px">Six square segments in one ink outline. Under every title, in the pager, on the cover.</p>
+        </div>
+        <div data-sem="5">
+          <h4>Page edge</h4>
+          <div class="mock" style="height: 58px"><i class="edge"></i><i style="position: absolute; inset: 0 auto auto 0; width: 46%; height: 3px; background: var(--sem)"></i></div>
+          <p class="muted" style="margin-top: 12px">Site: the right edge and the reading bar. Book: six tabs down the outer edge.</p>
+        </div>
+        <div>
+          <h4>Figure numbers · book</h4>
+          <p style="font: 400 21px var(--font-book); color: var(--text)"><b style="color: var(--sem-3)">FIG 3.4</b> Massing study</p>
+          <p class="muted" style="margin-top: 12px">The number takes the semester colour. The caption stays black.</p>
         </div>
       </div>
     </section>
 
-    <!-- 7, 8 -->
-    <section class="cols" style="grid-template-columns: 0.85fr 1.15fr">
-      <div>
-        <h2><b>07</b>The project page</h2>
-        <p class="note">Every studio project has this shape, in this order.</p>
-        <div class="tpl">
-          <div><b>Kicker</b><span>Semester N · course · year, label style, semester text shade</span></div>
-          <div><b>Title</b><span>serif; the last word italic in the semester colour</span></div>
-          <div><b>Progress bar</b><span>filled to N</span></div>
-          <div><b>Sub-line</b><span>one line in the project's own words, serif italic</span></div>
-          <div><b>Standfirst</b><span>optional; 58 characters a line</span></div>
-          <div><b>Fact tiles</b><span>two to four: a label and one short value</span></div>
-          <div><b>Lead image</b><span>right of the text; above it on a phone</span></div>
-          <div><b>Bird</b><span>behind the text column (section 6)</span></div>
-          <div><b>Chapter nav</b><span>sticky; one chip per chapter</span></div>
-          <div><b>Chapters</b><span>numbered 01, 02 …; rule between; one tinted at most</span></div>
-          <div><b>Pager</b><span>previous · progress bar · next</span></div>
-        </div>
-      </div>
-      <div>
-        <h2><b>08</b>Voices</h2>
-        <p class="note">A page may borrow the look of its own boards: a typeface from the six, and a few colours. The shell, scales, devices and page shape stay.</p>
-        <div class="row" style="grid-template-columns: repeat(4, 1fr)">
-          <div class="voice" style="--bg: var(--paper); --fg: var(--ink); --hl: var(--sem-3-text)">
-            <h3>Sem 1 – 3 · the kit</h3>
-            <div class="vt" style="font: 400 30px/0.98 var(--font-serif)">Blue <span style="font-style: italic; color: var(--sem-2-text)">Canvas</span></div>
-            <small>Instrument Serif + Inter. No colours of its own.</small>
-          </div>
-          <div class="voice" style="--bg: var(--paper-2); --fg: #2f4f4f; --hl: var(--sem-4-text)">
-            <h3>Sem 4 · resit book</h3>
-            <div class="vt" style="font: 700 25px/0.92 var(--font-book); text-transform: uppercase">Measured <span>Embrace</span></div>
-            <small>Source Sans 3 caps, Garamond italic, Plex labels. Slate, steel, navy.</small>
-          </div>
-          <div class="voice" style="--bg: #fff; --fg: var(--ink); --hl: var(--sem-5)">
-            <h3>Sem 5 · the boards</h3>
-            <div class="vt" style="font: 700 25px/0.98 var(--font-book)">Yield, <span>Transmit</span></div>
-            <small>Source Sans 3 bold and italic. White ground, cool foam.</small>
-          </div>
-          <div class="voice" style="--bg: var(--draft-paper); --fg: #15181c; --hl: var(--eng-blue); background-image: var(--drafting-grid); background-size: 16px 16px; border-radius: var(--radius-xs)">
-            <h3>Engineering</h3>
-            <div class="vt" style="font: 600 22px/1.05 var(--font-sans)">Drafting <span>sheet</span></div>
-            <small style="font-family: var(--font-data); font-size: 10.5px">Inter + Plex Mono. Grid, graphite, one blue, square corners.</small>
+    <!-- 06 Voices -->
+    <section>
+      <div class="head"><span class="n">06</span><h2>Voices</h2><span class="say">One shell, many voices</span><span class="lab part">Application</span></div>
+      <div class="cols" style="grid-template-columns: 1.7fr 1fr; align-items: start">
+        <div>
+          <div class="shell"><span class="lab">One shell</span><p class="big" style="margin-top: 4px">Navbar · grid · page shape · devices · footer</p></div>
+          <div class="tree"></div>
+          <div class="row" style="grid-template-columns: repeat(4, 1fr)">
+            <div class="voice" style="--bg: var(--paper); --fg: var(--ink)">
+              <span class="lab">Sem 1 – 3 · the kit</span>
+              <div class="vt" style="font: 400 36px/0.98 var(--font-serif)">Blue <span style="font-style: italic; color: var(--sem-2-text)">Canvas</span></div>
+              <small>The shell, unchanged.</small>
+            </div>
+            <div class="voice" style="--bg: var(--paper-2); --fg: #2f4f4f; --hl: var(--sem-4-text)">
+              <span class="lab">Sem 4 · research book</span>
+              <div class="vt" style="font: 700 29px/0.92 var(--font-book); text-transform: uppercase">Measured <span>Embrace</span></div>
+              <small>Book sans, Garamond italic, slate.</small>
+            </div>
+            <div class="voice" style="--bg: #fff; --fg: var(--ink); --hl: var(--sem-5)">
+              <span class="lab">Sem 5 · the boards</span>
+              <div class="vt" style="font: 700 29px/0.98 var(--font-book)">Yield, <span>Transmit</span></div>
+              <small>Book sans bold and italic, white ground.</small>
+            </div>
+            <div class="voice" style="--bg: var(--draft-paper); --fg: #15181c; --hl: var(--eng-blue); background-image: var(--drafting-grid); background-size: 16px 16px; border-radius: var(--radius-xs)">
+              <span class="lab">Engineering</span>
+              <div class="vt" style="font: 600 26px/1.05 var(--font-sans)">Drafting <span>sheet</span></div>
+              <small>Mono labels, grid paper, one blue.</small>
+            </div>
           </div>
         </div>
-        <table style="margin-top: 16px">
-          <tr><th style="width: 130px"></th><th>Book</th><th>Site</th></tr>
-          <tr><td><b>Ground</b></td><td>White paper</td><td>Warm paper</td></tr>
-          <tr><td><b>Typeface</b></td><td>Myriad Pro</td><td>Inter and Instrument Serif; Source Sans 3 in the book's voice</td></tr>
-          <tr><td><b>Semester colour</b></td><td>Edge tabs, progress bar, figure numbers</td><td>Page edge, reading bar, progress bar, kicker, chapter numbers</td></tr>
-          <tr><td><b>Bird</b></td><td>Opener, large, full strength</td><td>Behind the title, large, 26%</td></tr>
-        </table>
+        <div>
+          <p class="big">A project may change typeface, paper tone and colour. It never changes the grid, the hierarchy or how things behave.</p>
+          <h4 style="margin-top: 24px">Can change</h4>
+          <div class="tags"><span>Typeface, from the six</span><span>Paper tone</span><span>A few colours</span><span>Imagery</span></div>
+          <h4 style="margin-top: 22px">Cannot change</h4>
+          <div class="tags no"><span>Grid</span><span>Spacing</span><span>Page shape</span><span>Navigation</span><span>States</span><span>Devices</span></div>
+        </div>
       </div>
     </section>
 
-    <p class="foot">
-      Source of truth: <code>site/assets/css/main.css</code>. A page stylesheet that contains a hex colour, a font name or a pixel
-      radius is a bug. This sheet reads its values from that file; regenerate it with <code>deno task guide</code>.
-    </p>
+    <!-- Do / Don't -->
+    <section>
+      <div class="head"><span class="n">+</span><h2>Do / Don't</h2><span class="say">The cheat sheet</span></div>
+      <div class="dd">
+        <div><b>Quiet paper grounds</b><span>Decorative gradients</span></div>
+        <div><b>One accent per view</b><span>Several accents</span></div>
+        <div><b>Serif titles, regular weight</b><span>Bold or uppercase serif</span></div>
+        <div><b>One bird per semester</b><span>Birds as decoration</span></div>
+        <div><b>Thin 1 px rules</b><span>Heavy borders and boxes</span></div>
+        <div><b>Deliberate white space</b><span>Filling every gap</span></div>
+        <div><b>Colour to mark position</b><span>A new colour for a local fix</span></div>
+        <div><b>Drawings whole, on white</b><span>Cropping or tinting drawings</span></div>
+        <div><b>Rules and space between chapters</b><span>A card around everything</span></div>
+      </div>
+    </section>
+
+    <!-- Source of truth -->
+    <section>
+      <div class="head"><span class="n">→</span><h2>Source of truth</h2><span class="say">This sheet is the map; these are the territory</span></div>
+      <div class="src">
+        <div><code>DESIGN.md</code><span>The rules, in full</span></div>
+        <div><code>site/assets/css/main.css</code><span>Every value and component</span></div>
+        <div><code>site/_partials/</code><span>The shell: navbar, footer, model viewer</span></div>
+        <div><code>site/sem1.html</code><span>The project page template</span></div>
+        <div><code>site/assets/img/birds/</code><span>The birds</span></div>
+      </div>
+      <p class="muted" style="margin-top: 22px">A page stylesheet that contains a hex colour, a font name or a pixel radius is a bug. This sheet reads its values from <code>main.css</code>; redraw it with <code>deno task guide</code>.</p>
+    </section>
 
     <script>
       const css = getComputedStyle(document.documentElement);
       const val = (t) => css.getPropertyValue(t).trim();
-      for (const el of document.querySelectorAll(".sw[data-t]")) {
-        const t = el.dataset.t;
-        el.style.setProperty("--c", `var(${t})`);
-        el.innerHTML = `<i></i><div><b>${t.slice(2)}</b><span>${val(t)}</span>${el.innerHTML}</div>`;
+      for (const el of document.querySelectorAll("[data-chips]")) {
+        el.innerHTML = el.dataset.chips.split(" ").map((t) =>
+          `<span class="chipc"><i style="--c: var(--${t})"></i><span>${t}<small>${val("--" + t)}</small></span></span>`
+        ).join("");
       }
-      for (const el of document.querySelectorAll(".sw[data-s]")) {
-        const n = el.dataset.s;
-        el.style.setProperty("--c", `var(--sem-${n})`);
-        el.style.setProperty("--t", `var(--sem-${n}-text)`);
+      for (const el of document.querySelectorAll(".sems [data-sem]")) {
+        const n = el.dataset.sem;
         const fill = val(`--sem-${n}`), text = val(`--sem-${n}-text`);
-        el.innerHTML = `<i></i><div>${el.innerHTML.replace("<small>", `<span>${fill}${text === fill ? "" : " · " + text}</span><small>`)}</div>`;
+        el.querySelector("small").textContent = text === fill ? fill : `${fill} · ${text}`;
       }
     </script>
   </body>
