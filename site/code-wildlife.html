@@ -128,6 +128,13 @@
                 <li>Set up a GitHub Actions workflow to deploy on every push.</li>
                 <li>Ended with a refactor of the whole script, the first of many.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                My deploy worked in the wrong order: delete what was published, then build, then
+                copy the new files across. I only found out whether it had worked at the very end,
+                and when the build failed the site stayed down while I debugged it. It took me
+                until version 0.8 to see the fix.
+              </p>
             </div>
           </div>
         </section>
@@ -302,7 +309,7 @@
           <h2 data-label="v0.8 · May to July 2026">Doing it properly</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Measuring performance and accessibility; CI on pull requests</dd></div>
+              <div><dt>New to me</dt><dd>Build first, publish second; measuring performance and accessibility; CI on pull requests</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -326,6 +333,24 @@
                 <li>Lighthouse accessibility and SEO both to 100.</li>
                 <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
               </ul>
+              <h3>The deploy, the right way round</h3>
+              <p>
+                This sounds obvious now, and it was one of the biggest things this project taught
+                me. Since version 0.2 my deploy had deleted the live site first and built the new
+                one second. On 12 May 2026 I rewrote it eleven times in one day, and somewhere in
+                there it clicked: build first, and replace what is published only if the build
+                succeeded.
+              </p>
+              <pre class="pk-code" role="img" aria-label="Before: delete the published site, build, copy the new files; a failed build leaves the site down. After: build, check the result, then publish; a failed build leaves the old site untouched."><b>before</b>   delete published site  →  build  →  copy files across
+         a failed build leaves nothing online
+
+<b>after</b>    build  →  check the result  →  publish
+         a failed build leaves the old site exactly as it was</pre>
+              <p>
+                A failed build now costs nothing: the old site stays up and I can take my time.
+                The same idea grew in version 0.9, where the tests, the type-check and the image
+                check all have to pass before anything is published.
+              </p>
               <h3>The version number, worked out</h3>
               <p>
                 The footer today reads something like <code>v0.9.161 · 18 drawings · 4f0f400</code>.
