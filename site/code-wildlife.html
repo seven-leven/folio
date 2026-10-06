@@ -354,7 +354,7 @@
           <h2 data-label="v0.8 · May to July 2026">Doing it properly</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Build first, publish second; untangling a pipeline on paper; measuring performance and accessibility</dd></div>
+              <div><dt>New to me</dt><dd>Build first, publish second; untangling a pipeline on paper; measuring a page with Lighthouse</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -388,9 +388,21 @@
               </p>
               <ul class="pk-list">
                 <li>A performance pass: lazy images, debounced search, the full-size viewer loaded only when opened.</li>
-                <li>Lighthouse accessibility and SEO both to 100.</li>
                 <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
               </ul>
+              <h3>A week chasing 100</h3>
+              <p>
+                I spent about a week, in and out, running Lighthouse in Chrome and fixing whatever
+                it complained about until the numbers stopped moving. Accessibility and SEO both
+                reached 100. Most of it was small and unglamorous: text that was a shade too faint,
+                a missing description, a favicon at the wrong path, images at the top of the page
+                that should load at once and not wait.
+              </p>
+              <p>
+                It also taught me that a score can be chased too far. One speed trick, telling the
+                browser to skip drawing sections that are off screen, quietly broke the sidebar's
+                sense of where you were on the page. I took it out again the same day.
+              </p>
               <h3>The image pipeline, untangled</h3>
               <p>
                 Converting a drawing for the site had been an online converter, then a Colab
