@@ -229,6 +229,11 @@
               <ul class="pk-list">
                 <li>Added git hooks. They are gone now; CI does that job.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                On the day the theme toggle went in, one file, <code>App.vue</code>, was 429 lines:
+                three-quarters of the whole app. Cutting it down became its own project in 0.7.
+              </p>
             </div>
           </div>
         </section>
@@ -269,7 +274,7 @@
           <h2 data-label="v0.7 · March 2026">More than birds</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Designing around data; TypeScript types as a plan</dd></div>
+              <div><dt>New to me</dt><dd>Designing around data; code that does the work against code that says what should happen</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -290,8 +295,34 @@
 }</pre>
               <ul class="pk-list">
                 <li>A new collection is one entry like this (shortened, as it is today), a list of species and a folder of images.</li>
-                <li>Moved every type into its own folder and cut the main component down.</li>
+                <li>Moved every type into its own folder.</li>
               </ul>
+              <h3>Shrinking one file</h3>
+              <p>
+                <code>App.vue</code> had been growing since the rewrite. Everything went into it:
+                loading the list, filtering, scrolling, the theme. On 10 March I took it on as a
+                task in itself and tried to make it as small as I could. It went from 427 lines to
+                143 in a day.
+              </p>
+              <ol class="pk-bars" aria-label="Lines in App.vue over time">
+                <li style="--v: 0.277">May 2025<span><b>119</b> the first Vue version</span></li>
+                <li style="--v: 0.816">Jun 2025<span><b>350</b> after the interface revamp</span></li>
+                <li style="--v: 0.986">Nov 2025<span><b>423</b> scrolling, a progress counter</span></li>
+                <li class="is-peak" style="--v: 1.000">Jan 2026<span><b>429</b> the peak: three-quarters of the whole app</span></li>
+                <li style="--v: 0.478">Feb 2026<span><b>205</b> search bar added, parts moved out</span></li>
+                <li style="--v: 0.995">Mar 2026<span><b>427</b> collections added, and it is back</span></li>
+                <li class="is-peak" style="--v: 0.333">10 Mar 2026<span><b>143</b> "debloated app.vue", the same day</span></li>
+                <li style="--v: 0.587">6 Jul 2026<span><b>252</b> shareable links creep in</span></li>
+                <li class="is-peak" style="--v: 0.217">10 Jul 2026<span><b>93</b> state moved into stores</span></li>
+                <li style="--v: 0.242">Oct 2026<span><b>104</b> today</span></li>
+              </ol>
+              <p>
+                Doing it taught me a distinction I did not have words for: the difference between
+                code that does the work and code that says what should happen and leaves the work
+                to something else. The second kind is called declarative; the first, imperative.
+                The file at the top of an app should be almost all the second kind. It says which
+                parts exist and how they connect, and each part does its own work somewhere else.
+              </p>
               <figure>
                 <img
                   src="assets/projects/wildlife/shells.webp"
@@ -328,6 +359,19 @@
                 >
                 <figcaption>One search across every collection, by English, scientific or Dhivehi name</figcaption>
               </figure>
+              <h3>Search, a journey of its own</h3>
+              <p>
+                Search looks like the smallest feature on the page and took the most returns. A
+                search bar in February. A first rewrite in March, days after collections arrived,
+                because it now had to look in three places. A refactor in May. Results across every
+                collection with counts and arrow keys in June. Dhivehi names and Thaana script in
+                July. In 0.9 it became a proper combobox that announces its results, and learned
+                to fold a long list so the next collection is not buried.
+              </p>
+              <p>
+                By line count it peaked at 18% of the app in September 2026, and is 589 of 3,753
+                lines today. It felt like half the project.
+              </p>
               <ul class="pk-list">
                 <li>A performance pass: lazy images, debounced search, the full-size viewer loaded only when opened.</li>
                 <li>Lighthouse accessibility and SEO both to 100.</li>
@@ -377,7 +421,7 @@
               <p>
                 The longest stretch so far, in three bursts. In July the state moved out of one
                 shared object into four stores, every drawing got its own address, and the first
-                44 tests were written. In September the tests grew and found real bugs. In October
+                44 tests were written. <code>App.vue</code> fell from 252 lines to 93. In September the tests grew and found real bugs. In October
                 the site got a design system, its own icons and a logo.
               </p>
               <dl class="pk-stats">
