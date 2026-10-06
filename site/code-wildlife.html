@@ -76,6 +76,7 @@
           <a href="#v07">0.7</a>
           <a href="#v08">0.8</a>
           <a href="#v09">0.9</a>
+          <a href="#shape">Shape</a>
           <a href="#next">Next</a>
         </div>
       </nav>
@@ -642,6 +643,27 @@
           </div>
         </section>
 
+        <!-- The shape of the code, across all the versions -->
+        <section id="shape" class="animate-on-scroll-target">
+          <h2 data-label="May 2025 to now">The shape of the code</h2>
+          <p>
+            The same story without words. Each bar is one layer of the app, as tall as the lines of
+            code in it, at ten points in the repository's history. Watch
+            <code>App.vue</code> on the right.
+          </p>
+          <div class="pk-evo" data-evo>
+            <p>
+              This chart needs JavaScript. Today the app is 104 lines of App.vue, 1,543 of
+              components, 1,133 of composables, 262 of stores, 163 of helpers and 166 of types,
+              with 376 lines of CSS, 1,669 of build scripts and 3,547 of tests around it. In May
+              2025 it was 119 lines of App.vue, one 61-line component and 224 lines of CSS.
+            </p>
+          </div>
+          <p class="pk-caption" style="margin-top: 0.6rem; color: var(--text-muted); font-size: var(--fs-caption)">
+            Counted from the repository at each date. Versions 0.1 to 0.3 are not in its history.
+          </p>
+        </section>
+
         <!-- Next -->
         <section id="next" class="pk-section--tint animate-on-scroll-target">
           <h2 data-label="Next">Still open</h2>
@@ -683,5 +705,6 @@
     <!-- @include footer -->
 
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/arch-evolution.js"></script>
   </body>
 </html>
