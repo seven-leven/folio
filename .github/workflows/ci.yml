@@ -1,0 +1,17 @@
+name: Check
+
+# Pull requests and pushes to dev are checked and nothing else. Deploying is
+# deploy.yml's job, so a pull request never shows a skipped deploy.
+on:
+  pull_request:
+  push:
+    branches: [dev]
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify
+    uses: ./.github/workflows/verify.yml
