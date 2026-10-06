@@ -1,7 +1,8 @@
 /* ==========================================================================
    main.css: shared styles for every page.
 
-   1. Tokens        palette, then semantic roles (light, and the dark band)
+   1. Tokens        palette, semantic roles, type, space and corner scales,
+                    then the voices (each project page's own palette)
    2. Base          legacy element styles the project pages build on
    3. Motion        reveal-on-scroll
    4. Navbar
@@ -10,7 +11,7 @@
    7. Homepage      shell, hero, groups, Academic, Professional, Personal,
                     Skills, About, Contact
    8. Footer
-   9. Project pages reading progress, lightbox, pager
+   9. Project pages reading progress, lightbox, 3D model, the page kit (.pk), pager
    10. Responsive
    ========================================================================== */
 
@@ -63,12 +64,50 @@
   --accent-line: var(--accent-fill);
   --surface: var(--card);
 
+  /* Type. Six families, and no page loads any other:
+     sans and serif are the site's own voice; book is the printed folio's
+     (Myriad Pro there, Source Sans 3 here) for Semesters 4 and 5; book-serif
+     is the folio's italic standfirst; data is for labels, figures and code;
+     thaana is for Dhivehi names. */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-book: "Source Sans 3", "Myriad Pro", system-ui, sans-serif;
+  --font-book-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --font-mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+  --font-thaana: "Noto Sans Thaana", "MV Boli", sans-serif;
 
-  --radius: 14px;
+  /* Type scale (rem). label is the small uppercase label used everywhere. */
+  --fs-label: 0.76rem;
+  --fs-caption: 0.82rem;
+  --fs-small: 0.9rem;
+  --fs-body: 1rem;
+  --fs-lead: 1.08rem;
+  --fs-h3: 1.05rem;
+  --fs-h2: clamp(2rem, 3.6vw, 2.9rem);
+  --fs-h1: clamp(2.9rem, 6.6vw, 5.4rem);
+  --track-label: 0.14em;
+
+  /* Space scale (rem): gaps inside components, then between sections */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2.25rem;
+  --space-section: clamp(2.5rem, 5.5vw, 4.25rem);
+
+  /* Corner scale: xs for drawings and drafted pages, sm for images and tiles,
+     the default for cards, pill for buttons, tags and chips. */
+  --radius-xs: 4px;
   --radius-sm: 8px;
+  --radius: 14px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --wrap: 1180px; /* widest content column */
+  --measure: 68ch; /* longest comfortable line of text */
+  --subnav-h: 50px; /* the chapter nav on project pages */
   --shadow: 0 1px 2px rgba(22, 21, 20, 0.04), 0 14px 34px -14px rgba(22, 21, 20, 0.22);
   --nav-h: 68px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -125,6 +164,59 @@
   --sem-text: var(--eng-blue);
 }
 
+/* Voices ===================================================================
+   A project page may speak in the voice of its own boards. A voice is a small
+   palette and a typeface from the list above, nothing else: the shell, the
+   scales and the semester colours stay the same. Every voice is defined here,
+   so all of the site's colour lives in this file. Shared tokens are used
+   wherever the voice has no reason to differ. */
+
+/* Semester 4, the resit book: warm paper, slate titles, italic Garamond taglines */
+.project-measured-embrace {
+  --me-ink: var(--ink);
+  --me-text: var(--ink-2);
+  --me-muted: var(--muted);
+  --me-paper: var(--paper);
+  --me-sand: var(--paper-2);
+  --me-line: var(--line);
+  --me-slate: #2f4f4f; /* titles and the dark resolution band */
+  --me-steel: #6a8d9f; /* diagrams */
+  --me-navy: #1d4d8b; /* drawing annotations */
+  --me-terra: var(--sem-4-text);
+  --me-terra-text: #a4432e; /* the boards' terracotta, for sub-headings */
+  --me-sans: var(--font-book);
+  --me-serif: var(--font-book-serif);
+  --me-mono: var(--font-data);
+}
+
+/* Semester 5, the Design V boards: white paper, cool lagoon greys, italic text */
+.project-yield {
+  --yr-ink: var(--ink);
+  --yr-text: var(--ink-2);
+  --yr-muted: var(--muted);
+  --yr-lagoon: var(--sem-5);
+  --yr-deep: var(--sem-5-text);
+  --yr-mist: color-mix(in srgb, var(--sem-5) 35%, white);
+  --yr-foam: #f1f3f3; /* the tinted chapters */
+  --yr-line: #dfe4e6;
+  --yr-sun: #b8743d; /* the one warm note, on the build programme */
+  --yr-sans: var(--font-book);
+  --yr-quote: Georgia, "Times New Roman", serif;
+}
+
+/* Engineering, a drafting sheet: cool paper with a grid, graphite, one blue */
+.project-engineering {
+  --en-ink: #15181c;
+  --en-text: #33383f;
+  --en-muted: #666d75;
+  --en-blue: var(--eng-blue);
+  --en-blue-soft: #e8f0f9;
+  --en-paper: var(--draft-paper);
+  --en-grid: #e6e9ed;
+  --en-line: #d7dbe0;
+  --en-mono: var(--font-data);
+}
+
 /* 2. Base ==================================================================
    Shared with the project pages, which layer their own board styles on top.
    Keep these values stable so those pages don't shift. */
@@ -145,8 +237,8 @@ html {
 body {
   font-family: var(--font-sans);
   line-height: 1.6;
-  background-color: #fefefe;
-  color: #2c2c2c;
+  background-color: var(--paper);
+  color: var(--text);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
@@ -163,7 +255,7 @@ h1,
 h2,
 h3 {
   margin-bottom: 1rem;
-  color: #2c2c2c;
+  color: var(--text);
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -182,7 +274,7 @@ h3 {
 
 p {
   margin-bottom: 1rem;
-  color: #555555;
+  color: var(--text-2);
   font-size: 1rem;
   line-height: 1.7;
 }
@@ -202,15 +294,17 @@ img {
   display: block;
 }
 
+/* Controls take the page's typeface (browsers default them to 13px Arial) */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 section {
   padding: 4rem 0;
   position: relative;
-}
-
-/* Only the original three project pages rely on this alternating background. */
-body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
-  section:nth-child(even):not(.hero):not(#project-showcase-hero) {
-  background: linear-gradient(135deg, #f8f9fa 0%, #fefefe 100%);
 }
 
 :focus-visible {
@@ -562,9 +656,9 @@ body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
 .home .about-block__title,
 .site-footer .site-footer__heading,
 #project-pager .pp-label {
-  font-size: 0.76rem;
+  font-size: var(--fs-label);
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
 }
 
@@ -615,6 +709,89 @@ body:is(.project-reading-nook, .project-blue-canvas, .project-acupuncture)
   border: 1px solid var(--rule);
   border-radius: var(--radius);
   background: var(--surface);
+}
+
+/* The book's progress bar: six segments, one per semester, filled up to the
+   current one in each semester's own colour.
+   <span class="sem-bar" data-at="3"> with six <i> inside. */
+.sem-bar {
+  display: inline-grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 9.5rem;
+  height: 0.5rem;
+  border: 1px solid var(--text);
+  vertical-align: middle;
+}
+.sem-bar i {
+  display: block;
+}
+.sem-bar i:nth-child(1) {
+  --c: var(--sem-1);
+}
+.sem-bar i:nth-child(2) {
+  --c: var(--sem-2);
+}
+.sem-bar i:nth-child(3) {
+  --c: var(--sem-3);
+}
+.sem-bar i:nth-child(4) {
+  --c: var(--sem-4);
+}
+.sem-bar i:nth-child(5) {
+  --c: var(--sem-5);
+}
+.sem-bar i:nth-child(6) {
+  --c: var(--sem-6);
+}
+.sem-bar[data-at="1"] i:nth-child(-n + 1),
+.sem-bar[data-at="2"] i:nth-child(-n + 2),
+.sem-bar[data-at="3"] i:nth-child(-n + 3),
+.sem-bar[data-at="4"] i:nth-child(-n + 4),
+.sem-bar[data-at="5"] i:nth-child(-n + 5),
+.sem-bar[data-at="6"] i {
+  background: var(--c);
+}
+
+/* The progress bar's place on a project page: once, under the title. */
+.sem-mark {
+  margin: 0 0 var(--space-4);
+  line-height: 0;
+}
+
+/* The semester bird: that semester's drawing from the book, large and faint
+   behind the top of a project page, as it stands on the book's opener.
+   <img class="sem-bird"> as the last child of the hero's text column. */
+:root {
+  --bird-h: clamp(13rem, 31vw, 25rem);
+  --bird-opacity: 0.26;
+}
+:has(> .sem-bird) {
+  position: relative;
+  isolation: isolate;
+}
+.project-page img.sem-bird {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -2rem;
+  width: auto;
+  max-width: none;
+  height: var(--bird-h);
+  max-height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  opacity: var(--bird-opacity);
+  animation: none;
+  pointer-events: none;
+  user-select: none;
+}
+@media (max-width: 820px) {
+  .project-page img.sem-bird {
+    right: 0;
+  }
 }
 
 /* Drafting-grid background (the hero and the upcoming-project placeholder) */
@@ -991,7 +1168,7 @@ body.home {
 }
 .home .eng-card__body small {
   color: var(--eng-blue);
-  font-family: "IBM Plex Mono", var(--font-mono);
+  font-family: var(--font-data);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1328,7 +1505,7 @@ body.home {
 }
 .home .wl-card__dv {
   overflow: hidden;
-  font-family: "Noto Sans Thaana", "MV Boli", sans-serif;
+  font-family: var(--font-thaana);
   font-size: 1rem; /* Thaana reads small next to Latin at the same size */
   color: var(--muted);
   text-align: right;
@@ -2173,6 +2350,332 @@ html.lb-lock {
   white-space: nowrap;
 }
 
+/* Project page kit (.pk) ---------------------------------------------------
+   The shared page shape for a studio project: kicker, serif title with one
+   accented word, the progress bar, standfirst, fact tiles and a lead image;
+   a sticky chapter nav; then numbered chapters of text and drawings.
+   Semesters 1 to 3 use it as it is. A page adds only what is its own in
+   assets/css/pages/. Colour comes from the semester context (--sem,
+   --sem-text), set by the body class. */
+.pk {
+  background: var(--paper);
+  color: var(--text-2);
+  font-family: var(--font-sans);
+}
+.pk-wrap {
+  width: min(var(--wrap), 100% - 2.5rem);
+  margin-inline: auto;
+}
+.pk :is(h1, h2, h3) {
+  margin: 0;
+  color: var(--text);
+  letter-spacing: 0;
+}
+.pk p {
+  max-width: var(--measure);
+  color: var(--text-2);
+}
+.pk section {
+  padding: 0;
+  scroll-margin-top: calc(var(--nav-h) + var(--subnav-h) + 16px);
+}
+
+/* Hero */
+.pk-hero {
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 3.5rem);
+}
+.pk-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.pk-hero__text > * {
+  animation: rise 0.9s var(--ease) both;
+}
+.pk-hero__text > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.pk-hero__text > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.pk-hero__text > :nth-child(4) {
+  animation-delay: 240ms;
+}
+.pk-hero__text > :nth-child(5) {
+  animation-delay: 320ms;
+}
+.pk-hero__text > :nth-child(6) {
+  animation-delay: 400ms;
+}
+.pk-kicker,
+.pk-subnav a,
+.pk-facts dt,
+.pk-tile > h3,
+.pk-body > section > h2::before {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk .pk-kicker {
+  margin: 0;
+  color: var(--sem-text);
+}
+.pk .pk-title {
+  margin: var(--space-4) 0 1.1rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+.pk-title em {
+  display: block;
+  color: var(--sem-text);
+}
+.pk .pk-sub {
+  margin: 0 0 var(--space-4);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.25;
+}
+.pk .pk-standfirst {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.pk-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: var(--space-3);
+  margin: 1.75rem 0 0;
+}
+.pk-facts div {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.pk-facts dt {
+  color: var(--text-muted);
+}
+.pk-facts dd {
+  margin: 0.3rem 0 0;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pk-hero__media {
+  margin: 0;
+}
+.pk .pk-hero__media img {
+  width: 100%;
+  border: 0;
+  border-left: 4px solid var(--sem);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.pk .pk-hero__media figcaption {
+  margin-top: 0.7rem;
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+}
+
+/* Chapter nav */
+.pk-subnav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  height: var(--subnav-h);
+  border-block: 1px solid var(--rule);
+  background: rgba(246, 244, 239, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.pk-subnav__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pk-subnav__row::-webkit-scrollbar {
+  display: none;
+}
+.pk-subnav a {
+  flex: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.pk-subnav a:hover {
+  background: var(--paper-2);
+  color: var(--text);
+}
+.pk-subnav a.is-active {
+  background: var(--sem-text);
+  color: #fff;
+}
+
+/* Chapters: numbered, separated by a rule, no cards */
+.pk-body {
+  counter-reset: pk;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+.pk-body > section {
+  padding: var(--space-section) 0;
+  border-top: 1px solid var(--rule);
+}
+.pk-body > section:first-child {
+  border-top: 0;
+}
+.pk-body > section > h2 {
+  counter-increment: pk;
+  margin-bottom: var(--space-5);
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.pk-body > section > h2::before {
+  content: counter(pk, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.7rem;
+  color: var(--sem-text);
+  font-family: var(--font-sans);
+}
+.pk-body h3 {
+  margin: var(--space-6) 0 0.9rem;
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pk-body h2 + h3,
+.pk-body .pk-grid h3 {
+  margin-top: 0;
+}
+/* A chapter on the second ground, edge to edge */
+.pk-body > .pk-section--tint {
+  border-top-color: transparent;
+  background: var(--paper-2);
+  box-shadow: 0 0 0 100vmax var(--paper-2);
+  clip-path: inset(0 -100vmax);
+}
+.pk-body > .pk-section--tint + section {
+  border-top-color: transparent;
+}
+
+/* Drawings and their captions */
+.pk-body figure {
+  margin: 0;
+}
+.pk-body img {
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-xs);
+  background: #fff;
+}
+.pk-body :is(figcaption, .pk-caption) {
+  margin: 0.6rem 0 0;
+  max-width: none;
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+  font-style: normal;
+  line-height: 1.45;
+  text-align: left;
+}
+.pk-grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  align-items: start;
+  margin: var(--space-5) 0;
+}
+.pk-grid:last-child {
+  margin-bottom: 0;
+}
+.pk-grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+}
+.pk-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+/* Text beside a drawing */
+.pk-grid--split {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+}
+.pk-body figure + p,
+.pk-body .pk-grid + p {
+  margin-top: var(--space-4);
+}
+.pk-body figure + figure,
+.pk-body .pk-grid + figure,
+.pk-body figure + .pk-grid {
+  margin-top: var(--space-5);
+}
+/* A tall drawing that shouldn't fill the column */
+.pk-body .pk-figure--narrow {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+/* The project's own words, set apart */
+.pk .pk-quote {
+  margin: 1.75rem 0;
+  max-width: 44ch;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--sem);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.3;
+}
+/* Paired tiles (problem and remedy, strengths and threats) */
+.pk-tile {
+  padding: 1.1rem 1.2rem 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.pk-body .pk-tile > h3 {
+  margin: 0 0 0.9rem;
+  color: var(--sem-text);
+}
+.pk-list {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .pk-hero__grid,
+  .pk-grid--split {
+    grid-template-columns: 1fr;
+  }
+  .pk-grid--3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pk-hero__media {
+    order: -1;
+  }
+}
+
 #project-pager {
   border-top: 1px solid var(--rule);
   background: var(--paper);
@@ -2214,6 +2717,11 @@ html.lb-lock {
 #project-pager .pp-title {
   font-size: 1.55rem;
   line-height: 1.1;
+}
+#project-pager .pp-mid {
+  display: grid;
+  justify-items: center;
+  gap: 0.9rem;
 }
 #project-pager .pp-all {
   padding: 0.7rem 1.1rem;
@@ -2345,7 +2853,7 @@ html.lb-lock {
   #project-pager .pp-inner {
     grid-template-columns: 1fr 1fr;
   }
-  #project-pager .pp-all {
+  #project-pager .pp-mid {
     grid-column: 1 / -1;
     grid-row: 2;
     justify-self: center;
@@ -2457,7 +2965,7 @@ html.lb-lock {
   #project-pager .pp-empty {
     display: none;
   }
-  #project-pager .pp-all {
+  #project-pager .pp-mid {
     grid-row: auto;
   }
 }

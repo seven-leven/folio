@@ -13,57 +13,62 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Global Styles (apply first) -->
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
     <script>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
     <link rel="stylesheet" href="assets/css/main.css">
-
-    <!-- Project-Specific Styles (apply after global, or inline) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@300;400;700;900&display=swap"
-      rel="stylesheet"
-    >
     <link rel="stylesheet" href="assets/css/pages/sem2.css">
   </head>
-  <body class="project-page project-blue-canvas">
-    <!-- Global Navbar from index.html -->
+  <body class="project-page project-blue-canvas pk">
     <!-- @include navbar active="architecture" -->
 
-    <!-- Project Specific Header -->
-    <header class="project-header">
-      <div class="title-container">
-        <h1>BLUE <span class="canvas-text">CANVAS</span></h1>
-        <p class="subtitle">
-          EXPLORING THE INTERSECTION OF ARTISTIC PRACTICE AND CHILDHOOD PLAY
-        </p>
-      </div>
-    </header>
-
-    <!-- Main Project Image - for initial animation -->
-    <section
-      id="project-showcase-hero"
-      class="project-hero-animate animate-on-scroll-target"
-    >
-      <figure>
-        <img
-          src="assets/projects/sem2/killer.webp"
-          alt="Blue Canvas Conceptual Form - Main Building"
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Semester 2 · Architectural Design II · 2024</p>
+            <h1 class="pk-title">Blue <em>Canvas</em></h1>
+            <p class="sem-mark"><span class="sem-bar" data-at="2" role="img" aria-label="Semester 2 of 6"><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
+            <p class="pk-sub">Exploring the intersection of artistic practice and childhood play</p>
+            <dl class="pk-facts">
+              <div><dt>Programme</dt><dd>Art space for artists and children</dd></div>
+              <div><dt>Levels</dt><dd>Three</dd></div>
+              <div><dt>Method</dt><dd>Ricci flow study</dd></div>
+            </dl>
+            <img class="sem-bird" src="assets/img/birds/sem2.webp" alt="" width="760" height="651" decoding="async">
+          </div>
+          <figure class="pk-hero__media">
+            <img
+              src="assets/projects/sem2/killer.webp"
+              alt="Blue Canvas Conceptual Form - Main Building"
               width="2400" height="1520" fetchpriority="high" decoding="async"
             >
-        <figcaption>
-          The "Blue Canvas" - Main Building Conceptual Form
-        </figcaption>
-      </figure>
-    </section>
+            <figcaption>The "Blue Canvas" - Main Building Conceptual Form</figcaption>
+          </figure>
+        </div>
+      </header>
 
-    <main>
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#introduction">Concept</a>
+          <a href="#conceptual-building-form">Form</a>
+          <a href="#site">Site</a>
+          <a href="#ricci-flow-study">Ricci flow</a>
+          <a href="#programming">Programme</a>
+          <a href="#floor-plans">Plans</a>
+          <a href="#details">Details</a>
+          <a href="#blow-ups">Blow-ups</a>
+          <a href="#sections-elevations">Sections</a>
+          <a href="#model">Model</a>
+          <a href="#views">Views</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
       <section id="introduction" class="animate-on-scroll-target">
-        <h2>Introduction & Concept</h2>
+        <h2>Introduction &amp; Concept</h2>
         <div class="intro-text">
           <p>
             The project explores the intersection of <strong>artistic
@@ -84,8 +89,8 @@
           </p>
         </div>
 
-        <div class="problem-remedy-wrapper">
-          <div class="problem-box">
+        <div class="pk-grid pk-grid--2">
+          <div class="pk-tile">
             <h3>Problem Factor</h3>
             <figure>
               <img src="assets/projects/sem2/problem.webp" alt="Problem Factor Diagram"
@@ -97,7 +102,7 @@
               </figcaption>
             </figure>
           </div>
-          <div class="remedy-box">
+          <div class="pk-tile">
             <h3>Remedy</h3>
             <figure>
               <img src="assets/projects/sem2/remedy.webp" alt="Remedy Diagram"
@@ -112,10 +117,9 @@
         </div>
 
         <h3>Statement</h3>
-        <p class="statement-text">
-          FOSTERING A NURTURING AND SUPPORTIVE ENVIRONMENT WHERE CHILDREN CAN
-          FREELY EXPLORE ART, CONNECT WITH NATURE, AND GAIN AUTHENTIC
-          UNDERSTANDING OF ARTISTIC PRACTICE AND EXPRESSION.
+        <p class="pk-quote">
+          Fostering a nurturing and supportive environment where children can freely explore art,
+          connect with nature, and gain authentic understanding of artistic practice and expression.
         </p>
       </section>
 
@@ -125,26 +129,26 @@
           Early conceptual explorations for the main building's form,
           considering massing, program distribution, and experiential qualities.
         </p>
-        <div class="conceptual-form-grid">
+        <div class="pk-grid">
           <figure>
             <img
               src="assets/projects/sem2/form.webp"
               alt="Initial building form sketches and diagrams"
               width="2295" height="903" loading="lazy" decoding="async"
             >
-            <figcaption>Initial Building Form & Massing Concepts</figcaption>
+            <figcaption>Initial Building Form &amp; Massing Concepts</figcaption>
           </figure>
         </div>
       </section>
 
       <section id="site" class="animate-on-scroll-target">
-        <h2>Site Analysis & Strategy</h2>
-        <div class="site-grid">
+        <h2>Site Analysis &amp; Strategy</h2>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem2/site.webp" alt="Site Plan"
               width="1926" height="1645" loading="lazy" decoding="async"
             >
-            <figcaption>Site Plan & Key Areas</figcaption>
+            <figcaption>Site Plan &amp; Key Areas</figcaption>
           </figure>
           <figure>
             <img src="assets/projects/sem2/site-strategies.webp" alt="Site Strategies"
@@ -158,9 +162,9 @@
         </div>
       </section>
 
-      <section id="ricci-flow-study" class="animate-on-scroll-target">
+      <section id="ricci-flow-study" class="pk-section--tint animate-on-scroll-target">
         <h2>Design Methodology: Ricci Flow Study</h2>
-        <p class="section-intro-note">
+        <p>
           The "Ricci Flow" geometric process served as a key design methodology,
           explored as a foundational study for this project. This iterative
           technique for form generation (illustrated below) provided a framework
@@ -168,7 +172,7 @@
           building's structure. The study focused on how such processes can
           yield evolving and responsive architectural spaces.
         </p>
-        <div class="ricci-flow-grid">
+        <div class="pk-grid pk-grid--ricci">
           <figure>
             <img
               src="assets/projects/sem2/ricci-flow-form.webp"
@@ -193,8 +197,8 @@
       </section>
 
       <section id="programming" class="animate-on-scroll-target">
-        <h2>Programming & Parti</h2>
-        <figure>
+        <h2>Programming &amp; Parti</h2>
+        <figure class="pk-figure--narrow">
           <img
             src="assets/projects/sem2/programming.webp"
             alt="Programming and Parti Diagrams"
@@ -208,7 +212,7 @@
 
       <section id="floor-plans" class="animate-on-scroll-target">
         <h2>Floor Plans</h2>
-        <div class="plans-grid">
+        <div class="pk-grid">
           <figure>
             <img src="assets/projects/sem2/ground-floor.webp" alt="Ground Floor Plan"
               width="2400" height="840" loading="lazy" decoding="async"
@@ -231,8 +235,8 @@
       </section>
 
       <section id="details" class="animate-on-scroll-target">
-        <h2>Structural & Material Details</h2>
-        <div class="details-grid">
+        <h2>Structural &amp; Material Details</h2>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img
               src="assets/projects/sem2/frame-connection-detail.webp"
@@ -251,8 +255,8 @@
       </section>
 
       <section id="blow-ups" class="animate-on-scroll-target">
-        <h2>Detailed Views & Blow-ups</h2>
-        <div class="blowups-grid">
+        <h2>Detailed Views &amp; Blow-ups</h2>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem2/blow-up-1.webp" alt="Pathway Blowup"
               width="1327" height="882" loading="lazy" decoding="async"
@@ -269,8 +273,8 @@
       </section>
 
       <section id="sections-elevations" class="animate-on-scroll-target">
-        <h2>Sections & Elevations</h2>
-        <div class="sections-elevations-grid">
+        <h2>Sections &amp; Elevations</h2>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem2/section-1-1-100.webp" alt="Section 1 at 1:100"
               width="1209" height="829" loading="lazy" decoding="async"
@@ -305,7 +309,7 @@
 
       <section id="views" class="animate-on-scroll-target">
         <h2>Perspective Views</h2>
-        <div class="views-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem2/view-1.webp" alt="Perspective View 1"
               width="1198" height="902" loading="lazy" decoding="async"
@@ -320,12 +324,11 @@
           </figure>
         </div>
       </section>
+      </div>
     </main>
 
-    <!-- Global Footer from index.html -->
     <!-- @include footer -->
 
-    <!-- Centralized JavaScript -->
     <script src="assets/js/main.js"></script>
   </body>
 </html>

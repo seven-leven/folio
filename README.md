@@ -135,20 +135,36 @@ show a single still frame when the viewer prefers reduced motion.
 
 ## Styles
 
-`main.css` starts with a numbered contents list. Colours come from tokens in
-two layers: a palette (`--ink`, `--paper`, `--accent`…) and semantic roles
-(`--text`, `--text-muted`, `--rule`, `--accent-text`…) that components use.
-Dark areas (the Personal band, footer, CV card) just redefine the roles, so
-components adapt without overrides; a site-wide dark mode would do the same.
+The design rules, for the site and the printed book, are in [DESIGN.md](DESIGN.md).
+
+`main.css` is the single source for colour, type and scales, and starts with a
+numbered contents list:
+
+- **Tokens**: a palette (`--ink`, `--paper`, `--accent`…), semantic roles
+  (`--text`, `--text-muted`, `--rule`, `--accent-text`…) that components use, the
+  six semester colours, six font families, and the type, space and corner scales.
+  Dark areas (the Personal band, footer, CV card) just redefine the roles.
+- **Voices**: the small palette and typeface each project page adds (Semester 4,
+  Semester 5, Engineering), all declared in one block.
+- **The project page kit (`.pk`)**: the shared hero, chapter nav, numbered chapters,
+  figures, grids, tiles and quote. Semesters 1 to 3 are built from it alone.
+- **Shared devices**: the six-segment progress bar (`.sem-bar`) and the semester's bird
+  behind the page title (`.sem-bird`, from `assets/img/birds/`). `deno task guide` redraws
+  the one-sheet guide, `docs/design-guide.png`.
+
+Page stylesheets in `assets/css/pages/` hold layout particular to that page and
+nothing else: no colour values, font names or pixel radii.
 
 ## Adding a project page
 
 1. Put its images in `site/assets/projects/<name>/`; `deno task images` makes
    them WebP at most 2400 px, and the check rejects anything else.
-2. Copy an existing page (such as `sem5.html`) for the `<head>` and the
-   `@include` lines; give it a `<title>`, meta description, canonical URL and
-   `og:image`.
-3. Put page-specific styles in `site/assets/css/pages/<name>.css`.
+2. Copy `sem3.html`, which is built from the project page kit alone; give it a
+   `<title>`, meta description, canonical URL and `og:image`, a body class
+   (`project-<name>`), and map that class to its semester colour at the top of
+   `main.css`. DESIGN.md shows the kit's markup.
+3. Put anything particular to the page in `site/assets/css/pages/<name>.css`, and
+   the semester's bird in `site/assets/img/birds/semN.webp`.
 4. Add it to `site/_data/projects.json` (footer, previous/next links and the
    sitemap follow) and give it a row on the homepage; the check fails if the
    row is missing.

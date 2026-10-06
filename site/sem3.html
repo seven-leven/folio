@@ -13,54 +13,58 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Global Styles (apply first) -->
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
     <script>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
     <link rel="stylesheet" href="assets/css/main.css">
-
-    <!-- Project-Specific Styles (can be inline or in a separate file if very complex) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    >
-    <!-- Example if Helvetica Neue from Google Fonts was desired, otherwise system font is used -->
     <link rel="stylesheet" href="assets/css/pages/sem3.css">
   </head>
-  <body class="project-page project-acupuncture">
-    <!-- Added body classes -->
-
-    <!-- Global Navbar -->
+  <body class="project-page project-acupuncture pk">
     <!-- @include navbar active="architecture" -->
 
-    <!-- Page specific content for Acupuncture project -->
-    <div class="page-content-container">
-      <!-- Specific container for this page's main content -->
-      <header class="project-header-section">
-        <!-- Changed from generic header to a class -->
-        <h1>ACUPUNCTURE</h1>
-        <p class="author">by Gaahis Yaugoob</p>
-      </header>
-
-      <section class="hero-image-section animate-on-scroll-target" id="hero">
-        <!-- Added animate class -->
-        <figure>
-          <img
-            src="assets/projects/sem3/killer.webp"
-            alt="Exterior View of the Acupuncture Project"
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Semester 3 · Architectural Design III · 2025</p>
+            <h1 class="pk-title">Urban <em>Acupuncture</em></h1>
+            <p class="sem-mark"><span class="sem-bar" data-at="3" role="img" aria-label="Semester 3 of 6"><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
+            <p class="pk-sub">Strategic intervention in the urban fabric</p>
+            <dl class="pk-facts">
+              <div><dt>Site</dt><dd>Henveiru, Malé</dd></div>
+              <div><dt>Programme</dt><dd>Printshop, co-working, wellness, duplex homes</dd></div>
+              <div><dt>Structure</dt><dd>Steel frame</dd></div>
+            </dl>
+            <img class="sem-bird" src="assets/img/birds/sem3.webp" alt="" width="522" height="760" decoding="async">
+          </div>
+          <figure class="pk-hero__media">
+            <img
+              src="assets/projects/sem3/killer.webp"
+              alt="Exterior View of the Acupuncture Project"
               width="2400" height="1325" fetchpriority="high" decoding="async"
             >
-          <figcaption>Strategic intervention in the urban fabric.</figcaption>
-        </figure>
-      </section>
+          </figure>
+        </div>
+      </header>
 
-      <section
-        class="project-narrative animate-on-scroll-target"
-        id="narrative"
-      >
-        <!-- Added animate class -->
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#narrative">Brief</a>
+          <a href="#design-intent-image">Concept</a>
+          <a href="#context">Context</a>
+          <a href="#concept-development">Development</a>
+          <a href="#overall-views">Building</a>
+          <a href="#model">Model</a>
+          <a href="#floor-breakdown">Floor by floor</a>
+          <a href="#precedents">Precedents</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+      <section class="animate-on-scroll-target" id="narrative">
+        <h2>The Brief</h2>
         <p>
           Malé has become a monotonous concrete jungle, choked by unchecked
           development that strains infrastructure and erodes local identity.
@@ -86,9 +90,8 @@
       </section>
 
       <section id="design-intent-image" class="animate-on-scroll-target">
-        <!-- Added animate class -->
         <h2>Core Concept Visualized</h2>
-        <figure class="full-width-figure">
+        <figure>
           <img src="assets/projects/sem3/design-intent.webp" alt="Design Intent Diagram"
               width="1117" height="155" loading="lazy" decoding="async"
             >
@@ -100,9 +103,8 @@
       </section>
 
       <section id="context" class="animate-on-scroll-target">
-        <!-- Added animate class -->
-        <h2>Context & Problem</h2>
-        <div class="image-grid">
+        <h2>Context &amp; Problem</h2>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/site-analysis.webp" alt="Site Analysis"
               width="1193" height="516" loading="lazy" decoding="async"
@@ -123,7 +125,6 @@
       </section>
 
       <section id="concept-development" class="animate-on-scroll-target">
-        <!-- Added animate class -->
         <h2>Concept Development</h2>
         <h3>Programming</h3>
         <figure>
@@ -135,8 +136,8 @@
           </figcaption>
         </figure>
 
-        <h3>Parti & Massing</h3>
-        <div class="image-grid">
+        <h3>Parti &amp; Massing</h3>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/parti.webp" alt="Parti Diagram"
               width="1122" height="290" loading="lazy" decoding="async"
@@ -153,7 +154,6 @@
       </section>
 
       <section id="overall-views" class="animate-on-scroll-target">
-        <!-- Added animate class -->
         <h2>Building Representation</h2>
         <figure>
           <img src="assets/projects/sem3/north-side-elevation.webp" alt="North Side Elevation"
@@ -175,10 +175,9 @@
       </section>
 
       <section id="floor-breakdown" class="animate-on-scroll-target">
-        <!-- Added animate class -->
         <h2>Floor by Floor</h2>
 
-        <h3>Entrance & Ground Floor</h3>
+        <h3>Entrance &amp; Ground Floor</h3>
         <figure>
           <img src="assets/projects/sem3/entrance-view.webp" alt="View of Entrance"
               width="881" height="699" loading="lazy" decoding="async"
@@ -187,7 +186,7 @@
             View of Entrance, showcasing ground-level activation.
           </figcaption>
         </figure>
-        <div class="image-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-0-ground.webp" alt="Ground Floor Plan"
               width="625" height="415" loading="lazy" decoding="async"
@@ -205,7 +204,7 @@
         </div>
 
         <h3>First Floor</h3>
-        <div class="image-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-1st.webp" alt="First Floor Plan"
               width="609" height="412" loading="lazy" decoding="async"
@@ -225,7 +224,7 @@
         </div>
 
         <h3>Second Floor</h3>
-        <div class="image-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-2nd.webp" alt="Second Floor Plan"
               width="607" height="407" loading="lazy" decoding="async"
@@ -241,7 +240,7 @@
         </div>
 
         <h3>Third Floor</h3>
-        <div class="image-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-3rd.webp" alt="Third Floor Plan"
               width="602" height="397" loading="lazy" decoding="async"
@@ -257,7 +256,7 @@
         </div>
 
         <h3>Fourth Floor</h3>
-        <div class="image-grid">
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-4th.webp" alt="Fourth Floor Plan"
               width="610" height="393" loading="lazy" decoding="async"
@@ -276,8 +275,8 @@
           </figure>
         </div>
 
-        <h3>Fifth Floor & Terrace</h3>
-        <div class="image-grid">
+        <h3>Fifth Floor &amp; Terrace</h3>
+        <div class="pk-grid pk-grid--2">
           <figure>
             <img src="assets/projects/sem3/floor-5th.webp" alt="Fifth Floor Plan"
               width="606" height="397" loading="lazy" decoding="async"
@@ -296,7 +295,6 @@
       </section>
 
       <section id="precedents" class="animate-on-scroll-target">
-        <!-- Added animate class -->
         <h2>Precedent Studies</h2>
         <figure>
           <img src="assets/projects/sem3/precedents.webp" alt="Precedent Studies"
@@ -305,13 +303,11 @@
           <figcaption>Influential precedent projects and concepts.</figcaption>
         </figure>
       </section>
-    </div>
-    <!-- End .page-content-container -->
+      </div>
+    </main>
 
-    <!-- Global Footer -->
     <!-- @include footer -->
 
-    <!-- Centralized JavaScript -->
     <script src="assets/js/main.js"></script>
   </body>
 </html>

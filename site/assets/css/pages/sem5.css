@@ -1,28 +1,16 @@
-/* Page styles for sem5.html (extracted from the page). */
+/* Page styles for sem5.html. Its palette and typefaces (--yr-*) are defined with
+   the other voices in main.css; this file is layout and components only. */
 
 /* Board identity: white paper, lagoon blue-grey, italic Myriad-style
    text and Georgia italic quotes, as on the Design V boards. */
 .project-yield {
-  --yr-ink: #121212;
-  --yr-text: #2e2e2d;
-  --yr-muted: #575756;
-  --yr-lagoon: var(--sem-5); /* was #728b97; now Semester V Lagoon */
-  --yr-deep: var(--sem-5-text); /* was #4a616c */
-  --yr-mist: color-mix(in srgb, var(--sem-5) 35%, white); /* was #b8c4c9 */
-  --yr-foam: #f1f3f3;
-  --yr-line: #dfe4e6;
-  --yr-sun: #b8743d;
-  --yr-sans: "Source Sans 3", "Myriad Pro", system-ui, sans-serif;
-  --yr-quote: Georgia, "Times New Roman", serif;
-  --yr-subnav-h: 50px;
-
   background: #fff;
   color: var(--yr-text);
   font-family: var(--yr-sans);
 }
 :where(.project-yield) section {
   padding: 0;
-  scroll-margin-top: calc(var(--nav-h) + var(--yr-subnav-h) + 16px);
+  scroll-margin-top: calc(var(--nav-h) + var(--subnav-h) + 16px);
 }
 :where(.project-yield) :is(h1, h2, h3, h4) {
   margin: 0;
@@ -109,7 +97,7 @@
 .yr-facts div {
   padding: 0.85rem 0.9rem;
   border: 1px solid var(--yr-ink);
-  border-radius: 14px;
+  border-radius: var(--radius);
   background: #fff;
 }
 .yr-facts dt {
@@ -156,7 +144,7 @@
   position: sticky;
   top: var(--nav-h);
   z-index: 900;
-  height: var(--yr-subnav-h);
+  height: var(--subnav-h);
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.94);
@@ -176,7 +164,7 @@
 .yr-subnav a {
   flex: none;
   padding: 0.4rem 0.8rem;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-size: 0.9rem;
   font-style: italic;
   color: var(--yr-muted);
@@ -247,13 +235,13 @@
   width: 100%;
   height: auto;
   margin: 0;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: var(--yr-foam);
   box-shadow: 0 16px 36px -26px rgba(18, 18, 18, 0.55);
 }
 .project-yield .yr-fig--board img {
   border: 1px solid var(--yr-line);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: #fff;
 }
 /* Source photos are small; don't stretch them far past native size. */
@@ -340,7 +328,7 @@
   margin-top: 1.5rem;
   overflow: hidden;
   border: 1px solid var(--yr-deep);
-  border-radius: 14px;
+  border-radius: var(--radius);
   background: var(--yr-deep);
 }
 .yr-principles > div {
@@ -407,7 +395,7 @@
 }
 .yr-gantt__bar {
   height: 20px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--yr-lagoon);
 }
 .yr-gantt__bar--off {
@@ -445,7 +433,7 @@
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: #1d1f20;
   color: #f1f3f3;
   transition: transform 0.25s var(--ease), border-color 0.25s ease;
@@ -491,7 +479,7 @@
   grid-column: 1 / -1;
   padding: 2rem;
   border: 1px dashed rgba(255, 255, 255, 0.25);
-  border-radius: 12px;
+  border-radius: var(--radius);
   text-align: center;
 }
 .yr-journal__foot {

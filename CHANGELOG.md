@@ -15,6 +15,13 @@ commit.
 
 ## Unreleased
 
+- One design system for the whole site, written down in DESIGN.md (with the audit that led to it in docs/design-audit.md): `main.css` now holds every colour, the six font families and the type, space and corner scales; each project page's own palette moved there too, as a named voice
+- Semesters 1 to 3 rebuilt on a shared project page kit: the same kicker, serif title, fact tiles, lead image, chapter nav and numbered chapters as the newer pages, on the site's paper and type. Their words and drawings are unchanged; Montserrat, Oswald, Lato and a dead request for Helvetica Neue are gone
+- The book's progress bar on every project page and in the previous/next pager
+- Each semester's bird from the book, large and faint behind the title of its project page
+- A one-sheet design guide (`docs/design-guide.png`, redrawn with `deno task guide`)
+- Fixes: script-made buttons no longer fall back to 13 px Arial; images no longer grow on hover
+
 - Section cut is movable and turns: Plan, Section A or Section B, a slider to move it through the model, and Flip for the other half. The camera turns to face the cut and frames what's left, a thin outline in the semester colour marks the plane, and only the model is cut (the ground and shadows follow it)
 
 - 3D models for Semesters 2 (Blue Canvas) and 3 (Urban Acupuncture), with the viewer now shared by every project page: a `model` entry in `site/_data/projects.json` plus `<!-- @include model -->`, and `deno task model semN file.3dm` makes the model and its poster (Rhino, then Blender, then a headless screenshot)

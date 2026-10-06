@@ -1,19 +1,9 @@
-/* Page styles for engineering.html (extracted from the page). */
+/* Page styles for engineering.html. Its palette and typefaces (--en-*) are defined
+   with the other voices in main.css; this file is layout and components only. */
 
 /* Technical-sheet identity: drafting paper, graphite, one engineering
    blue, mono for data, title-block panels. */
 .project-engineering {
-  --en-ink: #15181c;
-  --en-text: #33383f;
-  --en-muted: #666d75;
-  --en-blue: #1f5fa8;
-  --en-blue-soft: #e8f0f9;
-  --en-paper: #fbfbf9;
-  --en-grid: #e6e9ed;
-  --en-line: #d7dbe0;
-  --en-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
-  --en-subnav-h: 50px;
-
   background-color: var(--en-paper);
   background-image: linear-gradient(var(--en-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--en-grid) 1px, transparent 1px);
@@ -22,7 +12,7 @@
 }
 :where(.project-engineering) section {
   padding: 0;
-  scroll-margin-top: calc(var(--nav-h) + var(--en-subnav-h) + 16px);
+  scroll-margin-top: calc(var(--nav-h) + var(--subnav-h) + 16px);
 }
 :where(.project-engineering) :is(h1, h2, h3, h4) {
   margin: 0;
@@ -113,7 +103,7 @@
   width: 100%;
   height: auto;
   border: 1px solid var(--en-line);
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   box-shadow: 0 30px 60px -34px rgba(21, 24, 28, 0.55);
 }
 
@@ -155,7 +145,7 @@
   position: sticky;
   top: var(--nav-h);
   z-index: 900;
-  height: var(--en-subnav-h);
+  height: var(--subnav-h);
   display: flex;
   align-items: center;
   background: rgba(251, 251, 249, 0.95);
@@ -174,7 +164,7 @@
 .en-subnav a {
   flex: none;
   padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   font-family: var(--en-mono);
   font-size: 0.8rem;
   color: var(--en-muted);
@@ -283,7 +273,7 @@
   width: 100%;
   height: auto;
   border: 1px solid var(--en-line);
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   background: #fff;
 }
 .en-fig figcaption {

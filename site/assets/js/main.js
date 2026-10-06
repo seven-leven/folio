@@ -458,7 +458,7 @@
   // --- Project pages: click any drawing/render to view it full screen -------
   function initLightbox() {
     const images = [...document.querySelectorAll("img")].filter(
-      (img) => !img.closest("#navbar, .site-footer, #project-pager, #lightbox, .model-viewer"),
+      (img) => !img.closest("#navbar, .site-footer, #project-pager, #lightbox, .model-viewer, .sem-bird"),
     );
     if (!images.length) return;
 
@@ -605,6 +605,7 @@
       href: a.getAttribute("href"),
       title: a.textContent.trim(),
       label: a.dataset.label,
+      sem: Number(a.dataset.sem) || 0,
     }));
     const page = (location.pathname.split("/").pop() || "").replace(/\.html$/, "");
     const i = PROJECTS.findIndex((p) => p.href.replace(/\.html$/, "") === page);
@@ -619,9 +620,18 @@
     const pager = document.createElement("nav");
     pager.id = "project-pager";
     pager.setAttribute("aria-label", "More projects");
+    // The book's progress bar: six semesters, filled up to this one.
+    const sem = PROJECTS[i].sem;
+    const bar = sem
+      ? `<span class="sem-bar" data-at="${sem}" role="img" aria-label="Semester ${sem} of 6">${
+        "<i></i>".repeat(6)
+      }</span>`
+      : "";
     pager.innerHTML = `<div class="pp-inner">${
       link(PROJECTS[i - 1], "prev")
-    }<a class="pp-all" href="index.html#architecture">All architecture</a>${link(PROJECTS[i + 1], "next")}</div>`;
+    }<div class="pp-mid">${bar}<a class="pp-all" href="index.html#architecture">All architecture</a></div>${
+      link(PROJECTS[i + 1], "next")
+    }</div>`;
 
     const footer = document.querySelector(".site-footer, footer");
     if (footer) footer.before(pager);
