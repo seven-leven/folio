@@ -198,6 +198,13 @@
                 <li>Two shells drawn in July, long before there was a shells collection.</li>
                 <li>Fixed scrolling twice, once for phones.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                The WebP files were made by hand. First I put each drawing through an online
+                converter, then through a Google Colab notebook. Nothing in the repository knew how
+                to make its own images until January 2026, and it took until version 0.8 to get
+                that right.
+              </p>
             </div>
           </div>
         </section>
@@ -256,7 +263,7 @@
                 February, its Dhivehi name.
               </p>
               <ul class="pk-list">
-                <li>Rewrote the build, and made the script that ships a drawing skip images already converted.</li>
+                <li>The first image scripts in the repository: one command to convert a drawing and ship it, taught the next day to skip images already converted. Three weeks later I rewrote the build around it.</li>
                 <li>Added a three-way check that the drawing count is right.</li>
                 <li>Wrote down the known issues for the first time.</li>
               </ul>
@@ -340,7 +347,7 @@
           <h2 data-label="v0.8 · May to July 2026">Doing it properly</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Build first, publish second; measuring performance and accessibility; CI on pull requests</dd></div>
+              <div><dt>New to me</dt><dd>Build first, publish second; untangling a pipeline on paper; measuring performance and accessibility</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -377,6 +384,27 @@
                 <li>Lighthouse accessibility and SEO both to 100.</li>
                 <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
               </ul>
+              <h3>The image pipeline, untangled</h3>
+              <p>
+                Converting a drawing for the site had been an online converter, then a Colab
+                notebook, then a script, then a rewrite of the script, then a restructure of the
+                rewrite. By May it worked and I could not follow it. It took a few hours with the
+                code spread out to untangle it into four steps that each do one thing.
+              </p>
+              <pre class="pk-code"><b>scan</b>      read the list and the image folders, once
+<b>plan</b>      work out what is new, what is missing, what is orphaned
+<b>execute</b>   convert the images, date the new drawings
+<b>report</b>    say what happened</pre>
+              <p>
+                The plan step touches nothing. It is only sets: what is listed, what is on disk,
+                and the difference. That is why it could be tested later without a single image.
+                I converted every drawing again that day to prove it.
+              </p>
+              <p class="pk-quote">
+                Either you spend hours banging your head against the wall until it falls into place
+                and you are coding blind, or you take a pen and paper, draw the flow chart, and
+                solve it. What I love about coding is that it feels like pure logic.
+              </p>
               <h3>The deploy, the right way round</h3>
               <p>
                 This sounds obvious now, and it was one of the biggest things this project taught
