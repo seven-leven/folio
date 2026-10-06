@@ -22,6 +22,7 @@ commit.
 - A one-sheet design guide (`docs/design-guide.png`, redrawn with `deno task guide`)
 - The design system written up as v1.0: grid, motion speeds, component states, accessibility checks, do / don't
 - Grid and motion are named tokens; buttons have pressed and disabled states
+- A separate guide for Personal work on the same foundations (`docs/design-personal.md`), including the shape of a future page per coding entry
 - Fixes: script-made buttons no longer fall back to 13 px Arial; images no longer grow on hover
 
 - Section cut is movable and turns: Plan, Section A or Section B, a slider to move it through the model, and Flip for the other half. The camera turns to face the cut and frames what's left, a thin outline in the semester colour marks the plane, and only the model is cut (the ground and shadows follow it)
