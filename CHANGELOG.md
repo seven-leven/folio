@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Wildlife Illustrated page: why six birds went up in one day (0.4), and moving the interface into `Chrome.vue` (0.7)
 - Wildlife Illustrated page: the deploy lesson (build first, publish only if it succeeds) added to versions 0.2 and 0.8; the icons, the design guide and the logo session added to 0.9; the size of `App.vue` over time and the search journey; the image pipeline, from an online converter to four steps; Tailwind in an afternoon; a week chasing a Lighthouse score; why the React version was abandoned for Vue; the size of the stylesheet over time
 - The Wildlife Illustrated page retold as an ongoing project: nine stretches of work in order, each with what was new to learn and the drawing count at the end
 - A page of its own for the first coding project: how the Wildlife Illustrated site was built, from its changelog, with screenshots of three versions (`code-wildlife.html`)

@@ -201,10 +201,12 @@
                 <figcaption>May 2025, rebuilt from the first Vue commit. Three drawings and 201 silhouettes.</figcaption>
               </figure>
               <p>
-                This is the stretch with the most drawing in it. In October I added six birds in
-                one day, and thumbnails four days later. By December there were fourteen drawings,
-                the list had moved from a text file to JSON, and the site counted how many were
-                done.
+                This is the stretch with the most drawing in it, and not by plan. I had meant to
+                take the drawing low and slow. Then the book for the N. Kendhikulhudhoo trip, the
+                island of my <a href="sem4.html">Semester 4 project</a>, needed birds, so six of
+                them were drawn in a rush and went up on the site in one day in October. Thumbnails
+                followed four days later. By December there were fourteen drawings, the list had
+                moved from a text file to JSON, and the site counted how many were done.
               </p>
               <ul class="pk-list">
                 <li>Converted the drawings from PNG to WebP, then added separate thumbnails.</li>
@@ -349,6 +351,13 @@
                 loading the list, filtering, scrolling, the theme. On 10 March I took it on as a
                 task in itself and tried to make it as small as I could. It went from 427 lines to
                 143 in a day.
+              </p>
+              <p>
+                The realisation that did it was simple. All the stitching of the interface, the
+                header, the sidebar, the grid and how they sit together, could move into one
+                component of its own. I called it <code>UI.vue</code> and renamed it
+                <code>Chrome.vue</code> the same day. With that gone, <code>App.vue</code> had
+                almost nothing left to do but start things.
               </p>
               <ol class="pk-bars" aria-label="Lines in App.vue over time">
                 <li style="--v: 0.277">May 2025<span><b>119</b> the first Vue version</span></li>
