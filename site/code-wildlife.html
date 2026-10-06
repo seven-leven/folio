@@ -128,6 +128,13 @@
                 <li>Set up a GitHub Actions workflow to deploy on every push.</li>
                 <li>Ended with a refactor of the whole script, the first of many.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                My deploy worked in the wrong order: delete what was published, then build, then
+                copy the new files across. I only found out whether it had worked at the very end,
+                and when the build failed the site stayed down while I debugged it. It took me
+                until version 0.8 to see the fix.
+              </p>
             </div>
           </div>
         </section>
@@ -150,7 +157,8 @@
               </p>
               <p class="pk-thread">
                 <b>A thread that returns</b>
-                These tests did not survive the next rewrite. The site then went without any until
+                Neither these tests nor this build survived. Three months later the site was down,
+                and the next version started from an empty folder. It then went without tests until
                 version 0.9, seventeen months later.
               </p>
             </div>
@@ -162,15 +170,27 @@
           <h2 data-label="v0.4 · May to December 2025">Starting over in Vue</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>A framework and components; image formats; keeping data as JSON</dd></div>
+              <div><dt>New to me</dt><dd>Locking dependency versions; one-file components; image formats; data as JSON</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">3 <small>→</small> 14</dd></div>
             </dl>
             <div class="pk-arc__body">
-              <!-- WHY: why I threw the first version away and rewrote it in Vue -->
               <p>
-                In May I rewrote the site from scratch in Vue. This is the oldest code still in the
-                repository, and the first version I can rebuild and show.
+                The version before this one was written as React components. I left it alone for a
+                few months, and when I came back the site was down. React had moved on a version,
+                I had never locked the versions the project depended on, and the build no longer
+                worked. I tried hard to fix it and could not.
+              </p>
+              <p>
+                So in May I started again in Vue, with Vite, and never looked back. What won me
+                over was that a component is one file: its HTML, its CSS and its JavaScript
+                together, where I can see all of it. The first Vue commit has a lock file in it.
+                The next five are named "tried fixing", "tried fixing v2", "hopefully", "hoper
+                fully" and "hoper fully v3".
+              </p>
+              <p>
+                This is the oldest code still in the repository, and the first version I can
+                rebuild and show.
               </p>
               <figure>
                 <img
@@ -191,6 +211,13 @@
                 <li>Two shells drawn in July, long before there was a shells collection.</li>
                 <li>Fixed scrolling twice, once for phones.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                The WebP files were made by hand. First I put each drawing through an online
+                converter, then through a Google Colab notebook. Nothing in the repository knew how
+                to make its own images until January 2026, and it took until version 0.8 to get
+                that right.
+              </p>
             </div>
           </div>
         </section>
@@ -219,9 +246,21 @@
                 >
                 <figcaption>January 2026, rebuilt from the commit that added the theme toggle</figcaption>
               </figure>
+              <p>
+                I expected moving to Tailwind to break half the site. It took an afternoon and
+                broke very little. The styles had lived in three separate files; with them written
+                where they are used, the whole app went from 870 lines to 549, and dark mode came
+                almost for free on the same day. It was the first rewrite that felt elegant rather
+                than hard.
+              </p>
               <ul class="pk-list">
                 <li>Added git hooks. They are gone now; CI does that job.</li>
               </ul>
+              <p class="pk-thread">
+                <b>A thread that returns</b>
+                On the day the theme toggle went in, one file, <code>App.vue</code>, was 429 lines:
+                three-quarters of the whole app. Cutting it down became its own project in 0.7.
+              </p>
             </div>
           </div>
         </section>
@@ -244,7 +283,7 @@
                 February, its Dhivehi name.
               </p>
               <ul class="pk-list">
-                <li>Rewrote the build, and made the script that ships a drawing skip images already converted.</li>
+                <li>The first image scripts in the repository: one command to convert a drawing and ship it, taught the next day to skip images already converted. Three weeks later I rewrote the build around it.</li>
                 <li>Added a three-way check that the drawing count is right.</li>
                 <li>Wrote down the known issues for the first time.</li>
               </ul>
@@ -262,7 +301,7 @@
           <h2 data-label="v0.7 · March 2026">More than birds</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Designing around data; TypeScript types as a plan</dd></div>
+              <div><dt>New to me</dt><dd>Designing around data; code that does the work against code that says what should happen</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -283,8 +322,34 @@
 }</pre>
               <ul class="pk-list">
                 <li>A new collection is one entry like this (shortened, as it is today), a list of species and a folder of images.</li>
-                <li>Moved every type into its own folder and cut the main component down.</li>
+                <li>Moved every type into its own folder.</li>
               </ul>
+              <h3>Shrinking one file</h3>
+              <p>
+                <code>App.vue</code> had been growing since the rewrite. Everything went into it:
+                loading the list, filtering, scrolling, the theme. On 10 March I took it on as a
+                task in itself and tried to make it as small as I could. It went from 427 lines to
+                143 in a day.
+              </p>
+              <ol class="pk-bars" aria-label="Lines in App.vue over time">
+                <li style="--v: 0.277">May 2025<span><b>119</b> the first Vue version</span></li>
+                <li style="--v: 0.816">Jun 2025<span><b>350</b> after the interface revamp</span></li>
+                <li style="--v: 0.986">Nov 2025<span><b>423</b> scrolling, a progress counter</span></li>
+                <li class="is-peak" style="--v: 1.000">Jan 2026<span><b>429</b> the peak: three-quarters of the whole app</span></li>
+                <li style="--v: 0.478">Feb 2026<span><b>205</b> search bar added, parts moved out</span></li>
+                <li style="--v: 0.995">Mar 2026<span><b>427</b> collections added, and it is back</span></li>
+                <li class="is-peak" style="--v: 0.333">10 Mar 2026<span><b>143</b> "debloated app.vue", the same day</span></li>
+                <li style="--v: 0.587">6 Jul 2026<span><b>252</b> shareable links creep in</span></li>
+                <li class="is-peak" style="--v: 0.217">10 Jul 2026<span><b>93</b> state moved into stores</span></li>
+                <li style="--v: 0.242">Oct 2026<span><b>104</b> today</span></li>
+              </ol>
+              <p>
+                Doing it taught me a distinction I did not have words for: the difference between
+                code that does the work and code that says what should happen and leaves the work
+                to something else. The second kind is called declarative; the first, imperative.
+                The file at the top of an app should be almost all the second kind. It says which
+                parts exist and how they connect, and each part does its own work somewhere else.
+              </p>
               <figure>
                 <img
                   src="assets/projects/wildlife/shells.webp"
@@ -302,7 +367,7 @@
           <h2 data-label="v0.8 · May to July 2026">Doing it properly</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Measuring performance and accessibility; CI on pull requests</dd></div>
+              <div><dt>New to me</dt><dd>Build first, publish second; untangling a pipeline on paper; measuring a page with Lighthouse</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -321,11 +386,75 @@
                 >
                 <figcaption>One search across every collection, by English, scientific or Dhivehi name</figcaption>
               </figure>
+              <h3>Search, a journey of its own</h3>
+              <p>
+                Search looks like the smallest feature on the page and took the most returns. A
+                search bar in February. A first rewrite in March, days after collections arrived,
+                because it now had to look in three places. A refactor in May. Results across every
+                collection with counts and arrow keys in June. Dhivehi names and Thaana script in
+                July. In 0.9 it became a proper combobox that announces its results, and learned
+                to fold a long list so the next collection is not buried.
+              </p>
+              <p>
+                By line count it peaked at 18% of the app in September 2026, and is 589 of 3,753
+                lines today. It felt like half the project.
+              </p>
               <ul class="pk-list">
                 <li>A performance pass: lazy images, debounced search, the full-size viewer loaded only when opened.</li>
-                <li>Lighthouse accessibility and SEO both to 100.</li>
                 <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
               </ul>
+              <h3>A week chasing 100</h3>
+              <p>
+                I spent about a week, in and out, running Lighthouse in Chrome and fixing whatever
+                it complained about until the numbers stopped moving. Accessibility and SEO both
+                reached 100. Most of it was small and unglamorous: text that was a shade too faint,
+                a missing description, a favicon at the wrong path, images at the top of the page
+                that should load at once and not wait.
+              </p>
+              <p>
+                It also taught me that a score can be chased too far. One speed trick, telling the
+                browser to skip drawing sections that are off screen, quietly broke the sidebar's
+                sense of where you were on the page. I took it out again the same day.
+              </p>
+              <h3>The image pipeline, untangled</h3>
+              <p>
+                Converting a drawing for the site had been an online converter, then a Colab
+                notebook, then a script, then a rewrite of the script, then a restructure of the
+                rewrite. By May it worked and I could not follow it. It took a few hours with the
+                code spread out to untangle it into four steps that each do one thing.
+              </p>
+              <pre class="pk-code"><b>scan</b>      read the list and the image folders, once
+<b>plan</b>      work out what is new, what is missing, what is orphaned
+<b>execute</b>   convert the images, date the new drawings
+<b>report</b>    say what happened</pre>
+              <p>
+                The plan step touches nothing. It is only sets: what is listed, what is on disk,
+                and the difference. That is why it could be tested later without a single image.
+                I converted every drawing again that day to prove it.
+              </p>
+              <p class="pk-quote">
+                Either you spend hours banging your head against the wall until it falls into place
+                and you are coding blind, or you take a pen and paper, draw the flow chart, and
+                solve it. What I love about coding is that it feels like pure logic.
+              </p>
+              <h3>The deploy, the right way round</h3>
+              <p>
+                This sounds obvious now, and it was one of the biggest things this project taught
+                me. Since version 0.2 my deploy had deleted the live site first and built the new
+                one second. On 12 May 2026 I rewrote it eleven times in one day, and somewhere in
+                there it clicked: build first, and replace what is published only if the build
+                succeeded.
+              </p>
+              <pre class="pk-code" role="img" aria-label="Before: delete the published site, build, copy the new files; a failed build leaves the site down. After: build, check the result, then publish; a failed build leaves the old site untouched."><b>before</b>   delete published site  →  build  →  copy files across
+         a failed build leaves nothing online
+
+<b>after</b>    build  →  check the result  →  publish
+         a failed build leaves the old site exactly as it was</pre>
+              <p>
+                A failed build now costs nothing: the old site stays up and I can take my time.
+                The same idea grew in version 0.9, where the tests, the type-check and the image
+                check all have to pass before anything is published.
+              </p>
               <h3>The version number, worked out</h3>
               <p>
                 The footer today reads something like <code>v0.9.161 · 18 drawings · 4f0f400</code>.
@@ -343,7 +472,7 @@
           <h2 data-label="v0.9 · July to October 2026">Safe to change</h2>
           <div class="pk-arc">
             <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>State in stores; testing in depth; a design system; writing things down</dd></div>
+              <div><dt>New to me</dt><dd>State in stores; testing in depth; one style for every icon; a design guide to build against; a logo and its rules</dd></div>
               <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno, fast-check</dd></div>
               <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
             </dl>
@@ -352,7 +481,7 @@
               <p>
                 The longest stretch so far, in three bursts. In July the state moved out of one
                 shared object into four stores, every drawing got its own address, and the first
-                44 tests were written. In September the tests grew and found real bugs. In October
+                44 tests were written. <code>App.vue</code> fell from 252 lines to 93. In September the tests grew and found real bugs. In October
                 the site got a design system, its own icons and a logo.
               </p>
               <dl class="pk-stats">
@@ -397,15 +526,46 @@
 <b>2. The site</b>         types ← helpers ← composables ← stores ← components
 
 <b>3. Tests and CI</b>     the same checks on every pull request and every deploy</pre>
+              <h3>Every icon, drawn the same way</h3>
+              <p>
+                The realisation that set off the last burst was a small one. The site used emoji
+                for its collections and a mix of borrowed icons everywhere else. On 5 October it
+                struck me that every one of them could be drawn in the same style, however mundane
+                the icon: a menu, a close button, an arrow. One grid, one stroke, round ends, no
+                fills.
+              </p>
+              <figure class="pk-figure--narrow">
+                <img
+                  src="assets/projects/wildlife/icons.webp"
+                  alt="The icon sheet: line icons in one stroke, grouped by purpose, from the bird, shark and shell of the collections down to menu, close, arrows and zoom"
+                  width="1000" height="1052" loading="lazy" decoding="async"
+                >
+                <figcaption>Every icon in the app, the mundane ones included</figcaption>
+              </figure>
               <h3>A look, written down</h3>
               <p>
-                For most of its life the site looked like whatever I had last changed. In October I
-                wrote the look down: one neutral ramp, one accent per collection from twelve
-                contrast-checked hues, six text sizes, two corner radii, and line icons in place of
-                emoji. The guide is drawn by a script from the real colours and icons, an idea I
-                then used for
+                Once the icons matched, everything around them looked inconsistent, so I spent the
+                next day writing a design guide to build against: one neutral ramp, one accent per
+                collection from twelve contrast-checked hues, six text sizes, two corner radii. It
+                is there to make the next thing I build agree with the last. The guide is drawn by
+                a script from the real colours and icons, an idea I then used for
                 <a href="https://github.com/seven-leven/folio/blob/main/DESIGN.md">this portfolio's guide</a>.
               </p>
+              <h3>A logo, in one sitting</h3>
+              <p>
+                With the icons and the guide in place, the site still had no mark of its own, so
+                the same morning went on a logo. The first idea was a bird stepping out of an
+                unfinished frame, built from the bird icon. It looked like an icon in a box. The
+                second pass gave the bird its own outline (back, tail, breast, wing, legs) and
+                stood it on the bottom line of a frame whose right side is missing, looking out of
+                the page it was drawn on.
+              </p>
+              <ul class="pk-list">
+                <li>Then the order flipped: the bird icon was redrawn from the logo's bird, so the tab, the placeholders and the logo all show the same animal.</li>
+                <li>The solid tile for small sizes is the same drawing reversed, not a second design.</li>
+                <li>It never takes an accent colour. The accent changes with the collection; the logo must not.</li>
+                <li>The rules came with it: sizes, clear space, and a list of what not to do.</li>
+              </ul>
               <div class="pk-grid pk-grid--half">
                 <figure>
                   <img

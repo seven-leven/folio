@@ -2904,6 +2904,45 @@ body.page-ink {
   background: var(--sem);
   vertical-align: 0.3em;
 }
+/* A measured series as plain bars: <ol class="pk-bars"> of <li style="--v: 0..1"> */
+.pk-bars {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 44rem;
+  margin: var(--space-5) 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-small);
+}
+.pk-bars li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  color: var(--text-muted);
+}
+.pk-bars li > span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-2);
+}
+.pk-bars li > span::before {
+  content: "";
+  flex: none;
+  width: calc(var(--v) * 62%);
+  min-width: 2px;
+  height: 0.7rem;
+  background: var(--rule-strong);
+}
+.pk-bars li.is-peak > span::before {
+  background: var(--sem);
+}
+.pk-bars b {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
 /* A thread that comes back in a later stretch */
 .pk .pk-thread {
   max-width: var(--measure);
