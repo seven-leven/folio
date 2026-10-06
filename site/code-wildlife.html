@@ -253,6 +253,25 @@
                 almost for free on the same day. It was the first rewrite that felt elegant rather
                 than hard.
               </p>
+              <h3>Keeping the stylesheet small</h3>
+              <p>
+                I had read enough horror stories in comment sections about stylesheets nobody dares
+                to touch that I spent a real amount of time trying not to grow one. In November I
+                cleaned the CSS up twice in one day and ended with more than I started. Tailwind is
+                what finally cut it.
+              </p>
+              <ol class="pk-bars" aria-label="Lines of CSS over time">
+                <li style="--v: 0.479">May 2025<span><b>224</b> three style files</span></li>
+                <li class="is-peak" style="--v: 1.000">Dec 2025<span><b>468</b> the peak, after two clean-ups in one day</span></li>
+                <li class="is-peak" style="--v: 0.088">Jan 2026<span><b>41</b> after Tailwind: one file</span></li>
+                <li style="--v: 0.241">Jul 2026<span><b>113</b> shared classes pulled out of the markup</span></li>
+                <li style="--v: 0.803">Oct 2026<span><b>376</b> design tokens and twelve accent palettes</span></li>
+              </ol>
+              <p>
+                It has bloated again since, and I would rather show that than hide it. I think it
+                is still manageable: it is one file, and a large part of what came back is a list
+                of colours and sizes with names, not rules fighting each other.
+              </p>
               <ul class="pk-list">
                 <li>Added git hooks. They are gone now; CI does that job.</li>
               </ul>
