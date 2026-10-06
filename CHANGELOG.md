@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- The Wildlife Illustrated page retold as an ongoing project: nine stretches of work in order, each with what was new to learn and the drawing count at the end
 - A page of its own for the first coding project: how the Wildlife Illustrated site was built, from its changelog, with screenshots of three versions (`code-wildlife.html`)
 - An ink page context (`page-ink`) so a Personal project can use the project page kit; version lists, code blocks and big-number rows for it
 - One design system for the whole site, written down in DESIGN.md (with the audit that led to it in docs/design-audit.md): `main.css` now holds every colour, the six font families and the type, space and corner scales; each project page's own palette moved there too, as a named voice
