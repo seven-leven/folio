@@ -1,0 +1,8 @@
+/* Page styles for sem1.html.
+   The page is built from the project page kit in main.css (.pk); only what is
+   particular to the reading nook lives here. */
+
+/* Strengths, weaknesses, opportunities, threats: four tiles in a row */
+.pk-grid--swot {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
