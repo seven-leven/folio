@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Building Wildlife Illustrated - Gaahis Yaugoob</title>
-    <meta name="description" content="An ongoing project: the Wildlife Illustrated website, in the nine stretches of work its changelog records, and what each one taught me.">
+    <meta name="description" content="An ongoing project: the Wildlife Illustrated website over nine versions, and the one lesson it kept teaching: stop trusting memory and make the project check itself.">
     <meta property="og:title" content="Building Wildlife Illustrated - Gaahis Yaugoob">
-    <meta property="og:description" content="An ongoing project: the Wildlife Illustrated website, in the nine stretches of work its changelog records, and what each one taught me.">
+    <meta property="og:description" content="An ongoing project: the Wildlife Illustrated website over nine versions, and the one lesson it kept teaching: stop trusting memory and make the project check itself.">
     <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/wildlife/now-dark.webp">
     <link rel="canonical" href="https://seven-leven.github.io/folio/code-wildlife.html">
     <meta property="og:url" content="https://seven-leven.github.io/folio/code-wildlife.html">
@@ -24,9 +24,10 @@
     <!-- @include navbar active="coding" -->
 
     <!--
-      Each stretch below has the same parts: a rail (when, what was new to me, how many
-      drawings by the end) and the story. A "WHY" comment marks where a line on what
-      brought me back to the project belongs, once written.
+      Three parts, nine versions. Each version has a rail (what was new to me, what was
+      still left to trust or is now checked, the drawing count), one story told in full,
+      and a closed "More from this stretch" for the rest. A "WHY" comment marks where a
+      line on what brought me back belongs, once written.
     -->
     <main>
       <header class="pk-hero">
@@ -34,12 +35,13 @@
           <div class="pk-hero__text">
             <p class="pk-kicker">Oct 2024 to now · Web app · Ongoing</p>
             <h1 class="pk-title">Building <em>Wildlife Illustrated</em></h1>
-            <p class="pk-sub">A home for the drawings, nine stretches in</p>
+            <p class="pk-sub">A gallery that learned to check itself</p>
             <p class="pk-standfirst">
               I am drawing every bird recorded in the Maldives, and the drawings needed somewhere to
               live. I built a page for them, and I keep coming back to it: every few months, for a
-              few weeks, usually to learn one new thing. Its changelog records nine stretches of work
-              so far. This page follows them in order.
+              few weeks, usually to learn one new thing. Looking back over nine versions, most of
+              what I learned was the same lesson in different places: stop trusting my own memory,
+              and make the project check itself.
             </p>
             <dl class="pk-facts">
               <div><dt>Started</dt><dd>October 2024</dd></div>
@@ -67,484 +69,653 @@
 
       <nav class="pk-subnav" aria-label="On this page" data-spy>
         <div class="pk-wrap pk-subnav__row">
-          <a href="#v01">0.1</a>
-          <a href="#v02">0.2</a>
-          <a href="#v03">0.3</a>
-          <a href="#v04">0.4</a>
-          <a href="#v05">0.5</a>
-          <a href="#v06">0.6</a>
-          <a href="#v07">0.7</a>
-          <a href="#v08">0.8</a>
-          <a href="#v09">0.9</a>
-          <a href="#shape">Shape</a>
-          <a href="#next">Next</a>
+          <a href="#online">I · Getting it online</a>
+          <a href="#mine">II · Making it mine</a>
+          <a href="#checks">III · Making it check itself</a>
+          <a href="#shape">The shape of the code</a>
+          <a href="#next">Still open</a>
         </div>
       </nav>
 
       <div class="pk-wrap pk-body">
-        <!-- 0.1 -->
-        <section id="v01" class="animate-on-scroll-target">
-          <h2 data-label="v0.1 · October 2024">A page for two ducks</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Putting a page online at all</dd></div>
-              <div><dt>Built with</dt><dd>HTML, CSS, JavaScript</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">2</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: what made me start the site -->
-              <p>
-                The list is long: 204 birds. A folder of image files does not show how far along I
-                am, which family I have been avoiding, or what each bird is called in Dhivehi. I
-                wanted the whole list on one page, with a grey shape for every species I had not
-                drawn yet, so the gaps were as visible as the drawings.
-              </p>
-              <p>
-                The first version was a plain page written by hand. It went up on 10 October 2024
-                with the Lesser Whistling-Duck on it, and the Cotton Pygmy-Goose followed five days
-                later.
-              </p>
-            </div>
-          </div>
-        </section>
+        <!-- ================= Act I ================= -->
+        <div class="pk-act" id="online">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part I · Versions 0.1 to 0.3 · October 2024 to February 2025</p>
+            <h2 class="pk-act__title">Getting it <em>online</em></h2>
+            <p class="pk-act__say">A page, a way to publish it, and tools I did not yet understand. Everything ran on trust.</p>
+          </header>
 
-        <!-- 0.2 -->
-        <section id="v02" class="animate-on-scroll-target">
-          <h2 data-label="v0.2 · January to February 2025">Making it publish itself</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>GitHub Actions, and what does not belong in a repository</dd></div>
-              <div><dt>Built with</dt><dd>The same page, plus a workflow</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">3</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: what brought me back in January 2025 -->
-              <p>
-                I came back with a third drawing, the Garganey, and spent the next few weeks on
-                everything around the page: a workflow so that a push publishes the site, a local
-                build that worked, a favicon and a title card.
-              </p>
-              <ul class="pk-list">
-                <li>Stopped tracking <code>node_modules</code>.</li>
-                <li>Set up a GitHub Actions workflow to deploy on every push.</li>
-                <li>Ended with a refactor of the whole script, the first of many.</li>
-              </ul>
-              <p class="pk-thread">
-                <b>A thread that returns</b>
-                My deploy worked in the wrong order: delete what was published, then build, then
-                copy the new files across. I only found out whether it had worked at the very end,
-                and when the build failed the site stayed down while I debugged it. It took me
-                until version 0.8 to see the fix.
-              </p>
+          <section id="v01" class="animate-on-scroll-target">
+            <h2 data-label="v0.1 · October 2024">A page for two ducks</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Putting a page online at all</dd></div>
+                <div><dt>Left to trust</dt><dd>Everything</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">2</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what made me start the site -->
+                <p>
+                  The list is long: 204 birds. A folder of image files does not show how far along I
+                  am, which family I have been avoiding, or what each bird is called in Dhivehi. I
+                  wanted the whole list on one page, with a grey shape for every species I had not
+                  drawn yet, so the gaps were as visible as the drawings.
+                </p>
+                <p>
+                  The first version was a plain page written by hand. It went up on 10 October 2024
+                  with the Lesser Whistling-Duck on it, and the Cotton Pygmy-Goose followed five days
+                  later.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- 0.3 -->
-        <section id="v03" class="animate-on-scroll-target">
-          <h2 data-label="v0.3 · February 2025">Build tools</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>A runtime, a bundler, and writing a test</dd></div>
-              <div><dt>Built with</dt><dd>Deno, esbuild</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">3</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: why I moved to Deno and esbuild a week after getting deployment working -->
-              <p>
-                A week later I moved the project to Deno and esbuild. Nothing a visitor could see
-                changed. I wrote my first tests here, for the build's handler and bundler, and added
-                a licence.
-              </p>
-              <p class="pk-thread">
-                <b>A thread that returns</b>
-                Neither these tests nor this build survived. Three months later the site was down,
-                and the next version started from an empty folder. It then went without tests until
-                version 0.9, seventeen months later.
-              </p>
+          <section id="v02" class="animate-on-scroll-target">
+            <h2 data-label="v0.2 · January to February 2025">Making it publish itself</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>GitHub Actions</dd></div>
+                <div><dt>Left to trust</dt><dd>That each deploy had worked. I found out at the end</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">3</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what brought me back in January 2025 -->
+                <p>
+                  I came back with a third drawing, the Garganey, and spent the next few weeks on
+                  everything around the page: a workflow so that a push publishes the site, a local
+                  build that worked, a favicon and a title card.
+                </p>
+                <p>
+                  My deploy worked in the wrong order: delete what was published, then build, then
+                  copy the new files across. I only found out whether it had worked at the very end,
+                  and when the build failed the site stayed down while I debugged it. It took me
+                  until version 0.8 to see the fix.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>Stopped tracking <code>node_modules</code>.</li>
+                    <li>Ended with a refactor of the whole script, the first of many.</li>
+                  </ul>
+                </details>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- 0.4 -->
-        <section id="v04" class="animate-on-scroll-target">
-          <h2 data-label="v0.4 · May to December 2025">Starting over in Vue</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Locking dependency versions; one-file components; image formats; data as JSON</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">3 <small>→</small> 14</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <p>
-                The version before this one was written as React components. I left it alone for a
-                few months, and when I came back the site was down. React had moved on a version,
-                I had never locked the versions the project depended on, and the build no longer
-                worked. I tried hard to fix it and could not.
-              </p>
-              <p>
-                So in May I started again in Vue, with Vite, and never looked back. What won me
-                over was that a component is one file: its HTML, its CSS and its JavaScript
-                together, where I can see all of it. The first Vue commit has a lock file in it.
-                The next five are named "tried fixing", "tried fixing v2", "hopefully", "hoper
-                fully" and "hoper fully v3".
-              </p>
-              <p>
-                This is the oldest code still in the repository, and the first version I can
-                rebuild and show.
-              </p>
-              <figure>
-                <img
-                  src="assets/projects/wildlife/2025-05.webp"
-                  alt="The May 2025 version, titled Bird Watchlist: a plain grey page with a grid of cards, three ducks drawn and the rest grey bird silhouettes, with family names as cards in the same grid"
-                  width="2400" height="1500" loading="lazy" decoding="async"
-                >
-                <figcaption>May 2025, rebuilt from the first Vue commit. Three drawings and 201 silhouettes.</figcaption>
-              </figure>
-              <p>
-                This is the stretch with the most drawing in it, and not by plan. I had meant to
-                take the drawing low and slow. Then the book for the N. Kendhikulhudhoo trip, the
-                island of my <a href="sem4.html">Semester 4 project</a>, needed birds, so six of
-                them were drawn in a rush and went up on the site in one day in October. Thumbnails
-                followed four days later. By December there were fourteen drawings, the list had
-                moved from a text file to JSON, and the site counted how many were done.
-              </p>
-              <ul class="pk-list">
-                <li>Converted the drawings from PNG to WebP, then added separate thumbnails.</li>
-                <li>Two shells drawn in July, long before there was a shells collection.</li>
-                <li>Fixed scrolling twice, once for phones.</li>
-              </ul>
-              <p class="pk-thread">
-                <b>A thread that returns</b>
-                The WebP files were made by hand. First I put each drawing through an online
-                converter, then through a Google Colab notebook. Nothing in the repository knew how
-                to make its own images until January 2026, and it took until version 0.8 to get
-                that right.
-              </p>
+          <section id="v03" class="animate-on-scroll-target">
+            <h2 data-label="v0.3 · February 2025">Build tools</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>A runtime, a bundler, and writing a test</dd></div>
+                <div><dt>Left to trust</dt><dd>The versions of everything the project depended on</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">3</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: why I moved to Deno and esbuild a week after getting deployment working -->
+                <p>
+                  A week later I moved the project to Deno and esbuild. Nothing a visitor could see
+                  changed. I wrote my first tests here, for the build's handler and bundler, and added
+                  a licence.
+                </p>
+                <p>
+                  Neither the tests nor the build survived. Three months later the site was down,
+                  and the next version started from an empty folder. It then went without tests until
+                  version 0.9, seventeen months later.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <!-- 0.5 -->
-        <section id="v05" class="animate-on-scroll-target">
-          <h2 data-label="v0.5 · December 2025 to January 2026">Tailwind and the dark</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Utility CSS, theming, git hooks</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">15</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: what brought me back in January 2026 -->
-              <p>
-                A drawing of the Northern Shoveler in December, and then a restyle in January: I
-                moved the styles to Tailwind, added a dark theme with a toggle, a sidebar of
-                families and a footer.
-              </p>
-              <figure>
-                <img
-                  src="assets/projects/wildlife/2026-01.webp"
-                  alt="The January 2026 version in dark mode: a sidebar titled Bird Groups listing families, a counter reading 13 of 204 drawn, and cards with the English and scientific name over each drawing"
-                  width="2400" height="1500" loading="lazy" decoding="async"
-                >
-                <figcaption>January 2026, rebuilt from the commit that added the theme toggle</figcaption>
-              </figure>
-              <p>
-                I expected moving to Tailwind to break half the site. It took an afternoon and
-                broke very little. The styles had lived in three separate files; with them written
-                where they are used, the whole app went from 870 lines to 549, and dark mode came
-                almost for free on the same day. It was the first rewrite that felt elegant rather
-                than hard.
-              </p>
-              <h3>Keeping the stylesheet small</h3>
-              <p>
-                I had read enough horror stories in comment sections about stylesheets nobody dares
-                to touch that I spent a real amount of time trying not to grow one. In November I
-                cleaned the CSS up twice in one day and ended with more than I started. Tailwind is
-                what finally cut it.
-              </p>
-              <ol class="pk-bars" aria-label="Lines of CSS over time">
-                <li style="--v: 0.479">May 2025<span><b>224</b> three style files</span></li>
-                <li class="is-peak" style="--v: 1.000">Dec 2025<span><b>468</b> the peak, after two clean-ups in one day</span></li>
-                <li class="is-peak" style="--v: 0.088">Jan 2026<span><b>41</b> after Tailwind: one file</span></li>
-                <li style="--v: 0.241">Jul 2026<span><b>113</b> shared classes pulled out of the markup</span></li>
-                <li style="--v: 0.803">Oct 2026<span><b>376</b> design tokens and twelve accent palettes</span></li>
-              </ol>
-              <p>
-                It has bloated again since, and I would rather show that than hide it. I think it
-                is still manageable: it is one file, and a large part of what came back is a list
-                of colours and sizes with names, not rules fighting each other.
-              </p>
-              <ul class="pk-list">
-                <li>Added git hooks. They are gone now; CI does that job.</li>
-              </ul>
-              <p class="pk-thread">
-                <b>A thread that returns</b>
-                On the day the theme toggle went in, one file, <code>App.vue</code>, was 429 lines:
-                three-quarters of the whole app. Cutting it down became its own project in 0.7.
-              </p>
+        <!-- ================= Act II ================= -->
+        <div class="pk-act" id="mine">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part II · Versions 0.4 to 0.7 · May 2025 to March 2026</p>
+            <h2 class="pk-act__title">Making it <em>mine</em></h2>
+            <p class="pk-act__say">A framework I chose, a look, features, and more than birds. It grew faster than I could keep it in my head.</p>
+          </header>
+
+          <section id="v04" class="animate-on-scroll-target">
+            <h2 data-label="v0.4 · May to December 2025">Starting over in Vue</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Locking versions; one-file components; data as JSON</dd></div>
+                <div><dt>Left to trust</dt><dd>Converting every image by hand</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">3 <small>→</small> 14</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <p>
+                  The version before this one was written as React components. I left it alone for a
+                  few months, and when I came back the site was down. React had moved on a version,
+                  I had never locked the versions the project depended on, and the build no longer
+                  worked. I tried hard to fix it and could not.
+                </p>
+                <p>
+                  So in May I started again in Vue, with Vite, and never looked back. What won me
+                  over was that a component is one file: its HTML, its CSS and its JavaScript
+                  together, where I can see all of it. The first Vue commit has a lock file in it.
+                  The next five are named "tried fixing", "tried fixing v2", "hopefully", "hoper
+                  fully" and "hoper fully v3".
+                </p>
+                <figure>
+                  <img
+                    src="assets/projects/wildlife/2025-05.webp"
+                    alt="The May 2025 version, titled Bird Watchlist: a plain grey page with a grid of cards, three ducks drawn and the rest grey bird silhouettes, with family names as cards in the same grid"
+                    width="2400" height="1500" loading="lazy" decoding="async"
+                  >
+                  <figcaption>May 2025, rebuilt from the first Vue commit: the oldest code still in the repository. Three drawings and 201 silhouettes.</figcaption>
+                </figure>
+                <p>
+                  This is the stretch with the most drawing in it, and not by plan. I had meant to
+                  take the drawing low and slow. Then the book for the N. Kendhikulhudhoo trip, the
+                  island of my <a href="sem4.html">Semester 4 project</a>, needed birds, so six of
+                  them were drawn in a rush and went up on the site in one day in October.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>The WebP files were made by hand: first through an online converter, then a Google Colab notebook. Nothing in the repository knew how to make its own images until January 2026.</li>
+                    <li>Thumbnails followed the six birds by four days.</li>
+                    <li>By December the list had moved from a text file to JSON, and the site counted how many were done.</li>
+                    <li>Two shells drawn in July, long before there was a shells collection.</li>
+                    <li>Fixed scrolling twice, once for phones.</li>
+                  </ul>
+                </details>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- 0.6 -->
-        <section id="v06" class="animate-on-scroll-target">
-          <h2 data-label="v0.6 · January to February 2026">Finding things</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Search, a full-size viewer, and data worth reading</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">16 <small>→</small> 17</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: why search and the info panel came next -->
-              <p>
-                Straight on from the restyle, the site started to do more than show a grid. A
-                drawing opens full-size with a panel beside it; there is a search bar; drawings can
-                be sorted by the date they were made. Each one gained a note from me and, in
-                February, its Dhivehi name.
-              </p>
-              <ul class="pk-list">
-                <li>The first image scripts in the repository: one command to convert a drawing and ship it, taught the next day to skip images already converted. Three weeks later I rewrote the build around it.</li>
-                <li>Added a three-way check that the drawing count is right.</li>
-                <li>Wrote down the known issues for the first time.</li>
-              </ul>
-              <p class="pk-thread">
-                <b>A thread that returns</b>
-                "Fixed versioning system" is in this changelog. It was replaced in 0.8 and
-                simplified in 0.9. Search, added here, was reworked in 0.8 and again in 0.9.
-              </p>
+          <section id="v05" class="animate-on-scroll-target">
+            <h2 data-label="v0.5 · December 2025 to January 2026">Tailwind and the dark</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Utility CSS and theming</dd></div>
+                <div><dt>Left to trust</dt><dd>That one 429-line file would stay readable</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">15</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what brought me back in January 2026 -->
+                <p>
+                  I expected moving to Tailwind to break half the site. It took an afternoon and
+                  broke very little. The styles had lived in three separate files; with them written
+                  where they are used, the whole app went from 870 lines to 549, and dark mode came
+                  almost for free on the same day. It was the first rewrite that felt elegant rather
+                  than hard.
+                </p>
+                <figure>
+                  <img
+                    src="assets/projects/wildlife/2026-01.webp"
+                    alt="The January 2026 version in dark mode: a sidebar titled Bird Groups listing families, a counter reading 13 of 204 drawn, and cards with the English and scientific name over each drawing"
+                    width="2400" height="1500" loading="lazy" decoding="async"
+                  >
+                  <figcaption>January 2026, rebuilt from the commit that added the theme toggle</figcaption>
+                </figure>
+                <h3>Keeping the stylesheet small</h3>
+                <p>
+                  I had read enough horror stories in comment sections about stylesheets nobody dares
+                  to touch that I spent a real amount of time trying not to grow one. In November I
+                  cleaned the CSS up twice in one day and ended with more than I started. Tailwind is
+                  what finally cut it.
+                </p>
+                <ol class="pk-bars" aria-label="Lines of CSS over time">
+                  <li style="--v: 0.479">May 2025<span><b>224</b> three style files</span></li>
+                  <li class="is-peak" style="--v: 1.000">Dec 2025<span><b>468</b> the peak, after two clean-ups in one day</span></li>
+                  <li class="is-peak" style="--v: 0.088">Jan 2026<span><b>41</b> after Tailwind: one file</span></li>
+                  <li style="--v: 0.241">Jul 2026<span><b>113</b> shared classes pulled out of the markup</span></li>
+                  <li style="--v: 0.803">Oct 2026<span><b>376</b> design tokens and twelve accent palettes</span></li>
+                </ol>
+                <p>
+                  It has bloated again since, and I would rather show that than hide it. I think it
+                  is still manageable: it is one file, and a large part of what came back is a list
+                  of colours and sizes with names, not rules fighting each other.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>A drawing of the Northern Shoveler in December, the only one of this stretch.</li>
+                    <li>A sidebar of families and a footer arrived with the restyle.</li>
+                    <li>Added git hooks. They are gone now; CI does that job.</li>
+                  </ul>
+                </details>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <!-- 0.7 -->
-        <section id="v07" class="animate-on-scroll-target">
-          <h2 data-label="v0.7 · March 2026">More than birds</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Designing around data; code that does the work against code that says what should happen</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: why sharks and shells, and why now -->
-              <p>
-                The project outgrew its name. I wrote a plan for more than one collection,
-                restructured the site so a collection is data and not code, and three days after
-                the first working version added sharks and shells on the same day. The Sand Dollar
-                was drawn that day too.
-              </p>
-              <pre class="pk-code">{
+          <section id="v06" class="animate-on-scroll-target">
+            <h2 data-label="v0.6 · January to February 2026">Finding things</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Search, a full-size viewer, and data worth reading</dd></div>
+                <div><dt>Left to trust</dt><dd>The version number and the drawing count, kept by hand</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">16 <small>→</small> 17</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: why search and the info panel came next -->
+                <p>
+                  Straight on from the restyle, the site started to do more than show a grid. A
+                  drawing opens full-size with a panel beside it; there is a search bar; drawings can
+                  be sorted by the date they were made. Each one gained a note from me and, in
+                  February, its Dhivehi name.
+                </p>
+                <p>
+                  The changelog here has two lines that show how much I was keeping in my head:
+                  "fixed versioning system", and "added triple check for bird count". Both numbers
+                  were kept by hand. The count got three checks. The version number was replaced
+                  in 0.8 with something that cannot drift.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>The first image scripts in the repository: one command to convert a drawing and ship it, taught the next day to skip images already converted. Three weeks later I rewrote the build around it.</li>
+                    <li>Wrote down the known issues for the first time.</li>
+                    <li>Search, added here, came back in 0.7, 0.8 and 0.9.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section id="v07" class="animate-on-scroll-target">
+            <h2 data-label="v0.7 · March 2026">More than birds, and one file less</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Code that does the work against code that says what should happen</dd></div>
+                <div><dt>Left to trust</dt><dd>That nothing had broken. There were still no tests</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: why sharks and shells, and why now -->
+                <p>
+                  The project outgrew its name. I restructured the site so a collection is data and
+                  not code, and three days after the first working version added sharks and shells
+                  on the same day. A new collection is now one entry in a file, a list of species
+                  and a folder of images.
+                </p>
+                <h3>Shrinking one file</h3>
+                <p>
+                  <code>App.vue</code> had been growing since the rewrite. Everything went into it:
+                  loading the list, filtering, scrolling, the theme. On 10 March I took it on as a
+                  task in itself and tried to make it as small as I could. It went from 427 lines to
+                  143 in a day.
+                </p>
+                <p>
+                  The realisation that did it was simple. All the stitching of the interface, the
+                  header, the sidebar, the grid and how they sit together, could move into one
+                  component of its own. I called it <code>UI.vue</code> and renamed it
+                  <code>Chrome.vue</code> the same day. With that gone, <code>App.vue</code> had
+                  almost nothing left to do but start things.
+                </p>
+                <ol class="pk-bars" aria-label="Lines in App.vue over time">
+                  <li style="--v: 0.277">May 2025<span><b>119</b> the first Vue version</span></li>
+                  <li style="--v: 0.816">Jun 2025<span><b>350</b> after the interface revamp</span></li>
+                  <li style="--v: 0.986">Nov 2025<span><b>423</b> scrolling, a progress counter</span></li>
+                  <li class="is-peak" style="--v: 1.000">Jan 2026<span><b>429</b> the peak: three-quarters of the whole app</span></li>
+                  <li style="--v: 0.478">Feb 2026<span><b>205</b> search bar added, parts moved out</span></li>
+                  <li style="--v: 0.995">Mar 2026<span><b>427</b> collections added, and it is back</span></li>
+                  <li class="is-peak" style="--v: 0.333">10 Mar 2026<span><b>143</b> "debloated app.vue", the same day</span></li>
+                  <li style="--v: 0.587">6 Jul 2026<span><b>252</b> shareable links creep in</span></li>
+                  <li class="is-peak" style="--v: 0.217">10 Jul 2026<span><b>93</b> state moved into stores</span></li>
+                  <li style="--v: 0.242">Oct 2026<span><b>104</b> today</span></li>
+                </ol>
+                <p>
+                  Doing it taught me a distinction I did not have words for: the difference between
+                  code that does the work and code that says what should happen and leaves the work
+                  to something else. The second kind is called declarative; the first, imperative.
+                  The file at the top of an app should be almost all the second kind.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <pre class="pk-code">{
   <b>"id"</b>: "birds",
   <b>"label"</b>: "Birds",
   <b>"groupLabel"</b>: "Family",
   <b>"itemLabel"</b>: "bird",
   <b>"links"</b>: [ { "label": "eBird", "url": "…?q={{common}}+ebird" } ]
 }</pre>
-              <ul class="pk-list">
-                <li>A new collection is one entry like this (shortened, as it is today), a list of species and a folder of images.</li>
-                <li>Moved every type into its own folder.</li>
-              </ul>
-              <h3>Shrinking one file</h3>
-              <p>
-                <code>App.vue</code> had been growing since the rewrite. Everything went into it:
-                loading the list, filtering, scrolling, the theme. On 10 March I took it on as a
-                task in itself and tried to make it as small as I could. It went from 427 lines to
-                143 in a day.
-              </p>
-              <p>
-                The realisation that did it was simple. All the stitching of the interface, the
-                header, the sidebar, the grid and how they sit together, could move into one
-                component of its own. I called it <code>UI.vue</code> and renamed it
-                <code>Chrome.vue</code> the same day. With that gone, <code>App.vue</code> had
-                almost nothing left to do but start things.
-              </p>
-              <ol class="pk-bars" aria-label="Lines in App.vue over time">
-                <li style="--v: 0.277">May 2025<span><b>119</b> the first Vue version</span></li>
-                <li style="--v: 0.816">Jun 2025<span><b>350</b> after the interface revamp</span></li>
-                <li style="--v: 0.986">Nov 2025<span><b>423</b> scrolling, a progress counter</span></li>
-                <li class="is-peak" style="--v: 1.000">Jan 2026<span><b>429</b> the peak: three-quarters of the whole app</span></li>
-                <li style="--v: 0.478">Feb 2026<span><b>205</b> search bar added, parts moved out</span></li>
-                <li style="--v: 0.995">Mar 2026<span><b>427</b> collections added, and it is back</span></li>
-                <li class="is-peak" style="--v: 0.333">10 Mar 2026<span><b>143</b> "debloated app.vue", the same day</span></li>
-                <li style="--v: 0.587">6 Jul 2026<span><b>252</b> shareable links creep in</span></li>
-                <li class="is-peak" style="--v: 0.217">10 Jul 2026<span><b>93</b> state moved into stores</span></li>
-                <li style="--v: 0.242">Oct 2026<span><b>104</b> today</span></li>
-              </ol>
-              <p>
-                Doing it taught me a distinction I did not have words for: the difference between
-                code that does the work and code that says what should happen and leaves the work
-                to something else. The second kind is called declarative; the first, imperative.
-                The file at the top of an app should be almost all the second kind. It says which
-                parts exist and how they connect, and each part does its own work somewhere else.
-              </p>
-              <figure>
-                <img
-                  src="assets/projects/wildlife/shells.webp"
-                  alt="The shells collection as it is today: a grid of spiral placeholder icons for sea snails not yet drawn, with a rose accent colour in place of the birds' teal"
-                  width="2400" height="1500" loading="lazy" decoding="async"
-                >
-                <figcaption>Shells, as the collection looks today</figcaption>
-              </figure>
+                  <ul class="pk-list">
+                    <li>A collection's entry, shortened, as it is today.</li>
+                    <li>The Sand Dollar was drawn the day shells went in. It is still the latest drawing.</li>
+                    <li>Moved every type into its own folder.</li>
+                    <li>Search got its first rewrite, days after collections arrived, because it now had to look in three places.</li>
+                  </ul>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/shells.webp"
+                      alt="The shells collection as it is today: a grid of spiral placeholder icons for sea snails not yet drawn, with a rose accent colour in place of the birds' teal"
+                      width="2400" height="1500" loading="lazy" decoding="async"
+                    >
+                    <figcaption>Shells, as the collection looks today</figcaption>
+                  </figure>
+                </details>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <!-- 0.8 -->
-        <section id="v08" class="animate-on-scroll-target">
-          <h2 data-label="v0.8 · May to July 2026">Doing it properly</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>Build first, publish second; untangling a pipeline on paper; measuring a page with Lighthouse</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: what brought me back in May 2026, and what changed in how I worked -->
-              <p>
-                No new drawings in this stretch or the next. I came back to the code itself: search
-                across every collection with keyboard navigation, a build pipeline in separate
-                steps, and a pass over the interface so its parts matched.
-              </p>
-              <figure>
-                <img
-                  src="assets/projects/wildlife/search.webp"
-                  alt="Searching for heron: a dropdown lists 14 matching birds with their scientific and Dhivehi names, while the grid behind filters to the herons, egrets and bitterns"
-                  width="2400" height="1500" loading="lazy" decoding="async"
-                >
-                <figcaption>One search across every collection, by English, scientific or Dhivehi name</figcaption>
-              </figure>
-              <h3>Search, a journey of its own</h3>
-              <p>
-                Search looks like the smallest feature on the page and took the most returns. A
-                search bar in February. A first rewrite in March, days after collections arrived,
-                because it now had to look in three places. A refactor in May. Results across every
-                collection with counts and arrow keys in June. Dhivehi names and Thaana script in
-                July. In 0.9 it became a proper combobox that announces its results, and learned
-                to fold a long list so the next collection is not buried.
-              </p>
-              <p>
-                By line count it peaked at 18% of the app in September 2026, and is 589 of 3,753
-                lines today. It felt like half the project.
-              </p>
-              <ul class="pk-list">
-                <li>A performance pass: lazy images, debounced search, the full-size viewer loaded only when opened.</li>
-                <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
-              </ul>
-              <h3>A week chasing 100</h3>
-              <p>
-                I spent about a week, in and out, running Lighthouse in Chrome and fixing whatever
-                it complained about until the numbers stopped moving. Accessibility and SEO both
-                reached 100. Most of it was small and unglamorous: text that was a shade too faint,
-                a missing description, a favicon at the wrong path, images at the top of the page
-                that should load at once and not wait.
-              </p>
-              <p>
-                It also taught me that a score can be chased too far. One speed trick, telling the
-                browser to skip drawing sections that are off screen, quietly broke the sidebar's
-                sense of where you were on the page. I took it out again the same day.
-              </p>
-              <h3>The image pipeline, untangled</h3>
-              <p>
-                Converting a drawing for the site had been an online converter, then a Colab
-                notebook, then a script, then a rewrite of the script, then a restructure of the
-                rewrite. By May it worked and I could not follow it. It took a few hours with the
-                code spread out to untangle it into four steps that each do one thing.
-              </p>
-              <pre class="pk-code"><b>scan</b>      read the list and the image folders, once
-<b>plan</b>      work out what is new, what is missing, what is orphaned
-<b>execute</b>   convert the images, date the new drawings
-<b>report</b>    say what happened</pre>
-              <p>
-                The plan step touches nothing. It is only sets: what is listed, what is on disk,
-                and the difference. That is why it could be tested later without a single image.
-                I converted every drawing again that day to prove it.
-              </p>
-              <p class="pk-quote">
-                Either you spend hours banging your head against the wall until it falls into place
-                and you are coding blind, or you take a pen and paper, draw the flow chart, and
-                solve it. What I love about coding is that it feels like pure logic.
-              </p>
-              <h3>The deploy, the right way round</h3>
-              <p>
-                This sounds obvious now, and it was one of the biggest things this project taught
-                me. Since version 0.2 my deploy had deleted the live site first and built the new
-                one second. On 12 May 2026 I rewrote it eleven times in one day, and somewhere in
-                there it clicked: build first, and replace what is published only if the build
-                succeeded.
-              </p>
-              <pre class="pk-code" role="img" aria-label="Before: delete the published site, build, copy the new files; a failed build leaves the site down. After: build, check the result, then publish; a failed build leaves the old site untouched."><b>before</b>   delete published site  →  build  →  copy files across
+        <!-- ================= Act III ================= -->
+        <div class="pk-act" id="checks">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part III · Versions 0.8 and 0.9 · May to October 2026</p>
+            <h2 class="pk-act__title">Making it <em>check itself</em></h2>
+            <p class="pk-act__say">No new drawings. One by one, the things I had been trusting myself to remember were handed to the project.</p>
+          </header>
+
+          <section id="v08" class="animate-on-scroll-target">
+            <h2 data-label="v0.8 · May to July 2026">Build first, publish second</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Untangling a pipeline on paper; measuring a page</dd></div>
+                <div><dt>Now checked</dt><dd>The build, before anything is published. The version number</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what brought me back in May 2026, and what changed in how I worked -->
+                <p>
+                  This sounds obvious now, and it was one of the biggest things this project taught
+                  me. Since version 0.2 my deploy had deleted the live site first and built the new
+                  one second. On 12 May 2026 I rewrote it eleven times in one day, and somewhere in
+                  there it clicked: build first, and replace what is published only if the build
+                  succeeded.
+                </p>
+                <pre class="pk-code" role="img" aria-label="Before: delete the published site, build, copy the new files; a failed build leaves the site down. After: build, check the result, then publish; a failed build leaves the old site untouched."><b>before</b>   delete published site  →  build  →  copy files across
          a failed build leaves nothing online
 
 <b>after</b>    build  →  check the result  →  publish
          a failed build leaves the old site exactly as it was</pre>
-              <p>
-                A failed build now costs nothing: the old site stays up and I can take my time.
-                The same idea grew in version 0.9, where the tests, the type-check and the image
-                check all have to pass before anything is published.
-              </p>
-              <h3>The version number, worked out</h3>
-              <p>
-                The footer today reads something like <code>v0.9.161 · 18 drawings · 4f0f400</code>.
-                Since this version only the first two numbers are written down anywhere. The patch is the
-                number of commits, the drawing count is read from the lists, and the last part is
-                the commit it was built from. It cannot drift, because there is nothing to forget
-                to update.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- 0.9 -->
-        <section id="v09" class="animate-on-scroll-target">
-          <h2 data-label="v0.9 · July to October 2026">Safe to change</h2>
-          <div class="pk-arc">
-            <dl class="pk-arc__meta">
-              <div><dt>New to me</dt><dd>State in stores; testing in depth; one style for every icon; a design guide to build against; a logo and its rules</dd></div>
-              <div><dt>Built with</dt><dd>Vue 3, Vite, Tailwind, Deno, fast-check</dd></div>
-              <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
-            </dl>
-            <div class="pk-arc__body">
-              <!-- WHY: what brought me back in July and again in September 2026 -->
-              <p>
-                The longest stretch so far, in three bursts. In July the state moved out of one
-                shared object into four stores, every drawing got its own address, and the first
-                44 tests were written. <code>App.vue</code> fell from 252 lines to 93. In September the tests grew and found real bugs. In October
-                the site got a design system, its own icons and a logo.
-              </p>
-              <dl class="pk-stats">
-                <div><dt>44 <small>→</small> 166</dt><dd>tests from July to early October, with 41 more since</dd></div>
-                <div><dt>47.8 <small>→</small> 93.0%</dt><dd>of lines covered; the build fails below 88%</dd></div>
-                <div><dt>4</dt><dd>time zones the tests run in</dd></div>
-              </dl>
-              <h3>What the tests found</h3>
-              <ul class="pk-list">
-                <li>A drawing dated the 1st of a month showed under the previous month for anyone west of UTC. That is why the tests run in four time zones.</li>
-                <li>A slow collection could finish loading after you had switched away, and show its items under the wrong heading.</li>
-                <li>If the list of collections failed to load, the spinner turned forever.</li>
-                <li>Searching for "amp" could cut an "&amp;" in half and break the highlighted name.</li>
-              </ul>
-              <div class="pk-grid pk-grid--half">
-                <figure>
-                  <img
-                    src="assets/projects/wildlife/lightbox.webp"
-                    alt="The full-size view of the House Crow drawing, with a panel giving its number, family, Dhivehi name in Thaana and romanised, scientific name, a note from the illustrator and links to eBird, BirdLife and Wikipedia"
-                    width="2400" height="1500" loading="lazy" decoding="async"
-                  >
-                  <figcaption>The full-size view became a real dialog: focus moves in, Tab stays inside, focus returns to the drawing</figcaption>
-                </figure>
-                <figure>
-                  <img
-                    src="assets/projects/wildlife/timeline.webp"
-                    alt="The date view: drawings grouped by the month they were made, from October 2024, with a sidebar of months and how many drawings each has"
-                    width="2400" height="1500" loading="lazy" decoding="async"
-                  >
-                  <figcaption>The date view. The empty months are honest.</figcaption>
-                </figure>
+                <p>
+                  A failed build now costs nothing: the old site stays up and I can take my time.
+                </p>
+                <h3>The image pipeline, untangled</h3>
+                <p>
+                  Converting a drawing for the site had been an online converter, then a Colab
+                  notebook, then a script, then a rewrite of the script, then a restructure of the
+                  rewrite. By May it worked and I could not follow it. It took a few hours with the
+                  code spread out to untangle it into four steps that each do one thing.
+                </p>
+                <pre class="pk-code"><b>scan</b>      read the list and the image folders, once
+<b>plan</b>      work out what is new, what is missing, what is orphaned
+<b>execute</b>   convert the images, date the new drawings
+<b>report</b>    say what happened</pre>
+                <p>
+                  The plan step touches nothing. It is only sets: what is listed, what is on disk,
+                  and the difference. That is why it could be tested later without a single image.
+                </p>
+                <p class="pk-quote">
+                  Either you spend hours banging your head against the wall until it falls into place
+                  and you are coding blind, or you take a pen and paper, draw the flow chart, and
+                  solve it. What I love about coding is that it feels like pure logic.
+                </p>
+                <h3>A number nobody types</h3>
+                <p>
+                  The footer reads something like <code>v0.9.161 · 18 drawings · 4f0f400</code>.
+                  Since this version only the first two numbers are written down anywhere. The
+                  patch is the number of commits, the drawing count is read from the lists, and the
+                  last part is the commit it was built from. It cannot drift, because there is
+                  nothing to forget to update. The changelog lost its "Unreleased" heading for the
+                  same reason: the site deploys on every merge, so nothing is ever unreleased.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch: search, and a week chasing 100</summary>
+                  <h3>Search, a journey of its own</h3>
+                  <p>
+                    Search looks like the smallest feature on the page and took the most returns. A
+                    search bar in February. A first rewrite in March. A refactor in May. Results
+                    across every collection with counts and arrow keys in June. Dhivehi names and
+                    Thaana script in July. In 0.9 it became a proper combobox that announces its
+                    results. By line count it peaked at 18% of the app, and is 589 of 3,753 lines
+                    today. It felt like half the project.
+                  </p>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/search.webp"
+                      alt="Searching for heron: a dropdown lists 14 matching birds with their scientific and Dhivehi names, while the grid behind filters to the herons, egrets and bitterns"
+                      width="2400" height="1500" loading="lazy" decoding="async"
+                    >
+                    <figcaption>One search across every collection, by English, scientific or Dhivehi name</figcaption>
+                  </figure>
+                  <h3>A week chasing 100</h3>
+                  <p>
+                    I spent about a week, in and out, running Lighthouse in Chrome and fixing whatever
+                    it complained about until the numbers stopped moving. Accessibility and SEO both
+                    reached 100. Most of it was small and unglamorous: text a shade too faint, a
+                    missing description, a favicon at the wrong path.
+                  </p>
+                  <p>
+                    It also taught me that a score can be chased too far. One speed trick, telling the
+                    browser to skip drawing sections that are off screen, quietly broke the sidebar's
+                    sense of where you were on the page. I took it out again the same day.
+                  </p>
+                  <ul class="pk-list">
+                    <li>A performance pass: lazy images, debounced search, the full-size viewer loaded only when opened.</li>
+                    <li>Lint, format and build on every pull request; the unused deploy branch removed.</li>
+                    <li>I converted every drawing again on the day the pipeline was untangled, to prove it.</li>
+                  </ul>
+                </details>
               </div>
-              <h3>How it is put together now</h3>
-              <pre class="pk-code" role="img" aria-label="Diagram: source drawings go through the asset pipeline into the public folder of JSON lists and images; the site fetches those files at runtime; a test harness and CI gate every merge">raw_png/  <b>(the drawings, not in git)</b>
+            </div>
+          </section>
+
+          <section id="v09" class="animate-on-scroll-target">
+            <h2 data-label="v0.9 · July 2026">Stores, and the first tests</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>State in stores; a type-check; unit tests</dd></div>
+                <div><dt>Now checked</dt><dd>Lint, types and 44 tests, before every deploy</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what brought me back in July 2026 -->
+                <p>
+                  The state of the app moved out of one shared object into four stores: search, the
+                  interface, the collections, and the drawing that is open. Components read them and
+                  change them only through actions. <code>App.vue</code> fell from 252 lines to 93.
+                </p>
+                <p>
+                  Then the idea from the deploy grew. If nothing should be published unless the
+                  build passes, nothing should be published unless the tests pass either. I wrote
+                  the first 44, and three days later the deploy would not run without them.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>Every drawing got its own address, so a link can open the site straight at one bird.</li>
+                    <li>The full-size view pages through drawings in the order they were made.</li>
+                    <li>A refactor that removed 198 more lines than it added.</li>
+                    <li>Fourteen icon components collapsed into one, with a registry.</li>
+                  </ul>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/timeline.webp"
+                      alt="The date view: drawings grouped by the month they were made, from October 2024, with a sidebar of months and how many drawings each has"
+                      width="2400" height="1500" loading="lazy" decoding="async"
+                    >
+                    <figcaption>The date view. The empty months are honest.</figcaption>
+                  </figure>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section id="v09-september" class="animate-on-scroll-target">
+            <h2 data-label="v0.9 · September 2026">The tests find things</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>Testing a fake browser; property tests; accessibility as behaviour</dd></div>
+                <div><dt>Now checked</dt><dd>Dates in four time zones. Missing and orphaned images. The data files</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <!-- WHY: what brought me back in September 2026 -->
+                <p>
+                  In one day the tests went from 44 to 147, and they started finding things that
+                  had been live the whole time.
+                </p>
+                <ul class="pk-list">
+                  <li>A drawing dated the 1st of a month showed under the previous month for anyone west of UTC. That is why the tests now run in four time zones.</li>
+                  <li>A slow collection could finish loading after you had switched away, and show its items under the wrong heading.</li>
+                  <li>If the list of collections failed to load, the spinner turned forever.</li>
+                  <li>Searching for "amp" could cut an "&amp;" in half and break the highlighted name.</li>
+                </ul>
+                <dl class="pk-stats">
+                  <div><dt>44 <small>→</small> 261</dt><dd>tests, from July to October 2026</dd></div>
+                  <div><dt>47.8 <small>→</small> 96.2%</dt><dd>of lines covered; the build fails below 92%</dd></div>
+                  <div><dt>4</dt><dd>time zones the tests run in</dd></div>
+                </dl>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>The full-size view became a real dialog: focus moves in, Tab stays inside, and focus returns to the drawing you opened.</li>
+                    <li>Search announces how many results it found.</li>
+                    <li>The theme is applied before the first paint, so a dark-theme visitor never sees a white flash.</li>
+                    <li>A weekly run tries the property tests at twenty-five times the depth.</li>
+                  </ul>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/lightbox.webp"
+                      alt="The full-size view of the House Crow drawing, with a panel giving its number, family, Dhivehi name in Thaana and romanised, scientific name, a note from the illustrator and links to eBird, BirdLife and Wikipedia"
+                      width="2400" height="1500" loading="lazy" decoding="async"
+                    >
+                    <figcaption>The full-size view, with the Dhivehi, English and scientific names and my note on the drawing</figcaption>
+                  </figure>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section id="v09-look" class="animate-on-scroll-target">
+            <h2 data-label="v0.9 · 5 and 6 October 2026">A look, written down</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>One style for every icon; a design guide; a logo and its rules</dd></div>
+                <div><dt>Now checked</dt><dd>The contrast of every accent colour. That every icon is in the set</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <p>
+                  The realisation that set this off was a small one. The site used emoji for its
+                  collections and a mix of borrowed icons everywhere else. It struck me that every
+                  one of them could be drawn in the same style, however mundane the icon: a menu, a
+                  close button, an arrow. One grid, one stroke, round ends, no fills.
+                </p>
+                <p>
+                  Once the icons matched, everything around them looked inconsistent, so I spent
+                  the next day writing a design guide to build against. It is there to make the
+                  next thing I build agree with the last. The guide is drawn by a script from the
+                  real colours and icons, so it cannot say one thing while the site does another.
+                  I then used the same idea for
+                  <a href="https://github.com/seven-leven/folio/blob/main/DESIGN.md">this portfolio's guide</a>.
+                </p>
+                <h3>Why the accent is not random</h3>
+                <p>
+                  I wanted the site to pick one of six accent colours at random on each load. The
+                  better version was one colour per collection: birds teal, sharks blue, shells
+                  rose. Then the colour tells you where you are. The menu has twelve hues, and a
+                  test measures the contrast of each. Amber, yellow and lime are out, and the first
+                  reason I wrote down for that was wrong. White text on them passes. It is their
+                  mid shade, used for the focus ring, that is too pale. I only know because the
+                  test measured it.
+                </p>
+                <div class="pk-grid pk-grid--half">
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/icons.webp"
+                      alt="The icon sheet: line icons in one stroke, grouped by purpose, from the bird, shark and shell of the collections down to menu, close, arrows and zoom"
+                      width="1000" height="1052" loading="lazy" decoding="async"
+                    >
+                    <figcaption>Every icon in the app, the mundane ones included</figcaption>
+                  </figure>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/logo.webp"
+                      alt="The logo sheet: the mark of a bird on an open frame in dark and light, a solid tile for small sizes, lockups with the wordmark, sizes, clear space and what not to do"
+                      width="1400" height="900" loading="lazy" decoding="async"
+                    >
+                    <figcaption>The logo: a bird perched on the open edge of an unfinished frame</figcaption>
+                  </figure>
+                </div>
+                <details class="pk-more">
+                  <summary>More from this stretch: the logo, the phone, the small things</summary>
+                  <h3>A logo, in one sitting</h3>
+                  <p>
+                    The first idea was a bird stepping out of an unfinished frame, built from the
+                    bird icon. The critique was that it was a generic bird icon in a box. The second
+                    pass took five variants. The bird got its own outline and stands on the bottom
+                    line of a frame whose right side is missing, looking out of the page it was
+                    drawn on.
+                  </p>
+                  <ul class="pk-list">
+                    <li>A closed wing clogged below 24 px, so the wing is a single line.</li>
+                    <li>A longer tail ran into the frame's corner and turned into a blob, so it was lifted clear.</li>
+                    <li>Then the order flipped: the bird icon was redrawn from the logo's bird, so the tab, the placeholders and the logo all show the same animal.</li>
+                    <li>It never takes an accent colour. The accent changes with the collection; the logo must not.</li>
+                    <li>The browser-tab icon is still my whistling duck drawing, on purpose.</li>
+                  </ul>
+                  <h3>Three bugs I could only find by measuring</h3>
+                  <ul class="pk-list">
+                    <li>On a 375 px phone the header was 485 px wide, so the view and theme buttons were off the edge of the screen.</li>
+                    <li>About 190 undrawn tiles were buttons that did nothing.</li>
+                    <li>Clicking the dark space around a drawing never closed the viewer, because an invisible layer swallowed the click.</li>
+                  </ul>
+                  <div class="pk-grid pk-grid--half pk-grid--keep">
+                    <figure class="pk-figure--phone">
+                      <img
+                        src="assets/projects/wildlife/phone.webp"
+                        alt="The site on a phone in dark theme: icon tabs for the collections, a search field on its own row, and the drawings two to a row"
+                        width="780" height="1688" loading="lazy" decoding="async"
+                      >
+                    </figure>
+                    <figure class="pk-figure--phone">
+                      <img
+                        src="assets/projects/wildlife/phone-lightbox.webp"
+                        alt="The full-size view on a phone: the drawing on top, and below it the information panel with names, the illustrator's note and links"
+                        width="780" height="1688" loading="lazy" decoding="async"
+                      >
+                    </figure>
+                  </div>
+                  <h3>Small things</h3>
+                  <ul class="pk-list">
+                    <li>The key hints under search used ↑↓ and ↵ as plain text, so their shape came from whatever font the visitor had. I noticed from a screenshot where the return arrow looked wrong. They are icons now, and the guide has a rule about it.</li>
+                    <li>The footer needed a GitHub mark, and I wanted it in my line style. GitHub's rules do not allow altering their logo, so it is the only filled shape in the set.</li>
+                    <li>The grey silhouettes for undrawn species are now each collection's own icon, with a second set for the dark theme so 190 white squares no longer glow at night.</li>
+                    <li>Typing "a" into search listed 203 birds before the first shark. A collection with ten or more matches now shows seven and a "Show 196 more" row.</li>
+                  </ul>
+                  <figure>
+                    <img
+                      src="assets/projects/wildlife/now-light.webp"
+                      alt="The October 2026 version in its light theme: a header with the logo, tabs for Birds, Sharks and Shells, a search field and view switches, above a grid of ducks"
+                      width="2400" height="1500" loading="lazy" decoding="async"
+                    >
+                    <figcaption>October 2026, light theme</figcaption>
+                  </figure>
+                </details>
+              </div>
+            </div>
+          </section>
+
+          <section id="v09-checks" class="animate-on-scroll-target">
+            <h2 data-label="v0.9 · 6 and 7 October 2026">Checking the checks</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>That a check can be wrong too</dd></div>
+                <div><dt>Now checked</dt><dd>The coverage figure. The commands in the docs. Branches after a merge</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <p>
+                  The last lesson so far is that the things doing the checking need checking. I
+                  added a report listing the source files no test touches. The first time it ran,
+                  it named files I knew had tests. The coverage setup had a badly escaped pattern:
+                  a rule meant to skip type files (<code>.d.ts</code>) was also skipping every file
+                  whose name ended in "d.ts", including <code>record.ts</code>. The honest number
+                  was half a point lower than the one I had been quoting.
+                </p>
+                <ul class="pk-list">
+                  <li><strong>Merged, and never shipped.</strong> Twice in one week I merged a pull request and the change never reached the site. Each had been stacked on another branch and merged into it after that branch had already landed. The fix was two settings: delete branches on merge, and protect the main branch. I deleted fourteen stale branches that day.</li>
+                  <li><strong>A test I made fail on purpose.</strong> The pipeline tests build a throwaway collection from tiny real images, run the real converter and delete it. To prove one of them could fail, I changed the converter from padding a wide drawing to cropping it, and watched the test go red.</li>
+                  <li><strong>The documented command that never worked.</strong> Writing a step-by-step guide to the tests, I ran every command before writing it down. One that had been in the docs for a week failed with "unknown option".</li>
+                </ul>
+                <pre class="pk-code" role="img" aria-label="Diagram: source drawings go through the asset pipeline into the public folder of JSON lists and images; the site fetches those files at runtime; a test harness and CI gate every merge">raw_png/  <b>(the drawings, not in git)</b>
       │
       ▼
 <b>1. Asset pipeline</b>   scan → plan → execute → report
@@ -555,93 +726,11 @@
 <b>2. The site</b>         types ← helpers ← composables ← stores ← components
 
 <b>3. Tests and CI</b>     the same checks on every pull request and every deploy</pre>
-              <h3>Every icon, drawn the same way</h3>
-              <p>
-                The realisation that set off the last burst was a small one. The site used emoji
-                for its collections and a mix of borrowed icons everywhere else. On 5 October it
-                struck me that every one of them could be drawn in the same style, however mundane
-                the icon: a menu, a close button, an arrow. One grid, one stroke, round ends, no
-                fills.
-              </p>
-              <figure class="pk-figure--narrow">
-                <img
-                  src="assets/projects/wildlife/icons.webp"
-                  alt="The icon sheet: line icons in one stroke, grouped by purpose, from the bird, shark and shell of the collections down to menu, close, arrows and zoom"
-                  width="1000" height="1052" loading="lazy" decoding="async"
-                >
-                <figcaption>Every icon in the app, the mundane ones included</figcaption>
-              </figure>
-              <h3>A look, written down</h3>
-              <p>
-                Once the icons matched, everything around them looked inconsistent, so I spent the
-                next day writing a design guide to build against: one neutral ramp, one accent per
-                collection from twelve contrast-checked hues, six text sizes, two corner radii. It
-                is there to make the next thing I build agree with the last. The guide is drawn by
-                a script from the real colours and icons, an idea I then used for
-                <a href="https://github.com/seven-leven/folio/blob/main/DESIGN.md">this portfolio's guide</a>.
-              </p>
-              <h3>A logo, in one sitting</h3>
-              <p>
-                With the icons and the guide in place, the site still had no mark of its own, so
-                the same morning went on a logo. The first idea was a bird stepping out of an
-                unfinished frame, built from the bird icon. It looked like an icon in a box. The
-                second pass gave the bird its own outline (back, tail, breast, wing, legs) and
-                stood it on the bottom line of a frame whose right side is missing, looking out of
-                the page it was drawn on.
-              </p>
-              <ul class="pk-list">
-                <li>Then the order flipped: the bird icon was redrawn from the logo's bird, so the tab, the placeholders and the logo all show the same animal.</li>
-                <li>The solid tile for small sizes is the same drawing reversed, not a second design.</li>
-                <li>It never takes an accent colour. The accent changes with the collection; the logo must not.</li>
-                <li>The rules came with it: sizes, clear space, and a list of what not to do.</li>
-              </ul>
-              <div class="pk-grid pk-grid--half">
-                <figure>
-                  <img
-                    src="assets/projects/wildlife/logo.webp"
-                    alt="The logo sheet: the mark of a bird on an open frame in dark and light, a solid tile for small sizes, lockups with the wordmark, sizes, clear space and what not to do"
-                    width="1400" height="900" loading="lazy" decoding="async"
-                  >
-                  <figcaption>The logo: a bird perched on the open edge of an unfinished frame</figcaption>
-                </figure>
-                <figure>
-                  <img
-                    src="assets/projects/wildlife/now-light.webp"
-                    alt="The October 2026 version in its light theme: a header with the logo, tabs for Birds, Sharks and Shells, a search field and view switches, above a grid of ducks"
-                    width="2400" height="1500" loading="lazy" decoding="async"
-                  >
-                  <figcaption>October 2026, light theme</figcaption>
-                </figure>
-              </div>
-              <div class="pk-grid pk-grid--split" style="align-items: center">
-                <div>
-                  <h3>On a phone</h3>
-                  <p>
-                    The phone layout got its own pass: search on its own row, two columns, names
-                    always visible because there is no hover, and pinch, pan and swipe in the
-                    full-size view.
-                  </p>
-                </div>
-                <div class="pk-grid pk-grid--half pk-grid--keep" style="margin: 0">
-                  <figure class="pk-figure--phone">
-                    <img
-                      src="assets/projects/wildlife/phone.webp"
-                      alt="The site on a phone in dark theme: icon tabs for the collections, a search field on its own row, and the drawings two to a row"
-                      width="780" height="1688" loading="lazy" decoding="async"
-                    >
-                  </figure>
-                  <figure class="pk-figure--phone">
-                    <img
-                      src="assets/projects/wildlife/phone-lightbox.webp"
-                      alt="The full-size view on a phone: the drawing on top, and below it the information panel with names, the illustrator's note and links"
-                      width="780" height="1688" loading="lazy" decoding="async"
-                    >
-                  </figure>
-                </div>
+                <p class="pk-caption">How it is put together now: three small programs that meet only at a folder of plain files.</p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <!-- The shape of the code, across all the versions -->
         <section id="shape" class="animate-on-scroll-target">
@@ -649,17 +738,18 @@
           <p>
             The same story without words. Each bar is one layer of the app, as tall as the lines of
             code in it, at ten points in the repository's history. Watch
-            <code>App.vue</code> on the right.
+            <code>App.vue</code> on the right shrink, and the tests on the lower row arrive last
+            and outgrow everything.
           </p>
           <div class="pk-evo" data-evo>
             <p>
-              This chart needs JavaScript. Today the app is 104 lines of App.vue, 1,543 of
-              components, 1,133 of composables, 262 of stores, 163 of helpers and 166 of types,
-              with 376 lines of CSS, 1,669 of build scripts and 3,547 of tests around it. In May
-              2025 it was 119 lines of App.vue, one 61-line component and 224 lines of CSS.
+              This chart needs JavaScript. On 6 October 2026 the app was 104 lines of App.vue,
+              1,543 of components, 1,133 of composables, 262 of stores, 163 of helpers and 166 of
+              types, with 376 lines of CSS, 1,669 of build scripts and 3,547 of tests around it. In
+              May 2025 it was 119 lines of App.vue, one 61-line component and 224 lines of CSS.
             </p>
           </div>
-          <p class="pk-caption" style="margin-top: 0.6rem; color: var(--text-muted); font-size: var(--fs-caption)">
+          <p class="pk-caption">
             Counted from the repository at each date. Versions 0.1 to 0.3 are not in its history.
           </p>
         </section>
@@ -671,6 +761,7 @@
             <dl class="pk-arc__meta">
               <div><dt>Not yet drawn</dt><dd class="pk-arc__num">258 <small>of 276</small></dd></div>
               <div><dt>Last drawing</dt><dd>Sand Dollar, March 2026</dd></div>
+              <div><dt>Still left to trust</dt><dd>The components, checked by hand. And me, to draw</dd></div>
             </dl>
             <div class="pk-arc__body">
               <p class="pk-quote">
@@ -678,8 +769,10 @@
                 exactly how I learned web development.
               </p>
               <p>
-                The site is now far ahead of the project it serves: two stretches of code since
-                the last drawing. The next time I come back, it should be with drawings.
+                The site can now tell me when a build is broken, a date is wrong, an image is
+                missing or a colour is too pale. It cannot draw. It is far ahead of the project it
+                serves: there has been no new drawing since March. The next time I come back, it
+                should be with drawings.
               </p>
               <h3>On the list</h3>
               <ul class="pk-list">

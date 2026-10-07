@@ -2428,7 +2428,7 @@ html.lb-lock {
 .pk-subnav a,
 .pk-facts dt,
 .pk-tile > h3,
-.pk-body > section > h2::before {
+:is(.pk-body, .pk-act) > section > h2::before {
   font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: var(--track-label);
@@ -2548,14 +2548,14 @@ html.lb-lock {
   counter-reset: pk;
   padding-bottom: clamp(2rem, 5vw, 4rem);
 }
-.pk-body > section {
+:is(.pk-body, .pk-act) > section {
   padding: var(--space-section) 0;
   border-top: 1px solid var(--rule);
 }
-.pk-body > section:first-child {
+:is(.pk-body, .pk-act) > section:first-child {
   border-top: 0;
 }
-.pk-body > section > h2 {
+:is(.pk-body, .pk-act) > section > h2 {
   counter-increment: pk;
   margin-bottom: var(--space-5);
   font-family: var(--font-serif);
@@ -2563,7 +2563,7 @@ html.lb-lock {
   font-weight: 400;
   line-height: 1.05;
 }
-.pk-body > section > h2::before {
+:is(.pk-body, .pk-act) > section > h2::before {
   content: counter(pk, decimal-leading-zero);
   display: block;
   margin-bottom: 0.7rem;
@@ -2836,8 +2836,102 @@ body.page-ink {
   font-size: var(--fs-small);
   line-height: 1.4;
 }
+/* A part of a long page: a few chapters under one heading. The chapter nav
+   can point at the part, and stays on it while its chapters scroll by. */
+.pk-act {
+  scroll-margin-top: calc(var(--nav-h) + var(--subnav-h));
+  border-top: 1px solid var(--rule-strong);
+}
+.pk-act:first-child {
+  border-top: 0;
+}
+.pk-act__head {
+  padding: var(--space-section) 0 var(--space-5);
+}
+.pk .pk-act__no {
+  max-width: none;
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk .pk-act__title {
+  margin: var(--space-3) 0 var(--space-4);
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+.pk-act__title em {
+  color: var(--sem-text);
+}
+.pk .pk-act__say {
+  max-width: 46ch;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  font-style: italic;
+  line-height: 1.3;
+}
+.pk-act > section:first-of-type {
+  border-top: 0;
+  padding-top: var(--space-5);
+}
+/* The rest of a chapter, closed until asked for */
+.pk-more {
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+.pk-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: var(--space-3) 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--dur-fast) ease;
+}
+.pk-more > summary::-webkit-details-marker {
+  display: none;
+}
+.pk-more > summary::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--dur-fast) ease;
+}
+.pk-more[open] > summary::before {
+  transform: translateY(1px) rotate(-135deg);
+}
+.pk-more > summary:hover,
+.pk-more[open] > summary {
+  color: var(--text);
+}
+.pk-more > :not(summary):first-of-type {
+  margin-top: var(--space-3);
+}
+.pk-more > :last-child {
+  margin-bottom: var(--space-4);
+}
+.pk-more > p + p,
+.pk-more > figure,
+.pk-more > .pk-list + h3 {
+  margin-top: var(--space-4);
+}
+.pk-more > h3 {
+  margin-top: var(--space-5);
+}
+
 /* A chapter may carry its own label in place of its number: <h2 data-label="v0.4"> */
-.pk-body > section > h2[data-label]::before {
+:is(.pk-body, .pk-act) > section > h2[data-label]::before {
   content: attr(data-label);
 }
 /* One stretch of an ongoing project: its facts on a rail, the story beside it */
@@ -2907,6 +3001,7 @@ body.page-ink {
 /* A measured series as plain bars: <ol class="pk-bars"> of <li style="--v: 0..1"> */
 .pk-bars {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.55rem;
   max-width: 44rem;
   margin: var(--space-5) 0;
@@ -2922,6 +3017,7 @@ body.page-ink {
   color: var(--text-muted);
 }
 .pk-bars li > span {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -2941,6 +3037,20 @@ body.page-ink {
 .pk-bars b {
   color: var(--text);
   font-variant-numeric: tabular-nums;
+}
+@media (max-width: 600px) {
+  .pk-bars li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+  .pk-bars li > span {
+    display: block;
+  }
+  .pk-bars li > span::before {
+    display: block;
+    width: calc(var(--v) * 100%);
+    margin: 0.2rem 0 0.3rem;
+  }
 }
 
 /* The shape of a codebase over time: bars per layer that grow and shrink as
