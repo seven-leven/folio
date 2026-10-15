@@ -1767,6 +1767,7 @@ body.home {
   min-width: 0;
 }
 .home .tl-vis canvas,
+.home .tl-vis img,
 .home .tl-vis .donut {
   display: block;
   width: 100%;
@@ -1774,6 +1775,11 @@ body.home {
   border: 1px solid var(--rule);
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.28);
+}
+.home .tl-vis img {
+  height: auto;
+  object-fit: cover;
+  object-position: left top;
 }
 .home .donut {
   display: grid;

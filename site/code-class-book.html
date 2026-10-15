@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Book by Script - Gaahis Yaugoob</title>
+    <meta name="description" content="The tooling behind the Design VI class book on Malé, Villimalé and Hulhumalé: page templates drawn by Python, InDesign driven by script, and the finished book turned into a website in about a day.">
+    <meta property="og:title" content="A Book by Script - Gaahis Yaugoob">
+    <meta property="og:description" content="A 198-page class book by 31 students, set with scripts, and its web edition built in about a day.">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/class-book/site-home.webp">
+    <link rel="canonical" href="https://seven-leven.github.io/folio/code-class-book.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/code-class-book.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+  </head>
+  <body class="project-page page-ink pk">
+    <!-- @include navbar active="coding" -->
+
+    <!--
+      A Coding entry page (docs/design-personal.md, section 05) for the ARC307 class book,
+      October 2026. Facts come from the Book folder (README, CLAUDE.md, HANDOVER.md, the
+      scripts, file dates) and the public repository seven-leven/arc307-book. No student
+      names: the images used are the cover, the style sheet, the contents, the web design
+      board and two screenshots of the public site.
+    -->
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Oct 2026 · A class book and its website · Python, InDesign scripts, Astro</p>
+            <h1 class="pk-title">A class book, <em>by script</em></h1>
+            <p class="pk-sub">Thirty-one students, three islands, one book in ten days</p>
+            <p class="pk-standfirst">
+              Our Design VI studio read three islands of the Greater Malé Region, Malé, Villimalé and
+              Hulhumalé, and redrew each as a masterplan. The research, the drawings, the writing and the
+              masterplans are the class's own, weeks of work by thirty-one students. This page is about
+              the frame they sit in. I built the tooling that set the book, with Claude Code in the
+              desktop app, and it was an absolute blast: the most fun I have had coding since AI took
+              the fun out of it. Python drew the page templates, scripts drove InDesign, and because
+              everything ended up so neatly organised, the finished book became a website in about a
+              day.
+            </p>
+            <dl class="pk-facts">
+              <div><dt>Made</dt><dd>4 to 13 October 2026</dd></div>
+              <div><dt>Written in</dt><dd>Python, InDesign's JavaScript, Astro</dd></div>
+              <div><dt>The book</dt><dd>198 pages, three chapters</dd></div>
+              <div><dt>Status</dt><dd>Draft submitted; website live</dd></div>
+            </dl>
+            <div class="pk-actions">
+              <a class="btn btn--light" href="https://seven-leven.github.io/arc307-book/" target="_blank" rel="noopener noreferrer">
+                Read the web edition
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+              <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/arc307-book" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            </div>
+          </div>
+          <figure class="pk-hero__media">
+            <img
+              src="assets/projects/class-book/site-home.webp"
+              alt="The web edition's home page: the title Greater Malé Region, a short introduction to the three islands, the cover's three triangles in red, green and blue, and a grid of chapters by island"
+              width="2000" height="1250" fetchpriority="high" decoding="async"
+            >
+            <figcaption>The web edition, built from the finished book</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#itch">The itch</a>
+          <a href="#templates">Templates first</a>
+          <a href="#indesign">InDesign by script</a>
+          <a href="#story">One story</a>
+          <a href="#web">A website in a day</a>
+          <a href="#learned">What I learned</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+        <section id="itch" class="animate-on-scroll-target">
+          <h2>The itch</h2>
+          <p>
+            A class book is thirty-one people's work in one binding. Three groups, one per island, each
+            drawing in its own software and its own style, with ten or eleven students in each. The book
+            had to read as one: the same headers, the same type, the same numbering for every figure, and
+            the three islands always in the same order, so a reader could set Malé's chapter against
+            Hulhumalé's and compare like with like.
+          </p>
+          <p>
+            Doing that by hand means checking two hundred pages for the same dozen rules, again after every
+            change. I had a feeling a lot of it could be written down once and done by code.
+          </p>
+          <figure>
+            <img
+              src="assets/projects/class-book/cover.webp"
+              alt="The book's wrap-around cover: on the front, Greater Malé Region above three triangles drawn in red, green and blue line patterns, one per island, inside faint concentric arcs; on the back, Three islands, one region"
+              width="2000" height="967" loading="lazy" decoding="async"
+            >
+            <figcaption>The wrap-around cover: one triangle per island, in its own colour</figcaption>
+          </figure>
+        </section>
+
+        <section id="templates" class="animate-on-scroll-target">
+          <h2>Templates first</h2>
+          <p>
+            The first thing I used Claude Code for was a standard template. A Python script draws each page
+            of the book as an SVG, with the proper header and footer already on it: the section label on the
+            left, the three island names on the right with this page's island in full colour, the page number
+            on the outer edge. The groups opened their pages in Illustrator and pasted their drawings in.
+          </p>
+          <p>
+            The whole look lives in one file. Every font is Century Gothic, in eight text styles and five
+            sizes, and each island has its colour: Malé red, Villimalé green, Hulhumalé blue. Change that file
+            and every page changes with it.
+          </p>
+          <p>
+            Before, the only things decided for the whole book were the font, the sizes and the colours.
+            Everything else was up to each student, and whoever compiled the book had to clean every page up
+            by hand. This time a design guide came first and decided the rest as well:
+          </p>
+          <ul class="pk-list">
+            <li>where the header and footer go, and what each carries on a left page and a right one;</li>
+            <li>the edge bars that mark the chapter, and the island names that show whose page it is;</li>
+            <li>how every figure and table is numbered: section, running number, island letter, as in <code>Figure 1.6.4M</code>;</li>
+            <li>the order of the three islands, always Malé, Villimalé, Hulhumalé;</li>
+            <li>and what to leave out: rules in tables, grey placeholder bars, boxed photo slots.</li>
+          </ul>
+          <p>
+            That changed when a decision had to be made. Before, something like the margins had to be fixed
+            weeks in advance, because changing it later meant going through every page by hand. Now the
+            margins, the sizes and the spacing could all be adjusted in one prompt, late, once we knew what
+            the pages actually needed.
+          </p>
+          <p>
+            The table of contents is generated the same way, and so are the
+            design guides, the chapter openings and the closing spreads that set the three islands side by
+            side.
+          </p>
+          <div class="pk-grid pk-grid--2">
+            <figure>
+              <img
+                src="assets/projects/class-book/styles.webp"
+                alt="The style guide spread: eight type styles from page title to small caps with their sizes, and a diagram of the header and footer with the section label, island indicator, edge bars, page number and university line"
+                width="2000" height="1000" loading="lazy" decoding="async"
+              >
+              <figcaption>The design guide: eight styles, five sizes, one font, and where the header and footer go</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/class-book/contents.webp"
+                alt="The table of contents spread: chapters 01 to 03 with every section's page number given three times, in red, green and blue, one per island"
+                width="2000" height="1000" loading="lazy" decoding="async"
+              >
+              <figcaption>The contents: a coloured number is that island's page</figcaption>
+            </figure>
+          </div>
+          <dl class="pk-stats">
+            <div><dt>62</dt><dd>Python scripts that draw pages</dd></div>
+            <div><dt>122</dt><dd>page templates, each with a preview</dd></div>
+            <div><dt>1</dt><dd>file holding the whole look</dd></div>
+          </dl>
+        </section>
+
+        <section id="indesign" class="animate-on-scroll-target">
+          <h2>InDesign by script</h2>
+          <p>
+            Then I found out Claude could write InDesign scripts. InDesign runs JavaScript, and it can be
+            started and driven from PowerShell, so a script can open the book, place a chapter, set every
+            caption and save, while I watch.
+          </p>
+          <p>
+            We set it up like code. The real book was the main file, and only checked chapters went into it.
+            Each group's file was copied onto a branch, cleaned and rebuilt there, then merged. Before every
+            scripted change the main file was backed up, and the backup's name says what came next:
+            "before Chapter 02 merge", "before contents fix".
+          </p>
+          <p>
+            The final merge and format ran for two days back to back, on 8 and 9 October, on two accounts so
+            the work never had to stop. Scripts set the paragraph styles on every piece of text in InDesign
+            and in Illustrator, numbered every figure, built the lists of figures and tables from the labels,
+            and checked the book against its own rules:
+          </p>
+          <pre class="pk-code"><b>// for every text frame on every page</b>
+if (!BOOK_STYLES[style])          report("a style outside the guide");
+if (font != "Century Gothic")     report("the wrong font");
+if (!SIZES[size])                 report("a size off the scale");
+<b>// reads the book; changes nothing</b></pre>
+          <p class="pk-caption">From the style check, shortened.</p>
+          <h3>The parts no sane person does by hand</h3>
+          <p>
+            Scripts also made the parts of a book nobody wants to make. The lists of figures and tables, four
+            pages, are built from the labels on the pages themselves, so they can't disagree with them. The
+            glossary takes two pages. And Appendix A sets out the data behind the class's toolkits as nine
+            neatly formatted pages of tables, for the digital edition: exactly the kind of job that never gets
+            done when it has to be done by hand.
+          </p>
+
+          <h3>A handover, so the work outlives a session</h3>
+          <p>
+            Two days on two accounts raised a problem: a session runs out of room, and the next one starts
+            knowing nothing. Explaining the book again every time would have eaten the work. So I worked out
+            a handover. <code>CLAUDE.md</code> holds the rules and the decisions not to reopen, and Claude reads
+            it by itself when it opens the folder. <code>HANDOVER.md</code> holds where every part stands now,
+            short enough to read in one go, with a table of which file to read for which job. The full history
+            of every fix goes in a separate log, not in the handover.
+          </p>
+          <pre class="pk-code"><b>CLAUDE.md</b>      the rules, read first, every time
+<b>HANDOVER.md</b>    where every part stands now
+<b>…_LOG.md</b>       how it got there, searched only when needed</pre>
+          <p>
+            The rule at the bottom of the handover does the rest: when you finish a piece of work, update the
+            tables, and put the detail in the log. Any session on either account, or a fresh agent, could pick
+            up where the last one stopped. By the end the folder held 48 Markdown files, and none of them was
+            code.
+          </p>
+          <p>
+            That is what gave us the freedom I liked most. A group could rework a whole chapter, or I could
+            move one, without anyone worrying about everything else: the numbering, the contents and the
+            styles would all be put right again by running the scripts.
+          </p>
+          <dl class="pk-stats">
+            <div><dt>33</dt><dd>InDesign scripts and their data</dd></div>
+            <div><dt>44</dt><dd>backups of the book, each named for the change after it</dd></div>
+            <div><dt>316</dt><dd>linked files in the book, none broken</dd></div>
+          </dl>
+        </section>
+
+        <section id="story" class="animate-on-scroll-target">
+          <h2>One story through the book</h2>
+          <p>
+            Thirty-one people wrote this book, each group its own pages. In a class book that usually shows:
+            each page reads the way its maker wrote it, and nothing runs through them all. We study
+            architecture, not literature, and none of us had kept one thought going across two hundred pages
+            before.
+          </p>
+          <p>
+            So the thread was written down first. <code>NARRATIVE.md</code> sets out the book's argument, its
+            voice, what each chapter and section has to do, and each island's story. One more guide covers
+            Chapter 02, and one per island covers its masterplan. Every group wrote to the same guides, and
+            every page was checked against them, so the three islands' chapters answer the same questions in
+            the same voice.
+          </p>
+          <p class="pk-quote">
+            Public life depends on how a place is designed, more than on how dense or how new it is.
+          </p>
+          <p class="pk-caption">The book's argument: the one idea the narrative guide says runs through all of it.</p>
+          <pre class="pk-code"><b>do</b>                            <b>avoid</b>
+"we", the studio              "the researchers"
+present tense for the plan    "will be", "aims to"
+one idea a sentence           "while", "thereby"
+a number with its unit        "many", "significant"
+street, shade, homes          permeability, activation</pre>
+          <p class="pk-caption">From the guide's rules for the voice, shortened.</p>
+        </section>
+
+        <section id="web" class="animate-on-scroll-target">
+          <h2>A website in a day</h2>
+          <p>
+            On 10 October the draft went in. Since everything was there and neatly organised, the text in
+            its styles and the figures named and numbered, turning the book into a website took about a day.
+            Scripts read the words and tables out of the finished book, and the site is built with Astro from
+            the same colours and type, sized for a screen. The printed draft carries a QR code to it.
+          </p>
+          <p>
+            The design guide came first, as always, then the site, in twelve pull requests merged on 13
+            October. You pick an island and stay on it; the island names at the top keep you on the same
+            section and change the island, and Compare shows any section for all three side by side.
+          </p>
+          <figure>
+            <img
+              src="assets/projects/class-book/web-guide.webp"
+              alt="The web edition's design guide board: the island colour ramps, the book's type styles sized for screens, the home page as a grid of chapters and islands, a section page with its rail, a phone layout, compare mode, components and a build order"
+              width="2000" height="1467" loading="lazy" decoding="async"
+            >
+            <figcaption>The web design guide, drawn before anything was built</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="assets/projects/class-book/site-masterplan.webp"
+              alt="Malé's masterplan chapter on the website: a section rail from 3.0 to 3.10 on the left, and the vision, Rebalancing Malé towards urban life, with a diagram moving from back of house to front of house"
+              width="2000" height="1250" loading="lazy" decoding="async"
+            >
+            <figcaption>Malé's masterplan as a real web page, not a picture of the book page</figcaption>
+          </figure>
+        </section>
+
+        <section id="learned" class="animate-on-scroll-target">
+          <h2>What I learned</h2>
+          <p>
+            Watching it come together was euphoric. Seeds planted on the first day of the semester bore fruit
+            in those ten days, and the book that came out reads as one.
+          </p>
+          <p>
+            Organisation is what makes the fast part fast. The website took a day because the ten days
+            before it had kept everything in one place, named the same way and styled by rule. Done the other
+            way round, it would have taken longer than the book.
+          </p>
+          <p>
+            And a design tool is a program too. InDesign and Illustrator felt like apps I clicked through until
+            I found they could be scripted. Once they could, the same habits I use in code worked on a book:
+            branches, backups before every change, one file for the look, and checks that read everything and
+            change nothing.
+          </p>
+          <div class="pk-actions">
+            <a class="btn btn--light" href="https://seven-leven.github.io/arc307-book/" target="_blank" rel="noopener noreferrer">
+              Read the web edition
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+            <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/arc307-book" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            <a class="link-arrow link-arrow--quiet" href="index.html#coding">All coding projects</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include footer -->
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
