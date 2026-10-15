@@ -1,11 +1,16 @@
-// --- Mancala (ohvalhugondi) engine, ported from the webui version -------------
-// 14 pits (0-6 bottom player, 7-13 top player), 7 seeds each, relay sowing.
+// --- Mancala (ohvalhugondi) engine: the same default rules as the game ----------
+// (seven-leven.github.io/mancala). 14 pits (0-6 bottom player, 7-13 top player),
+// 7 seeds each, relay sowing; a capture takes only the pit opposite and only on
+// your own side; the game ends when a side is empty or a store passes half (50).
 export function newGame() {
   return { pits: Array(14).fill(7), stores: [0, 0], player: 0 };
 }
 export const cloneGame = (g) => ({ pits: g.pits.slice(), stores: g.stores.slice(), player: g.player });
 export const validMoves = (g, p = g.player) => [0, 1, 2, 3, 4, 5, 6].map((i) => i + p * 7).filter((i) => g.pits[i] > 0);
-export const isOver = (g) => g.pits.slice(0, 7).every((n) => !n) || g.pits.slice(7).every((n) => !n);
+const MAJORITY = 50; // more than half of the 98 seeds: a lead that can't be caught
+export const isOver = (g) =>
+  g.pits.slice(0, 7).every((n) => !n) || g.pits.slice(7).every((n) => !n) ||
+  g.stores[0] >= MAJORITY || g.stores[1] >= MAJORITY;
 
 /** Plays a move in place; returns true if the player moves again. */
 export function sow(g, start, trace) {
@@ -34,7 +39,9 @@ export function sow(g, start, trace) {
     }
     trace?.push({ at: pit, hand, g: cloneGame(g) });
   }
-  if (!again) {
+  // The last seed always lands in an empty pit (a full one is picked up again), so it
+  // captures if that pit is on the mover's side.
+  if (!again && Math.floor(pit / 7) === g.player) {
     const opp = 13 - pit;
     if (g.pits[opp]) {
       g.stores[g.player] += g.pits[opp];
@@ -47,7 +54,16 @@ export function sow(g, start, trace) {
 
 export function play(g, move, trace) {
   const again = sow(g, move, trace);
-  if (!again) g.player = 1 - g.player;
+  if (isOver(g)) {
+    // Each side banks what's left on it.
+    for (let i = 0; i < 14; i++) {
+      g.stores[i < 7 ? 0 : 1] += g.pits[i];
+      g.pits[i] = 0;
+    }
+    trace?.push({ at: null, hand: 0, g: cloneGame(g) });
+  } else if (!again) {
+    g.player = 1 - g.player;
+  }
   return again;
 }
 

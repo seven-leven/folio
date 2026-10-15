@@ -15,6 +15,10 @@ commit.
 
 ## Unreleased
 
+- Mancala gets its own page (`mancala.html`): the story from the 2022 command-line game to the 2026 TypeScript game, with the Coding timeline's two mancala animations, the game in both themes, its design sheet, and what its eight bots found (the first player wins by force; the bots' Elo ladder with ranges). Built on the project page kit, with terracotta as its one accent since it isn't a semester; linked from the footer and from both mancala timeline entries
+- The Aug 2024 entry links to the game, its source and the story, and now says where the depth-first search came from (The Farmer Was Replaced) and where the bot stands today
+- The timeline's mancala animation follows the game's rules: captures only from your own side, and the game ends on a clinched majority with each side banking what's left
+
 - One design system for the whole site, written down in DESIGN.md (with the audit that led to it in docs/design-audit.md): `main.css` now holds every colour, the six font families and the type, space and corner scales; each project page's own palette moved there too, as a named voice
 - Semesters 1 to 3 rebuilt on a shared project page kit: the same kicker, serif title, fact tiles, lead image, chapter nav and numbered chapters as the newer pages, on the site's paper and type. Their words and drawings are unchanged; Montserrat, Oswald, Lato and a dead request for Helvetica Neue are gone
 - The book's progress bar on every project page and in the previous/next pager

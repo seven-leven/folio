@@ -1,0 +1,91 @@
+/* Mancala: the story of the game. The kit as it is (DESIGN.md section 06); only what no other
+   page needs is here, in tokens: the Coding animations' frame, and the bot ladder. */
+
+/* Not a semester, so the page's one accent is the site's: terracotta takes the semester colour's
+   place (the title's italic word, the active chapter chip, the page edge and the reading bar). */
+.project-mancala {
+  --sem: var(--accent-fill);
+  --sem-text: var(--accent);
+}
+
+/* Links under the facts */
+.project-mancala .mc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+}
+
+/* The Coding timeline's animations are drawn for a dark ground, so they sit on ink, framed
+   like a screenshot (a render: the small radius, no border) */
+.project-mancala .mc-vis canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  background: var(--ink);
+}
+
+/* The bot ladder: one row per bot; the track runs 400 to 2100 Elo. The pale band is the 90%
+   range, the dot the rating. */
+.project-mancala .mc-ladder ol {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.project-mancala .mc-ladder li {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr) 3rem;
+  align-items: center;
+  gap: var(--space-4);
+}
+.project-mancala .mc-ladder__name {
+  font-weight: 600;
+}
+.project-mancala .mc-ladder__name span {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.project-mancala .mc-ladder__track {
+  position: relative;
+  height: 1.1rem;
+  border-bottom: 1px solid var(--rule);
+}
+.project-mancala .mc-ladder__track i {
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: var(--lo);
+  width: calc(var(--hi) - var(--lo));
+  min-width: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+}
+.project-mancala .mc-ladder__track b {
+  position: absolute;
+  top: 50%;
+  left: var(--elo);
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--accent-fill);
+  transform: translate(-50%, -50%);
+}
+.project-mancala .mc-ladder__elo {
+  font-family: var(--font-data);
+  font-size: var(--fs-small);
+  text-align: right;
+}
+
+@media (max-width: 820px) {
+  .project-mancala .mc-ladder li {
+    grid-template-columns: minmax(0, 1fr) 3rem;
+    gap: var(--space-1) var(--space-3);
+  }
+  .project-mancala .mc-ladder__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
