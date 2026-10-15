@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- The Discord bot gets a Coding entry page (`code-discord-bot.html`): the itch, what it does (a queue filed into a thread per title), how it works (a pause that never happened, locks, numbers with no gaps), twelve rewrites by size, and what I learned; the Dec 2022 timeline entry links to it
 - Personal: a Coming soon block for Lunch Lab, a year of learning to cook told as experiments (from May 2027), with its brand sheet; the Personal intro mentions it
 - Wildlife Illustrated page: a new stretch in 0.9, "Not every file is code": the October docs folder (design, architecture, data, testing, a runbook, a coverage roadmap) and how Markdown took over the housekeeping, carried on into the mancala rewrite
 - Mancala gets a Coding entry page (`code-mancala.html`), built to the Personal design system like the Wildlife page: the itch (the 2022 command-line game), what it does, how it works (the 2024 bot's nine lines, the web game), what the bots found (the first player wins by force; the bots' Elo ladder with ranges) and what I learned; the timeline's mancala animation is its lead visual. A shared `.pk-vis` frame shows coding animations on ink pages

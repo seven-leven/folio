@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Archiving Bot - Gaahis Yaugoob</title>
+    <meta name="description" content="A Discord bot that files manga pages and fan art into a thread per title, rewritten twelve times since December 2022: what it does, how it works, and what each rewrite taught me about async Python.">
+    <meta property="og:title" content="An Archiving Bot - Gaahis Yaugoob">
+    <meta property="og:description" content="A Discord bot that files manga pages and fan art into a thread per title, and twelve rewrites of it.">
+    <link rel="canonical" href="https://seven-leven.github.io/folio/code-discord-bot.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/code-discord-bot.html">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+  </head>
+  <body class="project-page page-ink pk">
+    <!-- @include navbar active="coding" -->
+
+    <!--
+      A Coding entry page (docs/design-personal.md, section 05): the itch, what it does,
+      how it works, twelve rewrites, what I learned. The lead visual is the entry's own
+      animation from the timeline. Facts come from the bot's folder: the code of every
+      version, and the archive's posts.csv and threads.csv (dates read from Discord ids).
+      The code is private; no token, server or image from it appears here.
+    -->
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Dec 2022 to now · Discord bot · Async Python</p>
+            <h1 class="pk-title">An archiving bot <em>for manga and fan art</em></h1>
+            <p class="pk-sub">One Discord bot, rewritten twelve times</p>
+            <p class="pk-standfirst">
+              It takes a queue of manga pages and fan art, sorts each image into a thread for every
+              title it belongs to, files a copy on disk and writes down every post, so a whole
+              collection lives in one server. It is probably the project I have spent the most time
+              on. Almost none of that time went into new features: it went into doing the same few
+              things better, one rewrite at a time.
+            </p>
+            <dl class="pk-facts">
+              <div><dt>Started</dt><dd>December 2022</dd></div>
+              <div><dt>Written in</dt><dd>Python, with discord.py</dd></div>
+              <div><dt>Status</dt><dd>Version 12, written July 2026, waiting for a live run</dd></div>
+              <div><dt>Archive</dt><dd>2,402 images in 241 threads</dd></div>
+            </dl>
+          </div>
+          <figure class="pk-hero__media pk-vis">
+            <canvas data-vis="discord" role="img" aria-label="Image files leave a queue one at a time and are posted into the thread for their title, whose post count goes up"></canvas>
+            <figcaption>Queue in, sorted threads out</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#itch">The itch</a>
+          <a href="#does">What it does</a>
+          <a href="#works">How it works</a>
+          <a href="#rewrites">Twelve rewrites</a>
+          <a href="#learned">What I learned</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+        <section id="itch" class="animate-on-scroll-target">
+          <h2>The itch</h2>
+          <!-- WHY: what the collection was for, and why a Discord server -->
+          <p>
+            In 2021 I wrote a batch script to put my manga collection into folders and comic archives.
+            That handled whole volumes. What it could not handle was the other half of the collection:
+            single pages I wanted to keep, and fan art, each belonging to one series or several. A
+            folder sorts a file into one place. I wanted every image under every title it belonged to,
+            and somewhere I could scroll through them.
+          </p>
+          <p>
+            A Discord server could do that: one thread per title, an image posted into each of its
+            threads. Posting by hand would never keep up, so I wrote a bot. The first one printed every
+            message it saw and did nothing else. By the end of December 2022 the real one was posting.
+          </p>
+          <dl class="pk-stats">
+            <div><dt>2,040</dt><dd>manga pages in 170 threads, from 23 December 2022</dd></div>
+            <div><dt>362</dt><dd>pieces of fan art in 71 threads, from 20 December 2022</dd></div>
+            <div><dt>6 weeks</dt><dd>for the manga archive to reach its size</dd></div>
+          </dl>
+          <p class="pk-caption">Counted from the bot's own records; each post's date is read from its Discord id.</p>
+        </section>
+
+        <section id="does" class="animate-on-scroll-target">
+          <h2>What it does</h2>
+          <p>
+            Images wait in a queue folder, each named with its titles: <code>0042.OC.Monogatari.webp</code>
+            belongs to two. Sending <code>doit</code> in the queue channel starts the bot. For each
+            file it converts the image to JPEG and squeezes it under Discord's 8 MB upload limit, gives
+            it the next free number, and posts it into every thread it belongs to. Each post names the
+            others it went to, so a picture can be followed from one series to the next.
+          </p>
+          <pre class="pk-code" role="img" aria-label="Diagram: a queued file named with two titles is converted, numbered #00042, posted into both titles' threads with a note naming the other, filed on disk in the folder for #00001 to #00100, and recorded"><b>queue/</b>  0042.OC.Monogatari.webp       order . titles . type
+   │
+   ├─ convert to JPEG, under 8 MB
+   ├─ next free number               #00042
+   ├─▶ thread "OC"                   #00042 ft. [Monogatari]
+   ├─▶ thread "Monogatari"           #00042 ft. [OC]
+   ├─ file it on disk                #00001 - #00100/
+   └─ write it down                  every post, every thread</pre>
+          <p>Two more commands look after what is already there.</p>
+          <ul class="pk-list">
+            <li><code>delete #00042</code> removes a picture from every thread, from the disk and from the records. Its number goes back into use.</li>
+            <li><code>migrate Old.New</code> reposts a whole thread under a new title, then deletes the old one. The early versions did it by putting every image back into the queue and sending <code>doit</code> to themselves.</li>
+          </ul>
+        </section>
+
+        <section id="works" class="animate-on-scroll-target">
+          <h2>How it works</h2>
+          <p>
+            A Discord bot spends most of its life waiting: for a message, for an upload to finish, for
+            Discord to let it send the next one. Python's <code>asyncio</code> lets it do that waiting
+            without stopping everything else. I learned it on this bot, mostly by getting it wrong.
+          </p>
+
+          <h3>A pause that never happened</h3>
+          <p>
+            Discord limits how fast a bot can post, so the bot rests for half a second between posts.
+            That one line went wrong in two different ways.
+          </p>
+          <pre class="pk-code"><b>r3</b>   time.sleep(0.5)            the whole bot froze for half a second
+<b>r4</b>   await asyncio.sleep(0.5)   right: only this upload waits
+<b>r7</b>   sleep(0.5)                 no await, so no pause at all
+<b>v9</b>   await asyncio.sleep(0.5)   right again, in June 2024</pre>
+          <p>
+            The first version used the ordinary sleep, which stops the whole program, so while it rested
+            the bot could not hear anything. The fourth got it right. Then a rewrite in 2023 dropped the
+            <code>await</code>. Without it, the line makes a pause and throws it away. Python warns about
+            it, but nothing breaks, so the bot posted without resting through r7, r8 and a refactor before
+            version 9 put it back.
+          </p>
+
+          <h3>Locks, and then no locks</h3>
+          <p>
+            The bot kept its records in two CSV files, one for threads and one for posts, and several
+            uploads could try to write to them at once. A lock lets only one in at a time. Version 4 used
+            the kind of lock meant for threads, not for async tasks. Version 10 had a proper shared lock,
+            and beside it a few places that made a fresh lock every time they ran. A lock nobody else holds
+            guards nothing.
+          </p>
+          <p>
+            Version 12 stopped fighting it. The records moved into SQLite, a small database in a single
+            file that handles taking turns itself. On its first run it reads the old CSV files in, so
+            nothing from 2022 is lost.
+          </p>
+
+          <h3>Numbers with no gaps</h3>
+          <p>
+            Every image has a five-digit number, and on disk they sit in folders of a hundred. When a
+            picture is deleted, its number is given to the next one instead of being left as a hole. The
+            whole rule fits in a few lines:
+          </p>
+          <pre class="pk-code">used = <i>every picture number in the archive, in order</i>
+for expected, actual in enumerate(used, start=1):
+    if actual != expected:
+        return expected      <b># the first gap</b>
+return len(used) + 1         <b># no gaps: the next one</b></pre>
+        </section>
+
+        <section id="rewrites" class="animate-on-scroll-target">
+          <h2>Twelve rewrites</h2>
+          <p>
+            The bot has had twelve versions, and each one kept the same three commands. What changed was
+            how the code was put together. Laid side by side, they read like a record of what I was
+            learning at the time.
+          </p>
+          <ol class="pk-bars" aria-label="Lines of code in each version of the bot, not counting tests or blank lines">
+            <li style="--v: 0.014">r0<span><b>10</b> prints every message it sees</span></li>
+            <li style="--v: 0.171">r3 · Feb 2023<span><b>120</b> one file; pandas for the records</span></li>
+            <li style="--v: 0.282">r4<span><b>198</b> delete and migrate arrive</span></li>
+            <li style="--v: 0.295">r5<span><b>207</b> the bot becomes a class</span></li>
+            <li style="--v: 0.245">r6<span><b>172</b> polars instead of pandas</span></li>
+            <li style="--v: 0.355">r7 · 2023<span><b>249</b> a table of commands</span></li>
+            <li style="--v: 0.473">r8 · Jan 2024<span><b>332</b> one class per command</span></li>
+            <li style="--v: 0.544">r8, refactored<span><b>382</b> settings in their own file</span></li>
+            <li style="--v: 0.467">v9 · Jun 2024<span><b>328</b> and eleven tests</span></li>
+            <li style="--v: 0.486">r7 again · Jun 2025<span><b>341</b> an old version brought back to run</span></li>
+            <li style="--v: 0.440">r10 · May 2026<span><b>309</b> the token out of the code</span></li>
+            <li style="--v: 0.479">r11<span><b>336</b> a shorter command, a clean shutdown</span></li>
+            <li class="is-peak" style="--v: 1.000">v12 · Jul 2026<span><b>702</b> cogs, SQLite, checked settings, 34 tests</span></li>
+          </ol>
+          <p class="pk-caption">Lines of code in each version, without tests or blank lines. Versions 1 and 2 are lost.</p>
+
+          <div class="pk-grid pk-grid--2">
+            <div class="pk-tile">
+              <h3>How commands grew up</h3>
+              <p>
+                The first bot checked each message with a chain of <code>if</code>s. Then a table that
+                matched a word to a function. Then one class per command, then a shared outline every
+                command had to follow, and in version 12 discord.py's own cogs. Each step made adding a
+                command less likely to break the others.
+              </p>
+            </div>
+            <div class="pk-tile">
+              <h3>The token in the code</h3>
+              <p>
+                A bot logs in with a token, a password for the bot. For its first three years mine was
+                written straight into the code, in more than one version. Version 10 reads it from the
+                environment instead. It is the mistake every tutorial warns about, and I made it anyway.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="learned" class="animate-on-scroll-target">
+          <h2>What I learned</h2>
+          <p>
+            This bot turned out far bigger than I expected. It is where I learned how a program talks to an
+            online service, what it means for code to wait without stopping, and how to design a set of
+            commands so a new one doesn't break the rest.
+          </p>
+          <p>
+            Most of all it taught me that a rewrite is a way to learn. Version 12 does the same three things
+            version 3 did. It is six times longer, and nearly every line it added is there because an
+            earlier version got something wrong: a pause, a lock, a number, a password. What is still left
+            is to run it live, and retire version 11.
+          </p>
+          <div class="pk-actions">
+            <a class="link-arrow link-arrow--quiet" href="index.html#coding">All coding projects</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- @include footer -->
+
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/coding/index.js"></script>
+  </body>
+</html>
