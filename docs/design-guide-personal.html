@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folio design system: Personal</title>
+    <!-- The one-sheet map of design-personal.md. It sits inside the site's own
+         .personal-band, so its colours and components are the real ones from main.css.
+         Render it to design-guide-personal.png with: deno task guide -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thaana:wght@500&display=swap">
+    <link rel="stylesheet" href="../site/assets/css/main.css">
+    <style>
+      body.home {
+        width: 1440px;
+        margin: 0 auto;
+        background: var(--ink);
+        font: 15px/1.5 var(--font-sans);
+      }
+      .home .personal-band {
+        padding: 64px 72px 72px;
+      }
+      .dg p {
+        max-width: none;
+        margin: 0;
+        color: var(--text-2);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      .dg ul,
+      .dg ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .dg code {
+        font: 500 12.5px var(--font-data);
+      }
+      .dg p.muted,
+      .muted {
+        color: var(--text-muted);
+      }
+      .lab,
+      .dg h4 {
+        margin: 0;
+        color: var(--text-muted);
+        font: 600 11.5px/1.2 var(--font-sans);
+        letter-spacing: var(--track-label);
+        text-transform: uppercase;
+      }
+      .dg h4 {
+        margin-bottom: 12px;
+      }
+      .cols {
+        display: grid;
+        gap: 48px;
+      }
+      .cols > * {
+        min-width: 0;
+      }
+      .mast {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 64px;
+        align-items: end;
+        padding-bottom: 44px;
+        border-bottom: 1px solid var(--text);
+      }
+      .mast .id {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 30px;
+      }
+      .mast .id b {
+        color: var(--text);
+      }
+      .dg h1 {
+        color: var(--text);
+        font: 400 78px/0.98 var(--font-serif);
+        letter-spacing: -0.01em;
+      }
+      .dg h1 span,
+      .dg h1 em {
+        display: block;
+      }
+      .dg h1 em {
+        color: var(--accent-text);
+      }
+      .mast .sub {
+        margin-top: 22px;
+        color: var(--text);
+        font: italic 400 28px/1.2 var(--font-serif);
+      }
+      .mast li,
+      .kv li {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 11px 0;
+        border-top: 1px solid var(--rule-strong);
+        color: var(--text);
+        font-size: 16px;
+      }
+      .mast li b,
+      .kv li b {
+        font-weight: 600;
+      }
+      .mast li span,
+      .kv li span {
+        color: var(--text-muted);
+        text-align: right;
+      }
+      .kv li {
+        border-top-color: var(--rule);
+        font-size: 15px;
+      }
+      .kv li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .dg section {
+        margin-top: 72px;
+        padding: 0;
+        border: 0;
+      }
+      .head {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-bottom: 30px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--rule-strong);
+      }
+      .head .n {
+        color: var(--accent-text);
+        font: 600 13px var(--font-sans);
+        letter-spacing: var(--track-label);
+      }
+      .dg h2 {
+        color: var(--text);
+        font: 400 46px/1 var(--font-serif);
+      }
+      .head .say {
+        color: var(--text-muted);
+        font: italic 400 21px var(--font-serif);
+      }
+      .dg p.big {
+        color: var(--text);
+        font: 400 27px/1.15 var(--font-serif);
+      }
+
+      .diff {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .diff th {
+        padding: 0 16px 10px 0;
+        text-align: left;
+      }
+      .diff td {
+        padding: 12px 16px 12px 0;
+        border-top: 1px solid var(--rule);
+        color: var(--text-muted);
+      }
+      .diff td:first-child {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .diff td:last-child {
+        color: var(--text);
+      }
+      .same {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .same span {
+        padding: 7px 14px;
+        border: 1px solid var(--rule-strong);
+        border-radius: var(--radius-pill);
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .roles {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 12px;
+      }
+      .roles i {
+        display: block;
+        height: 64px;
+        border: 1px solid var(--rule-strong);
+        background: var(--c);
+      }
+      .roles b {
+        display: block;
+        margin-top: 8px;
+        color: var(--text);
+        font: 500 13px var(--font-data);
+      }
+      .roles small {
+        color: var(--text-muted);
+        font-size: 12.5px;
+      }
+      .acc {
+        display: grid;
+        grid-template-columns: 88px 1fr;
+        align-items: center;
+        gap: 18px;
+        padding: 14px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .acc i {
+        height: 60px;
+        background: var(--c);
+      }
+      .acc b {
+        display: block;
+        color: var(--text);
+        font: 400 26px/1.1 var(--font-serif);
+      }
+      .pal {
+        display: flex;
+        gap: 10px;
+      }
+      .pal div {
+        flex: 1;
+      }
+      .pal i {
+        display: block;
+        height: 40px;
+        background: var(--c);
+      }
+      .pal small {
+        display: block;
+        margin-top: 6px;
+        color: var(--text-muted);
+        font: 400 11.5px var(--font-data);
+      }
+
+      /* real components, trimmed for the sheet */
+      .home .wildlife__title {
+        margin: 0.7rem 0 1.2rem;
+        font-size: 60px;
+      }
+      .home .wl-progress {
+        margin-top: 0;
+      }
+      .home .wl-grid {
+        gap: 12px;
+      }
+      .home .wl-card.tilt {
+        transform: translateY(-4px) rotate(-0.6deg);
+        box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.7);
+      }
+      .home .wl-card.tilt img {
+        transform: scale(1.06);
+      }
+      .home .code-tl {
+        margin: 0;
+      }
+      .vis {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 4 / 3;
+        border: 1px solid var(--rule);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.28);
+      }
+      .vis svg {
+        width: 62%;
+      }
+      .entry {
+        position: relative;
+        border: 1px solid var(--rule-strong);
+        background: rgba(0, 0, 0, 0.28);
+      }
+      .entry > div {
+        position: relative;
+        padding: 20px 28px 20px 48px;
+        border-top: 1px solid var(--rule);
+      }
+      .entry > div:first-child {
+        border-top: 0;
+      }
+      .entry .mk,
+      .anat li i {
+        display: grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--paper);
+        color: var(--ink);
+        font: 600 11.5px var(--font-sans);
+      }
+      .entry .mk {
+        position: absolute;
+        left: 13px;
+      }
+      .entry .ehero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: center;
+      }
+      .entry .k {
+        color: var(--accent-text);
+        font: 600 9px var(--font-sans);
+        letter-spacing: var(--track-label);
+        text-transform: uppercase;
+      }
+      .entry .t {
+        margin: 9px 0 8px;
+        color: var(--text);
+        font: 400 44px/1 var(--font-serif);
+      }
+      .entry .t em {
+        display: block;
+        color: var(--accent-text);
+      }
+      .entry .s {
+        color: var(--text);
+        font: italic 400 16px var(--font-serif);
+      }
+      .entry .f {
+        display: flex;
+        gap: 7px;
+        margin-top: 14px;
+      }
+      .entry .f i {
+        width: 78px;
+        height: 36px;
+        border: 1px solid var(--rule);
+        border-radius: 5px;
+        background: var(--surface);
+      }
+      .entry .ln {
+        display: block;
+        height: 5px;
+        margin-top: 7px;
+        border-radius: 3px;
+        background: var(--rule-strong);
+      }
+      .entry .no {
+        color: var(--accent-text);
+        font: 600 9px var(--font-sans);
+        letter-spacing: var(--track-label);
+      }
+      .entry .h {
+        margin: 5px 0 10px;
+        color: var(--text);
+        font: 400 24px/1 var(--font-serif);
+      }
+      .entry pre {
+        margin-top: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--rule);
+        border-radius: var(--radius-sm);
+        background: rgba(0, 0, 0, 0.32);
+        color: var(--text-2);
+        font: 400 11.5px/1.6 var(--font-mono);
+      }
+      .entry pre b {
+        color: var(--accent-light);
+        font-weight: 400;
+      }
+      .entry .chips {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        padding-block: 9px;
+      }
+      .entry .chips i {
+        width: 58px;
+        height: 16px;
+        border-radius: 9px;
+        background: var(--rule);
+      }
+      .entry .chips i:first-of-type {
+        background: var(--accent-light);
+      }
+      .entry .pgr {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 14px;
+      }
+      .entry .pgr i {
+        height: 32px;
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+      }
+      .anat li {
+        display: grid;
+        grid-template-columns: 34px 130px 1fr;
+        align-items: baseline;
+        padding: 10px 0;
+        border-top: 1px solid var(--rule);
+        color: var(--text);
+      }
+      .anat li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .anat b {
+        font-weight: 600;
+      }
+      .anat span {
+        color: var(--text-muted);
+      }
+      .yn li {
+        padding: 9px 0 9px 24px;
+        border-top: 1px solid var(--rule);
+        color: var(--text-2);
+        text-indent: -24px;
+      }
+      .yn li:first-child {
+        border-top: 0;
+      }
+      .yn li::before {
+        content: "";
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 14px;
+        background: var(--text);
+      }
+      .yn.no li::before {
+        border-radius: 50%;
+        background: none;
+        box-shadow: inset 0 0 0 2px var(--accent-light);
+      }
+      .dd {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 40px;
+      }
+      .dd div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding: 14px 0;
+        border-top: 1px solid var(--rule-strong);
+      }
+      .dd b {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .dd span {
+        color: var(--accent-text);
+        text-decoration: line-through;
+        text-decoration-color: rgba(227, 154, 134, 0.5);
+      }
+      .src {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+      .src div {
+        padding-top: 12px;
+        border-top: 3px solid var(--text);
+      }
+      .src code {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--text);
+        font-size: 13px;
+      }
+      .src span {
+        color: var(--text-muted);
+        font-size: 13.5px;
+      }
+    </style>
+  </head>
+  <body class="home dg">
+    <div class="personal-band">
+      <header class="mast">
+        <div>
+          <div class="id lab"><b>Folio</b><span>Design system</span><span>Personal</span><span>v1.0</span><span>2026</span></div>
+          <h1><span>Same shell.</span><em>After hours.</em></h1>
+          <p class="sub">The paper turns to ink, and the work is allowed to play.</p>
+        </div>
+        <ul>
+          <li><b>Ground</b><span>ink, in one continuous band</span></li>
+          <li><b>Accents</b><span>sky for drawing, terracotta for code</span></li>
+          <li><b>Signature</b><span>a live count and a timeline</span></li>
+          <li><b>Motion</b><span>may play, within limits</span></li>
+        </ul>
+      </header>
+
+      <!-- 01 -->
+      <section>
+        <div class="head"><span class="n">01</span><h2>Same foundations</h2><span class="say">What carries over from DESIGN.md, and what doesn't</span></div>
+        <div class="cols" style="grid-template-columns: 1fr 1.5fr">
+          <div>
+            <h4>Inherited as it is</h4>
+            <div class="same"><span>Six typefaces</span><span>Eight sizes</span><span>Serif titles, one word in colour</span><span>Uppercase labels only</span><span>1180 px grid</span><span>Spacing steps</span><span>Four corners</span><span>Hover · current · focus</span><span>Accessibility checks</span><span>Navbar and footer</span></div>
+            <p class="big" style="margin-top: 28px">No new font, no new corner, no new state.</p>
+          </div>
+          <table class="diff">
+            <tr><th class="lab">What differs</th><th class="lab">Academic · professional</th><th class="lab">Personal</th></tr>
+            <tr><td>Ground</td><td>Paper</td><td>Ink</td></tr>
+            <tr><td>Accent</td><td>Terracotta, or the semester colour</td><td>Sky for illustration, light terracotta for code</td></tr>
+            <tr><td>Marker of place</td><td>Semester colour, bird, progress bar</td><td>None: there are no semesters here</td></tr>
+            <tr><td>Signature</td><td>The birds as an index</td><td>A live count and a timeline</td></tr>
+            <tr><td>Motion</td><td>1 to 4 px</td><td>May play (section 06)</td></tr>
+            <tr><td>Decoration</td><td>None</td><td>Two soft glows, nothing else</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section>
+        <div class="head"><span class="n">02</span><h2>Colour on ink</h2><span class="say">The same roles, redefined once</span></div>
+        <div class="roles">
+          <div><i style="--c: var(--text)"></i><b>--text</b><small>paper</small></div>
+          <div><i style="--c: var(--text-2)"></i><b>--text-2</b><small>paper 75%</small></div>
+          <div><i style="--c: var(--text-muted)"></i><b>--text-muted</b><small>paper 62%</small></div>
+          <div><i style="--c: var(--text-faint)"></i><b>--text-faint</b><small>48% · labels only</small></div>
+          <div><i style="--c: var(--rule-strong)"></i><b>--rule-strong</b><small>paper 30%</small></div>
+          <div><i style="--c: var(--rule)"></i><b>--rule</b><small>paper 14%</small></div>
+          <div><i style="--c: var(--surface)"></i><b>--surface</b><small>paper 4%</small></div>
+        </div>
+        <div class="cols" style="grid-template-columns: 1fr 1fr; margin-top: 34px">
+          <div>
+            <h4>Two accents · one per subject, never mixed in a block</h4>
+            <div class="acc"><i style="--c: linear-gradient(90deg, var(--blue), var(--blue-light))"></i><div><b>Sky</b><span class="muted">Illustration: the accented title word, the count bar</span></div></div>
+            <div class="acc"><i style="--c: var(--accent-light)"></i><div><b>Terracotta light</b><span class="muted">Code: labels, timeline dots, links</span></div></div>
+          </div>
+          <div>
+            <h4>Animation palette · five colours, no others</h4>
+            <div class="pal">
+              <div><i style="--c: #f6f4ef"></i><small>paper</small></div>
+              <div><i style="--c: #e39a86"></i><small>accent</small></div>
+              <div><i style="--c: #8fbde6"></i><small>blue</small></div>
+              <div><i style="--c: #d9695f"></i><small>red · "before"</small></div>
+              <div><i style="--c: #d8bd8c"></i><small>sand</small></div>
+            </div>
+            <p class="big" style="margin-top: 26px">Drawings stay on white. Never straight on ink, never tinted.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section>
+        <div class="head"><span class="n">03</span><h2>Illustration</h2><span class="say">Show the progress, send people to the collection</span></div>
+        <div class="cols" style="grid-template-columns: 1fr 1.1fr 0.9fr; align-items: start">
+          <div>
+            <p class="eyebrow">Illustrations · Wildlife Illustrated</p>
+            <h3 class="wildlife__title">Drawing every bird <em>of the Maldives</em></h3>
+            <div class="wl-progress">
+              <p class="wl-progress__main"><span class="wl-progress__count">15</span><span class="wl-progress__total">/ 204 birds drawn</span></p>
+              <div class="wl-bar"><span style="width: 7.4%"></span></div>
+              <ul class="wl-others">
+                <li><span>Shells</span><b>3 / 30</b></li>
+                <li><span>Sharks</span><b>0 / 42</b></li>
+                <li><span>All species</span><b>18 / 276</b></li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h4>Drawing card · default, hover, default</h4>
+            <div class="wl-grid">
+              <span class="wl-card"><span class="wl-card__img"><img src="../site/assets/img/birds/sem1.webp" alt=""></span><span class="wl-card__body"><span class="wl-card__id">Bird #001</span><b>Lesser Whistling-Duck</b></span></span>
+              <span class="wl-card tilt"><span class="wl-card__img"><img src="../site/assets/img/birds/sem4.webp" alt=""></span><span class="wl-card__body"><span class="wl-card__id">Bird #177</span><b>House Crow</b><span class="wl-card__dv" lang="dv" dir="rtl">ކާލު</span></span></span>
+              <span class="wl-card"><span class="wl-card__img"><img src="../site/assets/img/birds/sem5.webp" alt=""></span><span class="wl-card__body"><span class="wl-card__id">Bird #133</span><b>Grey Heron</b></span></span>
+            </div>
+            <p class="muted" style="margin-top: 14px">White card; the drawing whole with clear space; number, English name, Dhivehi name. Three across, six at most.</p>
+          </div>
+          <ul class="kv">
+            <li><b>Title</b><span>serif; last phrase italic in sky</span></li>
+            <li><b>Count</b><span>large serif, read live</span></li>
+            <li><b>Count bar</b><span>rounded, sky. Not the semester bar</span></li>
+            <li><b>Dhivehi</b><span>Thaana face, right-aligned</span></li>
+            <li><b>Link out</b><span>one light pill</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section>
+        <div class="head"><span class="n">04</span><h2>Code</h2><span class="say">A timeline, oldest first: date, rail, story, a small animation</span></div>
+        <div class="cols" style="grid-template-columns: 1.9fr 1fr; align-items: start">
+          <ol class="code-tl">
+            <li class="tl-chapter"><p>2022 · Making sense of data</p></li>
+            <li class="tl-item">
+              <p class="tl-date">Dec 2022</p>
+              <div class="tl-body tl-body--split">
+                <div class="tl-copy">
+                  <p class="tl-meta">Data cleaning · Plotting</p>
+                  <h4 class="tl-title" style="letter-spacing: 0; text-transform: none; color: var(--text)">Forty years of wind</h4>
+                  <p class="tl-text">I had forty years of daily wind data. The first challenge was cleaning it up, and then cleaning it up again with as little code as I could.</p>
+                </div>
+                <figure class="tl-vis">
+                  <div class="vis">
+                    <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                      <circle cx="50" cy="50" r="44" stroke="rgba(246,244,239,.16)"/><circle cx="50" cy="50" r="28" stroke="rgba(246,244,239,.16)"/>
+                      <path d="M50 50 L44 12 L56 12Z" fill="#8fbde6"/><path d="M50 50 L84 38 L88 50Z" fill="#8fbde6" opacity=".7"/><path d="M50 50 L22 70 L16 60Z" fill="#8fbde6" opacity=".5"/>
+                      <path d="M50 50 L72 22" stroke="#e39a86" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <figcaption>Real data: a rose per year</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li class="tl-item tl-item--now">
+              <p class="tl-date">Oct 2025</p>
+              <div class="tl-body">
+                <p class="tl-meta">Work tool · AutoCAD scripting</p>
+                <h4 class="tl-title" style="letter-spacing: 0; text-transform: none; color: var(--text)">Drawing layouts by script</h4>
+                <p class="tl-text">About 45 minutes by hand, down to about 10.</p>
+              </div>
+            </li>
+          </ol>
+          <ul class="kv">
+            <li><b>Date</b><span>serif, in its own column</span></li>
+            <li><b>Rail</b><span>1 px; a ring per entry, filled for the current one</span></li>
+            <li><b>Chapter</b><span>serif italic, faint</span></li>
+            <li><b>Meta</b><span>label style, light terracotta</span></li>
+            <li><b>Title</b><span>what it does, not what it's called</span></li>
+            <li><b>Text</b><span>first person, plain, 62 characters</span></li>
+            <li><b>Visual</b><span>4:3 frame; explains, never decorates</span></li>
+            <li><b>Mono</b><span>file names and commands only</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section>
+        <div class="head"><span class="n">05</span><h2>Entry page</h2><span class="say">Planned: a timeline entry opened out into its own page</span></div>
+        <div class="cols" style="grid-template-columns: 1.15fr 1fr; align-items: start">
+          <div class="entry">
+            <div class="ehero">
+              <div>
+                <span class="mk" style="top: 16px">1</span>
+                <div class="k">Dec 2022 · Data cleaning · Python</div>
+                <span class="mk" style="top: 46px">2</span>
+                <div class="t">Forty years <em>of wind</em></div>
+                <div class="s">A rose for every year, to see if the monsoon is shifting</div>
+                <span class="mk" style="top: 172px">3</span>
+                <div class="f"><i></i><i></i><i></i></div>
+              </div>
+              <div class="vis" style="position: relative"><span class="mk" style="left: -11px; top: -11px">4</span>
+                <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+                  <circle cx="50" cy="50" r="44" stroke="rgba(246,244,239,.16)"/><circle cx="50" cy="50" r="28" stroke="rgba(246,244,239,.16)"/>
+                  <path d="M50 50 L44 12 L56 12Z" fill="#8fbde6"/><path d="M50 50 L84 38 L88 50Z" fill="#8fbde6" opacity=".7"/><path d="M50 50 L22 70 L16 60Z" fill="#8fbde6" opacity=".5"/>
+                  <path d="M50 50 L72 22" stroke="#e39a86" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
+            <div class="chips"><span class="mk">5</span><i></i><i></i><i></i><i></i></div>
+            <div>
+              <span class="mk" style="top: 18px">6</span>
+              <div class="no">01</div>
+              <div class="h">The itch</div>
+              <i class="ln" style="width: 82%"></i><i class="ln" style="width: 76%"></i><i class="ln" style="width: 48%"></i>
+            </div>
+            <div>
+              <span class="mk" style="top: 18px">7</span>
+              <div class="no">02</div>
+              <div class="h">How it works</div>
+              <i class="ln" style="width: 80%"></i><i class="ln" style="width: 62%"></i>
+              <pre><b>for</b> year <b>in</b> range(1980, 2020):
+    rose(clean(wind[year]))</pre>
+            </div>
+            <div class="pgr"><span class="mk">8</span><i></i><span class="lab">All code</span><i></i></div>
+          </div>
+          <div>
+            <ul class="anat">
+              <li><i>1</i><b>Kicker</b><span>date · kind · language, in light terracotta</span></li>
+              <li><i>2</i><b>Title</b><span>the timeline's title; last phrase italic in the accent. Then one line of summary</span></li>
+              <li><i>3</i><b>Facts</b><span>two to four: year, language, status, where the code is</span></li>
+              <li><i>4</i><b>Lead visual</b><span>the entry's own animation, large. It takes the lead image's place</span></li>
+              <li><i>5</i><b>Chapter nav</b><span>sticky chips; the current one in the accent</span></li>
+              <li><i>6</i><b>Chapters</b><span>numbered: the itch · what it does · how it works · what I learned</span></li>
+              <li><i>7</i><b>Code block</b><span>mono on the dark panel, 8 px corners, 12 lines at most</span></li>
+              <li><i>8</i><b>Pager</b><span>previous and next entry, by date</span></li>
+            </ul>
+            <p class="big" style="margin-top: 26px">The same page shape as a studio project, on ink. No semester, no bird, no page edge.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section>
+        <div class="head"><span class="n">06</span><h2>Play</h2><span class="say">More movement than the rest of the site, with limits</span></div>
+        <div class="cols" style="grid-template-columns: 1fr 1fr 1fr">
+          <div>
+            <h4>Allowed</h4>
+            <ul class="yn">
+              <li>A drawing card lifts 4 px and tilts up to 1°</li>
+              <li>The drawing inside grows up to 6%</li>
+              <li>Canvas animations that loop quietly</li>
+              <li>A glow on a milestone dot</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Not allowed</h4>
+            <ul class="yn no">
+              <li>Tilt or scaling on anything else</li>
+              <li>Bounce or elastic easing</li>
+              <li>Sound, or anything that flashes</li>
+              <li>Any of this on an academic or professional page</li>
+            </ul>
+          </div>
+          <p class="big">Every animation waits until it is on screen, and stops for reduced motion.</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="head"><span class="n">+</span><h2>Do / Don't</h2><span class="say">The cheat sheet</span></div>
+        <div class="dd">
+          <div><b>One dark band, start to finish</b><span>Alternating dark and light</span></div>
+          <div><b>Sky for drawing, terracotta for code</b><span>Both in one block, or a third</span></div>
+          <div><b>Drawings on white cards</b><span>Drawings straight on ink</span></div>
+          <div><b>An animation that explains</b><span>An animation that decorates</span></div>
+          <div><b>First-person, plain sentences</b><span>Headlines in capitals</span></div>
+          <div><b>The shared type, grid and states</b><span>A new font or corner radius</span></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="head"><span class="n">→</span><h2>Source of truth</h2><span class="say">This sheet is the map</span></div>
+        <div class="src">
+          <div><code>DESIGN.md</code><span>The foundations</span></div>
+          <div><code>docs/design-personal.md</code><span>These rules, in full</span></div>
+          <div><code>site/assets/css/main.css</code><span>Dark roles and the band's components</span></div>
+          <div><code>site/assets/js/coding/</code><span>Animation palette, one file per visual</span></div>
+          <div><code>seven-leven/bird_dash</code><span>The collection, with its own guide</span></div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -123,7 +123,8 @@
 /* Dark contexts: the Personal band, the footer and the CV card */
 .home .personal-band,
 .site-footer,
-.home .cv-card {
+.home .cv-card,
+.page-ink {
   --text: var(--paper);
   --text-2: rgba(246, 244, 239, 0.75);
   --text-muted: rgba(246, 244, 239, 0.62);
@@ -2427,7 +2428,7 @@ html.lb-lock {
 .pk-subnav a,
 .pk-facts dt,
 .pk-tile > h3,
-.pk-body > section > h2::before {
+:is(.pk-body, .pk-act) > section > h2::before {
   font-size: var(--fs-label);
   font-weight: 600;
   letter-spacing: var(--track-label);
@@ -2547,14 +2548,14 @@ html.lb-lock {
   counter-reset: pk;
   padding-bottom: clamp(2rem, 5vw, 4rem);
 }
-.pk-body > section {
+:is(.pk-body, .pk-act) > section {
   padding: var(--space-section) 0;
   border-top: 1px solid var(--rule);
 }
-.pk-body > section:first-child {
+:is(.pk-body, .pk-act) > section:first-child {
   border-top: 0;
 }
-.pk-body > section > h2 {
+:is(.pk-body, .pk-act) > section > h2 {
   counter-increment: pk;
   margin-bottom: var(--space-5);
   font-family: var(--font-serif);
@@ -2562,7 +2563,7 @@ html.lb-lock {
   font-weight: 400;
   line-height: 1.05;
 }
-.pk-body > section > h2::before {
+:is(.pk-body, .pk-act) > section > h2::before {
   content: counter(pk, decimal-leading-zero);
   display: block;
   margin-bottom: 0.7rem;
@@ -2688,6 +2689,594 @@ html.lb-lock {
   }
   .pk-hero__media {
     order: -1;
+  }
+}
+
+/* An ink page: a Personal project opened out into a page of its own
+   (docs/design-personal.md, section 05). The kit above, on the dark roles,
+   with light terracotta where a studio page has its semester colour. */
+body.page-ink {
+  --sem: var(--accent-light);
+  --sem-text: var(--accent-light);
+  background: var(--ink);
+}
+.page-ink::after {
+  content: none; /* no page edge: that belongs to the semesters */
+}
+.page-ink .pk-hero {
+  position: relative;
+  overflow: hidden;
+}
+.page-ink .pk-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 8% 20%, rgba(91, 155, 213, 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 60% at 96% 70%, rgba(184, 84, 80, 0.14), transparent 70%);
+  pointer-events: none;
+}
+.page-ink .pk-hero > * {
+  position: relative;
+}
+.page-ink .pk-subnav {
+  background: rgba(22, 21, 20, 0.92);
+}
+.page-ink .pk-subnav a:hover {
+  background: var(--surface);
+}
+.page-ink .pk-subnav a.is-active {
+  color: var(--ink);
+}
+.page-ink .pk-body > .pk-section--tint {
+  background: #1f1e1c;
+  box-shadow: 0 0 0 100vmax #1f1e1c;
+}
+.page-ink .pk-body a:not(.btn) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: rgba(227, 154, 134, 0.6);
+  text-underline-offset: 3px;
+}
+.page-ink .pk-body a:not(.btn):hover {
+  color: var(--accent-text);
+}
+.page-ink .pk-body :is(p, li) code {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+.pk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+  margin-top: 1.75rem;
+}
+/* A coding animation on an ink page (the lead visual of an entry page, or in a chapter): the
+   Coding timeline's 4:3 frame. <figure class="pk-vis"><canvas data-vis="name"></canvas></figure>
+   and assets/js/coding/index.js on the page. */
+.pk-vis canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.28);
+}
+/* Code and plain-text diagrams, on the dark panel */
+.pk-code {
+  margin: var(--space-5) 0;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.32);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  white-space: pre;
+  tab-size: 2;
+}
+.pk-code b {
+  color: var(--accent-light);
+  font-weight: 400;
+}
+/* A dated list of steps: the version history of a project */
+.pk-steps {
+  margin: var(--space-5) 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.pk-steps li {
+  display: grid;
+  grid-template-columns: 4.5rem 7rem minmax(0, 1fr);
+  gap: var(--space-2) var(--gutter);
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pk-steps b {
+  color: var(--sem-text);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+}
+.pk-steps time {
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk-steps strong {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+}
+.pk-steps span {
+  color: var(--text-2);
+  font-size: var(--fs-small);
+}
+/* Big numbers with a label under each */
+.pk-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--gutter);
+  margin: var(--space-5) 0;
+}
+.pk-stats div {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule-strong);
+}
+.pk-stats dt {
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  line-height: 1;
+}
+.pk-stats dt small {
+  color: var(--text-muted);
+  font-size: 0.45em;
+}
+.pk-stats dd {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+/* A part of a long page: a few chapters under one heading. The chapter nav
+   can point at the part, and stays on it while its chapters scroll by. */
+.pk-act {
+  scroll-margin-top: calc(var(--nav-h) + var(--subnav-h));
+  border-top: 1px solid var(--rule-strong);
+}
+.pk-act:first-child {
+  border-top: 0;
+}
+.pk-act__head {
+  padding: var(--space-section) 0 var(--space-5);
+}
+.pk .pk-act__no {
+  max-width: none;
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk .pk-act__title {
+  margin: var(--space-3) 0 var(--space-4);
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1;
+}
+.pk-act__title em {
+  color: var(--sem-text);
+}
+.pk .pk-act__say {
+  max-width: 46ch;
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  font-style: italic;
+  line-height: 1.3;
+}
+.pk-act > section:first-of-type {
+  border-top: 0;
+  padding-top: var(--space-5);
+}
+/* The rest of a chapter, closed until asked for */
+.pk-more {
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--rule);
+}
+.pk-more > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: var(--space-3) 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  transition: color var(--dur-fast) ease;
+}
+.pk-more > summary::-webkit-details-marker {
+  display: none;
+}
+.pk-more > summary::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--dur-fast) ease;
+}
+.pk-more[open] > summary::before {
+  transform: translateY(1px) rotate(-135deg);
+}
+.pk-more > summary:hover,
+.pk-more[open] > summary {
+  color: var(--text);
+}
+.pk-more > :not(summary):first-of-type {
+  margin-top: var(--space-3);
+}
+.pk-more > :last-child {
+  margin-bottom: var(--space-4);
+}
+.pk-more > p + p,
+.pk-more > figure,
+.pk-more > .pk-list + h3 {
+  margin-top: var(--space-4);
+}
+.pk-more > h3 {
+  margin-top: var(--space-5);
+}
+
+/* A chapter may carry its own label in place of its number: <h2 data-label="v0.4"> */
+:is(.pk-body, .pk-act) > section > h2[data-label]::before {
+  content: attr(data-label);
+}
+/* One stretch of an ongoing project: its facts on a rail, the story beside it */
+.pk-arc {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: var(--space-5) clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.pk-arc > * {
+  min-width: 0;
+}
+.pk-arc__meta {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--subnav-h) + var(--space-5));
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--sem);
+}
+.pk-arc__meta dt {
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk-arc__meta dd {
+  margin: 0.25rem 0 0;
+  color: var(--text);
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+.pk-arc__meta dd.pk-arc__num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1;
+}
+.pk-arc__meta dd.pk-arc__num small {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+}
+.pk-arc__body > :first-child {
+  margin-top: 0;
+}
+.pk-arc__body > p + p {
+  margin-top: var(--space-4);
+}
+.pk-arc__body .pk-list {
+  margin-top: var(--space-4);
+}
+.pk-arc__body .pk-list li {
+  padding-left: 1.1rem;
+  text-indent: -1.1rem;
+}
+.pk-arc__body .pk-list li::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 1px;
+  margin-right: 0.7rem;
+  background: var(--sem);
+  vertical-align: 0.3em;
+}
+/* A measured series as plain bars: <ol class="pk-bars"> of <li style="--v: 0..1"> */
+.pk-bars {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.55rem;
+  max-width: 44rem;
+  margin: var(--space-5) 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-small);
+}
+.pk-bars li {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  color: var(--text-muted);
+}
+.pk-bars li > span {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-2);
+}
+.pk-bars li > span::before {
+  content: "";
+  flex: none;
+  width: calc(var(--v) * 62%);
+  min-width: 2px;
+  height: 0.7rem;
+  background: var(--rule-strong);
+}
+.pk-bars li.is-peak > span::before {
+  background: var(--sem);
+}
+.pk-bars b {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 600px) {
+  .pk-bars li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+  .pk-bars li > span {
+    display: block;
+  }
+  .pk-bars li > span::before {
+    display: block;
+    width: calc(var(--v) * 100%);
+    margin: 0.2rem 0 0.3rem;
+  }
+}
+
+/* The shape of a codebase over time: bars per layer that grow and shrink as
+   assets/js/arch-evolution.js steps through its history. */
+.pk-evo {
+  margin: var(--space-5) 0;
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: rgba(0, 0, 0, 0.28);
+}
+.pk-evo__caption {
+  min-height: 7.5rem;
+}
+.pk .pk-evo__when {
+  color: var(--sem-text);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk .pk-evo__title {
+  margin-top: var(--space-2);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  line-height: 1.1;
+}
+.pk .pk-evo__text {
+  margin-top: var(--space-2);
+  color: var(--text-2);
+}
+.pk-evo__group {
+  margin-top: var(--space-5);
+}
+.pk .pk-evo__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+  max-width: none;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--rule);
+  color: var(--text);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.pk-evo__heading span {
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.pk-evo__bars {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.pk-evo__track {
+  display: flex;
+  align-items: flex-end;
+  height: 11rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.pk-evo__group + .pk-evo__group .pk-evo__track {
+  height: 7rem;
+}
+.pk-evo__bar {
+  position: relative;
+  width: 100%;
+  background: var(--rule-strong);
+  transition: height var(--dur-slow) var(--ease), background var(--dur-mid) ease;
+}
+.pk-evo__col[data-layer="app"] .pk-evo__bar {
+  background: var(--sem);
+}
+.pk-evo__col[data-layer="tests"] .pk-evo__bar {
+  background: var(--blue-light);
+}
+.pk-evo__value {
+  position: absolute;
+  bottom: calc(100% + 0.3rem);
+  left: 0;
+  color: var(--text);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.pk .pk-evo__label {
+  margin-top: var(--space-2);
+  color: var(--text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.pk-evo__files {
+  display: block;
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+  font-weight: 400;
+}
+.pk-evo__col.is-empty .pk-evo__track {
+  border-bottom-style: dashed;
+  border-bottom-color: var(--rule);
+}
+.pk-evo__col.is-empty .pk-evo__label {
+  color: var(--text-faint);
+}
+.pk-evo__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+}
+.pk-evo__steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.pk-evo button {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--text-muted);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--dur-fast) ease, background var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.pk-evo button:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.pk-evo button.is-active {
+  background: var(--sem-text);
+  color: var(--ink);
+}
+.pk-evo .pk-evo__play {
+  min-width: 4.6rem;
+  border-color: var(--rule-strong);
+  color: var(--text);
+}
+@media (max-width: 600px) {
+  .pk-evo__bars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-5);
+  }
+  .pk-evo__track,
+  .pk-evo__group + .pk-evo__group .pk-evo__track {
+    height: 6rem;
+  }
+  .pk-evo__caption {
+    min-height: 10.5rem;
+  }
+  .pk-evo__controls {
+    display: grid;
+  }
+}
+
+/* A thread that comes back in a later stretch */
+.pk .pk-thread {
+  max-width: var(--measure);
+  margin-top: var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: var(--fs-small);
+}
+.pk-thread b {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--sem-text);
+  font-size: var(--fs-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+@media (max-width: 820px) {
+  .pk-arc {
+    grid-template-columns: 1fr;
+  }
+  .pk-arc__meta {
+    position: static;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Exactly two across, for a set of four */
+.pk-grid--half {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 600px) {
+  .pk-grid--half:not(.pk-grid--keep) {
+    grid-template-columns: 1fr;
+  }
+}
+/* A phone screenshot keeps to a phone's width */
+.pk-body .pk-figure--phone {
+  max-width: 17rem;
+  margin-inline: auto;
+}
+@media (max-width: 600px) {
+  .pk-steps li {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+  }
+  .pk-steps li > div {
+    grid-column: 1 / -1;
   }
 }
 

@@ -2,6 +2,12 @@
 
 v1.0 · 2026 · for the website and the printed book together.
 
+**Scope.** Sections 00 to 05 are the foundations for the whole site. Sections 06 to 08
+(page shape, signature devices, voices) are for academic and professional work. Personal
+work (Illustrations and Coding) shares the foundations and has its own guide,
+[docs/design-personal.md](docs/design-personal.md). One language for all three is a
+later job.
+
 The one-sheet map of this document is [docs/design-guide.png](docs/design-guide.png)
 (`deno task guide` redraws it). The sheet is for remembering; this file is for the
 detail. The state of the site before the system was written down is recorded in

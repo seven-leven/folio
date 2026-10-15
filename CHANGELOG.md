@@ -15,10 +15,16 @@ commit.
 
 ## Unreleased
 
-- Mancala gets its own page (`mancala.html`): the story from the 2022 command-line game to the 2026 TypeScript game, with the Coding timeline's two mancala animations, the game in both themes, its design sheet, and what its eight bots found (the first player wins by force; the bots' Elo ladder with ranges). Built on the project page kit, with terracotta as its one accent since it isn't a semester; linked from the footer and from both mancala timeline entries
-- The Aug 2024 entry links to the game, its source and the story, and now says where the depth-first search came from (The Farmer Was Replaced) and where the bot stands today
+- Mancala gets a Coding entry page (`code-mancala.html`), built to the Personal design system like the Wildlife page: the itch (the 2022 command-line game), what it does, how it works (the 2024 bot's nine lines, the web game), what the bots found (the first player wins by force; the bots' Elo ladder with ranges) and what I learned; the timeline's mancala animation is its lead visual. A shared `.pk-vis` frame shows coding animations on ink pages
+- The Aug 2024 entry links to the full story, the game and its source, and now says where the depth-first search came from (The Farmer Was Replaced) and where the bot stands today
 - The timeline's mancala animation follows the game's rules: captures only from your own side, and the game ends on a clinched majority with each side banking what's left
-
+- Wildlife Illustrated page: an animated view of the app's architecture at ten points in its history, one bar per layer
+- Wildlife Illustrated page: why six birds went up in one day (0.4), and moving the interface into `Chrome.vue` (0.7)
+- CI: pull requests run the checks only (`ci.yml`); the deploy lives in its own workflow on `main`, so a pull request no longer lists a skipped deploy
+- Wildlife Illustrated page: the deploy lesson (build first, publish only if it succeeds) added to versions 0.2 and 0.8; the icons, the design guide and the logo session added to 0.9; the size of `App.vue` over time and the search journey; the image pipeline, from an online converter to four steps; Tailwind in an afternoon; a week chasing a Lighthouse score; why the React version was abandoned for Vue; the size of the stylesheet over time
+- The Wildlife Illustrated page retold as an ongoing project: nine stretches of work in order, each with what was new to learn and the drawing count at the end
+- A page of its own for the first coding project: how the Wildlife Illustrated site was built, from its changelog, with screenshots of three versions (`code-wildlife.html`)
+- An ink page context (`page-ink`) so a Personal project can use the project page kit; version lists, code blocks and big-number rows for it
 - One design system for the whole site, written down in DESIGN.md (with the audit that led to it in docs/design-audit.md): `main.css` now holds every colour, the six font families and the type, space and corner scales; each project page's own palette moved there too, as a named voice
 - Semesters 1 to 3 rebuilt on a shared project page kit: the same kicker, serif title, fact tiles, lead image, chapter nav and numbered chapters as the newer pages, on the site's paper and type. Their words and drawings are unchanged; Montserrat, Oswald, Lato and a dead request for Helvetica Neue are gone
 - The book's progress bar on every project page and in the previous/next pager
@@ -26,6 +32,7 @@ commit.
 - A one-sheet design guide (`docs/design-guide.png`, redrawn with `deno task guide`)
 - The design system written up as v1.0: grid, motion speeds, component states, accessibility checks, do / don't
 - Grid and motion are named tokens; buttons have pressed and disabled states
+- A separate guide for Personal work on the same foundations (`docs/design-personal.md`), including the shape of a future page per coding entry
 - Fixes: script-made buttons no longer fall back to 13 px Arial; images no longer grow on hover
 
 - Section cut is movable and turns: Plan, Section A or Section B, a slider to move it through the model, and Flip for the other half. The camera turns to face the cut and frames what's left, a thin outline in the semester colour marks the plane, and only the model is cut (the ground and shadows follow it)
