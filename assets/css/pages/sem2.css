@@ -1,0 +1,14 @@
+/* Page styles for sem2.html.
+   The page is built from the project page kit in main.css (.pk); only what is
+   particular to Blue Canvas lives here. */
+
+/* The Ricci flow study: the wide process strip beside the square shell view */
+.pk-grid--ricci {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  align-items: center;
+}
+@media (max-width: 820px) {
+  .pk-grid--ricci {
+    grid-template-columns: 1fr;
+  }
+}

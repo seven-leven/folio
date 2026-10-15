@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Losing at Ohvalhugondi - Gaahis Yaugoob</title>
+    <meta name="description" content="A mancala bot four years in the making: a command-line game in 2022 to beat my grandmother at ohvalhugondi, a depth-first search bot in 2024, and a web game with eight bots on an Elo ladder.">
+    <meta property="og:title" content="Losing at Ohvalhugondi - Gaahis Yaugoob">
+    <meta property="og:description" content="Four years of building a bot to beat my grandmother at the Maldivian mancala, and what the bots found out about the game.">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/mancala/game-dark.webp">
+    <link rel="canonical" href="https://seven-leven.github.io/folio/code-mancala.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/code-mancala.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/pages/mancala.css">
+  </head>
+  <body class="project-page page-ink pk project-mancala">
+    <nav id="navbar" aria-label="Main">
+      <div class="container">
+        <a href="index.html" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+          <span class="nav-mark" aria-hidden="true">GY</span>
+          <span class="nav-name">Gaahis Yaugoob</span>
+        </a>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#home">Home</a></li>
+          <li class="nav-group">
+            <button type="button" class="nav-group__btn" aria-expanded="false" aria-controls="nav-academic">Academic</button>
+            <ul class="nav-group__menu" id="nav-academic">
+              <li><a href="engineering.html">Engineering</a></li>
+              <li><a href="index.html#architecture">Architecture</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#professional">Professional</a></li>
+          <li class="nav-group">
+            <button type="button" class="nav-group__btn is-active" aria-expanded="false" aria-controls="nav-personal">Personal</button>
+            <ul class="nav-group__menu" id="nav-personal">
+              <li><a href="index.html#illustrations">Illustrations</a></li>
+              <li><a href="index.html#coding" class="is-active" aria-current="true">Coding</a></li>
+            </ul>
+          </li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#contact-me">Contact</a></li>
+          <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--
+      A Coding entry page (docs/design-personal.md, section 05): the itch, what it does,
+      how it works, what the bots found, what I learned. The lead visual is the entry's own
+      animation from the timeline.
+    -->
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Dec 2022 to now · A game and its bots · Python, then TypeScript</p>
+            <h1 class="pk-title">Losing at <em>ohvalhugondi</em></h1>
+            <p class="pk-sub">A bot to beat my grandmother, four years in the making</p>
+            <p class="pk-standfirst">
+              Ohvalhugondi is the Maldivian mancala: two rows of seven pits, seven seeds in each. My grandmother kept
+              beating me at it, so in 2022 I set out to write a program that could beat her. It became a command-line
+              game, then a search bot, then a web game with eight bots, and finally a way to find out how the game
+              itself works.
+            </p>
+            <dl class="pk-facts">
+              <div><dt>Started</dt><dd>December 2022</dd></div>
+              <div><dt>Written in</dt><dd>Python, then TypeScript</dd></div>
+              <div><dt>Status</dt><dd>In use, version 2.1</dd></div>
+              <div><dt>Bots</dt><dd>Eight, Hopeless to Expert</dd></div>
+            </dl>
+            <div class="pk-actions">
+              <a class="btn btn--light" href="https://seven-leven.github.io/mancala/" target="_blank" rel="noopener noreferrer">
+                Play the game
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+              </a>
+              <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/mancala" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+            </div>
+          </div>
+          <figure class="pk-hero__media pk-vis">
+            <canvas data-vis="mancalaBot" role="img" aria-label="Two bots play ohvalhugondi: one looks four moves ahead, the other one move; seeds are sown pit by pit"></canvas>
+            <figcaption>Two bots playing the real rules</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#itch">The itch</a>
+          <a href="#does">What it does</a>
+          <a href="#works">How it works</a>
+          <a href="#found">What the bots found</a>
+          <a href="#learned">What I learned</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+        <section id="itch" class="animate-on-scroll-target">
+          <h2>The itch</h2>
+          <div class="pk-grid pk-grid--split">
+            <div>
+              <p>
+                In December 2022 I played my grandmother at ohvalhugondi again, and lost again. I decided to write a
+                bot that could beat her. I got as far as the game itself: a Python command-line version with the real
+                rules, seven pits a side, seven seeds in each, and relay sowing.
+              </p>
+              <p>
+                The bot would have to wait. I didn't yet know how to make a program look ahead, and my grandmother
+                passed away before I managed it.
+              </p>
+            </div>
+            <figure class="pk-vis">
+              <canvas data-vis="mancalaCli" role="img" aria-label="A text-mode mancala board in a terminal, with players picking pits and the board updating"></canvas>
+              <figcaption>The command-line game loop, redrawn</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="does" class="animate-on-scroll-target">
+          <h2>What it does</h2>
+          <p>
+            You pick up every seed in one of your pits and sow them one by one around the board, into your own store
+            but never your opponent's. If the last seed lands in a pit that already had seeds, you pick those up too and
+            keep going: relay sowing, the part that makes ohvalhugondi so hard to read ahead. A last seed in your own
+            store earns another turn, and one in an empty pit on your side captures the pit opposite.
+          </p>
+          <p>
+            Today it's a web game. You can play a friend on the same screen or any of eight bots, from one that tries
+            to lose to one that searches ahead, and it keeps an Elo rating of your own from the games you play against
+            them. There's undo, a hint, a replay of the finished game, and a move log where the search bots say what
+            they saw.
+          </p>
+          <div class="pk-grid pk-grid--2">
+            <figure>
+              <img
+                src="assets/projects/mancala/game-light.webp"
+                alt="The web game in its paper theme: a wooden board with two rows of seven pits holding drawn seeds, a store at each end, and a move log below"
+                width="1800" height="1337" loading="lazy" decoding="async"
+              >
+              <figcaption>The paper theme, a few moves in</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/projects/mancala/game-dark.webp"
+                alt="The same board in the ink theme: the bottom player's pits ringed as playable, the stores holding 9 and 15 seeds"
+                width="1800" height="1337" loading="lazy" decoding="async"
+              >
+              <figcaption>The ink theme, the same position</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="works" class="animate-on-scroll-target">
+          <h2>How it works</h2>
+          <h3>The 2024 bot</h3>
+          <p>
+            Twenty months after that game I came back to it, because I had finally learned the missing piece:
+            depth-first search, which I picked up playing <em>The Farmer Was Replaced</em>, a game where you program a
+            farming drone in Python and have to solve its mazes. I worked out how to use it here myself, without AI
+            help, and built the bot in Google Colab.
+          </p>
+          <p>
+            It follows its own chains of free turns as deep as they go and keeps the one that ends with the fullest
+            store. Today, in TypeScript, it is nine lines:
+          </p>
+          <pre class="pk-code"><b>chain</b>(state, move, depth, me) {
+  const r = playTurn(state, move);
+  if (!r.freeTurn || depth + 1 &gt;= maxDepth) return score(r.state, me);
+  let best = score(r.state, me);
+  for (const next of validMoves(r.state)) {
+    best = Math.max(best, <b>chain</b>(r.state, next, depth + 1, me));
+  }
+  return best;
+}</pre>
+          <p>
+            It never thinks about the opponent's reply, and it is still the second-strongest bot in the game.
+          </p>
+
+          <h3>The web game</h3>
+          <p>
+            The first web version came together in a single day in August 2025, with AI's help on the interface, and
+            was split into tidy modules the same day. In July 2026 the rules moved into one place: the engine writes
+            down every seed it sows, and the animation only replays that record, so the screen can never disagree with
+            the rules.
+          </p>
+          <p>
+            In October 2026 I rebuilt it in TypeScript, again with AI's help. It got tests for every rule, an
+            alpha-beta search that runs in the background so the page never freezes, and a design taken from this
+            site: the same paper and ink, the same type, a wooden board with drawn seeds. Testing the new version, I
+            caught a rule the game had got wrong since its first day. A capture should take only the pit opposite,
+            while the seed that lands stays where it is.
+          </p>
+          <figure class="pk-figure--narrow">
+            <img
+              src="assets/projects/mancala/design-guide.webp"
+              alt="The game's design guide on one sheet: its paper and ink palettes, the two player colours, the wood and seed colours, the board in both themes, pit states, type, buttons and voice"
+              width="1324" height="2400" loading="lazy" decoding="async"
+            >
+            <figcaption>The game's design guide, borrowed from this site's</figcaption>
+          </figure>
+        </section>
+
+        <section id="found" class="animate-on-scroll-target">
+          <h2>What the bots found</h2>
+          <p>With eight bots, the game could finally be measured. Two results stood out.</p>
+          <div class="pk-grid pk-grid--2">
+            <div class="pk-tile">
+              <h3>The first move decides it</h3>
+              <p>
+                With the standard rules, the strongest bot proves that whoever moves first wins by force. Opening with
+                pit 1 starts a chain of free turns that passes half the seeds before the other side ever moves. The
+                strongest bot playing itself ends 94–4. The game now lets you choose who goes first.
+              </p>
+            </div>
+            <div class="pk-tile">
+              <h3>A ladder, not exact numbers</h3>
+              <p>
+                Every bot played every other 40 times, and the results were fitted to Elo ratings. Many pairings end
+                100–0, which says one bot is much stronger but not by how much, so each rating comes with a range.
+              </p>
+            </div>
+          </div>
+
+          <figure class="mc-ladder">
+            <ol>
+              <li style="--lo: 83.3%; --elo: 88.7%; --hi: 95.6%"><span class="mc-ladder__name">Expert <span>Minimax</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1908</span></li>
+              <li style="--lo: 79.6%; --elo: 84.6%; --hi: 90.5%"><span class="mc-ladder__name">Hard <span>DFS, the 2024 bot</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1838</span></li>
+              <li style="--lo: 70.6%; --elo: 75.1%; --hi: 81.5%"><span class="mc-ladder__name">Tricky <span>Lookahead</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1677</span></li>
+              <li style="--lo: 53.4%; --elo: 57.8%; --hi: 62.4%"><span class="mc-ladder__name">Average <span>Greedy</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1383</span></li>
+              <li style="--lo: 37.5%; --elo: 41%; --hi: 44.3%"><span class="mc-ladder__name">Casual <span>First pit</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1097</span></li>
+              <li style="--lo: 35.3%; --elo: 35.3%; --hi: 35.3%"><span class="mc-ladder__name">Easy <span>Random</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">1000</span></li>
+              <li style="--lo: 7.9%; --elo: 12.3%; --hi: 16.7%"><span class="mc-ladder__name">Very easy <span>Generous</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">609</span></li>
+              <li style="--lo: 4.8%; --elo: 9.2%; --hi: 12.6%"><span class="mc-ladder__name">Hopeless <span>Pushover</span></span><span class="mc-ladder__track"><i></i><b></b></span><span class="mc-ladder__elo">556</span></li>
+            </ol>
+            <figcaption>
+              The eight bots by Elo, with 90% ranges; Random is pinned at 1000. Expert and Hard overlap: over 40 games,
+              Expert won 65%.
+            </figcaption>
+          </figure>
+
+          <p>
+            The ladder holds a few surprises. The 2024 bot, which never considers its opponent, is nearly as strong as
+            a full search. A bot that always plays its leftmost pit beats one that plays at random three times in four.
+            And at the bottom sit two that play worse than chance: one that banks as little as it can, and one that
+            searches ahead to lose by as much as it can.
+          </p>
+        </section>
+
+        <section id="learned" class="animate-on-scroll-target">
+          <h2>What I learned</h2>
+          <p class="pk-quote">
+            The first time I set out to solve a problem that was genuinely hard for me, and did.
+          </p>
+          <p>
+            It's the project I'm proudest of. The idea for the bot came from a game about programming a farm, the bot
+            I wrote in 2024 still holds up against a proper search, and measuring the bots showed me the game better
+            than playing it: ohvalhugondi looks like a game of patience and plays like a game of chains, where one
+            well-chosen pit decides everything.
+          </p>
+          <div class="pk-actions">
+            <a class="btn btn--light" href="https://seven-leven.github.io/mancala/" target="_blank" rel="noopener noreferrer">
+              Play the game
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+            <a class="link-arrow link-arrow--quiet" href="https://github.com/seven-leven/mancala/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Its changelog</a>
+            <a class="link-arrow link-arrow--quiet" href="index.html#coding">All coding projects</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="site-footer__brand">
+          <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
+          <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
+        </div>
+        <div>
+          <p class="site-footer__heading">Academic</p>
+          <nav class="site-footer__links" aria-label="Academic work">
+            <a href="engineering.html">Engineering work</a>
+            <a href="sem1.html" data-label="Semester 1 · 2023" data-sem="1">Enchanting Reading Nook</a>
+            <a href="sem2.html" data-label="Semester 2 · 2024" data-sem="2">Blue Canvas</a>
+            <a href="sem3.html" data-label="Semester 3 · 2025" data-sem="3">Urban Acupuncture</a>
+            <a href="sem4.html" data-label="Semester 4 · 2025" data-sem="4">Measured Embrace</a>
+            <a href="sem5.html" data-label="Semester 5 · 2026" data-sem="5">Yield, Register, Transmit</a>
+          </nav>
+        </div>
+        <div>
+          <p class="site-footer__heading">More</p>
+          <nav class="site-footer__links" aria-label="More work">
+            <a href="index.html#professional">Professional work</a>
+            <a href="index.html#illustrations">Illustrations</a>
+            <a href="index.html#coding">Coding</a>
+          </nav>
+        </div>
+        <div>
+          <p class="site-footer__heading">Contact</p>
+          <div class="site-footer__links">
+            <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+            <a href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">Process journal on Tumblr</a>
+            <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="container site-footer__bottom">
+        <p class="site-footer__copy">
+          © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+          <a class="site-footer__version" href="https://github.com/seven-leven/folio/blob/main/CHANGELOG.md" title="What changed in each version">v1.5.117</a>
+        </p>
+        <a class="site-footer__top" href="#">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/coding/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+/* Page styles for sem3.html.
+   The page is built from the project page kit in main.css (.pk); only what is
+   particular to Urban Acupuncture lives here. */
+
+/* The programme axonometric is tall: keep it to a readable column */
+#concept-development > figure,
+#floor-breakdown > figure {
+  max-width: 44rem;
+  margin-inline: auto;
+}
