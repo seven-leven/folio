@@ -730,6 +730,65 @@
               </div>
             </div>
           </section>
+
+          <section id="v09-docs" class="animate-on-scroll-target">
+            <h2 data-label="v0.9 · 5 to 14 October 2026">Not every file is code</h2>
+            <div class="pk-arc">
+              <dl class="pk-arc__meta">
+                <div><dt>New to me</dt><dd>That a plain-text file can do the housekeeping</dd></div>
+                <div><dt>Now written down</dt><dd>How it looks, how it is built, the data, the tests, what is next</dd></div>
+                <div><dt>Drawings</dt><dd class="pk-arc__num">18</dd></div>
+              </dl>
+              <div class="pk-arc__body">
+                <p>
+                  For most of its life the repository had two Markdown files: the README, from the
+                  Vue rewrite, and the changelog, from January 2026. The README was only there
+                  because every other repository had one. I thought it was manners, the way you
+                  sign a letter, not something that did a job. A list of known issues
+                  appeared in January with four notes on it, and three weeks later it became a
+                  to-do list. Everything else about how the project worked lived in the code, or in
+                  my head.
+                </p>
+                <p>
+                  This one came as a revelation: not every file in a repository has to be code. A
+                  Markdown file runs nothing, but it can do a lot of the housekeeping. It holds what
+                  I would otherwise have to remember, in the place the next person to open the
+                  project will look. That person is usually me, months later. In ten days the
+                  <code>docs</code> folder went from one file to seven.
+                </p>
+                <pre class="pk-code"><b>docs/</b>
+  DESIGN.md            how it looks, and a checklist for any change to it
+  ARCHITECTURE.md      three programs, one contract, and the rules
+  DATA.md              the shape of every data file, and recipes
+  TESTING.md           how the tests are organised, and how to write one
+  TEST-PROCEDURES.md   do this, then this: set up, run, fix
+  COVERAGE-ROADMAP.md  from 96% to 100%, in five phases
+  TODO.md              what is next, and what is done</pre>
+                <p class="pk-caption">1,759 lines of Markdown across nine files, counting the README and the changelog.</p>
+                <p>
+                  It is the same lesson as the rest of this part, from the other side. The checks
+                  make sure things are right; the documents say what right means, and why. Each one
+                  points at whatever keeps it honest: the design guide at the stylesheet it
+                  explains, the data reference at the tests that enforce it, the test runbook at
+                  commands I ran before writing them down.
+                </p>
+                <p>
+                  The habit has already moved on. When I rewrote
+                  <a href="code-mancala.html">my mancala game</a> a few days later, the design guide
+                  came first, and the roadmap, the standard every bot follows, how the bots are
+                  rated and how a game is written down are all Markdown files beside the code.
+                </p>
+                <details class="pk-more">
+                  <summary>More from this stretch</summary>
+                  <ul class="pk-list">
+                    <li>The to-do list moved out of the project root into <code>docs</code> the day the root was tidied.</li>
+                    <li>The testing guide and the runbook split on purpose: one explains the ideas, the other is only steps.</li>
+                    <li>The coverage roadmap estimates its own work, from about a day for the small gaps to a week for the components.</li>
+                  </ul>
+                </details>
+              </div>
+            </div>
+          </section>
         </div>
 
         <!-- The shape of the code, across all the versions -->

@@ -15,6 +15,8 @@ commit.
 
 ## Unreleased
 
+- Personal: a Coming soon block for Lunch Lab, a year of learning to cook told as experiments (from May 2027), with its brand sheet; the Personal intro mentions it
+- Wildlife Illustrated page: a new stretch in 0.9, "Not every file is code": the October docs folder (design, architecture, data, testing, a runbook, a coverage roadmap) and how Markdown took over the housekeeping, carried on into the mancala rewrite
 - Mancala gets a Coding entry page (`code-mancala.html`), built to the Personal design system like the Wildlife page: the itch (the 2022 command-line game), what it does, how it works (the 2024 bot's nine lines, the web game), what the bots found (the first player wins by force; the bots' Elo ladder with ranges) and what I learned; the timeline's mancala animation is its lead visual. A shared `.pk-vis` frame shows coding animations on ink pages
 - The Aug 2024 entry links to the full story, the game and its source, and now says where the depth-first search came from (The Farmer Was Replaced) and where the bot stands today
 - The timeline's mancala animation follows the game's rules: captures only from your own side, and the game ends on a clinched majority with each side banking what's left
