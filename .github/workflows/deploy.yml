@@ -1,8 +1,9 @@
 name: Check & deploy
 
 # Runs on main only: check, then deploy if the check passes.
-# gh-pages is a build artifact of main: never commit to it directly. Each
-# deploy builds site/ into dist/ and publishes it as a fresh orphan commit.
+# Each deploy builds site/ into dist/ and hands it to GitHub Pages as an
+# artifact (Pages source: GitHub Actions). Nothing is committed to a branch,
+# and GitHub's own "pages-build-deployment" run (Node 20) no longer happens.
 on:
   push:
     branches: [main]
@@ -17,13 +18,13 @@ jobs:
     name: Verify
     uses: ./.github/workflows/verify.yml
 
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Build
     needs: verify
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout code with full history (the version number is the commit count)
         uses: actions/checkout@v5
@@ -38,9 +39,22 @@ jobs:
       - name: Build
         run: deno task build
 
-      - name: Publish dist/ to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload dist/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          force_orphan: true
+          path: ./dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

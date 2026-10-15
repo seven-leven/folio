@@ -62,8 +62,8 @@ Requires [Deno](https://deno.com) 2.x. The browser-based tasks need Chrome
    `deno task snapshot after` and `deno task compare before after`.
 2. Commit. Every push runs formatting, lint and the check in CI.
 3. `deno task release` when it's ready. CI builds `main`, checks it again and
-   publishes `dist/` to the `gh-pages` branch as a fresh commit, which GitHub
-   Pages serves. `gh-pages` is a build artifact: never commit to it.
+   hands `dist/` to GitHub Pages as an artifact (Pages source: GitHub Actions).
+   Nothing is committed to a branch for the site.
 
 A monthly workflow (`links.yml`) checks external links and emails you if one
 breaks.
