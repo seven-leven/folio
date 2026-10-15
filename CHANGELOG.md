@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- CI: the site is deployed with GitHub's Pages actions (`upload-pages-artifact@v5`, `deploy-pages@v5`) instead of a `gh-pages` branch, so GitHub's own Pages build, which still ran on Node.js 20, no longer runs
 - The Discord bot gets a Coding entry page (`code-discord-bot.html`): the itch, what it does (a queue filed into a thread per title), how it works (a pause that never happened, locks, numbers with no gaps), twelve rewrites by size, and what I learned; the Dec 2022 timeline entry links to it
 - Personal: a Coming soon block for Lunch Lab, a year of learning to cook told as experiments (from May 2027), with its brand sheet; the Personal intro mentions it
 - Wildlife Illustrated page: a new stretch in 0.9, "Not every file is code": the October docs folder (design, architecture, data, testing, a runbook, a coverage roadmap) and how Markdown took over the housekeeping, carried on into the mancala rewrite
