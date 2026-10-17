@@ -8,8 +8,12 @@ export const data = new URL("../../../data/titanic.json", import.meta.url);
 // on a 40 x 30 grid ("1" = predicted to survive). Then the real results: each
 // model on all features, scored on the same 179 held-out passengers.
 export default function titanic(canvas, D) {
-  const GX = 40, GY = 30;
-  const px0 = 16, py0 = 40, PW = 208, PH = 156; // plot area
+  const GX = 40,
+    GY = 30;
+  const px0 = 16,
+    py0 = 40,
+    PW = 208,
+    PH = 156; // plot area
   const X = (u) => px0 + u * PW;
   const Y = (v) => py0 + PH - v * PH;
   const SURVIVED = "143, 189, 230";
@@ -78,7 +82,8 @@ export default function titanic(canvas, D) {
       how: ["Asks the five", "closest passengers", "and takes a vote."],
       draw(ctx, t) {
         regions(ctx, D.knn, fadeIn(t, 2.2));
-        const u = 0.5 + 0.34 * Math.sin(t * 1.3), v = 0.45 + 0.28 * Math.sin(t * 2.1 + 1);
+        const u = 0.5 + 0.34 * Math.sin(t * 1.3),
+          v = 0.45 + 0.28 * Math.sin(t * 2.1 + 1);
         const near = D.pts
           .map((p) => [Math.hypot(p[0] - u, p[1] - v), p])
           .sort((a, b) => a[0] - b[0])
@@ -147,7 +152,8 @@ export default function titanic(canvas, D) {
   const PERIOD = SHOW + 6.5;
 
   function drawResults(ctx, t) {
-    const lo = 75, hi = 86;
+    const lo = 75,
+      hi = 86;
     text(ctx, "All features · 179 held-out passengers", 16, 18, { size: 10, color: COL.paper, weight: 600 });
     RESULTS.forEach(([name, acc, wrong], i) => {
       const y = 52 + i * 30;
@@ -208,7 +214,10 @@ export default function titanic(canvas, D) {
       if (note) text(ctx, note, 236, 136, { size: 9, font: MONO, color: COL.accent });
 
       // Legend
-      [["survived", SURVIVED], ["did not", DIED]].forEach(([label, rgb], i) => {
+      [
+        ["survived", SURVIVED],
+        ["did not", DIED],
+      ].forEach(([label, rgb], i) => {
         const x = 16 + i * 80;
         ctx.fillStyle = `rgb(${rgb})`;
         ctx.beginPath();

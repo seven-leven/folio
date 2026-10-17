@@ -1,10 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": [
-      "tools/**/*.ts",
-      "site/assets/js/**/*.js"
-    ]
+    "includes": ["tools/**/*.ts", "site/assets/js/**/*.js"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -19,7 +16,7 @@
   },
   "linter": {
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "useTemplate": "off",
         "noNonNullAssertion": "off",

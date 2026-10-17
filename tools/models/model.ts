@@ -54,7 +54,9 @@ function findApp(env: string, candidates: string[]): string {
     try {
       statSync(c);
       return c;
-    } catch { /* not here */ }
+    } catch {
+      /* not here */
+    }
   }
   fail(`Couldn't find it at ${candidates.join(" or ")}. Set ${env} to its path.`);
 }
@@ -63,10 +65,16 @@ function blenderPath(): string {
   const root = "C:/Program Files/Blender Foundation";
   let versions: string[] = [];
   try {
-    versions = readdirSync(root).filter((n) => /^Blender \d/.test(n))
+    versions = readdirSync(root)
+      .filter((n) => /^Blender \d/.test(n))
       .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
-  } catch { /* not installed there */ }
-  return findApp("BLENDER_PATH", versions.map((v) => `${root}/${v}/blender.exe`));
+  } catch {
+    /* not installed there */
+  }
+  return findApp(
+    "BLENDER_PATH",
+    versions.map((v) => `${root}/${v}/blender.exe`),
+  );
 }
 
 async function run(cmd: string, args: string[]) {
@@ -113,7 +121,14 @@ if (source !== "--poster") {
   console.log("2/3 Blender: making it web-ready…");
   const out = fileURLToPath(new URL(model.file, SITE));
   await mkdir(join(out, ".."), { recursive: true });
-  const log = await run(blenderPath(), ["-b", "--python", fileURLToPath(new URL("web-model.py", HERE)), "--", fbx, out]);
+  const log = await run(blenderPath(), [
+    "-b",
+    "--python",
+    fileURLToPath(new URL("web-model.py", HERE)),
+    "--",
+    fbx,
+    out,
+  ]);
   for (const line of log.split("\n")) {
     if (/Dropped|Merged|Simplified|triangles/.test(line)) console.log("    " + line.trim());
   }
@@ -140,7 +155,9 @@ try {
   if (await tab.$(".model-viewer.is-failed")) fail("The viewer couldn't load the model (see the browser console).");
   await new Promise((r) => setTimeout(r, 1500));
   const shot = await (await tab.$(".model-viewer__stage"))!.screenshot({ type: "png" });
-  await sharp(shot).resize(POSTER.width, POSTER.height, { fit: "cover" }).webp({ quality: 80 })
+  await sharp(shot)
+    .resize(POSTER.width, POSTER.height, { fit: "cover" })
+    .webp({ quality: 80 })
     .toFile(fileURLToPath(new URL(model.poster, SITE)));
   console.log(`    ${model.poster}`);
 } finally {

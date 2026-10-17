@@ -47,7 +47,7 @@ function normalise(source: string): string[] {
   const walk = (node: Node, depth: number, raw: boolean) => {
     if (node.nodeName === "#comment") return;
     if (node.nodeName === "#text") {
-      const text = raw ? node.value ?? "" : (node.value ?? "").replace(/\s+/g, " ").trim();
+      const text = raw ? (node.value ?? "") : (node.value ?? "").replace(/\s+/g, " ").trim();
       if (text) out.push(`${"  ".repeat(depth)}"${text}"`);
       return;
     }
@@ -57,8 +57,10 @@ function normalise(source: string): string[] {
     }
     const kids = node.content?.childNodes ?? node.childNodes ?? [];
     if (node.tagName) {
-      const attrs = [...(node.attrs ?? [])].sort((x, y) => x.name.localeCompare(y.name))
-        .map((x) => ` ${x.name}="${x.value.replace(/\s+/g, " ").trim()}"`).join("");
+      const attrs = [...(node.attrs ?? [])]
+        .sort((x, y) => x.name.localeCompare(y.name))
+        .map((x) => ` ${x.name}="${x.value.replace(/\s+/g, " ").trim()}"`)
+        .join("");
       out.push(`${"  ".repeat(depth)}<${node.tagName}${attrs}>`);
     }
     for (const kid of kids) walk(kid, depth + (node.tagName ? 1 : 0), raw || RAW.has(node.tagName ?? ""));
@@ -70,7 +72,8 @@ function normalise(source: string): string[] {
 /** First lines where two line lists part ways. */
 function firstDifferences(x: string[], y: string[], n: number): string[] {
   const out: string[] = [];
-  let i = 0, j = 0;
+  let i = 0,
+    j = 0;
   while ((i < x.length || j < y.length) && out.length < n * 2) {
     if (x[i] === y[j]) {
       i++;
@@ -98,7 +101,8 @@ for (const f of left.filter((f) => inB.has(f)).sort()) {
   const [x, y] = await Promise.all([readFile(join(a, f)), readFile(join(b, f))]);
   if (x.equals(y)) continue;
   if (html && f.endsWith(".html")) {
-    const nx = normalise(x.toString("utf8")), ny = normalise(y.toString("utf8"));
+    const nx = normalise(x.toString("utf8")),
+      ny = normalise(y.toString("utf8"));
     if (nx.join("\n") === ny.join("\n")) continue;
     changed.push(f);
     details.push(`  ${f}`, ...firstDifferences(nx, ny, show));

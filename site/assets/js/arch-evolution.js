@@ -277,11 +277,14 @@
     show(0);
     play.textContent = "Play";
     if ("IntersectionObserver" in window) {
-      new IntersectionObserver(([entry]) => {
-        onScreen = entry.isIntersecting;
-        if (onScreen) start();
-        else pause();
-      }, { threshold: 0.4 }).observe(root);
+      new IntersectionObserver(
+        ([entry]) => {
+          onScreen = entry.isIntersecting;
+          if (onScreen) start();
+          else pause();
+        },
+        { threshold: 0.4 },
+      ).observe(root);
     } else {
       onScreen = true;
       start();

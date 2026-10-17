@@ -11,7 +11,8 @@ export interface Result {
 /** Runs a program and collects what it prints. Never throws: a missing program is a failed result. */
 export function capture(cmd: string, args: string[], options: SpawnOptions = {}): Promise<Result> {
   return new Promise((resolve) => {
-    let stdout = "", stderr = "";
+    let stdout = "",
+      stderr = "";
     const child = spawn(cmd, args, { ...options, stdio: ["ignore", "pipe", "pipe"] });
     child.stdout?.on("data", (d) => (stdout += d));
     child.stderr?.on("data", (d) => (stderr += d));

@@ -10,7 +10,16 @@ export default function knight(canvas) {
     if (Math.abs(x) >= Math.abs(y)) return x >= 0 ? layer - d - y : layer - 5 * d + y;
     return y >= 0 ? layer - 3 * d + x : layer - 7 * d - x;
   };
-  const JUMPS = [[1, 2], [-1, 2], [1, -2], [-1, -2], [2, 1], [-2, 1], [2, -1], [-2, -1]];
+  const JUMPS = [
+    [1, 2],
+    [-1, 2],
+    [1, -2],
+    [-1, -2],
+    [2, 1],
+    [-2, 1],
+    [2, -1],
+    [-2, -1],
+  ];
   const path = [[0, 0]];
   const seen = new Set([num(0, 0)]);
   for (;;) {
@@ -29,10 +38,15 @@ export default function knight(canvas) {
   const trappedOn = num(last[0], last[1]);
   const span = Math.max(...path.map(([x, y]) => Math.max(Math.abs(x), Math.abs(y))));
   const scale = 110 / span;
-  const cx = W / 2, cy = 140;
+  const cx = W / 2,
+    cy = 140;
   const P = ([x, y]) => [cx + x * scale, cy - y * scale];
   // Blue to terracotta to pale gold along the route
-  const stops = [[143, 189, 230], [227, 154, 134], [246, 227, 170]];
+  const stops = [
+    [143, 189, 230],
+    [227, 154, 134],
+    [246, 227, 170],
+  ];
   const colorAt = (f) => {
     const s = f < 0.5 ? 0 : 1;
     const k = f < 0.5 ? f * 2 : (f - 0.5) * 2;

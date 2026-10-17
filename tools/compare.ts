@@ -38,19 +38,20 @@ for (const name of names.sort()) {
   for (const key of Object.keys(A)) {
     if (!B[key]) continue;
     for (const prop of new Set([...Object.keys(A[key]), ...Object.keys(B[key])])) {
-      const va = A[key][prop], vb = B[key][prop];
+      const va = A[key][prop],
+        vb = B[key][prop];
       if (va === vb) continue;
       if (prop === "box") {
         moved++;
         continue;
       }
-      const followsColor = prop.endsWith("-color") && prop.startsWith("border-") &&
-        A[key].color === va && B[key].color === vb;
+      const followsColor =
+        prop.endsWith("-color") && prop.startsWith("border-") && A[key].color === va && B[key].color === vb;
       if (followsColor) continue;
       const leaf = key.split(">").pop()!.replace(/:\d+$/, "");
-      const sig = `${leaf.padEnd(32).slice(0, 32)} ${prop.padEnd(24).slice(0, 24)} ${String(va).slice(0, 44)} -> ${
-        String(vb).slice(0, 44)
-      }`;
+      const sig = `${leaf.padEnd(32).slice(0, 32)} ${prop.padEnd(24).slice(0, 24)} ${String(va).slice(0, 44)} -> ${String(
+        vb,
+      ).slice(0, 44)}`;
       changes.set(sig, (changes.get(sig) ?? 0) + 1);
     }
   }

@@ -32,7 +32,10 @@ export default function mancalaBot(canvas) {
     roundRect(ctx, 12, 56, 336, 158, 40);
     ctx.fill();
     // Stores: bottom player's on the right, top player's on the left
-    [[1, 34], [0, 326]].forEach(([p, x]) => {
+    [
+      [1, 34],
+      [0, 326],
+    ].forEach(([p, x]) => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
       roundRect(ctx, x - 16, 76, 32, 118, 16);
       ctx.fill();
@@ -47,7 +50,9 @@ export default function mancalaBot(canvas) {
       const [x, y] = pos(p);
       const active = p === at;
       ctx.fillStyle = active
-        ? (capture ? "rgba(217, 105, 95, 0.55)" : "rgba(227, 154, 134, 0.4)")
+        ? capture
+          ? "rgba(217, 105, 95, 0.55)"
+          : "rgba(227, 154, 134, 0.4)"
         : "rgba(0, 0, 0, 0.3)";
       ctx.beginPath();
       ctx.arc(x, y, 15, 0, Math.PI * 2);
@@ -101,9 +106,10 @@ export default function mancalaBot(canvas) {
       drawBoard(ctx, g, f ? f.at : null, f ? f.mover : 0, f ? f.hand : 0, f?.capture);
       if (isOver(game) && fi === frames.length - 1) {
         const [s0, s1] = game.stores;
-        const verdict = s0 === s1
-          ? `Draw, ${s0}-${s1}`
-          : `${s0 > s1 ? "4-move" : "1-move"} bot wins ${Math.max(s0, s1)}-${Math.min(s0, s1)}`;
+        const verdict =
+          s0 === s1
+            ? `Draw, ${s0}-${s1}`
+            : `${s0 > s1 ? "4-move" : "1-move"} bot wins ${Math.max(s0, s1)}-${Math.min(s0, s1)}`;
         ctx.fillStyle = "rgba(22, 21, 20, 0.75)";
         roundRect(ctx, 90, 118, 180, 34, 8);
         ctx.fill();

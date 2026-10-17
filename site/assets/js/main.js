@@ -9,12 +9,9 @@
   const ICON = {
     close:
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
-    prev:
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
-    next:
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
-    zoom:
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M20 20l-4-4"/></svg>',
+    prev: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>',
+    next: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+    zoom: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M11 8v6M8 11h6M20 20l-4-4"/></svg>',
   };
 
   function onReady(fn) {
@@ -115,7 +112,7 @@
         a.addEventListener("click", () => {
           setOpen(group, false);
           a.blur();
-        })
+        }),
       );
     });
     document.addEventListener("click", (e) => {
@@ -408,9 +405,9 @@
 
       const subject = `Portfolio enquiry from ${name}`;
       const body = `${message}\n\n${name}\n${email}`;
-      window.location.href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${
-        encodeURIComponent(body)
-      }`;
+      window.location.href = `mailto:${form.dataset.to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+        body,
+      )}`;
 
       const status = form.querySelector(".form-note");
       if (status) status.textContent = "Opening your email app…";
@@ -535,10 +532,13 @@
     const close = () => {
       lb.classList.remove("is-open");
       root.classList.remove("lb-lock");
-      hideTimer = setTimeout(() => {
-        lb.hidden = true;
-        big.removeAttribute("src");
-      }, reduceMotion ? 0 : 200);
+      hideTimer = setTimeout(
+        () => {
+          lb.hidden = true;
+          big.removeAttribute("src");
+        },
+        reduceMotion ? 0 : 200,
+      );
       if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
     };
 
@@ -623,15 +623,17 @@
     // The book's progress bar: six semesters, filled up to this one.
     const sem = PROJECTS[i].sem;
     const bar = sem
-      ? `<span class="sem-bar" data-at="${sem}" role="img" aria-label="Semester ${sem} of 6">${
-        "<i></i>".repeat(6)
-      }</span>`
+      ? `<span class="sem-bar" data-at="${sem}" role="img" aria-label="Semester ${sem} of 6">${"<i></i>".repeat(
+          6,
+        )}</span>`
       : "";
-    pager.innerHTML = `<div class="pp-inner">${
-      link(PROJECTS[i - 1], "prev")
-    }<div class="pp-mid">${bar}<a class="pp-all" href="index.html#architecture">All architecture</a></div>${
-      link(PROJECTS[i + 1], "next")
-    }</div>`;
+    pager.innerHTML = `<div class="pp-inner">${link(
+      PROJECTS[i - 1],
+      "prev",
+    )}<div class="pp-mid">${bar}<a class="pp-all" href="index.html#architecture">All architecture</a></div>${link(
+      PROJECTS[i + 1],
+      "next",
+    )}</div>`;
 
     const footer = document.querySelector(".site-footer, footer");
     if (footer) footer.before(pager);

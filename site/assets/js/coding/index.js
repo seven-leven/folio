@@ -99,13 +99,16 @@ function init() {
 
   // Create visuals shortly before they scroll into view.
   if (!noObserver) {
-    const near = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        near.unobserve(e.target);
-        create(items.find((i) => i.el === e.target));
-      });
-    }, { rootMargin: "600px 0px" });
+    const near = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          near.unobserve(e.target);
+          create(items.find((i) => i.el === e.target));
+        });
+      },
+      { rootMargin: "600px 0px" },
+    );
     items.forEach((it) => near.observe(it.el));
   }
   if (reduceMotion || noObserver) return;

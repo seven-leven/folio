@@ -11,7 +11,9 @@ export default function wind(canvas, D) {
   const WEEK = D.week; // [direction it comes from (degrees), speed m/s]
   const NAMES = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
   const MONTHS = "JFMAMJJASOND";
-  const cx = 128, cy = 136, R = 84;
+  const cx = 128,
+    cy = 136,
+    R = 84;
   const MAX = 107;
   const LOOP = 13; // one year of the arrow, and one pass through all forty roses
   const rad = (deg) => ((deg - 90) * Math.PI) / 180;
@@ -59,10 +61,12 @@ export default function wind(canvas, D) {
       const wk = Math.floor(t * 52) % 52;
       const [from, speed] = WEEK[wk];
       const oa = -Math.PI / 2 + t * Math.PI * 2;
-      const ox = cx + Math.cos(oa) * ORBIT, oy = cy + Math.sin(oa) * ORBIT;
+      const ox = cx + Math.cos(oa) * ORBIT,
+        oy = cy + Math.sin(oa) * ORBIT;
       const to = rad(from + 180);
       const len = 5 + speed * 2.6;
-      const tx = ox + Math.cos(to) * len, ty = oy + Math.sin(to) * len;
+      const tx = ox + Math.cos(to) * len,
+        ty = oy + Math.sin(to) * len;
       ctx.strokeStyle = COL.blue;
       ctx.fillStyle = COL.blue;
       ctx.lineWidth = 2;

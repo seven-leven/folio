@@ -15,12 +15,18 @@ export default function donut(pre) {
   function frame(A, B) {
     out.fill(" ");
     z.fill(0);
-    const cA = Math.cos(A), sA = Math.sin(A), cB = Math.cos(B), sB = Math.sin(B);
+    const cA = Math.cos(A),
+      sA = Math.sin(A),
+      cB = Math.cos(B),
+      sB = Math.sin(B);
     for (let th = 0; th < 6.283; th += 0.07) {
-      const ct = Math.cos(th), st = Math.sin(th);
+      const ct = Math.cos(th),
+        st = Math.sin(th);
       for (let ph = 0; ph < 6.283; ph += 0.02) {
-        const cp = Math.cos(ph), sp = Math.sin(ph);
-        const cx = R2 + R1 * ct, cy = R1 * st;
+        const cp = Math.cos(ph),
+          sp = Math.sin(ph);
+        const cx = R2 + R1 * ct,
+          cy = R1 * st;
         const x = cx * (cB * cp + sA * sB * sp) - cy * cA * sB;
         const y = cx * (sB * cp - sA * cB * sp) + cy * cA * cB;
         const ooz = 1 / (K2 + cA * cx * sp + cy * sA);

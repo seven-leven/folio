@@ -8,10 +8,10 @@ export default function discord(canvas) {
     { name: "fan-art-c", base: 152, color: COL.sand },
   ];
   const rand = rng(3);
-  const items = Array.from(
-    { length: 64 },
-    (_, i) => ({ thread: Math.floor(rand() * 3), id: 100 + i * 3 + Math.floor(rand() * 3) }),
-  );
+  const items = Array.from({ length: 64 }, (_, i) => ({
+    thread: Math.floor(rand() * 3),
+    id: 100 + i * 3 + Math.floor(rand() * 3),
+  }));
   const STEP = 0.9;
   const FLY = 0.7;
   const PERIOD = items.length * STEP;
