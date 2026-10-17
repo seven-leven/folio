@@ -10,13 +10,14 @@ Maldives, and personal projects in illustration and code.
 
 ```
 folio/
-├── site/                      ← source; built into dist/ and published
-│   ├── _partials/             shared navbar.html and footer.html (not published)
-│   ├── _data/projects.json    the architecture projects, in order (not published)
-│   ├── index.html             homepage
-│   ├── sem1.html … sem5.html  architecture studio projects
-│   ├── engineering.html       capstone, wind-load thesis, coastal study
-│   ├── 404.html               served by GitHub Pages for missing paths
+├── src/                       ← pages and components; Astro builds them into dist/
+│   ├── pages/                 one .astro file per page (index, sem1 … sem5, engineering,
+│   │                          the code-*.html entry pages, 404), each built to <name>.html
+│   ├── components/            Navbar, Footer, Model (the 3D viewer)
+│   ├── partials/              the HTML the components render (see "Shared navbar and footer")
+│   ├── lib/partials.ts        fills the partials in for each page
+│   └── data/projects.json     the architecture projects, in order
+├── public/                    ← copied into dist/ as it is
 │   ├── cv.pdf
 │   └── assets/
 │       ├── css/main.css       shared styles (see "Styles" below)
@@ -26,8 +27,9 @@ folio/
 │       ├── data/              JSON data for those animations
 │       ├── img/               favicon, homepage covers, Maldives map
 │       └── projects/<page>/   images for each project page
-├── tools/                     build, checks and helpers (see "Tasks")
-│   └── data/                  scripts that regenerate site/assets/data/
+├── tools/                     checks and helpers (see "Tasks")
+│   └── data/                  scripts that regenerate public/assets/data/
+├── astro.config.ts            base path /folio, file-style addresses, the sitemap
 ├── version.json               major.minor of the site version
 ├── CHANGELOG.md
 ├── package.json               tasks (npm run …) and dependencies
@@ -44,7 +46,7 @@ tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm ru
 
 | Task | What it does |
 |---|---|
-| `npm run dev` | build, watch `site/`, serve at http://localhost:8000/folio/ |
+| `npm run dev` | Astro's dev server at http://localhost:8000/folio/, reloading on every save |
 | `npm run build` | build `dist/` once |
 | `npm run check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
 | `npm run snapshot -- <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
@@ -56,7 +58,8 @@ tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm ru
 | `npm run distdiff -- <a> <b>` | compare two builds file by file (`--html` compares pages after normalising them) |
 | `npm run release` | check, merge dev into main, push, and wait for the deploy |
 
-`npm run lint` and `npm run fmt` (Biome) cover `tools/` and `site/assets/js/`.
+`npm run lint` and `npm run fmt` (Biome) cover `tools/`, `src/**/*.ts`, `astro.config.ts` and
+`public/assets/js/`.
 
 ## Working on the site
 
@@ -80,12 +83,12 @@ changelog` collects the commits since the last entry to start from.
 
 ## Shared navbar and footer
 
-The navbar and footer live once, in `site/_partials/`. Pages include them with
-a comment on its own line:
+The navbar and footer live once, in `src/partials/`, and pages use them through
+components, passing their own file name:
 
-```html
-<!-- @include navbar active="architecture" -->   <!-- highlights Academic › Architecture -->
-<!-- @include footer -->
+```astro
+<Navbar page="sem1.html" active="architecture" />   <!-- highlights Academic › Architecture -->
+<Footer page="sem1.html" />
 ```
 
 `active` takes a nav link name (`home`, `architecture`, `engineering`,
@@ -95,13 +98,17 @@ Personal: illustrations, coding) also highlight the group. On the homepage the
 navbar links to its own sections; on other pages it links to `index.html#…`.
 
 Partials can use placeholders: `{{version}}`, and `{{projectLinks}}` (the
-footer's list of architecture projects, from `site/_data/projects.json`). The
+footer's list of architecture projects, from `src/data/projects.json`). The
 previous/next links on project pages read that footer list. The build also
-writes `sitemap.xml`, with each page's last-changed date from git.
+writes `sitemap.xml`, with each page's last-changed date from git (`astro.config.ts`).
 
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
-it at any URL. The build fails on an unknown partial, an unknown `active` name,
-an unfilled placeholder, or an include that isn't alone on its line.
+it at any URL. The build fails on an unknown `active` name or an unfilled
+placeholder.
+
+Pages are the site's original HTML in `.astro` files: scripts carry `is:inline`
+so Astro leaves them alone, and a `{` or `}` in text is written `&#123;` or `&#125;`
+(Astro reads braces as code).
 
 ## The homepage
 
@@ -113,7 +120,7 @@ of projects per atoll) and **03 Personal** (Illustrations, Coding). Old anchors
 The Professional map counts projects per atoll from the work project register.
 `tools/data/professional.py` writes the counts, the Greater Malé breakdown (by
 ward and Hulhumalé phase) and the stats into `index.html`; see
-`tools/data/README.md`. The base map, `site/assets/img/maldives-map.svg`, is
+`tools/data/README.md`. The base map, `public/assets/img/maldives-map.svg`, is
 [Maldives location map](https://commons.wikimedia.org/wiki/File:Maldives_location_map.svg)
 by Ziansh (Wikimedia Commons, CC BY-SA 3.0), credited under the map on the page.
 
@@ -125,11 +132,11 @@ first and split by `tl-chapter` headings, inside `<details class="code-more">`
 order, and update the count in its summary. Each entry's animation is a
 `<canvas data-vis="name">`:
 
-1. Write `site/assets/js/coding/visuals/<name>.js`, whose default export is
+1. Write `public/assets/js/coding/visuals/<name>.js`, whose default export is
    `factory(canvas, data) => { draw(t), still }` (see the others, and the
    helpers in `core.js`).
-2. Register it in `site/assets/js/coding/index.js`.
-3. If it needs data, export `data` (a URL to `site/assets/data/<name>.json`) and
+2. Register it in `public/assets/js/coding/index.js`.
+3. If it needs data, export `data` (a URL to `public/assets/data/<name>.json`) and
    add a script in `tools/data/` that produces it; see `tools/data/README.md`.
 
 Animations are only created near the screen, only animate while on screen, and
@@ -159,15 +166,15 @@ nothing else: no colour values, font names or pixel radii.
 
 ## Adding a project page
 
-1. Put its images in `site/assets/projects/<name>/`; `npm run images` makes
+1. Put its images in `public/assets/projects/<name>/`; `npm run images` makes
    them WebP at most 2400 px, and the check rejects anything else.
-2. Copy `sem3.html`, which is built from the project page kit alone; give it a
+2. Copy `src/pages/sem3.astro`, which is built from the project page kit alone; give it a
    `<title>`, meta description, canonical URL and `og:image`, a body class
    (`project-<name>`), and map that class to its semester colour at the top of
    `main.css`. DESIGN.md shows the kit's markup.
-3. Put anything particular to the page in `site/assets/css/pages/<name>.css`, and
-   the semester's bird in `site/assets/img/birds/semN.webp`.
-4. Add it to `site/_data/projects.json` (footer, previous/next links and the
+3. Put anything particular to the page in `public/assets/css/pages/<name>.css`, and
+   the semester's bird in `public/assets/img/birds/semN.webp`.
+4. Add it to `src/data/projects.json` (footer, previous/next links and the
    sitemap follow) and give it a row on the homepage; the check fails if the
    row is missing.
 5. Run `npm run check`.

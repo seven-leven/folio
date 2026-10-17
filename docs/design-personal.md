@@ -70,7 +70,7 @@ Two accents, one per subject, never mixed in one block:
 - **Drawings stay on white.** A drawing is never placed straight on ink or tinted to
   suit it; it sits on a white card.
 - **Animation palette:** the coding animations draw with five colours only, defined in
-  `site/assets/js/coding/core.js`: paper `#f6f4ef`, accent `#e39a86`, blue `#8fbde6`,
+  `public/assets/js/coding/core.js`: paper `#f6f4ef`, accent `#e39a86`, blue `#8fbde6`,
   red `#d9695f`, sand `#d8bd8c`. Red is for "wrong" or "before"; sand is a neutral third.
 
 ## 03. Illustration
@@ -173,11 +173,11 @@ scrolls into view.
 |---|---|
 | `DESIGN.md` | The foundations this guide builds on |
 | `docs/design-personal.md` | These rules |
-| `site/assets/css/main.css` | The dark roles (top of the file) and the Personal band's components (section 7) |
-| `site/assets/js/coding/core.js` | The animation palette and fonts |
-| `site/assets/js/coding/visuals/` | One file per animation |
+| `public/assets/css/main.css` | The dark roles (top of the file) and the Personal band's components (section 7) |
+| `public/assets/js/coding/core.js` | The animation palette and fonts |
+| `public/assets/js/coding/visuals/` | One file per animation |
 | `seven-leven/bird_dash` | The collection itself, with its own guide |
-| `site/sem1.html` | The page template an entry page starts from |
+| `src/pages/sem1.astro` | The page template an entry page starts from |
 
 ### Not yet in line with this document
 

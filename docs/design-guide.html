@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital@1&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Thaana:wght@500&display=swap">
-    <link rel="stylesheet" href="../site/assets/css/main.css">
+    <link rel="stylesheet" href="../public/assets/css/main.css">
     <style>
       body {
         width: 1440px;
@@ -1194,7 +1194,7 @@
           <div class="bar"><i></i><i></i><i></i><i></i><i></i></div>
           <div class="hero">
             <div class="txt">
-              <img src="../site/assets/img/birds/sem3.webp" alt="">
+              <img src="../public/assets/img/birds/sem3.webp" alt="">
               <span class="mk" style="left: -34px; top: -6px">1</span>
               <div class="k">Semester 3 · Design III · 2025</div>
               <span class="mk" style="left: -34px; top: 34px">2</span>
@@ -1248,18 +1248,18 @@
         <p class="lab" style="font-size: 14px; text-align: right">Index · memory · not decoration</p>
       </div>
       <div class="birds">
-        <div class="bird" data-sem="1"><div class="pic"><img src="../site/assets/img/birds/sem1.webp" alt=""></div><b>I · Lesser Whistling-Duck</b><span>pen</span></div>
-        <div class="bird" data-sem="2"><div class="pic"><img src="../site/assets/img/birds/sem2.webp" alt=""></div><b>II · Grey waterbird</b><span>watercolour</span></div>
-        <div class="bird" data-sem="3"><div class="pic"><img src="../site/assets/img/birds/sem3.webp" alt=""></div><b>III · Flamingo</b><span>digital</span></div>
-        <div class="bird" data-sem="4"><div class="pic"><img src="../site/assets/img/birds/sem4.webp" alt=""></div><b>IV · House Crow</b><span>ink wash</span></div>
-        <div class="bird" data-sem="5"><div class="pic"><img src="../site/assets/img/birds/sem5.webp" alt=""></div><b>V · Grey Heron</b><span>digital</span></div>
+        <div class="bird" data-sem="1"><div class="pic"><img src="../public/assets/img/birds/sem1.webp" alt=""></div><b>I · Lesser Whistling-Duck</b><span>pen</span></div>
+        <div class="bird" data-sem="2"><div class="pic"><img src="../public/assets/img/birds/sem2.webp" alt=""></div><b>II · Grey waterbird</b><span>watercolour</span></div>
+        <div class="bird" data-sem="3"><div class="pic"><img src="../public/assets/img/birds/sem3.webp" alt=""></div><b>III · Flamingo</b><span>digital</span></div>
+        <div class="bird" data-sem="4"><div class="pic"><img src="../public/assets/img/birds/sem4.webp" alt=""></div><b>IV · House Crow</b><span>ink wash</span></div>
+        <div class="bird" data-sem="5"><div class="pic"><img src="../public/assets/img/birds/sem5.webp" alt=""></div><b>V · Grey Heron</b><span>digital</span></div>
         <div class="bird" data-sem="6"><div class="pic muted">to be chosen</div><b>VI</b><span>with the final project</span></div>
       </div>
       <div class="cols" style="grid-template-columns: 1fr 1fr 0.8fr 0.8fr; gap: 32px">
         <div data-sem="3">
           <h4>Site · behind the title, 26%</h4>
           <div class="mock sitebird">
-            <img src="../site/assets/img/birds/sem3.webp" alt="">
+            <img src="../public/assets/img/birds/sem3.webp" alt="">
             <div class="lab" style="color: var(--sem-text); font-size: 9px">Semester 3 · 2025</div>
             <div class="t">Urban <em>Acupuncture</em></div>
             <span class="sem-bar" data-at="3" style="width: 96px; height: 6px"><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -1275,7 +1275,7 @@
               <span class="sem-bar" data-at="3" style="width: 86px; height: 6px"><i></i><i></i><i></i><i></i><i></i><i></i></span>
             </div>
             <div>
-              <img src="../site/assets/img/birds/sem3.webp" alt="">
+              <img src="../public/assets/img/birds/sem3.webp" alt="">
               <div class="tabs">
                 <i style="--c: var(--sem-1)"></i><i style="--c: var(--sem-2)"></i><i class="on" style="--c: var(--sem-3)"></i>
                 <i style="--c: var(--sem-4)"></i><i style="--c: var(--sem-5)"></i><i style="--c: var(--sem-6)"></i>
@@ -1387,10 +1387,10 @@
       <div class="head"><span class="n">→</span><h2>Source of truth</h2><span class="say">This sheet is the map; these are the territory</span></div>
       <div class="src">
         <div><code>DESIGN.md</code><span>The rules, in full</span></div>
-        <div><code>site/assets/css/main.css</code><span>Every value and component</span></div>
-        <div><code>site/_partials/</code><span>The shell: navbar, footer, model viewer</span></div>
-        <div><code>site/sem1.html</code><span>The project page template</span></div>
-        <div><code>site/assets/img/birds/</code><span>The birds</span></div>
+        <div><code>public/assets/css/main.css</code><span>Every value and component</span></div>
+        <div><code>src/components/</code><span>The shell: navbar, footer, model viewer</span></div>
+        <div><code>src/pages/sem1.astro</code><span>The project page template</span></div>
+        <div><code>public/assets/img/birds/</code><span>The birds</span></div>
       </div>
       <p class="muted" style="margin-top: 22px">A page stylesheet that contains a hex colour, a font name or a pixel radius is a bug. This sheet reads its values from <code>main.css</code>; redraw it with <code>npm run guide</code>.</p>
     </section>

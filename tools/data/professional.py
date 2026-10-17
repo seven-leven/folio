@@ -1,5 +1,5 @@
 """Professional work map: counts projects per atoll from the project register and writes them
-into the homepage map, legend and stats (site/index.html).
+into the homepage map, legend and stats (src/pages/index.astro).
 
 Usage: python tools/data/professional.py "<Project Register (standardised).xlsx>"
 
@@ -20,7 +20,7 @@ from pathlib import Path
 import openpyxl
 
 ROOT = Path(__file__).resolve().parents[2]
-INDEX = ROOT / "site" / "index.html"
+INDEX = ROOT / "src" / "pages" / "index.astro"
 PLACES = json.loads((Path(__file__).parent / "professional-places.json").read_text(encoding="utf-8"))
 
 ATOLLS = ["Haa Alif", "Haa Dhaalu", "Shaviyani", "Noonu", "Raa", "Lhaviyani", "Baa", "Kaafu", "Malé",
@@ -82,7 +82,7 @@ total = len(mine)
 placed_total = total - len(unplaced)
 atolls_with_work = sum(1 for a in ATOLLS if per_atoll[a])
 
-# --- Write into index.html --------------------------------------------------------------
+# --- Write into index.astro -------------------------------------------------------------
 html = INDEX.read_text(encoding="utf-8")
 fmt = lambda n: str(n) if n else "–"
 for atoll in ATOLLS:

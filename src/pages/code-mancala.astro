@@ -1,3 +1,8 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script>document.documentElement.classList.add("js");</script>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
@@ -23,7 +28,7 @@
     <link rel="stylesheet" href="assets/css/pages/mancala.css">
   </head>
   <body class="project-page page-ink pk project-mancala">
-    <!-- @include navbar active="coding" -->
+    <Navbar page="code-mancala.html" active="coding" />
 
     <!--
       A Coding entry page (docs/design-personal.md, section 05): the itch, what it does,
@@ -143,15 +148,15 @@
             It follows its own chains of free turns as deep as they go and keeps the one that ends with the fullest
             store. Today, in TypeScript, it is nine lines:
           </p>
-          <pre class="pk-code"><b>chain</b>(state, move, depth, me) {
+          <pre class="pk-code"><b>chain</b>(state, move, depth, me) &#123;
   const r = playTurn(state, move);
   if (!r.freeTurn || depth + 1 &gt;= maxDepth) return score(r.state, me);
   let best = score(r.state, me);
-  for (const next of validMoves(r.state)) {
+  for (const next of validMoves(r.state)) &#123;
     best = Math.max(best, <b>chain</b>(r.state, next, depth + 1, me));
-  }
+  &#125;
   return best;
-}</pre>
+&#125;</pre>
           <p>
             It never thinks about the opponent's reply, and it is still the second-strongest bot in the game.
           </p>
@@ -249,9 +254,9 @@
       </div>
     </main>
 
-    <!-- @include footer -->
+    <Footer page="code-mancala.html" />
 
-    <script src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/coding/index.js"></script>
+    <script src="assets/js/main.js" is:inline></script>
+    <script type="module" src="assets/js/coding/index.js" is:inline></script>
   </body>
 </html>

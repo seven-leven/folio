@@ -1,3 +1,8 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,14 +19,14 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script>document.documentElement.classList.add("js");</script>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
     <link rel="stylesheet" href="assets/css/main.css">
   </head>
   <body class="project-page page-ink pk">
-    <!-- @include navbar active="coding" -->
+    <Navbar page="code-wildlife.html" active="coding" />
 
     <!--
       Three parts, nine versions. Each version has a rail (what was new to me, what was
@@ -366,13 +371,13 @@
                 </p>
                 <details class="pk-more">
                   <summary>More from this stretch</summary>
-                  <pre class="pk-code">{
+                  <pre class="pk-code">&#123;
   <b>"id"</b>: "birds",
   <b>"label"</b>: "Birds",
   <b>"groupLabel"</b>: "Family",
   <b>"itemLabel"</b>: "bird",
-  <b>"links"</b>: [ { "label": "eBird", "url": "…?q={{common}}+ebird" } ]
-}</pre>
+  <b>"links"</b>: [ &#123; "label": "eBird", "url": "…?q=&#123;&#123;common&#125;&#125;+ebird" &#125; ]
+&#125;</pre>
                   <ul class="pk-list">
                     <li>A collection's entry, shortened, as it is today.</li>
                     <li>The Sand Dollar was drawn the day shells went in. It is still the latest drawing.</li>
@@ -854,9 +859,9 @@
       </div>
     </main>
 
-    <!-- @include footer -->
+    <Footer page="code-wildlife.html" />
 
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/arch-evolution.js"></script>
+    <script src="assets/js/main.js" is:inline></script>
+    <script src="assets/js/arch-evolution.js" is:inline></script>
   </body>
 </html>

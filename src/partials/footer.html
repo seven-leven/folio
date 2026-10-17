@@ -1,7 +1,7 @@
 <!--
-  Shared footer, stamped into each page by tools/build.ts.
-  Use in a page: an HTML comment reading  @include footer
-  The Academic project links come from site/_data/projects.json ({{projectLinks}});
+  Shared footer, rendered by src/components/Footer.astro (src/lib/partials.ts).
+  Use in a page: <Footer page="sem1.html" />
+  The Academic project links come from src/data/projects.json ({{projectLinks}});
   the previous/next links on project pages read them from here.
 -->
 <footer class="site-footer">

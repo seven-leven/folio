@@ -9,8 +9,9 @@ desktop.ini
 .claude/
 *.swp
 
-# Build output (CI rebuilds it; never commit)
+# Build output (CI rebuilds it; never commit), and Astro's generated types
 dist/
+.astro/
 
 # Before/after page captures from `npm run snapshot`
 .snapshots/
