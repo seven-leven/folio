@@ -4,17 +4,17 @@
  * The sheets read their colours and sizes from site/assets/css/main.css, so run
  * this after changing a token.
  *
- * Run: deno task guide
+ * Run: npm run guide
  */
 import { openBrowser } from "./browser.ts";
-import { fromFileUrl } from "@std/path";
+import { fileURLToPath } from "node:url";
 
 const SHEETS = ["design-guide", "design-guide-personal"];
 
 const { browser, close } = await openBrowser(8132);
 try {
   for (const name of SHEETS) {
-    const out = fromFileUrl(new URL(`../docs/${name}.png`, import.meta.url));
+    const out = fileURLToPath(new URL(`../docs/${name}.png`, import.meta.url));
     const page = await browser.newPage();
     await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 2 });
     await page.goto(new URL(`../docs/${name}.html`, import.meta.url).href, { waitUntil: "networkidle0" });

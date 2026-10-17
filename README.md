@@ -30,7 +30,8 @@ folio/
 │   └── data/                  scripts that regenerate site/assets/data/
 ├── version.json               major.minor of the site version
 ├── CHANGELOG.md
-└── deno.json                  tasks, formatting and lint settings
+├── package.json               tasks (npm run …) and dependencies
+└── biome.json                 formatting and lint settings
 ```
 
 Page URLs (`/folio/sem1.html` etc.) are stable. `dist/` is build output and is
@@ -38,30 +39,31 @@ never committed.
 
 ## Tasks
 
-Requires [Deno](https://deno.com) 2.x. The browser-based tasks need Chrome
-(or set `CHROME_PATH`).
+Requires [Node.js](https://nodejs.org) 24 (see `.nvmrc`); run `npm install` once. The browser-based
+tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm run snapshot -- before`.
 
 | Task | What it does |
 |---|---|
-| `deno task dev` | build, watch `site/`, serve at http://localhost:8000/folio/ |
-| `deno task build` | build `dist/` once |
-| `deno task check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
-| `deno task snapshot <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
-| `deno task compare <a> <b>` | diff two snapshots: take one before a change and one after |
-| `deno task images <path>…` | convert images to WebP, at most 2400 px on the long side |
-| `deno task links` | check every external link on the site |
-| `deno task version` | print the current version |
-| `deno task changelog` | add commits since the last changelog edit under _Unreleased_ |
-| `deno task release` | check, merge dev into main, push, and wait for the deploy |
+| `npm run dev` | build, watch `site/`, serve at http://localhost:8000/folio/ |
+| `npm run build` | build `dist/` once |
+| `npm run check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
+| `npm run snapshot -- <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
+| `npm run compare -- <a> <b>` | diff two snapshots: take one before a change and one after |
+| `npm run images -- <path>…` | convert images to WebP, at most 2400 px on the long side |
+| `npm run links` | check every external link on the site |
+| `npm run version` | print the current version |
+| `npm run changelog` | add commits since the last changelog edit under _Unreleased_ |
+| `npm run distdiff -- <a> <b>` | compare two builds file by file (`--html` compares pages after normalising them) |
+| `npm run release` | check, merge dev into main, push, and wait for the deploy |
 
-`deno fmt` and `deno lint` cover `tools/` and `site/assets/js/`.
+`npm run lint` and `npm run fmt` (Biome) cover `tools/` and `site/assets/js/`.
 
 ## Working on the site
 
-1. Work on `dev`. Before a big visual change, `deno task snapshot before`; afterwards,
-   `deno task snapshot after` and `deno task compare before after`.
+1. Work on `dev`. Before a big visual change, `npm run snapshot -- before`; afterwards,
+   `npm run snapshot -- after` and `npm run compare -- before after`.
 2. Commit. Every push runs formatting, lint and the check in CI.
-3. `deno task release` when it's ready. CI builds `main`, checks it again and
+3. `npm run release` when it's ready. CI builds `main`, checks it again and
    hands `dist/` to GitHub Pages as an artifact (Pages source: GitHub Actions).
    Nothing is committed to a branch for the site.
 
@@ -73,7 +75,7 @@ breaks.
 The version at the bottom of every page is `vMAJOR.MINOR.PATCH`. Major and
 minor are set by hand in `version.json`; the patch is the commit count, worked
 out at build time (CI fetches the full history for this). For a notable
-release, bump the minor and add a section to `CHANGELOG.md`; `deno task
+release, bump the minor and add a section to `CHANGELOG.md`; `npm run
 changelog` collects the commits since the last entry to start from.
 
 ## Shared navbar and footer
@@ -149,7 +151,7 @@ numbered contents list:
 - **The project page kit (`.pk`)**: the shared hero, chapter nav, numbered chapters,
   figures, grids, tiles and quote. Semesters 1 to 3 are built from it alone.
 - **Shared devices**: the six-segment progress bar (`.sem-bar`) and the semester's bird
-  behind the page title (`.sem-bird`, from `assets/img/birds/`). `deno task guide` redraws
+  behind the page title (`.sem-bird`, from `assets/img/birds/`). `npm run guide` redraws
   the one-sheet guide, `docs/design-guide.png`.
 
 Page stylesheets in `assets/css/pages/` hold layout particular to that page and
@@ -157,7 +159,7 @@ nothing else: no colour values, font names or pixel radii.
 
 ## Adding a project page
 
-1. Put its images in `site/assets/projects/<name>/`; `deno task images` makes
+1. Put its images in `site/assets/projects/<name>/`; `npm run images` makes
    them WebP at most 2400 px, and the check rejects anything else.
 2. Copy `sem3.html`, which is built from the project page kit alone; give it a
    `<title>`, meta description, canonical URL and `og:image`, a body class
@@ -168,7 +170,7 @@ nothing else: no colour values, font names or pixel radii.
 4. Add it to `site/_data/projects.json` (footer, previous/next links and the
    sitemap follow) and give it a row on the homepage; the check fails if the
    row is missing.
-5. Run `deno task check`.
+5. Run `npm run check`.
 
 ## What `main.js` does
 

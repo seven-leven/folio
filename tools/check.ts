@@ -1,6 +1,6 @@
 /**
- * Static site checker for the built site in dist/ (run `deno task build` first;
- * `deno task check` does that automatically).
+ * Static site checker for the built site in dist/ (run `npm run build` first;
+ * `npm run check` does that automatically).
  *
  * Errors (fail CI): broken local links/images/scripts/styles, broken JS module
  * imports (bare ones through the pages' import maps) and data URLs, missing #anchors, <img> without alt, pages missing
@@ -11,8 +11,10 @@
  * nothing references.
  * Also lists placeholders still on the site ("xx", "Coming soon", "In progress").
  *
- * Run: deno task check
+ * Run: npm run check
  */
+import { readdir, readFile, stat } from "node:fs/promises";
+
 
 const SITE = new URL("../dist/", import.meta.url);
 const PROJECTS = new URL("../site/_data/projects.json", import.meta.url);
@@ -26,9 +28,9 @@ const referenced = new Set<string>();
 
 async function listFiles(dir: URL, prefix = ""): Promise<string[]> {
   const out: string[] = [];
-  for await (const entry of Deno.readDir(dir)) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
     const rel = prefix + entry.name;
-    if (entry.isDirectory) out.push(...await listFiles(new URL(entry.name + "/", dir), rel + "/"));
+    if (entry.isDirectory()) out.push(...await listFiles(new URL(entry.name + "/", dir), rel + "/"));
     else out.push(rel);
   }
   return out;
@@ -41,7 +43,7 @@ const pageIds = new Map<string, Set<string>>();
 const pageText = new Map<string, string>();
 
 for (const page of pages) {
-  const html = await Deno.readTextFile(new URL(page, SITE));
+  const html = await readFile(new URL(page, SITE), "utf8");
   pageText.set(page, html);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
   const seen = new Set<string>();
@@ -107,7 +109,7 @@ for (const [page, html] of pageText) {
 
 // CSS url(...) references
 for (const css of files.filter((f) => f.endsWith(".css"))) {
-  const text = await Deno.readTextFile(new URL(css, SITE));
+  const text = await readFile(new URL(css, SITE), "utf8");
   for (const m of text.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
     if (m[1].startsWith("#")) continue; // in-document reference, e.g. an SVG marker
     const target = resolveLocal(m[1], css);
@@ -133,7 +135,7 @@ for (const [page, html] of pageText) {
 
 // JS module imports and module-relative URLs (new URL("…", import.meta.url))
 for (const js of files.filter((f) => f.endsWith(".js"))) {
-  const text = await Deno.readTextFile(new URL(js, SITE));
+  const text = await readFile(new URL(js, SITE), "utf8");
   // Vendored libraries mention paths in their docs; only their top-level imports count
   const specs = js.startsWith("assets/vendor/")
     ? [...text.matchAll(/^(?:import|export)\b[^;]*?\bfrom\s*["']([^"']+)["']/gm)].map((m) => m[1])
@@ -178,9 +180,9 @@ function webpSize(bytes: Uint8Array): [number, number] | null {
 }
 for (const f of files.filter((f) => f.startsWith("assets/"))) {
   if (/\.(png|jpe?g|gif|bmp|tiff?)$/i.test(f)) {
-    errors.push(`${f}: raster images must be WebP (run \`deno task images\`)`);
+    errors.push(`${f}: raster images must be WebP (run \`npm run images\`)`);
   } else if (f.endsWith(".webp")) {
-    const size = webpSize(await Deno.readFile(new URL(f, SITE)));
+    const size = webpSize(await readFile(new URL(f, SITE)));
     if (size && Math.max(...size) > MAX_IMAGE_SIDE) {
       warnings.push(`${f} is ${size[0]}×${size[1]} px (limit ${MAX_IMAGE_SIDE} on the long side)`);
     }
@@ -188,7 +190,7 @@ for (const f of files.filter((f) => f.startsWith("assets/"))) {
 }
 
 // Projects: every entry needs its page and a homepage row
-const projects: { page: string; title: string }[] = JSON.parse(await Deno.readTextFile(PROJECTS));
+const projects: { page: string; title: string }[] = JSON.parse(await readFile(PROJECTS, "utf8"));
 const home = pageText.get("index.html") ?? "";
 for (const p of projects) {
   if (!fileSet.has(p.page)) errors.push(`projects.json: "${p.title}" has no page ${p.page}`);
@@ -199,7 +201,7 @@ for (const p of projects) {
 
 // Warnings: size budget and unreferenced assets
 for (const f of files) {
-  const { size } = await Deno.stat(new URL(f, SITE));
+  const { size } = await stat(new URL(f, SITE));
   if (f.startsWith("assets/") && size > SIZE_BUDGET) {
     warnings.push(`${f} is ${(size / 1048576).toFixed(1)} MB (budget ${SIZE_BUDGET / 1048576} MB)`);
   }
@@ -231,6 +233,6 @@ for (const w of warnings) console.log(`  warn  ${w}`);
 for (const e of errors) console.log(`  ERROR ${e}`);
 if (errors.length) {
   console.log(`\n${errors.length} error(s).`);
-  Deno.exit(1);
+  process.exit(1);
 }
 console.log(`OK${warnings.length ? ` (${warnings.length} warning(s))` : ""}.`);

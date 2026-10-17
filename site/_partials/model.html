@@ -3,7 +3,7 @@
   Use it inside the page's own section, under its own heading: an HTML comment reading  @include model
   The model file, poster, alt text, caption and "clay" (start as a white card model) come from the page's "model" entry in site/_data/projects.json,
   and the download sizes are measured at build time. Make the model and poster with
-  deno task model semN path/to/model.skp (or .3dm); see tools/models/README.md.
+  npm run model -- semN path/to/model.skp (or .3dm); see tools/models/README.md.
 -->
 <figure class="model-viewer" data-model-viewer data-label="{{modelLabel}}">
   <div class="model-viewer__stage">

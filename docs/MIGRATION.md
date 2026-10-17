@@ -124,8 +124,8 @@ doesn't exist yet fails the build unless `FOLIO_LENIENT=1` is set (what `npm run
 
 | # | Pull request | State |
 |---|---|---|
-| 1 | Migration plan | |
-| 2 | Tools on Node | |
+| 1 | Migration plan | Merged 17 Oct (#26) |
+| 2 | Tools on Node | This pull request |
 | 3 | Format with Biome | |
 | 4 | Build with Astro | |
 | 5 | Astro components | |

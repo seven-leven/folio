@@ -3,8 +3,9 @@
  * "Unreleased" section, as "- YYYY-MM-DD | subject", ready to tidy up.
  * Commits already listed are skipped, so it's safe to run more than once.
  *
- * Run: deno task changelog
+ * Run: npm run changelog
  */
+import { readFile, writeFile } from "node:fs/promises";
 import { git } from "./version.ts";
 
 const FILE = new URL("../CHANGELOG.md", import.meta.url);
@@ -14,10 +15,10 @@ const range = last ? `${last}..HEAD` : "HEAD";
 const log = await git("log", "--reverse", "--no-merges", "--format=%cs|%s", range);
 if (log === null) {
   console.error("Couldn't read the git history.");
-  Deno.exit(1);
+  process.exit(1);
 }
 
-let text = await Deno.readTextFile(FILE);
+let text = await readFile(FILE, "utf8");
 const entries = log
   .split("\n")
   .filter(Boolean)
@@ -29,7 +30,7 @@ const entries = log
 
 if (!entries.length) {
   console.log("Nothing new to add.");
-  Deno.exit(0);
+  process.exit(0);
 }
 
 const HEADING = "## Unreleased";
@@ -40,5 +41,5 @@ if (!text.includes(HEADING)) {
 }
 text = text.replace(`${HEADING}\n\n`, `${HEADING}\n\n${entries.join("\n")}\n`);
 
-await Deno.writeTextFile(FILE, text);
+await writeFile(FILE, text);
 console.log(`Added ${entries.length} commit(s) under "${HEADING}". Tidy them up, then commit.`);

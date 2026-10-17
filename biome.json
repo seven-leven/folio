@@ -1,0 +1,39 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": [
+      "tools/**/*.ts",
+      "site/assets/js/**/*.js"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "semicolons": "always"
+    }
+  },
+  "linter": {
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useTemplate": "off",
+        "noNonNullAssertion": "off",
+        "useExponentiationOperator": "off"
+      },
+      "suspicious": {
+        "useIterableCallbackReturn": "off",
+        "noAssignInExpressions": "off",
+        "noImplicitAnyLet": "off",
+        "noRedundantUseStrict": "off"
+      }
+    }
+  },
+  "assist": {
+    "enabled": false
+  }
+}
