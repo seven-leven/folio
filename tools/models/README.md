@@ -27,7 +27,7 @@ Visitors can switch it either way with the Clay button.
 </section>
 ```
 
-The `Model` component renders `src/partials/model.html`: the viewer, its poster, the download link with the model's size, and
+The `Model` component (`src/components/Model.astro`) renders the viewer, its poster, the download link with the model's size, and
 the three.js import map.
 
 **3. Make the model and its poster** from the SketchUp or Rhino file:

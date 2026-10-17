@@ -13,9 +13,8 @@ folio/
 ├── src/                       ← pages and components; Astro builds them into dist/
 │   ├── pages/                 one .astro file per page (index, sem1 … sem5, engineering,
 │   │                          the code-*.html entry pages, 404), each built to <name>.html
-│   ├── components/            Navbar, Footer, Model (the 3D viewer)
-│   ├── partials/              the HTML the components render (see "Shared navbar and footer")
-│   ├── lib/partials.ts        fills the partials in for each page
+│   ├── components/            Navbar, Footer, Model (the 3D viewer); see "Shared navbar and footer"
+│   ├── lib/site.ts            what they read at build time: projects, version, model sizes
 │   └── data/projects.json     the architecture projects, in order
 ├── public/                    ← copied into dist/ as it is
 │   ├── cv.pdf
@@ -83,12 +82,13 @@ changelog` collects the commits since the last entry to start from.
 
 ## Shared navbar and footer
 
-The navbar and footer live once, in `src/partials/`, and pages use them through
-components, passing their own file name:
+The navbar, footer and 3D model viewer are Astro components in `src/components/`.
+A page passes its own file name to the ones that need it:
 
 ```astro
 <Navbar page="sem1.html" active="architecture" />   <!-- highlights Academic › Architecture -->
-<Footer page="sem1.html" />
+<Model page="sem1.html" />                          <!-- the page's "model" from projects.json -->
+<Footer />
 ```
 
 `active` takes a nav link name (`home`, `architecture`, `engineering`,
@@ -97,14 +97,14 @@ off. Links inside a dropdown group (Academic: architecture, engineering;
 Personal: illustrations, coding) also highlight the group. On the homepage the
 navbar links to its own sections; on other pages it links to `index.html#…`.
 
-Partials can use placeholders: `{{version}}`, and `{{projectLinks}}` (the
-footer's list of architecture projects, from `src/data/projects.json`). The
-previous/next links on project pages read that footer list. The build also
-writes `sitemap.xml`, with each page's last-changed date from git (`astro.config.ts`).
+The footer shows the site version and lists the architecture projects from
+`src/data/projects.json`; the previous/next links on project pages read that list.
+The build also writes `sitemap.xml`, with each page's last-changed date from git
+(`astro.config.ts`).
 
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
-it at any URL. The build fails on an unknown `active` name or an unfilled
-placeholder.
+it at any URL. The build fails on an unknown `active` name, a `<Model>` on a page
+without a "model" entry, or a model file that isn't there yet.
 
 Pages are the site's original HTML in `.astro` files: scripts carry `is:inline`
 so Astro leaves them alone, and a `{` or `}` in text is written `&#123;` or `&#125;`

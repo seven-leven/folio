@@ -1,13 +1,51 @@
 ---
-// The shared footer, from src/partials/footer.html (see src/lib/partials.ts).
-import { renderPartial } from "../lib/partials.ts";
+/**
+ * The shared footer. Its Academic list is the project list (src/data/projects.json), which the
+ * previous/next links on project pages read (public/assets/js/main.js). The version links to the
+ * CHANGELOG.
+ */
+import { projects, versionLabel } from "../lib/site.ts";
 
-interface Props {
-  /** The page's file name in the built site, e.g. "sem1.html" */
-  page: string;
-}
-const { page } = Astro.props;
-const html = await renderPartial("footer", page);
+const list = await projects();
+const version = await versionLabel();
+// The project links keep a line break between them, as the footer always had: it is the space they wrap at
 ---
 
-<Fragment set:html={html} />
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <a class="site-footer__name" href="index.html">Gaahis Yaugoob</a>
+      <p class="site-footer__role">Architectural Designer &amp; Civil Engineer</p>
+    </div>
+    <div>
+      <p class="site-footer__heading">Academic</p>
+      <nav class="site-footer__links" aria-label="Academic work">
+        <a href="engineering.html">Engineering work</a>
+        {list.map((p, i) => <>{i > 0 && "\n        "}<a href={p.page} data-label={p.label} data-sem={p.semester}>{p.title}</a></>)}
+      </nav>
+    </div>
+    <div>
+      <p class="site-footer__heading">More</p>
+      <nav class="site-footer__links" aria-label="More work">
+        <a href="index.html#professional">Professional work</a>
+        <a href="index.html#illustrations">Illustrations</a>
+        <a href="index.html#coding">Coding</a>
+      </nav>
+    </div>
+    <div>
+      <p class="site-footer__heading">Contact</p>
+      <div class="site-footer__links">
+        <a href="mailto:s069483@student.mnu.edu.mv">s069483@student.mnu.edu.mv</a>
+        <a href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">Process journal on Tumblr</a>
+        <a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a>
+      </div>
+    </div>
+  </div>
+  <div class="container site-footer__bottom">
+    <p class="site-footer__copy">
+      © <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.
+      <a class="site-footer__version" href="https://github.com/seven-leven/folio/blob/main/CHANGELOG.md" title="What changed in each version">{version}</a>
+    </p>
+    <a class="site-footer__top" href="#">Back to top ↑</a>
+  </div>
+</footer>
