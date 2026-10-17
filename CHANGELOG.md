@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- The navbar, footer and 3D model viewer are written as Astro components (`src/components/`), replacing the HTML partials and their `{{placeholders}}`. Pages are unchanged. Step 5 of `docs/MIGRATION.md`, the last one
 - Astro builds the site: each page is a `.astro` file in `src/pages/`, the navbar, footer and 3D viewer are components, static files are in `public/`, and `npm run dev` is Astro's dev server. Every page is the same as before (checked after normalising the HTML, and with before/after snapshots), and every address is unchanged. Step 4 of `docs/MIGRATION.md`
 - Tooling: `tools/` and `site/assets/js/` formatted with Biome, and CI checks the formatting again (as `deno fmt --check` did). Whitespace and line breaks only. Step 3 of `docs/MIGRATION.md`
 - Tooling: the build, checks, snapshots and release run on Node 24 and npm instead of Deno (`npm run …` replaces `deno task …`); Biome replaces `deno fmt` and `deno lint`; `npm run distdiff` compares two builds. The site itself is unchanged, byte for byte. Step 2 of `docs/MIGRATION.md`

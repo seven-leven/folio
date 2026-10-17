@@ -600,7 +600,7 @@
 
   // --- Project pages: previous / next project links above the footer --------
   function initPager() {
-    // The footer lists the projects in order (built from site/_data/projects.json).
+    // The footer lists the projects in order (built from src/data/projects.json).
     const PROJECTS = [...document.querySelectorAll(".site-footer a[data-label]")].map((a) => ({
       href: a.getAttribute("href"),
       title: a.textContent.trim(),

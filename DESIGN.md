@@ -403,7 +403,7 @@ reason from the project's own boards; otherwise use the kit as it is.
 | `DESIGN.md` | The rules |
 | `public/assets/css/main.css` | Every value (tokens) and every shared component |
 | `public/assets/css/pages/` | Layout that only one page needs. No colours, font names or pixel radii |
-| `src/components/`, `src/partials/` | The shell: navbar, footer, model viewer |
+| `src/components/` | The shell: navbar, footer, model viewer |
 | `src/pages/sem1.astro` | The project page template |
 | `public/assets/img/birds/` | The birds |
 | `docs/design-guide.html` → `.png` | The one-sheet map, drawn from `main.css` |

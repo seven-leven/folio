@@ -1,13 +1,69 @@
 ---
-// The 3D model viewer, from src/partials/model.html (see src/lib/partials.ts).
-import { renderPartial } from "../lib/partials.ts";
+/**
+ * The 3D model viewer (public/assets/js/model-viewer.js) for a project page. Put it inside the
+ * page's own section, under its own heading. The model file, poster, alt text, caption and "clay"
+ * (start as a white card model) come from the page's "model" entry in src/data/projects.json; the
+ * download sizes are measured at build time. Make the model and poster with
+ * npm run model -- semN path/to/model.skp (or .3dm); see tools/models/README.md.
+ *
+ * A page whose model file isn't made yet fails the build, unless FOLIO_LENIENT=1 (npm run model
+ * sets it, since other pages may still be waiting for theirs): then the viewer is left out.
+ */
+import { modelSizes, projects } from "../lib/site.ts";
 
 interface Props {
   /** The page's file name in the built site, e.g. "sem1.html" */
   page: string;
 }
 const { page } = Astro.props;
-const html = await renderPartial("model", page);
+const project = (await projects()).find((p) => p.page === page);
+if (!project?.model) throw new Error(`${page}: give it a "model" entry in src/data/projects.json`);
+const { file, poster, alt, caption, clay = false } = project.model;
+const sizes = await modelSizes(project);
+// Written out, not JSON.stringify'd, so check.ts and the browser read the same map as always
+const importMap =
+  '{"imports": {"three": "./assets/vendor/three/three.module.min.js", "three/addons/": "./assets/vendor/three/addons/"}}';
 ---
 
-<Fragment set:html={html} />
+{
+  sizes && (
+    <figure class="model-viewer" data-model-viewer data-label={`3D model of ${project.title}`}>
+      <div class="model-viewer__stage">
+        <img class="model-viewer__poster" src={poster} alt={alt} width="1600" height="1000" loading="lazy" decoding="async" />
+        <div class="model-viewer__start">
+          <button type="button" class="model-viewer__load" data-mv-load>Explore in 3D</button>
+          <span class="model-viewer__size">{sizes.viewer}, loads on click</span>
+          <p class="model-viewer__status" data-mv-status role="status"></p>
+        </div>
+      </div>
+      <div class="model-viewer__bar">
+        <div class="model-viewer__views" role="group" aria-label="Views">
+          <button type="button" data-mv-view="outside" aria-pressed="true">Outside</button>
+          <button type="button" data-mv-view="inside" aria-pressed="false">Inside</button>
+          <button type="button" data-mv-view="above" aria-pressed="false">Above</button>
+        </div>
+        <button type="button" data-mv-clay aria-pressed={String(clay)}>Clay</button>
+        <button type="button" data-mv-cut aria-pressed="false">Section cut</button>
+        <button type="button" data-mv-full aria-pressed="false" hidden>Full screen</button>
+      </div>
+      <div class="model-viewer__cut" hidden>
+        <div class="model-viewer__views" role="group" aria-label="Cut direction">
+          <button type="button" data-mv-axis="y" aria-pressed="true">Plan</button>
+          <button type="button" data-mv-axis="x" aria-pressed="false">Section A</button>
+          <button type="button" data-mv-axis="z" aria-pressed="false">Section B</button>
+        </div>
+        <label class="model-viewer__slider">
+          <span>Move the cut</span>
+          <input type="range" min="0" max="1000" value="450" data-mv-cut-at />
+        </label>
+        <button type="button" data-mv-flip>Flip</button>
+      </div>
+      <figcaption>
+        {caption} Drag to turn it, scroll or pinch to zoom, and right-drag or use two fingers to move.
+        <a data-mv-src href={file} download>Download the model (.glb, {sizes.model})</a>
+      </figcaption>
+    </figure>
+    <script type="importmap" is:inline set:html={importMap} />
+    <script type="module" src="assets/js/model-viewer.js" is:inline></script>
+  )
+}

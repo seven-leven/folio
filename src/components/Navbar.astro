@@ -1,15 +1,69 @@
 ---
-// The shared navbar, from src/partials/navbar.html (see src/lib/partials.ts).
-import { renderPartial } from "../lib/partials.ts";
-
+/**
+ * The shared navbar. On the homepage its links go to the homepage's own sections; on other
+ * pages to index.html#…. `active` highlights one link: home, engineering, architecture,
+ * professional, illustrations, coding, about or contact. A link inside a dropdown group
+ * (Academic, Personal) also highlights the group's button.
+ */
 interface Props {
   /** The page's file name in the built site, e.g. "sem1.html" */
   page: string;
-  /** The nav link to highlight, e.g. "architecture" */
+  /** The nav link to highlight */
   active?: string;
 }
 const { page, active } = Astro.props;
-const html = await renderPartial("navbar", page, { active });
+const home = page === "index.html";
+const index = home ? "" : "index.html";
+
+const href: Record<string, string> = {
+  home: `${index}#home`,
+  engineering: home ? "#engineering" : "engineering.html",
+  architecture: `${index}#architecture`,
+  professional: `${index}#professional`,
+  illustrations: `${index}#illustrations`,
+  coding: `${index}#coding`,
+  about: `${index}#about`,
+  contact: `${index}#contact-me`,
+};
+if (active && !(active in href)) throw new Error(`${page}: no nav link "${active}" in the navbar`);
+
+/** The link's attributes; the active one is marked, with aria-current "page" if it points at this page. */
+const link = (nav: string) => ({
+  href: href[nav],
+  ...(nav === active && { class: "is-active", "aria-current": href[nav] === page ? "page" : "true" }),
+});
+const groupClass = (...links: string[]) => ["nav-group__btn", { "is-active": links.includes(active ?? "") }];
 ---
 
-<Fragment set:html={html} />
+<nav id="navbar" aria-label="Main">
+  <div class="container">
+    <a href={home ? "#home" : "index.html"} class="nav-logo" aria-label="Gaahis Yaugoob, home">
+      <span class="nav-mark" aria-hidden="true">GY</span>
+      <span class="nav-name">Gaahis Yaugoob</span>
+    </a>
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a {...link("home")}>Home</a></li>
+      <li class="nav-group">
+        <button type="button" class:list={groupClass("engineering", "architecture")} aria-expanded="false" aria-controls="nav-academic">Academic</button>
+        <ul class="nav-group__menu" id="nav-academic">
+          <li><a {...link("engineering")}>Engineering</a></li>
+          <li><a {...link("architecture")}>Architecture</a></li>
+        </ul>
+      </li>
+      <li><a {...link("professional")}>Professional</a></li>
+      <li class="nav-group">
+        <button type="button" class:list={groupClass("illustrations", "coding")} aria-expanded="false" aria-controls="nav-personal">Personal</button>
+        <ul class="nav-group__menu" id="nav-personal">
+          <li><a {...link("illustrations")}>Illustrations</a></li>
+          <li><a {...link("coding")}>Coding</a></li>
+        </ul>
+      </li>
+      <li><a {...link("about")}>About</a></li>
+      <li><a {...link("contact")}>Contact</a></li>
+      <li class="nav-cta"><a href="cv.pdf" download="Gaahis_Yaugoob_CV.pdf">Download CV</a></li>
+    </ul>
+  </div>
+</nav>
