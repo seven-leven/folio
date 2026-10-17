@@ -49,7 +49,11 @@ export default function ventilation(canvas) {
       const fields = finished
         ? ["", "", ""]
         : [typed(name, 0.1), local > 0.7 ? `${area.toFixed(1)}` : "", typed(str, 1.0)];
-      [["Room", 16, 96], ["Area m²", 116, 56], ["Openings", 176, 168]].forEach(([label, x, w], i) => {
+      [
+        ["Room", 16, 96],
+        ["Area m²", 116, 56],
+        ["Openings", 176, 168],
+      ].forEach(([label, x, w], i) => {
         text(ctx, label, x, 62, { size: 8, color: COL.dim });
         ctx.fillStyle = COL.ghost;
         roundRect(ctx, x, 70, w, 22, 4);
@@ -57,7 +61,9 @@ export default function ventilation(canvas) {
         text(ctx, fields[i], x + 7, 81, { size: 9, font: i === 1 || i === 2 ? MONO : SANS, color: COL.paper });
       });
       if (!finished && local > 1.9 && local < 2.7) {
-        const sum = parse(str).map(([c, n]) => (n > 1 ? `${c}×${n}` : c)).join(" + ");
+        const sum = parse(str)
+          .map(([c, n]) => (n > 1 ? `${c}×${n}` : c))
+          .join(" + ");
         text(ctx, `${sum} = ${openArea(str).toFixed(1)} m²`, 344, 104, {
           size: 8.5,
           align: "right",

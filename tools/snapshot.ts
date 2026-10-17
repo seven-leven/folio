@@ -77,7 +77,8 @@ for (const page of await distPages()) {
     await tab.goto(url(page), { waitUntil: "networkidle0" });
     await tab.addStyleTag({ content: "*,*::before,*::after{transition:none!important;animation:none!important}" });
     await tab.evaluate(async () => {
-      document.querySelectorAll(".reveal,.animate-on-scroll-target,#project-showcase-hero")
+      document
+        .querySelectorAll(".reveal,.animate-on-scroll-target,#project-showcase-hero")
         .forEach((e) => e.classList.add("is-visible"));
       await document.fonts.ready;
     });
@@ -87,7 +88,10 @@ for (const page of await distPages()) {
         const parts: string[] = [];
         for (let e: Element | null = el; e && e !== document.body; e = e.parentElement) {
           const idx = e.parentElement ? [...e.parentElement.children].indexOf(e) : 0;
-          const cls = e.getAttribute("class")?.split(/\s+/).filter((c) => c && !c.startsWith("is-"))[0];
+          const cls = e
+            .getAttribute("class")
+            ?.split(/\s+/)
+            .filter((c) => c && !c.startsWith("is-"))[0];
           parts.unshift(`${e.tagName.toLowerCase()}${e.id ? "#" + e.id : cls ? "." + cls : ""}:${idx}`);
         }
         return parts.join(">");
@@ -103,9 +107,16 @@ for (const page of await distPages()) {
         for (const pseudo of ["::before", "::after"]) {
           const ps = getComputedStyle(el, pseudo);
           if (ps.content && ps.content !== "none" && ps.content !== "normal") {
-            for (
-              const p of ["content", "width", "height", "background-color", "background-image", "color", "top", "left"]
-            ) {
+            for (const p of [
+              "content",
+              "width",
+              "height",
+              "background-color",
+              "background-image",
+              "color",
+              "top",
+              "left",
+            ]) {
               rec[pseudo + p] = ps.getPropertyValue(p);
             }
           }

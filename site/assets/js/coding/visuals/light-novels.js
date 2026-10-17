@@ -9,7 +9,10 @@ export default function lightNovels(canvas, D) {
   // When the newest Japanese volume should reach English
   const catchUp = a + b * (jp.length - 1);
   const part = catchUp % 1 < 0.34 ? "early" : catchUp % 1 < 0.67 ? "mid" : "late";
-  const x0 = 34, x1 = 344, y0 = 30, y1 = 236;
+  const x0 = 34,
+    x1 = 344,
+    y0 = 30,
+    y1 = 236;
   const X = (yr) => x0 + ((yr - 2014) / (2033 - 2014)) * (x1 - x0);
   const Y = (v) => y1 - (v / 48) * (y1 - y0);
   const PERIOD = 12;
@@ -35,7 +38,7 @@ export default function lightNovels(canvas, D) {
       ctx.fillStyle = COL.faint;
       ctx.fillRect(x0, y1, x1 - x0, 1);
       [2015, 2020, 2025, 2030].forEach((yr) =>
-        text(ctx, String(yr), X(yr), y1 + 12, { size: 8, align: "center", color: COL.dim })
+        text(ctx, String(yr), X(yr), y1 + 12, { size: 8, align: "center", color: COL.dim }),
       );
       [10, 20, 30, 40].forEach((v) => {
         ctx.fillStyle = COL.ghost;

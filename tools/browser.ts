@@ -30,7 +30,9 @@ function chromePath(): string {
     try {
       statSync(p);
       return p;
-    } catch { /* not here */ }
+    } catch {
+      /* not here */
+    }
   }
   throw new Error("Chrome not found. Install it or set CHROME_PATH.");
 }
@@ -38,7 +40,8 @@ function chromePath(): string {
 /** Pages in dist/, homepage first. */
 export async function distPages(): Promise<string[]> {
   const pages: string[] = [];
-  for (const e of await readdir(DIST, { withFileTypes: true })) if (e.isFile() && e.name.endsWith(".html")) pages.push(e.name);
+  for (const e of await readdir(DIST, { withFileTypes: true }))
+    if (e.isFile() && e.name.endsWith(".html")) pages.push(e.name);
   return pages.sort((a, b) => (a === "index.html" ? -1 : b === "index.html" ? 1 : a.localeCompare(b)));
 }
 

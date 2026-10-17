@@ -53,14 +53,18 @@ async function totalSize(dir: URL): Promise<number> {
 async function modelValues(project: Project | undefined, lenient: boolean): Promise<Record<string, string>> {
   if (!project?.model) return {};
   const { file, poster, alt, caption, clay = false } = project.model;
-  const model = await stat(new URL(file, SITE)).then((s) => s.size, () => {
-    const message = `${project.page}: no model at site/${file} (make it with npm run model)`;
-    if (!lenient) throw new Error(message);
-    console.warn(`  (skipping the viewer) ${message}`);
-    return -1;
-  });
+  const model = await stat(new URL(file, SITE)).then(
+    (s) => s.size,
+    () => {
+      const message = `${project.page}: no model at site/${file} (make it with npm run model)`;
+      if (!lenient) throw new Error(message);
+      console.warn(`  (skipping the viewer) ${message}`);
+      return -1;
+    },
+  );
   if (model < 0) return { modelSize: "missing" };
-  const viewer = await totalSize(new URL("assets/vendor/three/", SITE)) +
+  const viewer =
+    (await totalSize(new URL("assets/vendor/three/", SITE))) +
     (await stat(new URL("assets/js/model-viewer.js", SITE))).size;
   return {
     modelFile: file,
@@ -105,8 +109,9 @@ function placeholders(page: string, projects: Project[], version: string): Recor
     version,
     // One link per line; the partial supplies the first line's indent.
     projectLinks: projects
-      .map((p) =>
-        `<a href="${p.page}" data-label="${escapeHtml(p.label)}" data-sem="${p.semester}">${escapeHtml(p.title)}</a>`
+      .map(
+        (p) =>
+          `<a href="${p.page}" data-label="${escapeHtml(p.label)}" data-sem="${p.semester}">${escapeHtml(p.title)}</a>`,
       )
       .join("\n        "),
   };
@@ -165,9 +170,9 @@ async function writeSitemap(pages: string[]) {
         return `  <url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}</url>`;
       }),
   );
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
-    urls.join("\n")
-  }\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join(
+    "\n",
+  )}\n</urlset>\n`;
   await writeFile(new URL("sitemap.xml", DIST), xml);
 }
 
@@ -186,7 +191,10 @@ export async function build({ lenient = false } = {}): Promise<number> {
     pages.push(page);
     const values = {
       ...placeholders(page, projects, version.label),
-      ...await modelValues(projects.find((p) => p.page === page), lenient),
+      ...(await modelValues(
+        projects.find((p) => p.page === page),
+        lenient,
+      )),
     };
     const html = await readFile(new URL(page, SITE), "utf8");
     const out = html.replace(INCLUDE, (_all, indent: string, name: string, attrSrc: string) => {

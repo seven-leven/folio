@@ -47,7 +47,7 @@ export default function archiver(canvas) {
       roundRect(ctx, 10, 10, 340, 104, 8);
       ctx.fill();
       ["1. Create Folders", "2. Folders to cbr", "3. Misc", "4. Exit"].forEach((s, i) =>
-        text(ctx, s, 22, 26 + i * 13, { size: 10, font: MONO, color: COL.dim })
+        text(ctx, s, 22, 26 + i * 13, { size: 10, font: MONO, color: COL.dim }),
       );
       lines.forEach((line, i) => {
         if (t < line.at) return;

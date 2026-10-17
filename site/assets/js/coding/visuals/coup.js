@@ -6,8 +6,12 @@ export const data = new URL("../../../data/coup.json", import.meta.url);
 export default function coup(canvas, D) {
   const { players } = D;
   const games = players.A.length - 1;
-  const x0 = 44, x1 = 320, y0 = 36, y1 = 232;
-  const lo = 800, hi = 1180;
+  const x0 = 44,
+    x1 = 320,
+    y0 = 36,
+    y1 = 232;
+  const lo = 800,
+    hi = 1180;
   const X = (i) => x0 + (i / games) * (x1 - x0);
   const Y = (r) => y1 - ((r - lo) / (hi - lo)) * (y1 - y0);
   const PERIOD = 11;
@@ -37,7 +41,8 @@ export default function coup(canvas, D) {
         ctx.beginPath();
         const whole = Math.floor(upto);
         for (let i = 0; i <= whole; i++) (i ? ctx.lineTo : ctx.moveTo).call(ctx, X(i), Y(series[i]));
-        let ex = X(whole), ey = Y(series[whole]);
+        let ex = X(whole),
+          ey = Y(series[whole]);
         if (whole < games) {
           const f = upto - whole;
           ex = lerp(X(whole), X(whole + 1), f);

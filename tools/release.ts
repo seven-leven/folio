@@ -26,13 +26,14 @@ if (branch !== "dev") fail(`Release from dev (you're on ${branch ?? "?"}).`);
 if (await git("status", "--porcelain")) fail("Commit or stash your changes first.");
 
 console.log("→ Checking the site…");
-if (!await run("npm", ["run", "check"])) fail("The check failed, so nothing was pushed.");
+if (!(await run("npm", ["run", "check"]))) fail("The check failed, so nothing was pushed.");
 
 console.log("\n→ Pushing dev and fast-forwarding main…");
-const ok = await run("git", ["push", "origin", "dev"]) &&
-  await run("git", ["checkout", "main"]) &&
-  await run("git", ["merge", "--ff-only", "dev"]) &&
-  await run("git", ["push", "origin", "main"]);
+const ok =
+  (await run("git", ["push", "origin", "dev"])) &&
+  (await run("git", ["checkout", "main"])) &&
+  (await run("git", ["merge", "--ff-only", "dev"])) &&
+  (await run("git", ["push", "origin", "main"]));
 await run("git", ["checkout", "dev"]);
 if (!ok) fail("Couldn't update main (does it have commits that aren't on dev?).");
 
@@ -45,28 +46,28 @@ const gh = async (...args: string[]) => {
   const out = await capture("gh", args);
   return out.success ? out.stdout.trim() : null;
 };
-if (await gh("--version") === null) {
+if ((await gh("--version")) === null) {
   console.log(`Install the GitHub CLI (gh) to wait for the deploy here. Otherwise it'll be live at ${SITE} shortly.`);
   process.exit(0);
 }
 console.log("→ Waiting for the deploy run…");
 let runId: string | null = null;
 for (let i = 0; i < 24 && !runId; i++) {
-  runId = await gh(
-    "run",
-    "list",
-    "--branch",
-    "main",
-    "--commit",
-    sha,
-    "--limit",
-    "1",
-    "--json",
-    "databaseId",
-    "-q",
-    ".[0].databaseId",
-  ) ||
-    null;
+  runId =
+    (await gh(
+      "run",
+      "list",
+      "--branch",
+      "main",
+      "--commit",
+      sha,
+      "--limit",
+      "1",
+      "--json",
+      "databaseId",
+      "-q",
+      ".[0].databaseId",
+    )) || null;
   if (!runId) await new Promise((r) => setTimeout(r, 5000));
 }
 if (!runId) fail("The deploy run didn't start. Check the Actions tab on GitHub.");

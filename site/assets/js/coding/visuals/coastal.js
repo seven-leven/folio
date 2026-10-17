@@ -79,7 +79,10 @@ function groyneScene() {
 function profileScene(D) {
   const X = D.x;
   const P = D.profiles;
-  const x0 = 34, x1 = 346, y0 = 44, y1 = 228;
+  const x0 = 34,
+    x1 = 346,
+    y0 = 44,
+    y1 = 228;
   const px = (x) => x0 + ((x + 100) / 598) * (x1 - x0);
   const py = (z) => y0 + ((5 - z) / 18) * (y1 - y0);
 
@@ -106,7 +109,10 @@ function profileScene(D) {
 
     // Eroded (red) and deposited (blue) areas between the profiles
     for (let i = 0; i < X.length - 1; i++) {
-      const a0 = P[0][i], a1 = P[0][i + 1], b0 = cur[i], b1 = cur[i + 1];
+      const a0 = P[0][i],
+        a1 = P[0][i + 1],
+        b0 = cur[i],
+        b1 = cur[i + 1];
       const eroded = a0 + a1 > b0 + b1;
       if (Math.abs(a0 - b0) + Math.abs(a1 - b1) < 0.02) continue;
       ctx.fillStyle = eroded ? "rgba(217, 105, 95, 0.55)" : "rgba(143, 189, 230, 0.55)";
@@ -144,15 +150,24 @@ function profileScene(D) {
 // design results in D.breakwater (crest height, armour weight, layer thicknesses; 1:2 slopes).
 function breakwaterScene(D) {
   const B = D.breakwater;
-  const Hc = B.crest, SWL = B.designWater;
+  const Hc = B.crest,
+    SWL = B.designWater;
   const a = 1.5 * B.armour; // crest half-width, three armour stones across
-  const SX = 7, SY = 14, CX = 180, BED = 222;
+  const SX = 7,
+    SY = 14,
+    CX = 180,
+    BED = 222;
   const X = (m) => CX + m * SX;
   const Y = (m) => BED - m * SY;
   const shape = (t) => {
     const top = a - 0.236 * t;
     const base = a + 2 * Hc - 2.236 * t;
-    return [[-base, 0], [-top, Hc - t], [top, Hc - t], [base, 0]];
+    return [
+      [-base, 0],
+      [-top, Hc - t],
+      [top, Hc - t],
+      [base, 0],
+    ];
   };
   const layers = [
     // t: depth of each layer's outer face below the armour surface

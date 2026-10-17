@@ -15,7 +15,6 @@
  */
 import { readdir, readFile, stat } from "node:fs/promises";
 
-
 const SITE = new URL("../dist/", import.meta.url);
 const PROJECTS = new URL("../site/_data/projects.json", import.meta.url);
 const BASE_PATH = "/folio/"; // GitHub Pages project path, used by 404.html
@@ -30,7 +29,7 @@ async function listFiles(dir: URL, prefix = ""): Promise<string[]> {
   const out: string[] = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const rel = prefix + entry.name;
-    if (entry.isDirectory()) out.push(...await listFiles(new URL(entry.name + "/", dir), rel + "/"));
+    if (entry.isDirectory()) out.push(...(await listFiles(new URL(entry.name + "/", dir), rel + "/")));
     else out.push(rel);
   }
   return out;
@@ -140,15 +139,16 @@ for (const js of files.filter((f) => f.endsWith(".js"))) {
   const specs = js.startsWith("assets/vendor/")
     ? [...text.matchAll(/^(?:import|export)\b[^;]*?\bfrom\s*["']([^"']+)["']/gm)].map((m) => m[1])
     : [
-      ...text.matchAll(/\bfrom\s+["']([^"']+)["']/g),
-      ...text.matchAll(/\bimport\(\s*["']([^"']+)["']\s*\)/g),
-      ...text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g),
-    ].map((m) => m[1]);
+        ...text.matchAll(/\bfrom\s+["']([^"']+)["']/g),
+        ...text.matchAll(/\bimport\(\s*["']([^"']+)["']\s*\)/g),
+        ...text.matchAll(/new URL\(\s*["']([^"']+)["']\s*,\s*import\.meta\.url\s*\)/g),
+      ].map((m) => m[1]);
   for (const spec of specs) {
     let target;
     if (/^[\w@]/.test(spec) && !/^\w+:/.test(spec)) {
       // Bare specifier ("three", "three/addons/…"): resolve through a page's import map
-      const key = [...importMap.keys()].sort((a, b) => b.length - a.length)
+      const key = [...importMap.keys()]
+        .sort((a, b) => b.length - a.length)
         .find((k) => k === spec || (k.endsWith("/") && spec.startsWith(k)));
       if (key === undefined) {
         errors.push(`${js}: bare import "${spec}" is not in any page's import map`);

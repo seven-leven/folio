@@ -208,7 +208,8 @@ async function start(fig) {
       // Aim at the middle of what's seen, then move to fit it
       const right = new THREE.Vector3().setFromMatrixColumn(probe.matrixWorld, 0);
       const up = new THREE.Vector3().setFromMatrixColumn(probe.matrixWorld, 1);
-      target.addScaledVector(right, ((x0 + x1) / 2) * dist * tanHalf * probe.aspect)
+      target
+        .addScaledVector(right, ((x0 + x1) / 2) * dist * tanHalf * probe.aspect)
         .addScaledVector(up, ((y0 + y1) / 2) * dist * tanHalf);
       dist *= Math.max((x1 - x0) / 2, (y1 - y0) / 2) / 0.85;
     }
@@ -340,7 +341,8 @@ async function start(fig) {
 
   function applyCut() {
     const a = cut.axis;
-    const lo = box.min[a], hi = box.max[a];
+    const lo = box.min[a],
+      hi = box.max[a];
     const pos = lo + cut.at[a] * (hi - lo);
     // Clipping keeps the side the normal points to: below the plan cut, or before the section
     const normal = new THREE.Vector3();
@@ -372,7 +374,10 @@ async function start(fig) {
   function faceCut() {
     const s = cut.flip ? -1 : 1;
     const dir = cut.axis === "y" ? [0.45, 1.3, 0.65] : cut.axis === "x" ? [s, 0.45, 0.35] : [0.35, 0.45, s];
-    goTo(null, fitView(...dir, (p) => plane.distanceToPoint(p) >= 0));
+    goTo(
+      null,
+      fitView(...dir, (p) => plane.distanceToPoint(p) >= 0),
+    );
   }
 
   function showCutControls() {

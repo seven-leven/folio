@@ -2,7 +2,8 @@ import { COL, ease, MONO, surface, text } from "../core.js";
 
 // --- Oct 2021: sieve of Eratosthenes -------------------------------------------
 export default function sieve(canvas) {
-  const N = 120, COLS = 15;
+  const N = 120,
+    COLS = 15;
   const PRIMES = [2, 3, 5, 7];
   const PHASE = 2;
   const PERIOD = PRIMES.length * PHASE + 4.5;

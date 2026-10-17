@@ -13,7 +13,10 @@ import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 sharp.cache(false); // don't hold files open (Windows can't replace them otherwise)
 
 const opts = Object.fromEntries(
-  process.argv.slice(2).filter((a) => a.startsWith("--")).map((a) => a.slice(2).split("=") as [string, string]),
+  process.argv
+    .slice(2)
+    .filter((a) => a.startsWith("--"))
+    .map((a) => a.slice(2).split("=") as [string, string]),
 );
 const MAX = Number(opts.max ?? 2400);
 const QUALITY = Number(opts.quality ?? 82);

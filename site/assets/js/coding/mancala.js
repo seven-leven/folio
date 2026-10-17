@@ -9,8 +9,10 @@ export const cloneGame = (g) => ({ pits: g.pits.slice(), stores: g.stores.slice(
 export const validMoves = (g, p = g.player) => [0, 1, 2, 3, 4, 5, 6].map((i) => i + p * 7).filter((i) => g.pits[i] > 0);
 const MAJORITY = 50; // more than half of the 98 seeds: a lead that can't be caught
 export const isOver = (g) =>
-  g.pits.slice(0, 7).every((n) => !n) || g.pits.slice(7).every((n) => !n) ||
-  g.stores[0] >= MAJORITY || g.stores[1] >= MAJORITY;
+  g.pits.slice(0, 7).every((n) => !n) ||
+  g.pits.slice(7).every((n) => !n) ||
+  g.stores[0] >= MAJORITY ||
+  g.stores[1] >= MAJORITY;
 
 /** Plays a move in place; returns true if the player moves again. */
 export function sow(g, start, trace) {
