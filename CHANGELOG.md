@@ -7,7 +7,7 @@ Versions are `vMAJOR.MINOR.PATCH`:
 - `PATCH` is the commit count, worked out from git at build time, so it's never stored and can't
   drift. The live site shows the full version at the bottom of every page.
 
-Print the current version with `deno task version`. To log new work, run `deno task changelog`: it
+Print the current version with `npm run version`. To log new work, run `npm run changelog`: it
 adds every commit made since this file was last changed under _Unreleased_, ready to tidy up and
 commit.
 
@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Tooling: the build, checks, snapshots and release run on Node 24 and npm instead of Deno (`npm run …` replaces `deno task …`); Biome replaces `deno fmt` and `deno lint`; `npm run distdiff` compares two builds. The site itself is unchanged, byte for byte. Step 2 of `docs/MIGRATION.md`
 - Class book page: eight weeks of groundwork before ten days of making (the editorial team, group leaders and chapter leads, the shared template), and a section on the people who made it, by role
 - The class book gets a Coding entry page (`code-class-book.html`): page templates drawn by Python, InDesign driven by script with a handover file so sessions and accounts could pick up each other's work, narrative guides that kept one argument through the book, and the web edition built in about a day; a new Oct 2026 timeline entry links to it and to the web edition
 - CI: the site is deployed with GitHub's Pages actions (`upload-pages-artifact@v5`, `deploy-pages@v5`) instead of a `gh-pages` branch, so GitHub's own Pages build, which still ran on Node.js 20, no longer runs

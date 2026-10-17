@@ -3,7 +3,7 @@
 v1.0 · 2026 · for the Personal band of the site (Illustrations and Coding).
 
 The one-sheet map of this document is [design-guide-personal.png](design-guide-personal.png)
-(`deno task guide` redraws it).
+(`npm run guide` redraws it).
 
 Academic and professional work follow [DESIGN.md](../DESIGN.md). Personal work is not
 held to that document's page shape, signature devices or motion rules. It **is** held to

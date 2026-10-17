@@ -9,7 +9,7 @@ work (Illustrations and Coding) shares the foundations and has its own guide,
 later job.
 
 The one-sheet map of this document is [docs/design-guide.png](docs/design-guide.png)
-(`deno task guide` redraws it). The sheet is for remembering; this file is for the
+(`npm run guide` redraws it). The sheet is for remembering; this file is for the
 detail. The state of the site before the system was written down is recorded in
 [docs/design-audit.md](docs/design-audit.md).
 
@@ -408,11 +408,11 @@ reason from the project's own boards; otherwise use the kit as it is.
 | `site/assets/img/birds/` | The birds |
 | `docs/design-guide.html` → `.png` | The one-sheet map, drawn from `main.css` |
 
-- Before a visual change run `deno task snapshot before`; afterwards
-  `deno task snapshot after` and `deno task compare before after`.
-- `deno task check` must pass before a release.
+- Before a visual change run `npm run snapshot -- before`; afterwards
+  `npm run snapshot -- after` and `npm run compare -- before after`.
+- `npm run check` must pass before a release.
 - When a rule here stops being true, change the rule or the code in the same commit.
-- Images: WebP, at most 2400 px on the long side (`deno task images`); width and height
+- Images: WebP, at most 2400 px on the long side (`npm run images`); width and height
   always set; the lead image loads eagerly, everything else lazily.
 
 ### Not yet in line with this document

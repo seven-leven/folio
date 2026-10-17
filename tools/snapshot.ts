@@ -1,22 +1,24 @@
 /**
  * Records every page at phone, tablet and desktop widths: each element's box
  * and computed styles (JSON), plus a full-page screenshot. Take one before a
- * change and one after, then diff them with `deno task compare`.
+ * change and one after, then diff them with `npm run compare`.
  *
- * Run: deno task snapshot <name>          writes .snapshots/<name>/
- *      deno task snapshot <name> --no-shots   skip the screenshots
+ * Run: npm run snapshot -- <name>              writes .snapshots/<name>/
+ *      npm run snapshot -- <name> --no-shots   skip the screenshots
  *
  * Animations are switched off (reduced motion), external requests are blocked
  * and everything waiting to fade in is shown, so runs are repeatable.
  */
+import { mkdir, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { distPages, openBrowser } from "./browser.ts";
 
-const name = Deno.args.find((a) => !a.startsWith("--"));
+const name = process.argv.slice(2).find((a) => !a.startsWith("--"));
 if (!name) {
-  console.error("Usage: deno task snapshot <name> [--no-shots]");
-  Deno.exit(1);
+  console.error("Usage: npm run snapshot -- <name> [--no-shots]");
+  process.exit(1);
 }
-const shots = !Deno.args.includes("--no-shots");
+const shots = !process.argv.slice(2).includes("--no-shots");
 const OUT = new URL(`../.snapshots/${name}/`, import.meta.url);
 const WIDTHS = [375, 820, 1280];
 const PROPS = [
@@ -61,7 +63,7 @@ const PROPS = [
   "pointer-events",
 ];
 
-await Deno.mkdir(OUT, { recursive: true });
+await mkdir(OUT, { recursive: true });
 const { browser, url, close } = await openBrowser(8132);
 const port = new URL(url("")).origin;
 
@@ -113,10 +115,10 @@ for (const page of await distPages()) {
       return out;
     }, PROPS);
     const file = `${page.replace(".html", "")}-${width}`;
-    await Deno.writeTextFile(new URL(`${file}.json`, OUT), JSON.stringify(data));
+    await writeFile(new URL(`${file}.json`, OUT), JSON.stringify(data));
     if (shots) {
       await tab.screenshot({
-        path: new URL(`${file}.jpg`, OUT).pathname.replace(/^\/(\w:)/, "$1"),
+        path: fileURLToPath(new URL(`${file}.jpg`, OUT)) as `${string}.jpeg`,
         fullPage: true,
         type: "jpeg",
         quality: 60,

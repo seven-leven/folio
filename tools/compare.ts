@@ -1,32 +1,34 @@
 /**
- * Compares two snapshots from `deno task snapshot`: for each page and width,
+ * Compares two snapshots from `npm run snapshot`: for each page and width,
  * lists the style changes (grouped, most common first), how many boxes moved,
  * and elements that appeared or disappeared.
  *
- * Run: deno task compare <before> <after> [page-prefix] [--all]
- *   e.g. deno task compare base after index-375
+ * Run: npm run compare -- <before> <after> [page-prefix] [--all]
+ *   e.g. npm run compare -- base after index-375
  * Colours that only follow `color` (borders using currentColor) are folded in.
  */
-const [a, b, only] = Deno.args.filter((x) => !x.startsWith("--"));
-const showAll = Deno.args.includes("--all");
+import { readdir, readFile } from "node:fs/promises";
+
+const [a, b, only] = process.argv.slice(2).filter((x) => !x.startsWith("--"));
+const showAll = process.argv.slice(2).includes("--all");
 if (!a || !b) {
-  console.error("Usage: deno task compare <before> <after> [page-prefix] [--all]");
-  Deno.exit(1);
+  console.error("Usage: npm run compare -- <before> <after> [page-prefix] [--all]");
+  process.exit(1);
 }
 const dir = (n: string) => new URL(`../.snapshots/${n}/`, import.meta.url);
 type Snap = Record<string, Record<string, string>>;
 
 const names: string[] = [];
-for await (const e of Deno.readDir(dir(a))) {
+for (const e of await readdir(dir(a), { withFileTypes: true })) {
   if (e.name.endsWith(".json") && (!only || e.name.startsWith(only))) names.push(e.name.slice(0, -5));
 }
 
 let total = 0;
 for (const name of names.sort()) {
-  const A: Snap = JSON.parse(await Deno.readTextFile(new URL(`${name}.json`, dir(a))));
+  const A: Snap = JSON.parse(await readFile(new URL(`${name}.json`, dir(a)), "utf8"));
   let B: Snap;
   try {
-    B = JSON.parse(await Deno.readTextFile(new URL(`${name}.json`, dir(b))));
+    B = JSON.parse(await readFile(new URL(`${name}.json`, dir(b)), "utf8"));
   } catch {
     console.log(`== ${name}: missing from ${b}`);
     continue;

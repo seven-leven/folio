@@ -1,0 +1,36 @@
+{
+  "name": "folio",
+  "private": true,
+  "type": "module",
+  "description": "Portfolio of Gaahis Yaugoob: https://seven-leven.github.io/folio/",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "node tools/build.ts --watch --serve",
+    "build": "node tools/build.ts",
+    "check": "npm run build && node tools/check.ts",
+    "snapshot": "npm run build && node tools/snapshot.ts",
+    "compare": "node tools/compare.ts",
+    "distdiff": "node tools/distdiff.ts",
+    "version": "node tools/version.ts",
+    "changelog": "node tools/changelog.ts",
+    "guide": "node tools/guide.ts",
+    "images": "node tools/images.ts",
+    "model": "node tools/models/model.ts",
+    "links": "npm run build && node tools/links.ts",
+    "release": "node tools/release.ts",
+    "lint": "biome lint",
+    "fmt": "biome format --write",
+    "fmt:check": "biome format"
+  },
+  "dependencies": {
+    "puppeteer-core": "23.11.1",
+    "sharp": "0.33.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "24.19.2",
+    "parse5": "8.0.1"
+  }
+}

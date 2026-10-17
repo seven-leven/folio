@@ -33,12 +33,12 @@ the three.js import map.
 **3. Make the model and its poster** from the SketchUp or Rhino file:
 
 ```
-deno task model sem4 "C:\path\to\model.3dm"
+npm run model -- sem4 "C:\path\to\model.3dm"
 ```
 
 It runs Rhino 8 (import, export FBX, quit; FBX because Rhino's glTF writer fails on some Enscape materials), then
 Blender with `web-model.py`, then opens the page in headless Chrome and saves the viewer's first view as the poster. To
-retake only the poster (after changing the views in `model-viewer.js`), run `deno task model sem4 --poster`.
+retake only the poster (after changing the views in `model-viewer.js`), run `npm run model -- sem4 --poster`.
 
 ## What `web-model.py` does
 

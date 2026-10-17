@@ -14,11 +14,13 @@
  * The build also writes dist/sitemap.xml from the pages it finds.
  *
  * Usage:
- *   deno task build          build once
- *   deno task dev            build, watch site/ and serve at http://localhost:8000/folio/
+ *   npm run build            build once
+ *   npm run dev              build, watch site/ and serve at http://localhost:8000/folio/
  */
-import { serveDir } from "@std/http/file-server";
-import { fromFileUrl } from "@std/path";
+import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { watch } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { serveDist } from "./serve.ts";
 import { gitDate, siteVersion } from "./version.ts";
 
 const SITE = new URL("../site/", import.meta.url);
@@ -39,10 +41,10 @@ const megabytes = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`;
 
 async function totalSize(dir: URL): Promise<number> {
   let bytes = 0;
-  for await (const entry of Deno.readDir(dir)) {
-    const url = new URL(entry.name + (entry.isDirectory ? "/" : ""), dir);
-    if (entry.isDirectory) bytes += await totalSize(url);
-    else if (entry.name !== "LICENSE") bytes += (await Deno.stat(url)).size;
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const url = new URL(entry.name + (entry.isDirectory() ? "/" : ""), dir);
+    if (entry.isDirectory()) bytes += await totalSize(url);
+    else if (entry.name !== "LICENSE") bytes += (await stat(url)).size;
   }
   return bytes;
 }
@@ -51,15 +53,15 @@ async function totalSize(dir: URL): Promise<number> {
 async function modelValues(project: Project | undefined, lenient: boolean): Promise<Record<string, string>> {
   if (!project?.model) return {};
   const { file, poster, alt, caption, clay = false } = project.model;
-  const model = await Deno.stat(new URL(file, SITE)).then((s) => s.size, () => {
-    const message = `${project.page}: no model at site/${file} (make it with deno task model)`;
+  const model = await stat(new URL(file, SITE)).then((s) => s.size, () => {
+    const message = `${project.page}: no model at site/${file} (make it with npm run model)`;
     if (!lenient) throw new Error(message);
     console.warn(`  (skipping the viewer) ${message}`);
     return -1;
   });
   if (model < 0) return { modelSize: "missing" };
   const viewer = await totalSize(new URL("assets/vendor/three/", SITE)) +
-    (await Deno.stat(new URL("assets/js/model-viewer.js", SITE))).size;
+    (await stat(new URL("assets/js/model-viewer.js", SITE))).size;
   return {
     modelFile: file,
     modelPoster: poster,
@@ -74,9 +76,9 @@ async function modelValues(project: Project | undefined, lenient: boolean): Prom
 
 async function loadPartials(): Promise<Map<string, string>> {
   const partials = new Map<string, string>();
-  for await (const entry of Deno.readDir(new URL("_partials/", SITE))) {
-    if (!entry.isFile || !entry.name.endsWith(".html")) continue;
-    const raw = await Deno.readTextFile(new URL(`_partials/${entry.name}`, SITE));
+  for (const entry of await readdir(new URL("_partials/", SITE), { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".html")) continue;
+    const raw = await readFile(new URL(`_partials/${entry.name}`, SITE), "utf8");
     // Drop the leading documentation comment.
     partials.set(entry.name.slice(0, -5), raw.replace(/^\s*<!--[\s\S]*?-->\s*/, "").trimEnd());
   }
@@ -84,7 +86,7 @@ async function loadPartials(): Promise<Map<string, string>> {
 }
 
 async function loadProjects(): Promise<Project[]> {
-  return JSON.parse(await Deno.readTextFile(new URL("_data/projects.json", SITE)));
+  return JSON.parse(await readFile(new URL("_data/projects.json", SITE), "utf8"));
 }
 
 function parseAttrs(src: string): Record<string, string> {
@@ -142,13 +144,13 @@ function renderPartial(
 }
 
 async function copyDir(from: URL, to: URL) {
-  await Deno.mkdir(to, { recursive: true });
-  for await (const entry of Deno.readDir(from)) {
+  await mkdir(to, { recursive: true });
+  for (const entry of await readdir(from, { withFileTypes: true })) {
     if (entry.name.startsWith("_")) continue; // build inputs, not published
-    const src = new URL(entry.name + (entry.isDirectory ? "/" : ""), from);
-    const dest = new URL(entry.name + (entry.isDirectory ? "/" : ""), to);
-    if (entry.isDirectory) await copyDir(src, dest);
-    else await Deno.copyFile(src, dest);
+    const src = new URL(entry.name + (entry.isDirectory() ? "/" : ""), from);
+    const dest = new URL(entry.name + (entry.isDirectory() ? "/" : ""), to);
+    if (entry.isDirectory()) await copyDir(src, dest);
+    else await copyFile(src, dest);
   }
 }
 
@@ -166,27 +168,27 @@ async function writeSitemap(pages: string[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
     urls.join("\n")
   }\n</urlset>\n`;
-  await Deno.writeTextFile(new URL("sitemap.xml", DIST), xml);
+  await writeFile(new URL("sitemap.xml", DIST), xml);
 }
 
-/** `lenient`: leave out viewers whose model isn't made yet, instead of failing (for deno task model). */
+/** `lenient`: leave out viewers whose model isn't made yet, instead of failing (for npm run model). */
 export async function build({ lenient = false } = {}): Promise<number> {
   const started = performance.now();
   const [partials, projects, version] = await Promise.all([loadPartials(), loadProjects(), siteVersion()]);
-  await Deno.remove(DIST, { recursive: true }).catch(() => {});
+  await rm(DIST, { recursive: true, force: true }).catch(() => {});
   await copyDir(SITE, DIST);
 
   let includes = 0;
   const pages: string[] = [];
-  for await (const entry of Deno.readDir(SITE)) {
-    if (!entry.isFile || !entry.name.endsWith(".html")) continue;
+  for (const entry of await readdir(SITE, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".html")) continue;
     const page = entry.name;
     pages.push(page);
     const values = {
       ...placeholders(page, projects, version.label),
       ...await modelValues(projects.find((p) => p.page === page), lenient),
     };
-    const html = await Deno.readTextFile(new URL(page, SITE));
+    const html = await readFile(new URL(page, SITE), "utf8");
     const out = html.replace(INCLUDE, (_all, indent: string, name: string, attrSrc: string) => {
       const body = partials.get(name);
       if (body === undefined) throw new Error(`${page}: unknown partial "${name}"`);
@@ -198,7 +200,7 @@ export async function build({ lenient = false } = {}): Promise<number> {
         .join("\n");
     });
     if (/<!--\s*@include/.test(out)) throw new Error(`${page}: malformed @include (must be alone on its line)`);
-    await Deno.writeTextFile(new URL(page, DIST), out);
+    await writeFile(new URL(page, DIST), out);
   }
   await writeSitemap(pages);
   console.log(
@@ -208,43 +210,35 @@ export async function build({ lenient = false } = {}): Promise<number> {
 }
 
 if (import.meta.main) {
-  const args = new Set(Deno.args);
+  const args = new Set(process.argv.slice(2));
   try {
     await build();
   } catch (err) {
     console.error(`Build failed: ${(err as Error).message}`);
-    if (!args.has("--watch")) Deno.exit(1);
+    if (!args.has("--watch")) process.exit(1);
   }
 
   if (args.has("--serve")) {
     // Mirror GitHub Pages: site under /folio/, 404.html for missing paths.
-    const notFound = () => Deno.readTextFile(new URL("404.html", DIST));
     const port = 8000;
     try {
-      const probe = Deno.listen({ port });
-      probe.close();
+      await serveDist(port);
+      console.log(`Serving http://localhost:${port}/folio/`);
     } catch (err) {
-      if (err instanceof Deno.errors.AddrInUse) {
-        console.error(`Port ${port} is already in use. Is another \`deno task dev\` still running?`);
-        Deno.exit(1);
+      if ((err as NodeJS.ErrnoException).code === "EADDRINUSE") {
+        console.error(`Port ${port} is already in use. Is another \`npm run dev\` still running?`);
+        process.exit(1);
       }
       throw err;
     }
-    Deno.serve({ port, onListen: () => console.log(`Serving http://localhost:${port}/folio/`) }, async (req) => {
-      const { pathname } = new URL(req.url);
-      if (!pathname.startsWith("/folio")) return Response.redirect(new URL("/folio/", req.url), 302);
-      const res = await serveDir(req, { fsRoot: fromFileUrl(DIST), urlRoot: "folio", quiet: true });
-      if (res.status !== 404) return res;
-      return new Response(await notFound(), { status: 404, headers: { "content-type": "text/html; charset=utf-8" } });
-    });
   }
 
   if (args.has("--watch")) {
     console.log("Watching site/ for changes...");
-    let timer: number | undefined;
-    for await (const _event of Deno.watchFs(fromFileUrl(SITE))) {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    watch(fileURLToPath(SITE), { recursive: true }, () => {
       clearTimeout(timer);
       timer = setTimeout(() => build().catch((err) => console.error(`Build failed: ${err.message}`)), 150);
-    }
+    });
   }
 }

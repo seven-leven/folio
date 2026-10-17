@@ -7,17 +7,19 @@
  * Warned (passes): 401/403/429, which usually mean a site blocks bots rather
  * than a dead link.
  *
- * Run: deno task links
+ * Run: npm run links
  */
+import { readdir, readFile } from "node:fs/promises";
+
 const DIST = new URL("../dist/", import.meta.url);
 const TIMEOUT = 20_000;
 const CONCURRENCY = 6;
 const BOT_BLOCKED = new Set([401, 403, 429, 999]);
 
 const pagesFor = new Map<string, Set<string>>();
-for await (const e of Deno.readDir(DIST)) {
-  if (!e.isFile || !e.name.endsWith(".html")) continue;
-  const html = await Deno.readTextFile(new URL(e.name, DIST));
+for (const e of await readdir(DIST, { withFileTypes: true })) {
+  if (!e.isFile() || !e.name.endsWith(".html")) continue;
+  const html = await readFile(new URL(e.name, DIST), "utf8");
   for (const m of html.matchAll(/\s(?:href|src)="(https?:\/\/[^"]+)"/g)) {
     const url = m[1].replace(/&amp;/g, "&");
     if (/fonts\.(googleapis|gstatic)\.com/.test(url)) continue; // preconnect/stylesheet hosts
@@ -70,5 +72,5 @@ for (const [url, s] of results) {
 console.log(`Checked ${urls.length} external links.`);
 for (const w of warned) console.log(`  warn   ${w}`);
 for (const b of broken) console.log(`  BROKEN ${b}`);
-if (broken.length) Deno.exit(1);
+if (broken.length) process.exit(1);
 console.log("No broken links.");

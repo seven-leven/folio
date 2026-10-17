@@ -6,10 +6,11 @@
  * macOS and Linux (GitHub's Ubuntu runners have it at /usr/bin/google-chrome).
  */
 import puppeteer, { type Browser } from "puppeteer-core";
-import { serveDir } from "@std/http/file-server";
-import { fromFileUrl } from "@std/path";
+import { readdir } from "node:fs/promises";
+import { statSync } from "node:fs";
+import { DIST, serveDist } from "./serve.ts";
 
-export const DIST = new URL("../dist/", import.meta.url);
+export { DIST };
 
 const CANDIDATES = [
   "C:/Program Files/Google/Chrome/Application/chrome.exe",
@@ -23,11 +24,11 @@ const CANDIDATES = [
 ];
 
 function chromePath(): string {
-  const fromEnv = Deno.env.get("CHROME_PATH");
+  const fromEnv = process.env.CHROME_PATH;
   if (fromEnv) return fromEnv;
   for (const p of CANDIDATES) {
     try {
-      Deno.statSync(p);
+      statSync(p);
       return p;
     } catch { /* not here */ }
   }
@@ -37,7 +38,7 @@ function chromePath(): string {
 /** Pages in dist/, homepage first. */
 export async function distPages(): Promise<string[]> {
   const pages: string[] = [];
-  for await (const e of Deno.readDir(DIST)) if (e.isFile && e.name.endsWith(".html")) pages.push(e.name);
+  for (const e of await readdir(DIST, { withFileTypes: true })) if (e.isFile() && e.name.endsWith(".html")) pages.push(e.name);
   return pages.sort((a, b) => (a === "index.html" ? -1 : b === "index.html" ? 1 : a.localeCompare(b)));
 }
 
@@ -45,10 +46,7 @@ export async function distPages(): Promise<string[]> {
 export async function openBrowser(
   port = 8130,
 ): Promise<{ browser: Browser; url: (page: string) => string; close: () => Promise<void> }> {
-  const server = Deno.serve(
-    { port, onListen() {} },
-    (req) => serveDir(req, { fsRoot: fromFileUrl(DIST), urlRoot: "folio", quiet: true }),
-  );
+  const server = await serveDist(port);
   const browser = await puppeteer.launch({
     executablePath: chromePath(),
     headless: true,
@@ -59,7 +57,7 @@ export async function openBrowser(
     url: (page) => `http://localhost:${port}/folio/${page}`,
     close: async () => {
       await browser.close();
-      await server.shutdown();
+      await new Promise((r) => server.close(r));
     },
   };
 }

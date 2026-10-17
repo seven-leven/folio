@@ -6,16 +6,19 @@
  * from git at build time, so it is never stored and can't drift. CI must check
  * out the full history (fetch-depth: 0) for the count to be right.
  *
- * Run: deno task version
+ * Run: npm run version
  */
+import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { capture } from "./proc.ts";
 
 const ROOT = new URL("../", import.meta.url);
 
 /** Runs git in the repo root; returns trimmed stdout, or null if git is unavailable or fails. */
 export async function git(...args: string[]): Promise<string | null> {
   try {
-    const out = await new Deno.Command("git", { args, cwd: ROOT, stdout: "piped", stderr: "null" }).output();
-    return out.success ? new TextDecoder().decode(out.stdout).trim() : null;
+    const out = await capture("git", args, { cwd: fileURLToPath(ROOT) });
+    return out.success ? out.stdout.trim() : null;
   } catch {
     return null;
   }
@@ -35,7 +38,7 @@ export interface Version {
 }
 
 export async function siteVersion(): Promise<Version> {
-  const { major, minor } = JSON.parse(await Deno.readTextFile(new URL("version.json", ROOT)));
+  const { major, minor } = JSON.parse(await readFile(new URL("version.json", ROOT), "utf8"));
   const count = await git("rev-list", "--count", "HEAD");
   const patch = count ? Number(count) : null;
   const date = await git("log", "-1", "--format=%cs");
