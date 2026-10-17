@@ -128,7 +128,7 @@ doesn't exist yet fails the build unless `FOLIO_LENIENT=1` is set (what `npm run
 | 2 | Tools on Node | Merged 17 Oct (#27) |
 | 3 | Format with Biome | Merged 17 Oct (#28) |
 | 4 | Build with Astro | Merged 17 Oct (#29) |
-| 5 | Astro components | This pull request |
+| 5 | Astro components | Merged 17 Oct (#30) |
 
 ## 8. If it goes wrong
 
