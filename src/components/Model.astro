@@ -1,0 +1,13 @@
+---
+// The 3D model viewer, from src/partials/model.html (see src/lib/partials.ts).
+import { renderPartial } from "../lib/partials.ts";
+
+interface Props {
+  /** The page's file name in the built site, e.g. "sem1.html" */
+  page: string;
+}
+const { page } = Astro.props;
+const html = await renderPartial("model", page);
+---
+
+<Fragment set:html={html} />

@@ -1,7 +1,7 @@
 # Data for the Coding timeline
 
-Each script here regenerates one file in `site/assets/data/`, which the matching animation in
-`site/assets/js/coding/visuals/` loads. The sources are personal archives that aren't in this repo; the table says where
+Each script here regenerates one file in `public/assets/data/`, which the matching animation in
+`public/assets/js/coding/visuals/` loads. The sources are personal archives that aren't in this repo; the table says where
 each one lives.
 
 Run from the repo root, for example `python tools/data/anime.py path/to/export.xml`. The scripts need Python 3 with
@@ -20,7 +20,7 @@ numpy, pandas, scipy, scikit-learn and requests (and torch for `titanic.py`).
 ## Professional map
 
 `professional.py` is different: it reads the work project register (Excel) and writes the per-atoll counts, the Greater
-Malé breakdown and the stats straight into the map section of `site/index.html`. Locations are placed with
+Malé breakdown and the stats straight into the map section of `src/pages/index.astro`. Locations are placed with
 `professional-places.json`: add a register location there, or override a single project by its exact name (`sites` for
 several islands, `area` for a Malé ward or Hulhumalé phase). The script prints anything it couldn't place.
 
@@ -28,5 +28,5 @@ several islands, `area` for a Malé ward or Hulhumalé phase). The script prints
 python tools/data/professional.py "C:\Users\gaahi\Desktop\Ixp\Project Progress\Project Register (standardised).xlsx"
 ```
 
-When a script's numbers change, update any figures quoted in the timeline text in `site/index.html` to match (for
+When a script's numbers change, update any figures quoted in the timeline text in `src/pages/index.astro` to match (for
 example the anime totals, or the benchmark speed-up).

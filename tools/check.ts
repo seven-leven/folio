@@ -5,7 +5,7 @@
  * Errors (fail CI): broken local links/images/scripts/styles, broken JS module
  * imports (bare ones through the pages' import maps) and data URLs, missing #anchors, <img> without alt, pages missing
  * <title>, meta description, lang or canonical, duplicate ids, raster images
- * that aren't WebP, and projects in site/_data/projects.json without a page or
+ * that aren't WebP, and projects in src/data/projects.json without a page or
  * a homepage entry.
  * Warnings: assets over the size budget, images over 2400 px, and assets
  * nothing references.
@@ -16,7 +16,7 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 
 const SITE = new URL("../dist/", import.meta.url);
-const PROJECTS = new URL("../site/_data/projects.json", import.meta.url);
+const PROJECTS = new URL("../src/data/projects.json", import.meta.url);
 const BASE_PATH = "/folio/"; // GitHub Pages project path, used by 404.html
 const SIZE_BUDGET = 1.5 * 1024 * 1024;
 const MAX_IMAGE_SIDE = 2400;

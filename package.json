@@ -7,8 +7,9 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "node tools/build.ts --watch --serve",
-    "build": "node tools/build.ts",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "check": "npm run build && node tools/check.ts",
     "snapshot": "npm run build && node tools/snapshot.ts",
     "compare": "node tools/compare.ts",
@@ -25,6 +26,7 @@
     "fmt:check": "biome format"
   },
   "dependencies": {
+    "astro": "5.18.2",
     "puppeteer-core": "23.11.1",
     "sharp": "0.33.5"
   },

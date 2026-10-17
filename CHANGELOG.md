@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Astro builds the site: each page is a `.astro` file in `src/pages/`, the navbar, footer and 3D viewer are components, static files are in `public/`, and `npm run dev` is Astro's dev server. Every page is the same as before (checked after normalising the HTML, and with before/after snapshots), and every address is unchanged. Step 4 of `docs/MIGRATION.md`
 - Tooling: `tools/` and `site/assets/js/` formatted with Biome, and CI checks the formatting again (as `deno fmt --check` did). Whitespace and line breaks only. Step 3 of `docs/MIGRATION.md`
 - Tooling: the build, checks, snapshots and release run on Node 24 and npm instead of Deno (`npm run …` replaces `deno task …`); Biome replaces `deno fmt` and `deno lint`; `npm run distdiff` compares two builds. The site itself is unchanged, byte for byte. Step 2 of `docs/MIGRATION.md`
 - Class book page: eight weeks of groundwork before ten days of making (the editorial team, group leaders and chapter leads, the shared template), and a section on the people who made it, by role

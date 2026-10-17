@@ -1,7 +1,7 @@
 <!--
-  Shared navbar, stamped into each page by tools/build.ts.
-  Use in a page: an HTML comment reading  @include navbar
-  (optionally  @include navbar active="architecture"  to highlight a link;
+  Shared navbar, rendered by src/components/Navbar.astro (src/lib/partials.ts).
+  Use in a page: <Navbar page="sem1.html" />
+  (optionally <Navbar page="sem1.html" active="architecture" /> to highlight a link;
   a link inside a group also highlights its group).
   Placeholders ({{home}}, {{index}}, {{engineering}}) are filled per page: the
   homepage links to its own sections, other pages link to index.html#...

@@ -1,7 +1,7 @@
 /**
  * Renders the one-sheet design guides in docs/ to PNG: design-guide.html (the
  * map of DESIGN.md) and design-guide-personal.html (of docs/design-personal.md).
- * The sheets read their colours and sizes from site/assets/css/main.css, so run
+ * The sheets read their colours and sizes from public/assets/css/main.css, so run
  * this after changing a token.
  *
  * Run: npm run guide

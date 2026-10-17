@@ -1,3 +1,8 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +17,7 @@
     <meta property="og:type" content="website">
 
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script>document.documentElement.classList.add("js");</script>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
@@ -20,7 +25,7 @@
     <link rel="stylesheet" href="assets/css/main.css">
   </head>
   <body class="project-page page-ink pk">
-    <!-- @include navbar active="coding" -->
+    <Navbar page="code-discord-bot.html" active="coding" />
 
     <!--
       A Coding entry page (docs/design-personal.md, section 05): the itch, what it does,
@@ -232,9 +237,9 @@ return len(used) + 1         <b># no gaps: the next one</b></pre>
       </div>
     </main>
 
-    <!-- @include footer -->
+    <Footer page="code-discord-bot.html" />
 
-    <script src="assets/js/main.js"></script>
-    <script type="module" src="assets/js/coding/index.js"></script>
+    <script src="assets/js/main.js" is:inline></script>
+    <script type="module" src="assets/js/coding/index.js" is:inline></script>
   </body>
 </html>

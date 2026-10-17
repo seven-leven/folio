@@ -2,11 +2,11 @@
 import json
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parents[2] / "site" / "assets" / "data"
+DATA_DIR = Path(__file__).resolve().parents[2] / "public" / "assets" / "data"
 
 
 def write(name: str, data) -> None:
-    """Write site/assets/data/<name>.json compactly and say where it went."""
+    """Write public/assets/data/<name>.json compactly and say where it went."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     path = DATA_DIR / f"{name}.json"
     path.write_text(json.dumps(data, separators=(",", ":"), ensure_ascii=False) + "\n", encoding="utf-8")

@@ -9,10 +9,14 @@
  * Run: npm run version
  */
 import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
+import { sep } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { capture } from "./proc.ts";
 
-const ROOT = new URL("../", import.meta.url);
+// The repo root: next to this file, or (when Astro bundles this into dist/ during a build) the folder npm runs in
+const HERE = new URL("../", import.meta.url);
+const ROOT = existsSync(new URL("version.json", HERE)) ? HERE : pathToFileURL(`${process.cwd()}${sep}`);
 
 /** Runs git in the repo root; returns trimmed stdout, or null if git is unavailable or fails. */
 export async function git(...args: string[]): Promise<string | null> {

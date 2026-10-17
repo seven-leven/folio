@@ -4,8 +4,8 @@
  *   npm run model -- sem2 "C:\path\to\model.3dm"
  *   npm run model -- sem2 --poster          (only retake the poster, e.g. after changing the views)
  *
- * The page needs a "model" entry in site/_data/projects.json (it says where the files go) and
- * an include comment reading  @include model  where the viewer should be.
+ * The page needs a "model" entry in src/data/projects.json (it says where the files go) and
+ * a <Model page="semN.html" /> component where the viewer should be.
  *
  * 1. Rhino 8 imports the file and exports FBX (it opens, converts and quits). FBX, not glTF:
  *    Rhino's glTF writer fails on some Enscape materials, and FBX keeps the units and textures.
@@ -21,11 +21,11 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawn } from "node:child_process";
-import { capture } from "../proc.ts";
-import { build } from "../build.ts";
+import { capture, inherit } from "../proc.ts";
 import { openBrowser } from "../browser.ts";
 
-const SITE = new URL("../../site/", import.meta.url);
+const SITE = new URL("../../public/", import.meta.url);
+const PROJECTS = new URL("../../src/data/projects.json", import.meta.url);
 const HERE = new URL("./", import.meta.url);
 const POSTER = { width: 1600, height: 1000 }; // the model partial's <img> size
 
@@ -36,10 +36,10 @@ if (!name || !source) {
 }
 const page = name.endsWith(".html") ? name : `${name}.html`;
 const projects: { page: string; model?: { file: string; poster: string } }[] = JSON.parse(
-  await readFile(new URL("_data/projects.json", SITE), "utf8"),
+  await readFile(PROJECTS, "utf8"),
 );
 const model = projects.find((p) => p.page === page)?.model;
-if (!model) fail(`${page} has no "model" entry in site/_data/projects.json; add one first.`);
+if (!model) fail(`${page} has no "model" entry in src/data/projects.json; add one first.`);
 
 function fail(message: string): never {
   console.error(message);
@@ -137,7 +137,9 @@ if (source !== "--poster") {
 }
 
 console.log("3/3 Poster: opening the viewer…");
-await build({ lenient: true }); // other pages may be waiting for their models
+// FOLIO_LENIENT: other pages may still be waiting for their models
+if (!(await inherit("npm", ["run", "build"], { env: { ...process.env, FOLIO_LENIENT: "1" } })))
+  fail("The build failed.");
 const { browser, url, close } = await openBrowser(8133);
 try {
   const tab = await browser.newPage();

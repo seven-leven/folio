@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["tools/**/*.ts", "site/assets/js/**/*.js"]
+    "includes": ["tools/**/*.ts", "src/**/*.ts", "astro.config.ts", "public/assets/js/**/*.js"]
   },
   "formatter": {
     "indentStyle": "space",

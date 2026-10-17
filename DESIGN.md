@@ -222,7 +222,7 @@ One look for each state, everywhere:
 ## 06. Project page
 
 Every studio project has this shape, in this order. Semesters 1 to 3 use it unchanged
-(`site/sem1.html` is the template).
+(`src/pages/sem1.astro` is the template).
 
 | # | Part | Rule |
 |---|---|---|
@@ -401,11 +401,11 @@ reason from the project's own boards; otherwise use the kit as it is.
 | Where | What |
 |---|---|
 | `DESIGN.md` | The rules |
-| `site/assets/css/main.css` | Every value (tokens) and every shared component |
-| `site/assets/css/pages/` | Layout that only one page needs. No colours, font names or pixel radii |
-| `site/_partials/` | The shell: navbar, footer, model viewer |
-| `site/sem1.html` | The project page template |
-| `site/assets/img/birds/` | The birds |
+| `public/assets/css/main.css` | Every value (tokens) and every shared component |
+| `public/assets/css/pages/` | Layout that only one page needs. No colours, font names or pixel radii |
+| `src/components/`, `src/partials/` | The shell: navbar, footer, model viewer |
+| `src/pages/sem1.astro` | The project page template |
+| `public/assets/img/birds/` | The birds |
 | `docs/design-guide.html` → `.png` | The one-sheet map, drawn from `main.css` |
 
 - Before a visual change run `npm run snapshot -- before`; afterwards

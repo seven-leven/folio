@@ -1,9 +1,9 @@
 # 3D models for the project pages
 
-Each project page can show its model in the 3D viewer (`site/assets/js/model-viewer.js`, three.js). Adding one takes
+Each project page can show its model in the 3D viewer (`public/assets/js/model-viewer.js`, three.js). Adding one takes
 three steps.
 
-**1. Give the project a `model` entry** in `site/_data/projects.json`:
+**1. Give the project a `model` entry** in `src/data/projects.json`:
 
 ```json
 "model": {
@@ -23,11 +23,11 @@ Visitors can switch it either way with the Clay button.
 ```html
 <section id="model" class="animate-on-scroll-target">
   <h2>The Model</h2>
-  <!-- @include model -->
+  <Model page="sem4.html" />
 </section>
 ```
 
-The build stamps in `site/_partials/model.html`: the viewer, its poster, the download link with the model's size, and
+The `Model` component renders `src/partials/model.html`: the viewer, its poster, the download link with the model's size, and
 the three.js import map.
 
 **3. Make the model and its poster** from the SketchUp or Rhino file:
@@ -61,7 +61,7 @@ SketchUp's opacity.
 
 ## three.js
 
-three.js is vendored in `site/assets/vendor/three/`: version 0.186.1, from jsDelivr. It's `build/three.module.min.js`,
+three.js is vendored in `public/assets/vendor/three/`: version 0.186.1, from jsDelivr. It's `build/three.module.min.js`,
 plus `build/three.core.min.js` saved as `three.core.js` (the name the module imports), plus the addons the viewer uses.
 To update it, download the same files for the new version.
 

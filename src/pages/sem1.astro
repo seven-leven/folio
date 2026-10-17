@@ -1,3 +1,9 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Model from "../components/Model.astro";
+import Footer from "../components/Footer.astro";
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script>document.documentElement.classList.add("js");</script>
+    <script is:inline>document.documentElement.classList.add("js");</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
@@ -22,7 +28,7 @@
     <link rel="stylesheet" href="assets/css/pages/sem1.css">
   </head>
   <body class="project-page project-reading-nook pk">
-    <!-- @include navbar active="architecture" -->
+    <Navbar page="sem1.html" active="architecture" />
 
     <main>
       <header class="pk-hero">
@@ -230,7 +236,7 @@
 
         <section id="model" class="animate-on-scroll-target">
           <h2>The Model</h2>
-          <!-- @include model -->
+          <Model page="sem1.html" />
         </section>
 
         <section id="views" class="animate-on-scroll-target">
@@ -292,8 +298,8 @@
       </div>
     </main>
 
-    <!-- @include footer -->
+    <Footer page="sem1.html" />
 
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/main.js" is:inline></script>
   </body>
 </html>
