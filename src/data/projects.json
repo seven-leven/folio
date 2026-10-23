@@ -28,5 +28,6 @@
     }
   },
   {"page": "sem4.html", "title": "Measured Embrace", "label": "Semester 4 · 2025", "semester": 4},
-  {"page": "sem5.html", "title": "Yield, Register, Transmit", "label": "Semester 5 · 2026", "semester": 5}
+  {"page": "sem5.html", "title": "Yield, Register, Transmit", "label": "Semester 5 · 2026", "semester": 5},
+  {"page": "sem6.html", "title": "Known Again", "label": "Semester 6 · 2026", "semester": 6}
 ]

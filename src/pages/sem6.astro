@@ -1,0 +1,450 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Known Again - Gaahis Yaugoob</title>
+    <meta name="description" content="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress: the group's masterplan, the artwork, and the Part 3A proposal.">
+    <meta property="og:title" content="Known Again - Gaahis Yaugoob">
+    <meta property="og:description" content="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress.">
+    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem6.webp">
+    <link rel="canonical" href="https://seven-leven.github.io/folio/sem6.html">
+    <meta property="og:url" content="https://seven-leven.github.io/folio/sem6.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/pages/sem6.css">
+  </head>
+  <body class="project-page project-known pk">
+    <Navbar page="sem6.html" active="architecture" />
+
+    <main>
+      <header class="pk-hero">
+        <div class="pk-wrap pk-hero__grid">
+          <div class="pk-hero__text">
+            <p class="pk-kicker">Semester 6 · Architectural Design VI · 2026 · in progress</p>
+            <h1 class="pk-title">Known <em>Again</em></h1>
+            <p class="sem-mark"><span class="sem-bar" data-at="6" role="img" aria-label="Semester 6 of 6"><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
+            <p class="pk-sub">Eighty-four homes round a courtyard, on Malé's old port</p>
+            <p class="pk-standfirst sem6-motto">Goods are counted. People are known.</p>
+            <dl class="pk-facts">
+              <div><dt>Homes</dt><dd>84, for islanders and families</dd></div>
+              <div><dt>Storeys</dt><dd>9, 29.45 m</dd></div>
+              <div><dt>Ground</dt><dd>60% given to the city</dd></div>
+              <div><dt>Open to the sky</dt><dd>22% of the plot</dd></div>
+            </dl>
+          </div>
+          <figure class="pk-hero__media">
+            <img
+              src="assets/projects/sem6/section-bb.webp"
+              alt="Section B-B through the building and its courtyard: homes with bedrooms on the outer face and day rooms on the inner, the corridors, the courtyard and the raft foundation"
+              width="2400" height="1698" fetchpriority="high" decoding="async"
+            >
+            <figcaption>One cut through the courtyard: the homes, the corridors, the air and the water.</figcaption>
+          </figure>
+        </div>
+      </header>
+
+      <nav class="pk-subnav" aria-label="On this page" data-spy>
+        <div class="pk-wrap pk-subnav__row">
+          <a href="#old-port">The old port</a>
+          <a href="#counting">I · Counting</a>
+          <a href="#breaking">II · Breaking</a>
+          <a href="#known">III · Known</a>
+          <a href="#next">What comes next</a>
+          <a href="#journal">Process journal</a>
+        </div>
+      </nav>
+
+      <div class="pk-wrap pk-body">
+        <figure class="sem6-pano">
+          <img
+            src="assets/projects/sem6/hero-courtyard.webp"
+            alt="A sweeping view round the inside of the courtyard: the corridors climbing the inner faces of the two halves"
+            width="2400" height="687" loading="lazy" decoding="async"
+          >
+        </figure>
+
+        <section id="old-port" class="animate-on-scroll-target">
+          <h2 data-label="Context · why plot B1">The old port</h2>
+          <div class="pk-grid pk-grid--split">
+            <div>
+              <p>
+                As a group we planned Fahi-Malé: move the port to Thilafushi and give its edge back to
+                the city. Each of us then took one plot. Mine, B1, sits on the old harbour edge, west of
+                the new central park: the beach to the west, the schools to the east, a bus road along
+                the south. It is the harbour where, as a child, I first arrived in Malé.
+              </p>
+              <ul class="pk-list sem6-key">
+                <li>Beach-goers from the west</li>
+                <li>Students from the mosque and social complex to the east</li>
+                <li>The general north–south walk</li>
+                <li>The commercial edges: the promenade, the bus road</li>
+                <li>Hulhangu from the south-west, iruvai from the north-east</li>
+              </ul>
+              <dl class="pk-stats">
+                <div><dt>3,000 <small>m²</small></dt><dd>plot</dd></div>
+                <div><dt>30.48 <small>m</small></dt><dd>height limit</dd></div>
+                <div><dt>1.5 <small>m</small></dt><dd>setback</dd></div>
+              </dl>
+              <p class="sem6-note">Motor-vehicle free, under Gavadhu 2.0.</p>
+            </div>
+            <figure>
+              <img src="assets/projects/sem6/site.webp" alt="Site analysis of plot B1 on the group's masterplan, with arrows for who passes and from which direction" width="2400" height="2400" loading="lazy" decoding="async">
+              <figcaption>B1 on the group's masterplan: who passes, and from where.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- I · Counting -->
+        <div class="pk-act" id="counting">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part I · Group work</p>
+            <h2 class="pk-act__title"><em>Counting</em></h2>
+            <p class="pk-act__say">Borrowing a way of looking.</p>
+          </header>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="I · Group work">Borrowed eyes</h2>
+            <p>
+              We started with Gehl's study of Perth: counting who stays in a street and what they do.
+              I built two of the studio's field tools and presented them. Even then we could see what a
+              count would miss.
+            </p>
+            <div class="pk-grid pk-grid--half">
+              <figure><img src="assets/projects/sem6/1a-tool-1.webp" alt="Field tool 1, land use and building scale: a street photograph annotated with storeys, doors and units" width="2400" height="1697" loading="lazy" decoding="async"></figure>
+              <figure><img src="assets/projects/sem6/1a-tool-2.webp" alt="Field tool 2, activity, comfort and safety: a street photograph annotated with where people sit, stand and play" width="2400" height="1697" loading="lazy" decoding="async"></figure>
+            </div>
+            <p class="sem6-mine"><b>My part</b> Part 1A slides 10–11, Tools 1 and 2 · presenting</p>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="I · Group work">The city that moves people</h2>
+            <div class="pk-grid pk-grid--split">
+              <div>
+                <p>
+                  Then we took the toolkit into Malé. Most of the people we counted were passing
+                  through. We saw no children playing. Shade decided who walked at all. The city moves
+                  people. It doesn't hold them.
+                </p>
+                <p class="sem6-mine"><b>My part</b> compiling, the toolkit, site research, presenting, class and group coordination, modelling</p>
+              </div>
+              <figure>
+                <img src="assets/projects/sem6/2a-board.webp" alt="The Part 2A city profile board for Malé" width="1698" height="2400" loading="lazy" decoding="async">
+                <figcaption>What the counts found.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="I · Group work">Fahi-Malé</h2>
+            <p>
+              Our answer was to move the port and give the waterfront back. We compiled the three
+              islands' work into one class book: three islands, one voice.
+            </p>
+            <div class="pk-grid pk-grid--2">
+              <figure>
+                <img src="assets/projects/sem6/masterplan.webp" alt="The Fahi-Malé masterplan map, with the port moved and the waterfront returned to the city" width="2400" height="1697" loading="lazy" decoding="async">
+                <figcaption>Fahi-Malé: the port moved, the edge returned.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/class-book.webp" alt="The cover of the class book, Greater Malé Region: Site Analysis and Masterplans" width="2400" height="2400" loading="lazy" decoding="async">
+                <figcaption>One book, one voice. <a href="code-class-book.html">How the book was made</a></figcaption>
+              </figure>
+            </div>
+            <p class="sem6-mine"><b>My part</b> the masterplan workshop, metrics, compiling, 3D and physical modelling</p>
+            <blockquote class="pk-quote">A count can tell you what a street does. It can't tell you how a place feels.</blockquote>
+          </section>
+        </div>
+
+        <!-- II · Breaking -->
+        <div class="pk-act" id="breaking">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part II</p>
+            <h2 class="pk-act__title"><em>Breaking</em></h2>
+            <p class="pk-act__say">Finding the feeling, then the form.</p>
+          </header>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II">A solution before a feeling</h2>
+            <div class="pk-grid pk-grid--split">
+              <p>
+                My first touchstone started from a line I had read, not from the site: white blocks, a
+                wire coil, threads pulling the joali and holhuashi into a tower. The tutors called it
+                too spatial, a building in disguise. They were right.
+              </p>
+              <figure class="pk-figure--narrow">
+                <img src="assets/projects/sem6/touchstone-1.webp" alt="Touchstone 1: stacked white blocks wrapped in a wire coil and threads, on a table" width="1350" height="2400" loading="lazy" decoding="async">
+                <figcaption>Touchstone 1: a building in disguise.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II">The walk back</h2>
+            <p>
+              So I walked the harbour again. What came back was not what stands there now but my first
+              memories of Malé: a ten-hour cargo boat with my father, the atoll shops, sacks and goods
+              waiting for boats. I thought that was how people here lived. When I moved here to study,
+              the feeling stayed. Malé stores people the way its godowns stored goods: packed,
+              identical, hidden from each other.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/journal-walk.webp" alt="Journal spread 02, Back to the site: notes from the site walk and a sketch of the memory it brought back" width="2400" height="1697" loading="lazy" decoding="async">
+              <figcaption>The site walk, and what it brought back.</figcaption>
+            </figure>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II · The artwork"><em>The City that Forgets</em></h2>
+            <p>
+              It took three tries to make that feeling instead of drawing it. The third mock read
+              brown, not grey, and its colour was spread too evenly. The final panel is one grey over
+              everything. From two metres it is a single mass. Only up close, where the covering cracks
+              and lets go, is the colour still there: the atolls, mixed in Malé and covered over.
+            </p>
+            <div class="pk-grid pk-grid--3">
+              <figure>
+                <img src="assets/projects/sem6/mock-3.webp" alt="Mock 3: a cracked brownish panel with colour spread evenly through it" width="1800" height="2400" loading="lazy" decoding="async">
+                <figcaption>Mock 3: too brown, too even.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/artwork-far.webp" alt="The final panel seen from standing height: one cracked grey surface" width="1800" height="2400" loading="lazy" decoding="async">
+                <figcaption>From two metres: one grey.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/artwork-close.webp" alt="The final panel close up: where the grey covering cracks, flecks of bright colour show underneath" width="2400" height="1800" loading="lazy" decoding="async">
+                <figcaption>Up close: the colour is still there.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II">The problem, and the principle</h2>
+            <div class="pk-grid pk-grid--3 sem6-stages">
+              <figure>
+                <img src="assets/projects/sem6/problem-1.webp" alt="Diagram: goods waiting for boats, and homes in Malé packed the same way" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>01 · Stored.</b> The goods first, then the people, packed the same way.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/problem-2.webp" alt="Diagram: one grey covering over a band of colours, cracking in places" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>02 · Covered.</b> One grey over every life inside.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/problem-3.webp" alt="Diagram: two blocks of flats across a narrow lane, their windows facing each other" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>03 · Forgotten.</b> Two blocks across a lane, and no one sees the other.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/principle-1.webp" alt="Diagram: the artwork's crack line, and a block opened along the same line" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>I · Opened.</b> Crack the block where the wind already wants to pass.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/principle-2.webp" alt="Diagram: a home in plan, its bedroom on the outer face and its day room facing the shared corridor" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>II · Turned in.</b> Rest looks out; life looks in, onto the courtyard.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/principle-3.webp" alt="Diagram: a corridor winding round the courtyard and climbing one storey a lap" width="2400" height="955" loading="lazy" decoding="async">
+                <figcaption><b>III · Known.</b> A corridor that climbs a storey a lap, so neighbours pass each other every day.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II">Eighteen forms, eight built</h2>
+            <p>
+              I tested eighteen forms on paper and built eight. The tutors said they looked like random
+              blobs. They were right: I had drawn shapes, not followed the artwork.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/form-models.webp" alt="Sheet of eighteen form studies at 1:500: blocks cut, bent and split in different ways" width="2400" height="1696" loading="lazy" decoding="async">
+              <figcaption>Eighteen on paper, eight in card: shapes, not yet the artwork.</figcaption>
+            </figure>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="II">Grown from the artwork</h2>
+            <p>
+              So I took one grey block and did to it what the artwork does. It covers, cracks along the
+              wind line, opens into a courtyard, and one half lifts half a storey, so one walk round the
+              corridor takes you up a floor.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/form-growth.webp" alt="Sheet of the form grown in steps from one grey block: covered, cracked, opened, lifted" width="2400" height="1696" loading="lazy" decoding="async">
+              <figcaption>Covers · cracks · opens · lifts · breaks free.</figcaption>
+            </figure>
+          </section>
+        </div>
+
+        <!-- III · Known -->
+        <div class="pk-act" id="known">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part III · The proposal, Part 3A</p>
+            <h2 class="pk-act__title"><em>Known</em></h2>
+            <p class="pk-act__say">Putting the island's steps back, in the air.</p>
+          </header>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">The ladder</h2>
+            <p>
+              On the islands there is a ladder of steps from the bedroom to the street: inner rooms, the
+              courtyard, the threshold, the lane, the main street, the harbour. Malé lost the middle
+              rungs. B1 puts them back in the air: bedroom, day room, threshold, corridor, third space,
+              the open ground, the street.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/ungoofaaru.webp" alt="Precedent diagram: the steps from house to harbour on Ungoofaaru, beside the same seven steps in section through B1" width="2400" height="1346" loading="lazy" decoding="async">
+              <figcaption>The island's ladder, and the same seven steps in B1.</figcaption>
+            </figure>
+            <p class="sem6-note">Also: SkyVille @ Dawson, eighty homes round one shared terrace, about B1's eighty-four; and Pangyo housing, a threshold room the resident opens or closes.</p>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">The bay and the three homes</h2>
+            <p>
+              Everything is set by one bay, 3.9 by 12 metres. The outer end is a bedroom suite that
+              looks out to the horizon; the corridor end is a day room that looks in. One bay is a home
+              for an islander staying in Malé for a while, two a small family, three a medium family:
+              42, 28 and 14 homes, 84 in all. When the tutors said the homes were too realistic, I
+              tested how far a home could open into the corridor: the compound, six rooms round a
+              shared house.
+            </p>
+            <div class="pk-grid pk-grid--2">
+              <figure>
+                <img src="assets/projects/sem6/homes.webp" alt="Plans at 1:100 of the three homes: one, two and three bays" width="2400" height="1696" loading="lazy" decoding="async">
+                <figcaption>Rest looks out, life looks in.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/compound.webp" alt="Plan at 1:100 of the compound: six rooms round a shared house and yard" width="2400" height="1696" loading="lazy" decoding="async">
+                <figcaption>Too realistic, so: six rooms and one shared house.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">Every floor different</h2>
+            <p>
+              Two halves round the courtyard, half B 1.55 metres above half A. Each floor has its own
+              mix, from more transit homes low down to more families higher up, so no two floors are the
+              same and the third spaces climb with the corridor.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/stack.webp" alt="Three floor plans side by side, the same bays arranged in a different mix of homes on each" width="1298" height="428" loading="lazy" decoding="async">
+              <figcaption>The same bay, a different mix on every floor.</figcaption>
+            </figure>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">The ground given back</h2>
+            <div class="pk-grid pk-grid--split">
+              <p>
+                The ground stands on columns. Sixty percent of it is for the city: a fifth for
+                beach-goers on the west, a fifth for students on the school side, a fifth for shops on
+                the streets. The rest is the residents' courtyard. Rooms for rent at the ground and
+                Level 1 help pay for the homes.
+              </p>
+              <figure>
+                <img src="assets/projects/sem6/ground.webp" alt="Ground floor plan of B1, divided by who passes: the beach side, the school side, the street shops and the residents' courtyard" width="2400" height="1625" loading="lazy" decoding="async">
+                <figcaption>The ground split by who passes: 20 · 20 · 20 · 40.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">An ordinary day, and iftar</h2>
+            <p>Up here the corridor is a street. On an ordinary day it is quiet. At iftar it is full.</p>
+            <div class="pk-grid pk-grid--half">
+              <figure>
+                <img src="assets/projects/sem6/corridor-day.webp" alt="View along an upper corridor on an ordinary day: the inner faces of the homes and the courtyard below" width="2400" height="1374" loading="lazy" decoding="async">
+                <figcaption>An ordinary day.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/corridor-iftar.webp" alt="The same corridor view at iftar" width="2400" height="1374" loading="lazy" decoding="async">
+                <figcaption>Iftar.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III">The numbers</h2>
+            <div class="pk-grid pk-grid--split">
+              <div>
+                <dl class="pk-stats">
+                  <div><dt>84</dt><dd>homes</dd></div>
+                  <div><dt>14,749 <small>m²</small></dt><dd>gross floor area</dd></div>
+                  <div><dt>4.92</dt><dd>floor area ratio</dd></div>
+                  <div><dt>22%</dt><dd>of the plot open to the sky</dd></div>
+                </dl>
+                <p>
+                  The rooms for rent cover about three quarters of what the transit homes cannot pay,
+                  and the building pays back in about 26 years with inflation: not alone, but public
+                  housing on state land never is. Of 36 regulations, 30 are met, 1 is answered and 5
+                  are carried into development.
+                </p>
+              </div>
+              <figure class="pk-figure--narrow">
+                <img src="assets/projects/sem6/numbers.webp" alt="The numbers column from the Part 3A board: areas, homes, costs and the regulation checklist" width="662" height="2400" loading="lazy" decoding="async">
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="III · 21 October">The pin-up</h2>
+            <div class="pk-grid pk-grid--split">
+              <figure class="pk-figure--narrow">
+                <img src="assets/projects/sem6/board-3a.webp" alt="The Part 3A concept board, Known Again, one tall portrait sheet" width="1133" height="2400" loading="lazy" decoding="async">
+                <figcaption>Known Again, Part 3A.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/model-table.webp" alt="The model table at the pin-up: the artwork, the form models, the site model and the concept model" width="2400" height="1346" loading="lazy" decoding="async">
+                <figcaption>The table: the artwork, the forms, the site, the concept model.</figcaption>
+              </figure>
+            </div>
+            <blockquote class="pk-quote">I can't build a community. I can build somewhere people see each other every day. That is where being known begins.</blockquote>
+          </section>
+        </div>
+
+        <section id="next" class="pk-section--tint animate-on-scroll-target">
+          <h2 data-label="Still to come">What comes next</h2>
+          <p>This page is written as the semester happens. These parts are added when they do.</p>
+          <ul class="pk-list">
+            <li><b>Part 3B · 11 November.</b> What the crit said; the structure, services and materials resolved; a 1:50 fragment of the half-level corner.</li>
+            <li><b>Part 4A · Week 15.</b> The final board, renders and the final model.</li>
+            <li><b>Looking back.</b> After the final crit.</li>
+          </ul>
+        </section>
+
+        <section id="journal" class="animate-on-scroll-target">
+          <h2 data-label="Process journal · live from Tumblr">The studio, week by week</h2>
+          <p>The journal kept alongside the project: models, sketches, site visits and the odd broken print. New entries appear here as they're posted.</p>
+          <div data-tumblr-feed="gaahis" data-count="9">
+            <div class="tf-list">
+              <p class="tf-status" role="status">Loading the latest entries…</p>
+            </div>
+          </div>
+          <div class="pk-actions">
+            <p>Read <span class="tf-total">every entry</span> on the blog.</p>
+            <a class="btn btn--primary" href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">
+              Open the journal on Tumblr
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <Footer />
+
+    <script src="assets/js/main.js" is:inline></script>
+  </body>
+</html>
