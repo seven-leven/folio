@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Mancala page brought up to the game's v2.7: twenty-three bots, Doomed to Expert, on a 240-game matched-pair ladder; the 2024 bot now fourth, with two of the three above it built on it; a short part on the bots that learn; the solver's answer (the standard game is a first-player win, 96–2) with its heat map of board sizes; the First-versus-Random claim corrected; and a new section listing every bot by the picker's groups, with the four resting ones
 - Semester 6, Known Again: a project page as far as the Part 3A pin-up (the group's masterplan, the artwork, the proposal), written up as the semester goes; the homepage row and footer list now link it
 - The navbar, footer and 3D model viewer are written as Astro components (`src/components/`), replacing the HTML partials and their `{{placeholders}}`. Pages are unchanged. Step 5 of `docs/MIGRATION.md`, the last one
 - Astro builds the site: each page is a `.astro` file in `src/pages/`, the navbar, footer and 3D viewer are components, static files are in `public/`, and `npm run dev` is Astro's dev server. Every page is the same as before (checked after normalising the HTML, and with before/after snapshots), and every address is unchanged. Step 4 of `docs/MIGRATION.md`
