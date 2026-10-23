@@ -163,7 +163,8 @@
   --sem: var(--sem-5);
   --sem-text: var(--sem-5-text);
 }
-[data-sem="6"] {
+[data-sem="6"],
+.project-known {
   --sem: var(--sem-6);
   --sem-text: var(--sem-6-text);
 }
