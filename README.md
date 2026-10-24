@@ -28,7 +28,7 @@ folio/
 │       └── projects/<page>/   images for each project page
 ├── tools/                     checks and helpers (see "Tasks")
 │   └── data/                  scripts that regenerate public/assets/data/
-├── astro.config.ts            base path /folio, file-style addresses, the sitemap
+├── astro.config.ts            base path /folio, file-style addresses, the sitemap, cache busting
 ├── version.json               major.minor of the site version
 ├── CHANGELOG.md
 ├── package.json               tasks (npm run …) and dependencies
@@ -101,6 +101,12 @@ The footer shows the site version and lists the architecture projects from
 `src/data/projects.json`; the previous/next links on project pages read that list.
 The build also writes `sitemap.xml`, with each page's last-changed date from git
 (`astro.config.ts`).
+
+After the build, every local CSS and JS reference gets `?v=<hash of the file>`
+(`src/integrations/cache-bust.ts`), so a deploy is seen at once instead of after
+GitHub Pages' 10-minute browser cache. Scripts that import other scripts get an
+import map from each module's plain address to its stamped one. Write plain paths
+in pages and scripts; the build adds the stamps.
 
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
 it at any URL. The build fails on an unknown `active` name, a `<Model>` on a page
