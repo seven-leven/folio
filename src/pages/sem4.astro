@@ -1,36 +1,18 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Measured Embrace - Gaahis Yaugoob</title>
-    <link rel="canonical" href="https://seven-leven.github.io/folio/sem4.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/sem4.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="Measured Embrace: a homestay for an introverted host in N. Kendhikulhudhoo, Maldives. Design Studio IV main portfolio and supplementary technical resolution.">
-    <meta property="og:title" content="Measured Embrace - Gaahis Yaugoob">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem4.webp">
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital@1&family=IBM+Plex+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    >
-    <link rel="stylesheet" href="assets/css/pages/sem4.css">
-  </head>
-  <body class="project-page project-measured-embrace">
+<BaseLayout
+  page="sem4.html"
+  title="Measured Embrace"
+  description="Measured Embrace: a homestay for an introverted host in N. Kendhikulhudhoo, Maldives. Design Studio IV main portfolio and supplementary technical resolution."
+  image="assets/img/cover-sem4.webp"
+  styles={["sem4"]}
+  fonts={["plex-mono", "source-sans", "garamond"]}
+  bodyClass="project-page project-measured-embrace"
+>
     <Navbar page="sem4.html" active="architecture" />
 
     <main>
@@ -903,5 +885,4 @@ import Footer from "../components/Footer.astro";
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

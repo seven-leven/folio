@@ -1,32 +1,18 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Book by Script - Gaahis Yaugoob</title>
-    <meta name="description" content="The tooling behind the Design VI class book on Malé, Villimalé and Hulhumalé: page templates drawn by Python, InDesign driven by script, and the finished book turned into a website in about a day.">
-    <meta property="og:title" content="A Book by Script - Gaahis Yaugoob">
-    <meta property="og:description" content="A 198-page class book by 31 students, set with scripts, and its web edition built in about a day.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/class-book/site-home.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/code-class-book.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/code-class-book.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-  </head>
-  <body class="project-page page-ink pk">
+<BaseLayout
+  page="code-class-book.html"
+  title="A Book by Script"
+  description="The tooling behind the Design VI class book on Malé, Villimalé and Hulhumalé: page templates drawn by Python, InDesign driven by script, and the finished book turned into a website in about a day."
+  shareDescription="A 198-page class book by 31 students, set with scripts, and its web edition built in about a day."
+  image="assets/projects/class-book/site-home.webp"
+  fonts={["plex-mono"]}
+  bodyClass="project-page page-ink pk"
+>
     <Navbar page="code-class-book.html" active="coding" />
 
     <!--
@@ -364,5 +350,4 @@ street, shade, homes          permeability, activation</pre>
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

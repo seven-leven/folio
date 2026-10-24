@@ -13,6 +13,7 @@ folio/
 ├── src/                       ← pages and components; Astro builds them into dist/
 │   ├── pages/                 one .astro file per page (index, sem1 … sem5, engineering,
 │   │                          the code-*.html entry pages, 404), each built to <name>.html
+│   ├── layouts/BaseLayout.astro  every page's <head> and <body>: title, description, sharing tags, fonts
 │   ├── components/            Navbar, Footer, Model (the 3D viewer); see "Shared navbar and footer"
 │   ├── lib/site.ts            what they read at build time: projects, version, model sizes
 │   └── data/projects.json     the architecture projects, in order
@@ -174,10 +175,12 @@ nothing else: no colour values, font names or pixel radii.
 
 1. Put its images in `public/assets/projects/<name>/`; `npm run images` makes
    them WebP at most 2400 px, and the check rejects anything else.
-2. Copy `src/pages/sem3.astro`, which is built from the project page kit alone; give it a
-   `<title>`, meta description, canonical URL and `og:image`, a body class
-   (`project-<name>`), and map that class to its semester colour at the top of
-   `main.css`. DESIGN.md shows the kit's markup.
+2. Copy `src/pages/sem3.astro`, which is built from the project page kit alone. In its
+   `<BaseLayout>` give it the page name, title, description, preview `image`, its
+   `styles` and a body class (`project-<name>`); the layout writes the `<head>`
+   (canonical address, sharing tags, fonts) and the build fails without a title or
+   description. Map the body class to its semester colour at the top of `main.css`.
+   DESIGN.md shows the kit's markup.
 3. Put anything particular to the page in `public/assets/css/pages/<name>.css`, and
    the semester's bird in `public/assets/img/birds/semN.webp`.
 4. Add it to `src/data/projects.json` (footer, previous/next links and the

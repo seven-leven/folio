@@ -1,33 +1,18 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Model from "../components/Model.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enchanting Reading Nook - Gaahis Yaugoob</title>
-    <meta name="description" content="Enchanting Reading Nook: a Semester 1 architectural design project by Gaahis Yaugoob, a cozy and immersive space designed for literary escape and tranquility.">
-    <meta property="og:title" content="Enchanting Reading Nook - Gaahis Yaugoob">
-    <meta property="og:description" content="Enchanting Reading Nook: a Semester 1 architectural design project by Gaahis Yaugoob, a cozy and immersive space designed for literary escape and tranquility.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem1.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/sem1.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/sem1.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/pages/sem1.css">
-  </head>
-  <body class="project-page project-reading-nook pk">
+<BaseLayout
+  page="sem1.html"
+  title="Enchanting Reading Nook"
+  description="Enchanting Reading Nook: a Semester 1 architectural design project by Gaahis Yaugoob, a cozy and immersive space designed for literary escape and tranquility."
+  image="assets/img/cover-sem1.webp"
+  styles={["sem1"]}
+  bodyClass="project-page project-reading-nook pk"
+>
     <Navbar page="sem1.html" active="architecture" />
 
     <main>
@@ -301,5 +286,4 @@ import Footer from "../components/Footer.astro";
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

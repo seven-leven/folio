@@ -1,33 +1,18 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Model from "../components/Model.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Acupuncture - Gaahis Yaugoob</title>
-    <meta name="description" content="Urban Acupuncture: a Semester 3 architectural design project by Gaahis Yaugoob, a vitalizing retreat designed as a strategic intervention within the concrete jungle.">
-    <meta property="og:title" content="Urban Acupuncture - Gaahis Yaugoob">
-    <meta property="og:description" content="Urban Acupuncture: a Semester 3 architectural design project by Gaahis Yaugoob, a vitalizing retreat designed as a strategic intervention within the concrete jungle.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem3.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/sem3.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/sem3.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/pages/sem3.css">
-  </head>
-  <body class="project-page project-acupuncture pk">
+<BaseLayout
+  page="sem3.html"
+  title="Urban Acupuncture"
+  description="Urban Acupuncture: a Semester 3 architectural design project by Gaahis Yaugoob, a vitalizing retreat designed as a strategic intervention within the concrete jungle."
+  image="assets/img/cover-sem3.webp"
+  styles={["sem3"]}
+  bodyClass="project-page project-acupuncture pk"
+>
     <Navbar page="sem3.html" active="architecture" />
 
     <main>
@@ -315,5 +300,4 @@ import Footer from "../components/Footer.astro";
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

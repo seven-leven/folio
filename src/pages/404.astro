@@ -1,21 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page not found - Gaahis Yaugoob</title>
-    <meta name="description" content="This page doesn't exist. Head back to the portfolio of Gaahis Yaugoob.">
-    <meta name="robots" content="noindex">
-    <!-- GitHub Pages serves this for any missing path, so every URL here is absolute. -->
-    <link rel="icon" href="/folio/assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="/folio/assets/css/main.css">
-    <link rel="stylesheet" href="/folio/assets/css/pages/404.css">
-</head>
-<body class="home not-found">
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  page="404.html"
+  title="Page not found"
+  description="This page doesn't exist. Head back to the portfolio of Gaahis Yaugoob."
+  styles={["404"]}
+  bodyClass="home not-found"
+  notFound
+>
     <nav id="navbar" aria-label="Main">
         <div class="container">
             <a href="/folio/" class="nav-logo" aria-label="Gaahis Yaugoob, home">
@@ -45,5 +39,4 @@
     </footer>
 
     <script src="/folio/assets/js/main.js" is:inline></script>
-</body>
-</html>
+</BaseLayout>
