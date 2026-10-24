@@ -511,7 +511,7 @@
       const img = images[index];
       const live = images.filter((x) => !x.dataset.broken);
       lb.classList.remove("is-zoomed");
-      big.src = img.currentSrc || img.src;
+      big.src = img.src; // the full-size file, not the smaller copy srcset may have picked for the page
       big.alt = img.alt || "";
       caption.textContent = captionFor(img);
       count.textContent = `${live.indexOf(img) + 1} / ${live.length}`;

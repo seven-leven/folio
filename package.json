@@ -18,6 +18,7 @@
     "changelog": "node tools/changelog.ts",
     "guide": "node tools/guide.ts",
     "images": "node tools/images.ts",
+    "fonts": "node tools/fonts.ts",
     "model": "node tools/models/model.ts",
     "links": "npm run build && node tools/links.ts",
     "release": "node tools/release.ts",
