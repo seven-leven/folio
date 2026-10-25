@@ -79,6 +79,43 @@ _Gathers: the accessibility checklist, now a principle rather than a table at th
 
 > When a rule and a principle disagree, change the rule. Don't quietly drop the principle.
 
+### Tightened after the semester audit (v2.1)
+
+The [semester audit](audit/semesters.md) showed the principles were right but too soft to stop
+drift: every page "followed" them and still came out differently. v2.1 makes them sharper in
+three ways.
+
+**1. Rules that can be measured are numbers** (section 00 of the sheet). Phase 2 makes
+`npm run check` enforce them.
+
+| Rule | Limit | Serves | Worst today |
+|---|---|---|---|
+| Intro under the title | 40 words at most | P1 | Sem 1 · 106 |
+| Font sizes on one page | 10 at most | P3 | Sem 4 · 22 |
+| Figures on one page | 30 at most, the strongest | P1 | Sem 4 · 40 |
+| Chapters | 5 to 9, in acts, ending by looking back | P4 | Sem 1–3 · no reflection |
+| Figures with a caption | every one | P4 | Sem 1 · 13 of 17 |
+| Alt text | describes what is shown, 6 words or more | P4 P5 | Sem 3 · 21 of 24 only name it |
+| Title case in headings and captions | none | P4 | Sem 4 · 24 headings, 33 captions |
+| Text contrast, voice labels included | 4.5:1 or more | P5 | Sem 6 · 2.7:1 |
+| Link and button height | 44 px or more | P5 | Sem 1–4 · every one in the page |
+| A drawing's width at 375 px | 300 px or more | P1 P5 | Sem 1, 6 · 160 px |
+
+**2. P3 names the shared parts.** A voice changes typeface, paper tone and colour, and nothing
+else. The hero, fact tiles, lead image shape (a rectangle), captions, heading case and numbering,
+the chapter nav and the states are shared components. This answers decision 2 below the way the
+plan assumed; Sem 4 and 5 keep their type and colour and move onto the shared parts.
+
+**3. P4 covers the story, not just the words.** Every semester is told in five acts, whatever
+its chapter titles: context → the idea → how it developed → the drawings → looking back. Each
+act has a question to answer (in the audit, §3). Sem 5 and 6 already work this way; Sem 1–3
+need the story written, which is the author's job, not a code change.
+
+Smaller rules added: the kicker stays on one line on a phone; the bird ends above the intro;
+the chapter nav fades at its edge when it overflows; a chapter number is its own label;
+captions read "Ground floor plan, 1:20"; text is first person and about the design, never a
+pitch to the reader.
+
 ## The new guide: shape
 
 One `DESIGN.md` replaces `DESIGN.md` and `docs/design-personal.md`. Each section opens with
@@ -87,6 +124,7 @@ the principles it serves.
 | # | Section | Serves | Comes from |
 |---|---|---|---|
 | | Manifesto: tagline and the five principles | all | new |
+| 00 | Budgets: the rules as numbers | all | **new**, from the semester audit |
 | 01 | Colour: quiet ground, one signal | P1 P2 P5 | DESIGN §01, Personal §02 |
 | 02 | Type: hierarchy without shouting | P3 P5 | DESIGN §02 |
 | 03 | Language: say what is true | P4 P3 | **new** (case, captions, status, counts, link text, alt text) |
@@ -96,8 +134,9 @@ the principles it serves.
 | 07 | Place markers: bird, bar, edge | P2 | DESIGN §07 |
 | 08 | Voices, Personal included | P3 P1 | DESIGN §08, Personal §01–04 |
 | 09 | Page shapes: project, entry, homepage | P2 P3 | DESIGN §06, Personal §05 |
-| 10 | Empty, loading and failed: never pretend | P4 | **new** (journal and wildlife data when the fetch fails, placeholders, Sem VI) |
-| 11 | Book and site | P3 | DESIGN §07 table, expanded |
+| 10 | Story: told, not listed (the five acts) | P4 P1 | **new**, from the semester audit |
+| 11 | Empty, loading and failed: never pretend | P4 | **new** (journal and wildlife data when the fetch fails, placeholders, Sem VI) |
+| 12 | Book and site | P3 | DESIGN §07 table, expanded |
 | | Before a change ships: checklist by principle | all | **new**, replaces Do/Don't |
 | | Reference: every token, checked against `main.css` | | DESIGN tables, moved |
 

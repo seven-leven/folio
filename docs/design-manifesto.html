@@ -242,6 +242,23 @@
       .case .demo { margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-xs); background: var(--paper-2); font-size: 13px; color: var(--text-2); }
       .case .demo b { font: 400 30px/1 var(--font-serif); color: var(--text); }
 
+      /* Budgets */
+      .budgets { display: grid; }
+      .budgets > div { display: grid; grid-template-columns: 1.1fr 1.3fr 0.4fr 1fr; gap: 20px; padding: 11px 0; border-top: 1px solid var(--line); align-items: baseline; font-size: 14px; }
+      .budgets .bh { border-top: 0; font: 600 11px/1.2 var(--font-sans); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-muted); }
+      .budgets .br span { color: var(--text-2); }
+      .budgets .br b { color: var(--text); font-weight: 600; }
+      .budgets .br i { font: 600 11px var(--font-sans); letter-spacing: .06em; color: var(--accent); }
+      .budgets .br em { font: 500 12.5px var(--font-data); font-style: normal; color: var(--text-muted); }
+
+      /* Story */
+      .acts { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 3px solid var(--sem-3); }
+      .act { padding: 22px 22px 6px 0; border-right: 1px solid var(--line); margin-right: 22px; }
+      .act.last { border-right: 0; margin-right: 0; }
+      .act .lab { color: var(--sem-3-text); }
+      .act h4 { margin: 8px 0 0; font: 400 26px/1.1 var(--font-serif); }
+      .act p { margin-top: 10px; font-size: 13.5px; color: var(--text-2); }
+
       /* Checklist */
       .check { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
       .check h4 { margin: 10px 0 14px; font: 400 21px/1.1 var(--font-serif); }
@@ -254,10 +271,10 @@
   </head>
   <body>
     <header class="head">
-      <p class="lab">Folio · Design manifesto · v2 draft · website and printed book</p>
+      <p class="lab">Folio · Design manifesto · v2.1 · tightened after the semester audit</p>
       <h1>One shell. Six semesters.<br><em>A few voices.</em></h1>
       <p class="tag">The drawings carry the colour.<br>Everything around them stays quiet.</p>
-      <p class="sub muted">Five principles first; every rule below names the ones it serves. When a rule and a principle disagree, change the rule.</p>
+      <p class="sub muted">Five principles first; every rule below names the ones it serves. When a rule and a principle disagree, change the rule. Where a rule can be measured, it is a number (section 00).</p>
     </header>
 
     <div class="principles">
@@ -266,37 +283,58 @@
         <p class="lab">P1</p>
         <h3>The work leads</h3>
         <p class="bold">The drawings carry the colour.</p>
-        <p class="desc">Boards, renders and code animations are the most vivid things on the page. Drawings whole, on white, never cropped.</p>
+        <p class="desc">Drawings whole, on white, in plain rectangles, never cropped or tinted. Show the strongest thirty, not every board.</p>
       </div>
       <div class="pr">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
         <p class="lab">P2</p>
         <h3>Always say where you are</h3>
         <p class="bold">Which semester, which chapter, at a glance.</p>
-        <p class="desc">Colour, bird, progress bar and page edge are one system for placing people, never decoration.</p>
+        <p class="desc">Colour, bird, bar and edge place people. The kicker stays on one line; the chapter nav shows that more chapters exist.</p>
       </div>
       <div class="pr">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
         <p class="lab">P3</p>
         <h3>One shell, many voices</h3>
         <p class="bold">Consistency is the default; difference is earned.</p>
-        <p class="desc">Grid, hierarchy, states and navigation never change. A project may borrow its boards' voice. Book and site are one work.</p>
+        <p class="desc">Hero, facts, captions, chapter nav and states are shared parts. A voice changes type, paper and colour, nothing else.</p>
       </div>
       <div class="pr">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H10l-5 4v-4H4z"/><path d="M8 8.5h8M8 12h5"/></svg>
         <p class="lab">P4</p>
         <h3>Tell it straight</h3>
         <p class="bold">Words, numbers and status say what is true.</p>
-        <p class="desc">Plain first person, sentence case, captions that say what a drawing shows, counts only once they're known.</p>
+        <p class="desc">First person, sentence case, every figure captioned and described. Every semester is told in acts and ends by looking back.</p>
       </div>
       <div class="pr">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5"/><path d="M12 10v5l-3.5 6M12 15l3.5 6"/></svg>
         <p class="lab">P5</p>
         <h3>For everyone, on every screen</h3>
         <p class="bold">Access is part of the design.</p>
-        <p class="desc">Phones first at 375 px, 44 px targets, 4.5:1 text, keyboard focus, reduced motion, Dhivehi set properly.</p>
+        <p class="desc">Phones first: drawings 300 px wide or more, 44 px targets, 4.5:1 for all text, voice labels included.</p>
       </div>
     </div>
+
+    <!-- 00 Budgets -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">00 · Budgets</p><h2>The rules, as numbers.</h2><p>Each limit comes from the semester audit; the last column is the worst page today. Phase 2 makes <code>npm run check</code> enforce them.</p></div>
+        <div class="serves"><span>P1</span><span>P2</span><span>P3</span><span>P4</span><span>P5</span></div>
+      </div>
+      <div class="body budgets">
+        <div class="bh"><span>Rule</span><span>Limit</span><span>Serves</span><span>Worst today</span></div>
+        <div class="br"><span>Intro under the title</span><b>40 words at most</b><i>P1</i><em>Sem 1 · 106</em></div>
+        <div class="br"><span>Font sizes on one page</span><b>10 at most</b><i>P3</i><em>Sem 4 · 22</em></div>
+        <div class="br"><span>Figures on one page</span><b>30 at most, the strongest</b><i>P1</i><em>Sem 4 · 40</em></div>
+        <div class="br"><span>Chapters</span><b>5 to 9, in acts, ending by looking back</b><i>P4</i><em>Sem 1–3 · no reflection</em></div>
+        <div class="br"><span>Figures with a caption</span><b>every one</b><i>P4</i><em>Sem 1 · 13 of 17</em></div>
+        <div class="br"><span>Alt text</span><b>describes what is shown, 6 words or more</b><i>P4 P5</i><em>Sem 3 · 21 of 24 only name it</em></div>
+        <div class="br"><span>Title case in headings and captions</span><b>none</b><i>P4</i><em>Sem 4 · 24 headings, 33 captions</em></div>
+        <div class="br"><span>Text contrast, voice labels included</span><b>4.5:1 or more</b><i>P5</i><em>Sem 6 · 2.7:1</em></div>
+        <div class="br"><span>Link and button height</span><b>44 px or more</b><i>P5</i><em>Sem 1–4 · every one in the page</em></div>
+        <div class="br"><span>A drawing's width at 375 px</span><b>300 px or more</b><i>P1 P5</i><em>Sem 1, 6 · 160 px</em></div>
+      </div>
+    </section>
 
     <!-- 01 Colour -->
     <section>
@@ -417,11 +455,13 @@
       </div>
       <div class="body say">
         <div class="pair"><p class="lab">Case</p><div class="yes">Sun shading and ventilation</div><div class="no">Sun Shading And Ventilation</div><p class="why">Sentence case for every heading, button and label.</p></div>
-        <div class="pair"><p class="lab">Captions</p><div class="yes">Section through the stair core, looking east</div><div class="no">Image 3</div><p class="why">Say what the drawing shows. Alt text too.</p></div>
+        <div class="pair"><p class="lab">Captions</p><div class="yes">Ground floor plan, 1:20</div><div class="no">Ground Floor Plan (Scale 1:20)</div><p class="why">Every figure has one: what it is, then the scale. Sentence case, no brackets.</p></div>
+        <div class="pair"><p class="lab">Alt text</p><div class="yes">Section: shelves on both sides, a bean bag on the mirrored floor</div><div class="no">Section X-X</div><p class="why">Describe what a reader would see; the caption already names it.</p></div>
+        <div class="pair"><p class="lab">Numbers</p><div class="yes">01.1 · The shift and the site</div><div class="no">01.1The Shift &amp; The Site</div><p class="why">A chapter number is its own label, so a screen reader can tell it apart.</p></div>
         <div class="pair"><p class="lab">Status</p><div class="yes">Lunch Lab · starts May 2027</div><div class="no">Coming soon</div><p class="why">A promise has a date, or it isn't made.</p></div>
         <div class="pair"><p class="lab">Links</p><div class="yes">Read the full story</div><div class="no">Click here</div><p class="why">A link says where it goes; it's always underlined.</p></div>
         <div class="pair"><p class="lab">Credit</p><div class="yes">Group work · with four classmates</div><div class="no">(an unmarked group board)</div><p class="why">Group work is marked as group work, on the site and in the book.</p></div>
-        <div class="pair"><p class="lab">Voice</p><div class="yes">I wrote a bot because I kept losing</div><div class="no">Leveraging AI to optimise gameplay</div><p class="why">First person and plain. Say the problem before the solution.</p></div>
+        <div class="pair"><p class="lab">Voice</p><div class="yes">I stacked the shelves so every book is in reach</div><div class="no">Sink into the plush comfort of a bean bag</div><p class="why">First person, about the design. Never a sales pitch to the reader.</p></div>
       </div>
     </section>
 
@@ -438,7 +478,7 @@
         <div class="spans"><div style="grid-column: span 4">4 · drawing set</div><div style="grid-column: span 4">4</div><div style="grid-column: span 4">4</div></div>
         <div class="spans"><div style="grid-column: 3 / span 8">8 · body text, 68 characters</div></div>
         <div class="bps">
-          <div class="bp"><div class="dev" style="width:52px;height:96px;grid-template-rows:1fr 1fr 1fr"><i></i><i></i><i></i></div><p><b>Phone · 1 column</b>Designed first. Nothing scrolls sideways at 375 px; 16 px gutters; touch targets 44 px.</p></div>
+          <div class="bp"><div class="dev" style="width:52px;height:96px;grid-template-rows:1fr 1fr 1fr"><i></i><i></i><i></i></div><p><b>Phone · 1 column</b>Designed first. Nothing scrolls sideways at 375 px. Drawing sets go to one column below 480 px.</p></div>
           <div class="bp"><div class="dev" style="width:84px;height:110px;grid-template-columns:1fr 1fr"><i></i><i></i><i></i><i></i></div><p><b>Tablet · 2 columns</b>820 px and under: spans stack; the lead image comes first.</p></div>
           <div class="bp"><div class="dev" style="width:150px;height:96px;grid-template-columns:5fr 7fr"><i></i><i></i></div><p><b>Desktop · 12 columns</b>Space inside a chapter from 4 to 36 px; between chapters, a rule and 40–68 px.</p></div>
         </div>
@@ -511,7 +551,7 @@
           </div>
         </div>
       </div>
-      <p class="note">Current is semantic as well as visual: <code>aria-current</code> sets it. If it looks clickable it must do something; images open the lightbox but don't grow on hover.</p>
+      <p class="note">Current is semantic as well as visual: <code>aria-current</code> sets it. If it looks clickable it must do something; images open the lightbox but don't grow on hover. Every link and chip is 44 px tall on a phone.</p>
     </section>
 
     <!-- 07 Place markers -->
@@ -545,10 +585,10 @@
           <div class="panel">
             <p class="lab">Chapter nav</p>
             <div class="chips"><span class="chip">Context</span><span class="chip on">Site</span><span class="chip">Proposal</span><span class="chip">Drawings</span></div>
-            <p>Sticky under the navbar, one chip per chapter; current is filled with the semester's text shade.</p>
+            <p>Sticky, one chip per chapter, current filled with the semester's text shade. When the row overflows, its edge fades.</p>
           </div>
         </div>
-        <p class="note">A bird appears behind a project's title at 26%, on the book's semester opener at 100%, or beside each semester in an index. Never in the navbar, never to fill a corner, never mirrored or recoloured.</p>
+        <p class="note">A bird appears behind a project's title at 26%, on the book's semester opener at 100%, or beside each semester in an index. It ends above the intro and never sits under body text. Never in the navbar, never to fill a corner, never mirrored or recoloured.</p>
       </div>
     </section>
 
@@ -570,8 +610,9 @@
         </div>
         <div class="canwrap">
           <div><p class="lab">A voice can change</p><div class="chips"><span class="chip">Typeface, from the six</span><span class="chip">Paper tone</span><span class="chip">A few colours of its own</span><span class="chip">Imagery</span><span class="chip">How much it plays (Personal)</span></div></div>
-          <div><p class="lab">A voice can't change</p><div class="chips"><span class="chip x">Grid and spacing</span><span class="chip x">Page shape</span><span class="chip x">Hero and fact tiles</span><span class="chip x">Navigation</span><span class="chip x">States</span><span class="chip x">Place markers</span></div></div>
+          <div><p class="lab">A voice can't change</p><div class="chips"><span class="chip x">Grid and spacing</span><span class="chip x">Page shape</span><span class="chip x">Hero and fact tiles</span><span class="chip x">Lead image shape</span><span class="chip x">Captions</span><span class="chip x">Heading case and numbers</span><span class="chip x">Navigation</span><span class="chip x">States</span><span class="chip x">Place markers</span></div></div>
         </div>
+        <p class="note">Not yet in line: Semesters 4 and 5 bring their own hero, facts, chapter nav and an arched lead image. They keep their type and colour and move onto the shared parts (pass 3).</p>
       </div>
     </section>
 
@@ -585,13 +626,13 @@
         <div class="panel">
           <p class="lab">Project page · paper</p>
           <ol class="steps-list">
-            <li><span><b>Kicker</b> · Semester N · course · year</span></li>
-            <li><span><b>Title</b> · serif, last word italic in the semester colour; the bird behind it</span></li>
+            <li><span><b>Kicker</b> · Semester N · course · year, one line on a phone</span></li>
+            <li><span><b>Title</b> · serif, last word italic in colour; the bird behind it, ending above the intro</span></li>
             <li><span><b>Progress bar</b>, filled to N</span></li>
-            <li><span><b>Sub-line, standfirst, two to four facts</b></span></li>
-            <li><span><b>Lead image</b> · one, with the semester colour down its edge</span></li>
-            <li><span><b>Chapter nav</b> · sticky chips</span></li>
-            <li><span><b>Chapters</b> · numbered, a rule between, drawings on white</span></li>
+            <li><span><b>Sub-line</b> in the project's words · <b>intro</b> of 40 words at most · <b>three or four facts</b></span></li>
+            <li><span><b>Lead image</b> · a rectangle on white, the semester colour down its edge, captioned</span></li>
+            <li><span><b>Chapter nav</b> · sticky chips, 44 px, fading where there are more</span></li>
+            <li><span><b>Chapters</b> · the five acts (section 10), a rule between, 30 figures at most</span></li>
             <li><span><b>Pager</b> · previous · progress · next</span></li>
           </ol>
         </div>
@@ -611,10 +652,26 @@
       </div>
     </section>
 
-    <!-- 10 Never pretend -->
+    <!-- 10 Story -->
     <section>
       <div class="sec-head">
-        <div><p class="lab">10 · Empty, loading, failed</p><h2>Never pretend.</h2><p>Live data and unfinished work say exactly what is known, and nothing more.</p></div>
+        <div><p class="lab">10 · Story</p><h2>Told, not listed.</h2><p>A semester is a story of decisions, not a catalogue of drawing types. Every one runs in the same five acts.</p></div>
+        <div class="serves"><span>P4</span><span>P1</span><span>P3</span></div>
+      </div>
+      <div class="body acts">
+        <div class="act"><p class="lab">Act 1</p><h4>Context</h4><p>What was the brief really asking, and what did I decide it was about?</p></div>
+        <div class="act"><p class="lab">Act 2</p><h4>The idea</h4><p>The one sentence the project stands on, and the drawing that shows it.</p></div>
+        <div class="act"><p class="lab">Act 3</p><h4>How it developed</h4><p>What changed my mind: models, tests and dead ends, in order.</p></div>
+        <div class="act"><p class="lab">Act 4</p><h4>The drawings</h4><p>Plans, sections and views, the strongest only, each captioned and described.</p></div>
+        <div class="act last"><p class="lab">Act 5</p><h4>Looking back</h4><p>What I'd do differently now, and what carried into the next semester.</p></div>
+      </div>
+      <p class="note">Chapter titles may be the project's own words ("Searching", "The old port"); the acts underneath are what's fixed. Semesters 5 and 6 already work this way; 1 to 3 list drawing types and need the story written.</p>
+    </section>
+
+    <!-- 11 Never pretend -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">11 · Empty, loading, failed</p><h2>Never pretend.</h2><p>Live data and unfinished work say exactly what is known, and nothing more.</p></div>
         <div class="serves"><span>P4</span><span>P2</span></div>
       </div>
       <div class="body states3">
@@ -631,11 +688,11 @@
         <div><p class="lab">Before a change ships</p><h2>Does it still belong?</h2><p>The review for every page PR, by principle.</p></div>
       </div>
       <div class="body check">
-        <div><p class="lab">P1</p><h4>The work leads</h4><ul><li>Is anything over a drawing?</li><li>Are drawings whole, on white?</li><li>Is the accent used for a few signals only?</li></ul></div>
-        <div><p class="lab">P2</p><h4>Where you are</h4><ul><li>Kicker, bird, bar and edge in the semester's colour?</li><li>Is the current chapter marked?</li></ul></div>
-        <div><p class="lab">P3</p><h4>One shell</h4><ul><li>Only tokens: no hex, font names or px radii in page CSS?</li><li>Shared components, voice on top?</li><li>Snapshots compared?</li></ul></div>
-        <div><p class="lab">P4</p><h4>Tell it straight</h4><ul><li>Sentence case?</li><li>Captions and alt text say what's shown?</li><li>Group work marked; no undated "soon"?</li></ul></div>
-        <div><p class="lab">P5</p><h4>Everyone</h4><ul><li>375 px with no sideways scroll?</li><li>44 px targets, visible focus?</li><li>4.5:1 text on its real ground?</li></ul></div>
+        <div><p class="lab">P1</p><h4>The work leads</h4><ul><li>Is anything over a drawing?</li><li>Drawings whole, on white, in rectangles?</li><li>30 figures or fewer, the strongest?</li></ul></div>
+        <div><p class="lab">P2</p><h4>Where you are</h4><ul><li>Kicker on one line, bird above the intro?</li><li>Current chapter marked, overflow visible?</li></ul></div>
+        <div><p class="lab">P3</p><h4>One shell</h4><ul><li>Shared hero, facts, captions and nav?</li><li>10 font sizes or fewer, only tokens?</li><li>Snapshots compared?</li></ul></div>
+        <div><p class="lab">P4</p><h4>Tell it straight</h4><ul><li>Intro 40 words or fewer, first person?</li><li>Every figure captioned and described?</li><li>Five acts, ending by looking back?</li><li>Sentence case; group work marked?</li></ul></div>
+        <div><p class="lab">P5</p><h4>Everyone</h4><ul><li>Drawings 300 px wide at 375?</li><li>44 px targets, visible focus?</li><li>4.5:1 for every label, voices too?</li></ul></div>
       </div>
     </section>
 
