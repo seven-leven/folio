@@ -1,0 +1,39 @@
+---
+/**
+ * The latest posts of the Tumblr process journal, read when the site is built (src/lib/live.ts).
+ * If the feed couldn't be read, it says so and the page's own link to the blog does the rest.
+ */
+import { journal } from "../lib/live.ts";
+
+interface Props {
+  blog: string;
+  count?: number;
+}
+const { blog, count = 9 } = Astro.props;
+const entries = await journal(blog, count);
+---
+
+<div data-tumblr-feed={blog} class={entries ? "is-loaded" : "is-error"}>
+  <div class="tf-list">
+    {
+      entries ? (
+        entries.map((e) => (
+          <a class="tf-card" href={e.href} target="_blank" rel="noopener noreferrer">
+            {e.image && (
+              <span class="tf-media">
+                <img src={e.image} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+              </span>
+            )}
+            <span class="tf-meta">
+              <span>{e.label}</span>
+              <time datetime={e.date}>{e.dateText}</time>
+            </span>
+            <span class="tf-caption">{e.caption}</span>
+          </a>
+        ))
+      ) : (
+        <p class="tf-status" role="status">The journal couldn’t be loaded when this page was built. Read it on Tumblr instead.</p>
+      )
+    }
+  </div>
+</div>

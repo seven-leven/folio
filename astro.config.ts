@@ -2,6 +2,7 @@ import { readdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { defineConfig, type AstroIntegration } from "astro/config";
 import { cacheBust } from "./src/integrations/cache-bust.ts";
+import { responsiveImages } from "./src/integrations/responsive-images.ts";
 import { gitDate } from "./tools/version.ts";
 
 const SITE_URL = "https://seven-leven.github.io/folio/";
@@ -40,5 +41,5 @@ export default defineConfig({
   outDir: fileURLToPath(new URL("./dist/", import.meta.url)),
   server: { port: 8000 },
   devToolbar: { enabled: false },
-  integrations: [sitemap(), cacheBust()],
+  integrations: [sitemap(), responsiveImages(), cacheBust()],
 });

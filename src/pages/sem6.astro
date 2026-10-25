@@ -1,32 +1,19 @@
 ---
+import TumblrFeed from "../components/TumblrFeed.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Known Again - Gaahis Yaugoob</title>
-    <meta name="description" content="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress: the group's masterplan, the artwork, and the Part 3A proposal.">
-    <meta property="og:title" content="Known Again - Gaahis Yaugoob">
-    <meta property="og:description" content="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-sem6.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/sem6.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/sem6.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/pages/sem6.css">
-  </head>
-  <body class="project-page project-known pk">
+<BaseLayout
+  page="sem6.html"
+  title="Known Again"
+  description="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress: the group's masterplan, the artwork, and the Part 3A proposal."
+  shareDescription="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress."
+  image="assets/img/cover-sem6.webp"
+  styles={["sem6"]}
+  bodyClass="project-page project-known pk"
+>
     <Navbar page="sem6.html" active="architecture" />
 
     <main>
@@ -427,11 +414,7 @@ import Footer from "../components/Footer.astro";
         <section id="journal" class="animate-on-scroll-target">
           <h2 data-label="Process journal · live from Tumblr">The studio, week by week</h2>
           <p>The journal kept alongside the project: models, sketches, site visits and the odd broken print. New entries appear here as they're posted.</p>
-          <div data-tumblr-feed="gaahis" data-count="9">
-            <div class="tf-list">
-              <p class="tf-status" role="status">Loading the latest entries…</p>
-            </div>
-          </div>
+          <TumblrFeed blog="gaahis" count={9} />
           <div class="pk-actions">
             <p>Read <span class="tf-total">every entry</span> on the blog.</p>
             <a class="btn btn--primary" href="https://www.tumblr.com/gaahis" target="_blank" rel="noopener noreferrer">
@@ -446,5 +429,4 @@ import Footer from "../components/Footer.astro";
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

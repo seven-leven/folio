@@ -1,33 +1,17 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering - Gaahis Yaugoob</title>
-    <link rel="canonical" href="https://seven-leven.github.io/folio/engineering.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/engineering.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="description" content="Civil engineering work by Gaahis Yaugoob: a 14-storey building designed from survey to raft foundation, a wind-load thesis, and a coastal field study in K. Thulusdhoo.">
-    <meta property="og:title" content="Engineering - Gaahis Yaugoob">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/img/cover-engineering.webp">
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/pages/engineering.css">
-  </head>
-  <body class="project-page project-engineering">
+<BaseLayout
+  page="engineering.html"
+  title="Engineering"
+  description="Civil engineering work by Gaahis Yaugoob: a 14-storey building designed from survey to raft foundation, a wind-load thesis, and a coastal field study in K. Thulusdhoo."
+  image="assets/img/cover-engineering.webp"
+  styles={["engineering"]}
+  bodyClass="project-page project-engineering"
+>
     <Navbar page="engineering.html" active="engineering" />
 
     <main>
@@ -401,5 +385,4 @@ import Footer from "../components/Footer.astro";
     <Footer />
 
     <script src="assets/js/main.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

@@ -80,6 +80,17 @@ for (const [page, html] of pageText) {
     if (!/\salt=/.test(m[0])) errors.push(`${page}: <img> without alt: ${m[0].slice(0, 80).replace(/\s+/g, " ")}`);
   }
 
+  // Every file in a srcset must exist
+  for (const m of html.matchAll(/\ssrcset="([^"]*)"/g)) {
+    for (const entry of m[1].split(",")) {
+      const value = entry.trim().split(/\s+/)[0];
+      const target = value && resolveLocal(value, page);
+      if (!target) continue;
+      if (!fileSet.has(target.path)) errors.push(`${page}: broken srcset -> ${value}`);
+      else referenced.add(target.path);
+    }
+  }
+
   // Every local src/href must exist; every #anchor must exist
   for (const m of html.matchAll(/\s(src|href)="([^"]*)"/g)) {
     const value = m[2];

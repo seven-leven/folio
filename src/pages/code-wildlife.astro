@@ -1,31 +1,16 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building Wildlife Illustrated - Gaahis Yaugoob</title>
-    <meta name="description" content="An ongoing project: the Wildlife Illustrated website over nine versions, and the one lesson it kept teaching: stop trusting memory and make the project check itself.">
-    <meta property="og:title" content="Building Wildlife Illustrated - Gaahis Yaugoob">
-    <meta property="og:description" content="An ongoing project: the Wildlife Illustrated website over nine versions, and the one lesson it kept teaching: stop trusting memory and make the project check itself.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/wildlife/now-dark.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/code-wildlife.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/code-wildlife.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-  </head>
-  <body class="project-page page-ink pk">
+<BaseLayout
+  page="code-wildlife.html"
+  title="Building Wildlife Illustrated"
+  description="An ongoing project: the Wildlife Illustrated website over nine versions, and the one lesson it kept teaching: stop trusting memory and make the project check itself."
+  image="assets/projects/wildlife/now-dark.webp"
+  bodyClass="project-page page-ink pk"
+>
     <Navbar page="code-wildlife.html" active="coding" />
 
     <!--
@@ -863,5 +848,4 @@ import Footer from "../components/Footer.astro";
 
     <script src="assets/js/main.js" is:inline></script>
     <script src="assets/js/arch-evolution.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

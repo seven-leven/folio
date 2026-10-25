@@ -1,0 +1,88 @@
+---
+/**
+ * The page shell every page uses: the <head> (title, description, canonical address, sharing
+ * tags, icon, stylesheets) and the <body>. The fonts are served from the site
+ * (public/assets/css/fonts.css, written by npm run fonts). A page without a title or a description
+ * doesn't build.
+ *
+ *   <BaseLayout page="sem1.html" title="Enchanting Reading Nook" description="…"
+ *     image="assets/img/cover-sem1.webp" styles={["sem1"]} bodyClass="project-page pk">
+ *     …the page…
+ *   </BaseLayout>
+ */
+const SITE = "https://seven-leven.github.io/folio/";
+
+
+interface Props {
+  /** The page's file name in the built site, e.g. "sem1.html" */
+  page: string;
+  /** The page's own title; " - Gaahis Yaugoob" is added unless `fullTitle` is set */
+  title: string;
+  /** Used as is, for the homepage */
+  fullTitle?: boolean;
+  description: string;
+  /** For link previews, when they should say less than the description */
+  shareDescription?: string;
+  /** Preview image, relative to the site, e.g. "assets/img/cover-sem1.webp" */
+  image?: string;
+  /** Page stylesheets in assets/css/pages/, without ".css" */
+  styles?: string[];
+  bodyClass?: string;
+  themeColor?: string;
+  /** The 404 page: not indexed, and every address absolute (GitHub Pages serves it at any path) */
+  notFound?: boolean;
+}
+
+const {
+  page,
+  title,
+  fullTitle = false,
+  description,
+  shareDescription,
+  image,
+  styles = [],
+  bodyClass,
+  themeColor,
+  notFound = false,
+} = Astro.props;
+if (!title.trim()) throw new Error(`${page}: BaseLayout needs a title`);
+if (!description.trim()) throw new Error(`${page}: BaseLayout needs a description`);
+
+const heading = fullTitle ? title : `${title} - Gaahis Yaugoob`;
+const url = SITE + (page === "index.html" ? "" : page);
+const asset = (path: string) => (notFound ? `/folio/${path}` : path);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{heading}</title>
+    <meta name="description" content={description}>
+    {notFound && <meta name="robots" content="noindex">}
+    {
+      !notFound && (
+        <>
+          <link rel="canonical" href={url}>
+          <meta property="og:url" content={url}>
+          <meta property="og:type" content="website">
+          <meta property="og:title" content={heading}>
+          <meta property="og:description" content={shareDescription ?? description}>
+          {image && <meta property="og:image" content={SITE + image}>}
+          {image && <meta name="twitter:card" content="summary_large_image">}
+        </>
+      )
+    }
+    {themeColor && <meta name="theme-color" content={themeColor}>}
+    <link rel="icon" href={asset("assets/img/favicon.svg")} type="image/svg+xml">
+    <script is:inline>document.documentElement.classList.add("js");</script>
+    <link rel="stylesheet" href={asset("assets/css/fonts.css")}>
+    <link rel="stylesheet" href={asset("assets/css/main.css")}>
+    {styles.map((s) => <link rel="stylesheet" href={asset(`assets/css/pages/${s}.css`)}>)}
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

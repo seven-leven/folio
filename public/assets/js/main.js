@@ -30,8 +30,6 @@
     initScrollSpy();
     initSectionNav();
     initContactForm();
-    initTumblrFeed();
-    initWildlife();
 
     if (document.body.classList.contains("project-page")) {
       initBrokenImages();
@@ -220,177 +218,6 @@
     targets.forEach((t) => io.observe(t));
   }
 
-  // --- Live Tumblr journal ([data-tumblr-feed="blogname"]) -----------------
-  // Tumblr's public v1 API answers with `var tumblr_api_read = {...}`, so it
-  // loads as a plain script (no CORS). Posts are rebuilt from their text and
-  // image URLs only; no Tumblr HTML is ever inserted into the page.
-  function initTumblrFeed() {
-    const feed = document.querySelector("[data-tumblr-feed]");
-    if (!feed) return;
-    const blog = feed.dataset.tumblrFeed;
-    const count = Number(feed.dataset.count) || 9;
-    const list = feed.querySelector(".tf-list");
-    const status = feed.querySelector(".tf-status");
-    const total = (feed.closest("section") || document).querySelector(".tf-total");
-
-    const fail = () => {
-      feed.classList.add("is-error");
-      if (status) status.textContent = "The journal couldn’t be loaded right now. Read it on Tumblr instead.";
-    };
-
-    const script = document.createElement("script");
-    script.src = `https://${blog}.tumblr.com/api/read/json?num=${count}`;
-    script.async = true;
-    script.onerror = fail;
-    script.onload = () => {
-      const data = window.tumblr_api_read;
-      if (!data || !Array.isArray(data.posts) || !list) return fail();
-      data.posts.forEach((post) => list.appendChild(tumblrCard(blog, post)));
-      if (total && data["posts-total"]) total.textContent = `all ${data["posts-total"]} entries`;
-      if (status) status.hidden = true;
-      feed.classList.add("is-loaded");
-    };
-    document.body.appendChild(script);
-  }
-
-  function tumblrCard(blog, post) {
-    const html = post["regular-body"] || post["photo-caption"] || post["video-caption"] || "";
-    const doc = new DOMParser().parseFromString(html, "text/html"); // inert: nothing loads or runs
-    const imgSrc = post["photo-url-500"] || doc.querySelector("img")?.getAttribute("src") || "";
-    // textContent glues adjacent blocks/links together ("@studiowork"); pad them first.
-    doc.body.querySelectorAll("p, div, br, li, h1, h2, h3, h4, figure, blockquote, a").forEach((el) => el.append(" "));
-    const text = `${post["regular-title"] || ""} ${doc.body.textContent || ""}`.replace(/\s+/g, " ").trim();
-    const num = text.match(/entry\s*\/\/\s*#?\s*(\d+)/i)?.[1];
-    const caption = text
-      .replace(/^.*?entry\s*\/\/\s*#?\s*\d+\s*/i, "")
-      .replace(/@[\w-]+/g, "")
-      .trim();
-    const date = new Date(Number(post["unix-timestamp"]) * 1000);
-
-    const card = document.createElement("a");
-    card.className = "tf-card";
-    card.href = `https://www.tumblr.com/${blog}/${encodeURIComponent(post.id)}`;
-    card.target = "_blank";
-    card.rel = "noopener noreferrer";
-
-    if (/^https:\/\//.test(imgSrc)) {
-      const media = document.createElement("span");
-      media.className = "tf-media";
-      const img = document.createElement("img");
-      img.src = imgSrc;
-      img.alt = "";
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.referrerPolicy = "no-referrer";
-      media.appendChild(img);
-      card.appendChild(media);
-    }
-
-    const meta = document.createElement("span");
-    meta.className = "tf-meta";
-    const label = document.createElement("span");
-    label.textContent = num ? `Entry #${num}` : "Journal";
-    const time = document.createElement("time");
-    time.dateTime = date.toISOString();
-    time.textContent = date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-    meta.append(label, time);
-
-    const cap = document.createElement("span");
-    cap.className = "tf-caption";
-    cap.textContent = caption || "View entry";
-
-    card.append(meta, cap);
-    return card;
-  }
-
-  // --- Wildlife Illustrated: live progress from the bird_dash data ---------
-  // The page ships with the latest known numbers; this refreshes them from
-  // the collection's own JSON so the portfolio never goes stale.
-  async function initWildlife() {
-    const section = document.querySelector("[data-wildlife]");
-    if (!section || !window.fetch) return;
-    const base = section.dataset.wildlife;
-
-    try {
-      const getJSON = (path) =>
-        fetch(base + path, { cache: "no-cache" }).then((r) => {
-          if (!r.ok) throw new Error(`${path}: ${r.status}`);
-          return r.json();
-        });
-
-      const collections = await getJSON("collections.json");
-      const lists = await Promise.all(collections.map((c) => getJSON(`lists/${c.id}.json`)));
-
-      const stats = { all: { drawn: 0, total: 0 } };
-      const drawnItems = [];
-      collections.forEach((c, i) => {
-        const items = Object.values(lists[i]).flat();
-        const drawn = items.filter((it) => it.drawn);
-        stats[c.id] = { drawn: drawn.length, total: items.length };
-        stats.all.drawn += drawn.length;
-        stats.all.total += items.length;
-        drawn.forEach((it) => drawnItems.push({ ...it, collection: c }));
-      });
-
-      Object.entries(stats).forEach(([id, s]) => {
-        section.querySelectorAll(`[data-count="${id}"]`).forEach((el) => (el.textContent = String(s.drawn)));
-        section.querySelectorAll(`[data-total="${id}"]`).forEach((el) => (el.textContent = String(s.total)));
-        const bar = section.querySelector(`[data-bar="${id}"]`);
-        if (bar && s.total) {
-          bar.setAttribute("aria-valuenow", String(s.drawn));
-          bar.setAttribute("aria-valuemax", String(s.total));
-          bar.firstElementChild.style.width = `${((s.drawn / s.total) * 100).toFixed(1)}%`;
-        }
-      });
-
-      const grid = section.querySelector("[data-latest]");
-      if (grid && drawnItems.length) {
-        drawnItems.sort((a, b) => String(b.drawn).localeCompare(String(a.drawn)));
-        grid.replaceChildren(...drawnItems.slice(0, 6).map((it) => wildlifeCard(base, it)));
-      }
-    } catch (err) {
-      // Keep the numbers baked into the page.
-      console.warn("Wildlife Illustrated: using cached numbers.", err);
-    }
-  }
-
-  function wildlifeCard(base, it) {
-    const kind = it.collection.itemLabel || it.collection.id;
-    const card = document.createElement("a");
-    card.className = "wl-card";
-    card.href = base;
-    card.target = "_blank";
-    card.rel = "noopener noreferrer";
-
-    const media = document.createElement("span");
-    media.className = "wl-card__img";
-    const img = document.createElement("img");
-    img.src = `${base}thumb/${encodeURIComponent(it.collection.id)}/${encodeURIComponent(it.id)}.webp`;
-    img.alt = `Drawing of a ${it.name}`;
-    img.loading = "lazy";
-    media.appendChild(img);
-
-    const body = document.createElement("span");
-    body.className = "wl-card__body";
-    const id = document.createElement("span");
-    id.className = "wl-card__id";
-    id.textContent = `${kind.charAt(0).toUpperCase()}${kind.slice(1)} #${it.id}`;
-    const name = document.createElement("b");
-    name.textContent = it.name;
-    body.append(id, name);
-    if (it.dhiv_script) {
-      const dv = document.createElement("span");
-      dv.className = "wl-card__dv";
-      dv.lang = "dv";
-      dv.dir = "rtl";
-      dv.textContent = it.dhiv_script;
-      body.appendChild(dv);
-    }
-
-    card.append(media, body);
-    return card;
-  }
-
   // --- Contact form: open the visitor's mail app with a pre-filled message --
   function initContactForm() {
     const form = document.getElementById("contact-form");
@@ -511,7 +338,7 @@
       const img = images[index];
       const live = images.filter((x) => !x.dataset.broken);
       lb.classList.remove("is-zoomed");
-      big.src = img.currentSrc || img.src;
+      big.src = img.src; // the full-size file, not the smaller copy srcset may have picked for the page
       big.alt = img.alt || "";
       caption.textContent = captionFor(img);
       count.textContent = `${live.indexOf(img) + 1} / ${live.length}`;

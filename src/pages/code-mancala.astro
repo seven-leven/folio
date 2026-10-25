@@ -1,33 +1,18 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Losing at Ohvalhugondi - Gaahis Yaugoob</title>
-    <meta name="description" content="A mancala bot four years in the making: a command-line game in 2022 to beat my grandmother at ohvalhugondi, a depth-first search bot in 2024, a web game with twenty-three bots on an Elo ladder, and a solver that settles who wins.">
-    <meta property="og:title" content="Losing at Ohvalhugondi - Gaahis Yaugoob">
-    <meta property="og:description" content="Four years of building a bot to beat my grandmother at the Maldivian mancala, and what the bots found out about the game.">
-    <meta property="og:image" content="https://seven-leven.github.io/folio/assets/projects/mancala/game-dark.webp">
-    <link rel="canonical" href="https://seven-leven.github.io/folio/code-mancala.html">
-    <meta property="og:url" content="https://seven-leven.github.io/folio/code-mancala.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-    <script is:inline>document.documentElement.classList.add("js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/pages/mancala.css">
-  </head>
-  <body class="project-page page-ink pk project-mancala">
+<BaseLayout
+  page="code-mancala.html"
+  title="Losing at Ohvalhugondi"
+  description="A mancala bot four years in the making: a command-line game in 2022 to beat my grandmother at ohvalhugondi, a depth-first search bot in 2024, a web game with twenty-three bots on an Elo ladder, and a solver that settles who wins."
+  shareDescription="Four years of building a bot to beat my grandmother at the Maldivian mancala, and what the bots found out about the game."
+  image="assets/projects/mancala/game-dark.webp"
+  styles={["mancala"]}
+  bodyClass="project-page page-ink pk project-mancala"
+>
     <Navbar page="code-mancala.html" active="coding" />
 
     <!--
@@ -370,5 +355,4 @@ import Footer from "../components/Footer.astro";
 
     <script src="assets/js/main.js" is:inline></script>
     <script type="module" src="assets/js/coding/index.js" is:inline></script>
-  </body>
-</html>
+</BaseLayout>

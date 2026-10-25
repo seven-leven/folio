@@ -13,8 +13,11 @@ folio/
 ├── src/                       ← pages and components; Astro builds them into dist/
 │   ├── pages/                 one .astro file per page (index, sem1 … sem5, engineering,
 │   │                          the code-*.html entry pages, 404), each built to <name>.html
+│   ├── layouts/BaseLayout.astro  every page's <head> and <body>: title, description, sharing tags, fonts
 │   ├── components/            Navbar, Footer, Model (the 3D viewer); see "Shared navbar and footer"
 │   ├── lib/site.ts            what they read at build time: projects, version, model sizes
+│   ├── lib/live.ts            data fetched at build time: the Tumblr journal, Wildlife progress
+│   ├── integrations/          after-build steps: responsive images, cache busting
 │   └── data/projects.json     the architecture projects, in order
 ├── public/                    ← copied into dist/ as it is
 │   ├── cv.pdf
@@ -50,6 +53,7 @@ tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm ru
 | `npm run check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
 | `npm run snapshot -- <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
 | `npm run compare -- <a> <b>` | diff two snapshots: take one before a change and one after |
+| `npm run fonts` | download the site's fonts from Google Fonts into `public/assets/fonts/` and rewrite `fonts.css` (after adding a family or weight) |
 | `npm run images -- <path>…` | convert images to WebP, at most 2400 px on the long side |
 | `npm run links` | check every external link on the site |
 | `npm run version` | print the current version |
@@ -107,6 +111,21 @@ After the build, every local CSS and JS reference gets `?v=<hash of the file>`
 GitHub Pages' 10-minute browser cache. Scripts that import other scripts get an
 import map from each module's plain address to its stamped one. Write plain paths
 in pages and scripts; the build adds the stamps.
+
+Images: every local `.webp` wider than 640 px gets 640/1024/1600 px copies at build
+time and a `srcset` (`src/integrations/responsive-images.ts`), so phones download a
+smaller file. The copies are cached in `.cache/`. Keep adding images as single WebP
+files at up to 2400 px; the lightbox still opens the full-size file.
+
+Fonts are served from the site (`public/assets/fonts/`, written by `npm run fonts`
+from Google Fonts' own files), not from Google.
+
+Live data is read when the site is built, and the site is rebuilt every day:
+the process journal on the Semester 5 and 6 pages (`<TumblrFeed blog="gaahis" />`,
+from the blog's RSS feed) and the Wildlife Illustrated numbers and latest drawings
+on the homepage (from bird_dash's JSON). If the journal can't be read the page says
+so and links to the blog; if bird_dash can't be read the build fails, and the live
+site keeps yesterday's numbers.
 
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
 it at any URL. The build fails on an unknown `active` name, a `<Model>` on a page
@@ -174,10 +193,12 @@ nothing else: no colour values, font names or pixel radii.
 
 1. Put its images in `public/assets/projects/<name>/`; `npm run images` makes
    them WebP at most 2400 px, and the check rejects anything else.
-2. Copy `src/pages/sem3.astro`, which is built from the project page kit alone; give it a
-   `<title>`, meta description, canonical URL and `og:image`, a body class
-   (`project-<name>`), and map that class to its semester colour at the top of
-   `main.css`. DESIGN.md shows the kit's markup.
+2. Copy `src/pages/sem3.astro`, which is built from the project page kit alone. In its
+   `<BaseLayout>` give it the page name, title, description, preview `image`, its
+   `styles` and a body class (`project-<name>`); the layout writes the `<head>`
+   (canonical address, sharing tags, fonts) and the build fails without a title or
+   description. Map the body class to its semester colour at the top of `main.css`.
+   DESIGN.md shows the kit's markup.
 3. Put anything particular to the page in `public/assets/css/pages/<name>.css`, and
    the semester's bird in `public/assets/img/birds/semN.webp`.
 4. Add it to `src/data/projects.json` (footer, previous/next links and the
