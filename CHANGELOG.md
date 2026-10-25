@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Migration follow-ups: the homepage's "This portfolio" entry describes the Astro site; `npm run dev` sends the bare `localhost:8000/` to `/folio/`; snapshots wait for every image, so two runs of the same build always match; workflows use `actions/checkout@v7` and `actions/setup-node@v7`
 - Fonts are served from the site (`public/assets/fonts/`, `npm run fonts`) instead of Google Fonts: the same files and rules, so pages render the same, with no request to Google
 - Responsive images: every local image wider than 640 px gets smaller copies and a `srcset` at build time; on a phone the project pages download 30–55% less. The lightbox still opens the full-size image
 - The Tumblr journal and the Wildlife Illustrated progress are read when the site is built, from the blog's RSS feed and bird_dash's JSON, and the site rebuilds every day. The pages no longer load Tumblr's script or fetch bird_dash in the browser, and the journal no longer shows "couldn't be loaded" (Tumblr's old JSON API now answers with a browser check)

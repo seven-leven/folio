@@ -61,8 +61,14 @@ tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm ru
 | `npm run distdiff -- <a> <b>` | compare two builds file by file (`--html` compares pages after normalising them) |
 | `npm run release` | check, merge dev into main, push, and wait for the deploy |
 
+npm 11 warns that it didn't run install scripts for `sharp` and `esbuild`; that's
+fine, both work from their prebuilt packages, so there's nothing to approve.
+
 `npm run lint` and `npm run fmt` (Biome) cover `tools/`, `src/**/*.ts`, `astro.config.ts` and
-`public/assets/js/`.
+`public/assets/js/`. A few of Biome's recommended rules are off in
+`biome.json` (`useTemplate`, `useIterableCallbackReturn`, `noNonNullAssertion` and four
+more): the code was written to `deno lint`, which didn't have them, and they're style,
+not bugs.
 
 ## Working on the site
 
