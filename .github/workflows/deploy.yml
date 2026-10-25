@@ -1,12 +1,15 @@
 name: Check & deploy
 
-# Runs on main only: check, then deploy if the check passes.
+# Runs on main only (on every push, and daily): check, then deploy if the check passes.
 # Each deploy builds site/ into dist/ and hands it to GitHub Pages as an
 # artifact (Pages source: GitHub Actions). Nothing is committed to a branch,
 # and GitHub's own "pages-build-deployment" run (Node 20) no longer happens.
 on:
   push:
     branches: [main]
+  # Every day, so the Tumblr journal and the Wildlife Illustrated numbers (read at build time) stay current
+  schedule:
+    - cron: "0 1 * * *" # 01:00 UTC, 06:00 in the Maldives
   workflow_dispatch: {}
 
 concurrency:

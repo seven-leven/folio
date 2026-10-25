@@ -15,6 +15,9 @@ commit.
 
 ## Unreleased
 
+- Fonts are served from the site (`public/assets/fonts/`, `npm run fonts`) instead of Google Fonts: the same files and rules, so pages render the same, with no request to Google
+- Responsive images: every local image wider than 640 px gets smaller copies and a `srcset` at build time; on a phone the project pages download 30–55% less. The lightbox still opens the full-size image
+- The Tumblr journal and the Wildlife Illustrated progress are read when the site is built, from the blog's RSS feed and bird_dash's JSON, and the site rebuilds every day. The pages no longer load Tumblr's script or fetch bird_dash in the browser, and the journal no longer shows "couldn't be loaded" (Tumblr's old JSON API now answers with a browser check)
 - Every page uses one layout (`src/layouts/BaseLayout.astro`) for its `<head>`: title, description, canonical address, sharing tags, icon, fonts and stylesheets come from props, and a page without a title or description doesn't build. Pages that had no sharing description (engineering, Semesters 4 and 5) now get their description; each page loads its fonts in one request instead of two
 - Cache busting: the build stamps every local stylesheet and script reference with a hash of the file (`main.css?v=…`), and pages that run modules get an import map to the stamped addresses, so a new deploy no longer needs a hard refresh
 - Mancala page brought up to the game's v2.7: twenty-three bots, Doomed to Expert, on a 240-game matched-pair ladder; the 2024 bot now fourth, with two of the three above it built on it; a short part on the bots that learn; the solver's answer (the standard game is a first-player win, 96–2) with its heat map of board sizes; the First-versus-Random claim corrected; and a new section listing every bot by the picker's groups, with the four resting ones

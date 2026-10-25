@@ -16,6 +16,8 @@ folio/
 │   ├── layouts/BaseLayout.astro  every page's <head> and <body>: title, description, sharing tags, fonts
 │   ├── components/            Navbar, Footer, Model (the 3D viewer); see "Shared navbar and footer"
 │   ├── lib/site.ts            what they read at build time: projects, version, model sizes
+│   ├── lib/live.ts            data fetched at build time: the Tumblr journal, Wildlife progress
+│   ├── integrations/          after-build steps: responsive images, cache busting
 │   └── data/projects.json     the architecture projects, in order
 ├── public/                    ← copied into dist/ as it is
 │   ├── cv.pdf
@@ -51,6 +53,7 @@ tasks need Chrome (or set `CHROME_PATH`). Arguments go after `--`, as in `npm ru
 | `npm run check` | build, then check links, images, anchors, alt text, metadata, image rules and the project list; lists remaining placeholders |
 | `npm run snapshot -- <name>` | record every page at 375/820/1280 px (styles, boxes, screenshots) into `.snapshots/<name>/` |
 | `npm run compare -- <a> <b>` | diff two snapshots: take one before a change and one after |
+| `npm run fonts` | download the site's fonts from Google Fonts into `public/assets/fonts/` and rewrite `fonts.css` (after adding a family or weight) |
 | `npm run images -- <path>…` | convert images to WebP, at most 2400 px on the long side |
 | `npm run links` | check every external link on the site |
 | `npm run version` | print the current version |
@@ -108,6 +111,21 @@ After the build, every local CSS and JS reference gets `?v=<hash of the file>`
 GitHub Pages' 10-minute browser cache. Scripts that import other scripts get an
 import map from each module's plain address to its stamped one. Write plain paths
 in pages and scripts; the build adds the stamps.
+
+Images: every local `.webp` wider than 640 px gets 640/1024/1600 px copies at build
+time and a `srcset` (`src/integrations/responsive-images.ts`), so phones download a
+smaller file. The copies are cached in `.cache/`. Keep adding images as single WebP
+files at up to 2400 px; the lightbox still opens the full-size file.
+
+Fonts are served from the site (`public/assets/fonts/`, written by `npm run fonts`
+from Google Fonts' own files), not from Google.
+
+Live data is read when the site is built, and the site is rebuilt every day:
+the process journal on the Semester 5 and 6 pages (`<TumblrFeed blog="gaahis" />`,
+from the blog's RSS feed) and the Wildlife Illustrated numbers and latest drawings
+on the homepage (from bird_dash's JSON). If the journal can't be read the page says
+so and links to the blog; if bird_dash can't be read the build fails, and the live
+site keeps yesterday's numbers.
 
 `404.html` keeps its own minimal navbar and footer because GitHub Pages serves
 it at any URL. The build fails on an unknown `active` name, a `<Model>` on a page
