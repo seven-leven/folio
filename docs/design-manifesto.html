@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folio design manifesto</title>
+    <!-- The one-sheet of the design manifesto (docs/DESIGN-PLAN.md): five principles, then
+         each part of the system tagged with the principles it serves. Colours, type, radii
+         and timings come from the site's own main.css and fonts, so the sheet can't drift.
+         Render with: npm run guide (writes design-manifesto.png, .pdf and .svg) -->
+    <link rel="stylesheet" href="../public/assets/css/fonts.css">
+    <link rel="stylesheet" href="../public/assets/css/main.css">
+    <style>
+      * { box-sizing: border-box; }
+      html { background: var(--paper); }
+      body {
+        width: 1440px;
+        margin: 0 auto;
+        padding: 80px 96px 96px;
+        background: var(--paper);
+        color: var(--text);
+        font: 15px/1.5 var(--font-sans);
+      }
+      p { margin: 0; max-width: none; color: var(--text-2); font-size: 15px; line-height: 1.5; }
+      ul { margin: 0; padding: 0; list-style: none; }
+      code { font: 500 12.5px var(--font-data); color: var(--text-2); }
+      .lab {
+        margin: 0;
+        color: var(--text-muted);
+        font: 600 11.5px/1.2 var(--font-sans);
+        letter-spacing: var(--track-label);
+        text-transform: uppercase;
+      }
+      .muted { color: var(--text-muted); }
+      .serif { font-family: var(--font-serif); font-weight: 400; }
+
+      /* Header */
+      .head h1 {
+        margin: 18px 0 0;
+        font: 400 112px/0.95 var(--font-serif);
+        letter-spacing: -0.01em;
+      }
+      .head h1 em { color: var(--accent); }
+      .head .tag {
+        margin-top: 28px;
+        font: italic 400 34px/1.2 var(--font-serif);
+        color: var(--text);
+      }
+      .head .sub { margin-top: 18px; font-size: 16px; }
+
+      section { padding: 64px 0 0; margin-top: 64px; border-top: 1px solid var(--line); }
+      .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; }
+      .sec-head h2 { margin: 12px 0 0; font: 400 46px/1.05 var(--font-serif); }
+      .sec-head p { margin-top: 10px; }
+      .serves { display: flex; gap: 6px; flex-shrink: 0; }
+      .serves span {
+        padding: 4px 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-pill);
+        font: 600 11px/1.2 var(--font-sans);
+        letter-spacing: 0.08em;
+        color: var(--text-2);
+        background: var(--card);
+      }
+      .body { margin-top: 36px; }
+
+      /* Principles */
+      .principles { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 64px; border-top: 1px solid var(--line); }
+      .pr { padding: 36px 26px 8px; border-left: 1px solid var(--line); }
+      .pr:first-child { border-left: 0; padding-left: 0; }
+      .pr svg { width: 30px; height: 30px; stroke: var(--accent); }
+      .pr .lab { margin-top: 26px; color: var(--accent); }
+      .pr h3 { margin: 10px 0 0; font: 400 30px/1.08 var(--font-serif); min-height: 66px; }
+      .pr .bold { margin-top: 16px; color: var(--text); font-weight: 600; font-size: 14.5px; }
+      .pr p.desc { margin-top: 10px; font-size: 13.5px; color: var(--text-muted); }
+      .rule-note { margin-top: 36px; font: italic 400 22px/1.3 var(--font-serif); color: var(--text-2); }
+
+      /* Colour */
+      .ramp { display: grid; gap: 6px; }
+      .sw { height: 92px; border-radius: var(--radius-xs); padding: 10px 11px; display: flex; flex-direction: column; justify-content: space-between; font: 500 11.5px/1.3 var(--font-data); border: 1px solid rgba(22,21,20,0.06); }
+      .sw b { font: 600 12px/1.2 var(--font-sans); }
+      .ramp-row { display: grid; grid-template-columns: 170px 1fr; gap: 24px; align-items: start; margin-top: 18px; }
+      .ramp-row .lab { padding-top: 10px; }
+      .sems { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+      .sem { border-radius: var(--radius-xs); overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+      .sem .fill { height: 72px; }
+      .sem .txt { padding: 10px 11px 12px; }
+      .sem .txt b { font: 400 22px/1 var(--font-serif); }
+      .sem .txt div { margin-top: 6px; font: 500 11px/1.4 var(--font-data); color: var(--text-muted); }
+      .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+      .panel { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; background: var(--card); }
+      .panel.ink {
+        background: var(--ink); border-color: var(--ink);
+        --text: var(--paper); --text-2: rgba(246,244,239,.75); --text-muted: rgba(246,244,239,.62);
+        --line: rgba(246,244,239,.14); --line-strong: rgba(246,244,239,.3); --accent: var(--accent-light);
+        color: var(--text);
+      }
+      .panel .lab { margin-bottom: 14px; }
+      .role { display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); font-size: 13.5px; }
+      .role:first-of-type { border-top: 0; }
+      .role i { display: block; width: 40px; height: 22px; border-radius: 3px; border: 1px solid var(--line); }
+      .role .v { font: 500 11.5px var(--font-data); color: var(--text-muted); }
+      .role .ratio { font: 600 11.5px var(--font-data); color: var(--text-2); }
+      .note { margin-top: 18px; font-size: 13.5px; color: var(--text-muted); }
+
+      /* Type */
+      .type { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; }
+      .spec { align-self: start; position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 40px 40px 36px; overflow: hidden; }
+      .spec .kick { color: var(--sem-3-text); }
+      .spec h3 { position: relative; margin: 16px 0 0; font: 400 84px/0.95 var(--font-serif); }
+      .spec h3 em { color: var(--sem-3-text); }
+      .spec .bird { position: absolute; right: -10px; top: 18px; height: 250px; opacity: 0.26; }
+      .spec .s1 { position: relative; margin-top: 22px; font-size: 17px; color: var(--text); }
+      .spec .s2 { position: relative; margin-top: 14px; font-size: 15px; }
+      .spec .cap { position: relative; margin-top: 18px; font-size: 13px; color: var(--text-muted); }
+      .scale { display: grid; grid-template-columns: 112px 64px 1fr; row-gap: 0; }
+      .scale > div { padding: 10px 0; border-top: 1px solid var(--line); display: flex; align-items: center; }
+      .scale .t { font: 500 12px var(--font-data); }
+      .scale .px { font: 500 12px var(--font-data); color: var(--text-muted); }
+      .fam { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin-top: 28px; align-items: baseline; }
+      .fam > div:nth-child(odd) { font-size: 20px; color: var(--text); }
+      .fam > div:nth-child(even) { font-size: 12.5px; color: var(--text-muted); text-align: right; }
+      .rules-inline { margin-top: 26px; display: grid; gap: 8px; font-size: 13.5px; color: var(--text-2); }
+
+      /* Language */
+      .say { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .pair { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 20px 22px; }
+      .pair .lab { margin-bottom: 12px; }
+      .pair .yes, .pair .no { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: baseline; font-size: 15px; }
+      .pair .yes { color: var(--text); }
+      .pair .no { margin-top: 8px; color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--accent-fill); }
+      .pair .yes::before { content: "Say"; font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--sem-5-text); }
+      .pair .no::before { content: "Not"; font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: inline-block; }
+      .pair p.why { margin-top: 12px; font-size: 12.5px; color: var(--text-muted); }
+
+      /* Grid */
+      .grid12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
+      .grid12 .c { height: 26px; background: rgba(184, 84, 80, 0.07); border-left: 1px solid rgba(184,84,80,.25); border-right: 1px solid rgba(184,84,80,.25); }
+      .spans { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; margin-top: 10px; }
+      .spans div { height: 40px; border: 1px solid var(--line-strong); border-radius: var(--radius-xs); background: var(--card); display: flex; align-items: center; padding: 0 12px; font: 500 11.5px var(--font-data); color: var(--text-2); }
+      .bps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+      .bp { display: flex; gap: 18px; align-items: flex-end; }
+      .bp .dev { border: 1.5px solid var(--ink-2); border-radius: 6px; background: var(--card); display: grid; gap: 4px; padding: 6px; }
+      .bp .dev i { display: block; background: var(--paper-2); border-radius: 2px; }
+      .bp p { font-size: 13px; }
+      .bp b { display: block; color: var(--text); font-size: 14px; }
+
+      /* Form and motion */
+      .form { display: grid; grid-template-columns: 1.1fr 1fr 0.8fr; gap: 56px; align-items: end; }
+      .radii { display: flex; gap: 22px; align-items: flex-end; }
+      .radii div div { width: 88px; height: 64px; border: 1.5px solid var(--ink-2); background: var(--card); }
+      .radii p, .steps p, .durs p { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+      .radii b, .steps b { display: block; font: 500 12px var(--font-data); color: var(--text); }
+      .steps { display: flex; gap: 16px; align-items: flex-end; }
+      .steps i { display: block; background: var(--accent-fill); }
+      .durs > div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+      .durs b { font: 500 12px var(--font-data); }
+      .durs .bar { height: 6px; background: var(--ink-2); border-radius: 3px; }
+      .form-rules { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; font-size: 13.5px; }
+      .form-rules div { padding-top: 12px; border-top: 1px solid var(--line); color: var(--text-2); }
+
+      /* States */
+      .states { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      .st-row { display: flex; gap: 6px; align-items: center; }
+      .st { text-align: center; }
+      .st small { display: block; margin-top: 10px; font-size: 11.5px; color: var(--text-muted); }
+      .pill { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: var(--radius-pill); font: 500 14px var(--font-sans); color: var(--text-2); border: 1px solid transparent; }
+      .pill.hover { background: rgba(22,21,20,.06); color: var(--text); }
+      .ink .pill.hover { background: rgba(246,244,239,.1); }
+      .pill.current { background: rgba(22,21,20,.1); color: var(--text); font-weight: 600; }
+      .ink .pill.current { background: rgba(246,244,239,.16); }
+      .pill.focus { outline: 2px solid var(--accent-fill); outline-offset: 3px; color: var(--text); }
+      .ink .pill.focus { outline-color: var(--accent-light); }
+      .pill.disabled { opacity: .4; }
+
+      /* Place markers */
+      .birds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+      .bd { border-top: 6px solid var(--c); padding-top: 14px; }
+      .bd .img { height: 150px; display: flex; align-items: flex-end; justify-content: center; }
+      .bd img { max-height: 150px; max-width: 100%; }
+      .bd .tbc { height: 150px; border: 1px dashed var(--line-strong); border-radius: var(--radius-xs); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted); }
+      .bd b { display: block; margin-top: 12px; font: 400 21px/1.1 var(--font-serif); }
+      .bd small { display: block; margin-top: 4px; font-size: 12px; color: var(--text-muted); }
+      .devices { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 24px; margin-top: 36px; }
+      .devices .panel p { font-size: 13.5px; margin-top: 14px; }
+      .bar6 { display: inline-flex; border: 1px solid var(--ink); }
+      .bar6 i { width: 38px; height: 14px; display: block; border-left: 1px solid var(--ink); }
+      .bar6 i:first-child { border-left: 0; }
+      .mini { position: relative; height: 110px; border: 1px solid var(--line); background: var(--paper); border-radius: var(--radius-xs); overflow: hidden; }
+      .mini .top { position: absolute; left: 0; top: 0; height: 3px; width: 58%; background: var(--sem-3); }
+      .mini .edge { position: absolute; right: 0; top: 0; bottom: 0; width: 6px; background: var(--sem-3); }
+      .mini .l { position: absolute; left: 14px; height: 6px; background: var(--line-strong); border-radius: 3px; }
+      .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+      .chip { height: 30px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: var(--radius-pill); font: 600 10.5px var(--font-sans); letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--line); }
+      .chip.on { background: var(--sem-3-text); border-color: var(--sem-3-text); color: #fff; }
+
+      /* Voices */
+      .shell { border: 1.5px solid var(--ink-2); border-radius: var(--radius); padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; background: var(--card); }
+      .shell b { font: 400 24px var(--font-serif); }
+      .voices { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 12px; }
+      .vc { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px 16px 18px; min-height: 196px; display: flex; flex-direction: column; }
+      .vc .lab { font-size: 10px; }
+      .vc .name { margin-top: 14px; }
+      .vc p { margin-top: auto; padding-top: 12px; font-size: 12px; color: var(--text-muted); }
+      .v-kit { background: var(--card); }
+      .v-kit .name { font: 400 32px/0.95 var(--font-serif); }
+      .v-kit .name em { color: var(--sem-2-text); }
+      .v-book { background: #faf8f4; }
+      .v-book .name { font: 900 25px/0.95 var(--font-book); text-transform: uppercase; letter-spacing: .01em; color: #2b3a4a; }
+      .v-book .sf { margin-top: 8px; font: italic 400 15px/1.2 var(--font-book-serif); color: var(--text-2); }
+      .v-five { background: #fff; }
+      .v-five .name { font: 700 27px/0.95 var(--font-book); color: var(--sem-5-text); }
+      .v-five .name i { font-weight: 400; }
+      .v-eng { background-color: var(--draft-paper); background-image: linear-gradient(var(--draft-grid) 1px, transparent 1px), linear-gradient(90deg, var(--draft-grid) 1px, transparent 1px); background-size: 14px 14px; border-radius: var(--radius-xs); }
+      .v-eng .name { font: 600 24px/1 var(--font-sans); color: var(--eng-blue); }
+      .v-eng .sf { margin-top: 8px; font: 500 11px var(--font-data); color: var(--text-muted); }
+      .v-ink { background: var(--ink); border-color: var(--ink); --text-muted: rgba(246,244,239,.62); color: var(--paper); }
+      .v-ink .lab { color: rgba(246,244,239,.62); }
+      .v-ink .name { font: 400 30px/0.95 var(--font-serif); }
+      .v-ink .name em { color: var(--blue-light); }
+      .v-ink .name span { color: var(--accent-light); }
+      .v-six { border-style: dashed; background: transparent; }
+      .v-six .name { font: 400 26px/1 var(--font-serif); color: var(--text-muted); }
+      .canwrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+      .canwrap .chips { margin-top: 12px; }
+      .canwrap .chip { text-transform: none; letter-spacing: 0; font: 500 13px var(--font-sans); color: var(--text-2); background: var(--card); }
+      .canwrap .chip.x { color: var(--accent); text-decoration: line-through; background: transparent; }
+
+      /* Page shapes */
+      .shapes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      .steps-list { counter-reset: s; display: grid; gap: 0; margin-top: 4px; }
+      .steps-list li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; padding: 8px 0; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--text-2); }
+      .steps-list li::before { content: counter(s, decimal-leading-zero); font: 500 11.5px/1.9 var(--font-data); color: var(--text-muted); }
+      .steps-list b { color: var(--text); font-weight: 600; }
+      .panel.ink .steps-list li::before { color: var(--accent-light); }
+
+      /* Never pretend */
+      .states3 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+      .case { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 20px 22px; }
+      .case h4 { margin: 12px 0 0; font: 400 22px/1.15 var(--font-serif); }
+      .case p { margin-top: 10px; font-size: 13px; }
+      .case .demo { margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-xs); background: var(--paper-2); font-size: 13px; color: var(--text-2); }
+      .case .demo b { font: 400 30px/1 var(--font-serif); color: var(--text); }
+
+      /* Checklist */
+      .check { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+      .check h4 { margin: 10px 0 14px; font: 400 21px/1.1 var(--font-serif); }
+      .check li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); }
+      .check li::before { content: ""; width: 12px; height: 12px; margin-top: 3px; border: 1.5px solid var(--line-strong); border-radius: 3px; }
+
+      .close { margin-top: 80px; padding-top: 56px; border-top: 1px solid var(--line); font: italic 400 38px/1.25 var(--font-serif); color: var(--text); }
+      .foot { margin-top: 26px; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); }
+    </style>
+  </head>
+  <body>
+    <header class="head">
+      <p class="lab">Folio · Design manifesto · v2 draft · website and printed book</p>
+      <h1>One shell. Six semesters.<br><em>A few voices.</em></h1>
+      <p class="tag">The drawings carry the colour.<br>Everything around them stays quiet.</p>
+      <p class="sub muted">Five principles first; every rule below names the ones it serves. When a rule and a principle disagree, change the rule.</p>
+    </header>
+
+    <div class="principles">
+      <div class="pr">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="15" rx="1"/><path d="M3 14l5-4.5 4 3.5 3-2.5 6 5"/><path d="M8 22h8"/></svg>
+        <p class="lab">P1</p>
+        <h3>The work leads</h3>
+        <p class="bold">The drawings carry the colour.</p>
+        <p class="desc">Boards, renders and code animations are the most vivid things on the page. Drawings whole, on white, never cropped.</p>
+      </div>
+      <div class="pr">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+        <p class="lab">P2</p>
+        <h3>Always say where you are</h3>
+        <p class="bold">Which semester, which chapter, at a glance.</p>
+        <p class="desc">Colour, bird, progress bar and page edge are one system for placing people, never decoration.</p>
+      </div>
+      <div class="pr">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>
+        <p class="lab">P3</p>
+        <h3>One shell, many voices</h3>
+        <p class="bold">Consistency is the default; difference is earned.</p>
+        <p class="desc">Grid, hierarchy, states and navigation never change. A project may borrow its boards' voice. Book and site are one work.</p>
+      </div>
+      <div class="pr">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H10l-5 4v-4H4z"/><path d="M8 8.5h8M8 12h5"/></svg>
+        <p class="lab">P4</p>
+        <h3>Tell it straight</h3>
+        <p class="bold">Words, numbers and status say what is true.</p>
+        <p class="desc">Plain first person, sentence case, captions that say what a drawing shows, counts only once they're known.</p>
+      </div>
+      <div class="pr">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5"/><path d="M12 10v5l-3.5 6M12 15l3.5 6"/></svg>
+        <p class="lab">P5</p>
+        <h3>For everyone, on every screen</h3>
+        <p class="bold">Access is part of the design.</p>
+        <p class="desc">Phones first at 375 px, 44 px targets, 4.5:1 text, keyboard focus, reduced motion, Dhivehi set properly.</p>
+      </div>
+    </div>
+
+    <!-- 01 Colour -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">01 · Colour</p><h2>Quiet ground, one signal.</h2><p>90% paper and ink, 10% colour. Colour marks place or state, never decoration.</p></div>
+        <div class="serves"><span>P1</span><span>P2</span><span>P5</span></div>
+      </div>
+      <div class="body">
+        <div class="ramp-row">
+          <p class="lab">Paper and ink</p>
+          <div class="ramp" style="grid-template-columns: repeat(8, 1fr)">
+            <div class="sw" style="background:var(--paper)"><b>paper</b><span>#f6f4ef</span></div>
+            <div class="sw" style="background:var(--paper-2)"><b>paper-2</b><span>#eeebe4</span></div>
+            <div class="sw" style="background:var(--card)"><b>card</b><span>#fffdf9</span></div>
+            <div class="sw" style="background:var(--line)"><b>line</b><span>#dfdad0</span></div>
+            <div class="sw" style="background:var(--line-strong)"><b>line-strong</b><span>#cbc4b6</span></div>
+            <div class="sw" style="background:var(--muted);color:#fff"><b>muted</b><span>#6b6760</span></div>
+            <div class="sw" style="background:var(--ink-2);color:#fff"><b>ink-2</b><span>#34322f</span></div>
+            <div class="sw" style="background:var(--ink);color:#fff"><b>ink</b><span>#161514</span></div>
+          </div>
+        </div>
+        <div class="ramp-row">
+          <p class="lab">Accents</p>
+          <div class="ramp" style="grid-template-columns: repeat(8, 1fr)">
+            <div class="sw" style="background:var(--accent);color:#fff"><b>accent</b><span>text on paper</span></div>
+            <div class="sw" style="background:var(--accent-fill);color:#fff"><b>accent-fill</b><span>fills, focus ring</span></div>
+            <div class="sw" style="background:var(--accent-light)"><b>accent-light</b><span>text on ink</span></div>
+            <div class="sw" style="background:var(--blue-light)"><b>blue-light</b><span>illustration, on ink</span></div>
+            <div class="sw" style="background:var(--eng-blue);color:#fff"><b>eng-blue</b><span>engineering</span></div>
+          </div>
+        </div>
+        <div class="ramp-row">
+          <p class="lab">One colour per semester<br><span style="text-transform:none;letter-spacing:0;font-weight:400">fill above, text shade below</span></p>
+          <div class="sems">
+            <div class="sem"><div class="fill" style="background:var(--sem-1)"></div><div class="txt"><b style="color:var(--sem-1-text)">I · Ink</b><div>ink in water</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--sem-2)"></div><div class="txt"><b style="color:var(--sem-2-text)">II · Ember</b><div>the flame painting</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--sem-3)"></div><div class="txt"><b style="color:var(--sem-3-text)">III · Mauve</b><div>Henveiru's pink wash</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--sem-4)"></div><div class="txt"><b style="color:var(--sem-4-text)">IV · Olive</b><div>the mangrove island</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--sem-5)"></div><div class="txt"><b style="color:var(--sem-5-text)">V · Lagoon</b><div>the floating lagoon</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--sem-6)"></div><div class="txt"><b style="color:var(--sem-6-text)">VI · Red</b><div>the final semester</div></div></div>
+            <div class="sem"><div class="fill" style="background:var(--eng-blue)"></div><div class="txt"><b style="color:var(--eng-blue)">Engineering</b><div>drawing blue</div></div></div>
+          </div>
+        </div>
+
+        <div class="roles">
+          <div class="panel">
+            <p class="lab">On paper · academic and professional</p>
+            <div class="role"><i style="background:var(--paper)"></i><span>Page</span><span class="v">paper</span></div>
+            <div class="role"><i style="background:var(--card)"></i><span>Cards and tiles</span><span class="v">card</span></div>
+            <div class="role"><i style="background:var(--ink)"></i><span>Headings and text</span><span class="ratio" data-fg="--ink" data-bg="--paper"></span></div>
+            <div class="role"><i style="background:var(--ink-2)"></i><span>Body text</span><span class="ratio" data-fg="--ink-2" data-bg="--paper"></span></div>
+            <div class="role"><i style="background:var(--muted)"></i><span>Captions and labels</span><span class="ratio" data-fg="--muted" data-bg="--paper"></span></div>
+            <div class="role"><i style="background:var(--accent)"></i><span>Accent text</span><span class="ratio" data-fg="--accent" data-bg="--paper"></span></div>
+            <div class="role"><i style="background:var(--sem-2-text)"></i><span>Semester text shade (II, lightest)</span><span class="ratio" data-fg="--sem-2-text" data-bg="--paper"></span></div>
+          </div>
+          <div class="panel ink">
+            <p class="lab">On ink · Personal, footer, dark bands</p>
+            <div class="role"><i style="background:var(--ink)"></i><span>Band</span><span class="v">ink</span></div>
+            <div class="role"><i style="background:rgba(246,244,239,.04)"></i><span>Cards</span><span class="v">paper at 4%</span></div>
+            <div class="role"><i style="background:var(--paper)"></i><span>Headings and text</span><span class="ratio" data-fg="--paper" data-bg="--ink"></span></div>
+            <div class="role"><i style="background:rgba(246,244,239,.75)"></i><span>Body text</span><span class="ratio" data-fg="rgba(246,244,239,.75)" data-bg="--ink"></span></div>
+            <div class="role"><i style="background:rgba(246,244,239,.62)"></i><span>Captions and labels</span><span class="ratio" data-fg="rgba(246,244,239,.62)" data-bg="--ink"></span></div>
+            <div class="role"><i style="background:var(--accent-light)"></i><span>Code accent</span><span class="ratio" data-fg="--accent-light" data-bg="--ink"></span></div>
+            <div class="role"><i style="background:var(--blue-light)"></i><span>Illustration accent</span><span class="ratio" data-fg="--blue-light" data-bg="--ink"></span></div>
+          </div>
+        </div>
+        <p class="note">Components use roles (<code>--text</code>, <code>--text-muted</code>, <code>--accent-text</code>, <code>--rule</code>, <code>--surface</code>), which a dark band redefines. One accent per view: on a project page it's the semester colour. Contrast is measured from <code>main.css</code> as the sheet is drawn.</p>
+      </div>
+    </section>
+
+    <!-- 02 Type -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">02 · Type</p><h2>Hierarchy without shouting.</h2><p>A serif for titles, a sans for everything read, a mono for data. Eight sizes and no others.</p></div>
+        <div class="serves"><span>P3</span><span>P5</span></div>
+      </div>
+      <div class="body type">
+        <div class="spec">
+          <img class="bird" src="../public/assets/img/birds/sem3.webp" alt="">
+          <p class="lab kick">Semester 3 · Architectural Design III · 2025</p>
+          <h3>Urban<br><em>Acupuncture</em></h3>
+          <p class="s1">Strategic insertions in the urban fabric of Henveiru.</p>
+          <p class="s2">Malé has become a monotonous concrete jungle. This project works by precise, small interventions rather than a single master plan.</p>
+          <p class="cap">Section through the stair core, looking east</p>
+        </div>
+        <div>
+          <div class="scale">
+            <div class="t">--fs-h1</div><div class="px">86 px</div><div><span class="serif" style="font-size:40px;line-height:1">Page title</span></div>
+            <div class="t">--fs-h2</div><div class="px">46 px</div><div><span class="serif" style="font-size:30px;line-height:1">Chapter title</span></div>
+            <div class="t">--fs-lead</div><div class="px">17 px</div><div style="font-size:17px">Standfirst, one line in the project's words</div>
+            <div class="t">--fs-h3</div><div class="px">17 px</div><div style="font-size:16.8px;font-weight:600">Sub-heading</div>
+            <div class="t">--fs-body</div><div class="px">16 px</div><div style="font-size:16px">Body, 1.7 line height, 68 characters at most</div>
+            <div class="t">--fs-small</div><div class="px">14 px</div><div style="font-size:14.4px">Lists and secondary text</div>
+            <div class="t">--fs-caption</div><div class="px">13 px</div><div style="font-size:13.1px;color:var(--text-muted)">Captions: plain, muted, under the drawing</div>
+            <div class="t">--fs-label</div><div class="px">12 px</div><div class="lab" style="font-size:12.2px">Labels, kickers, chips</div>
+          </div>
+          <div class="fam">
+            <div style="font-family:var(--font-sans)">Inter</div><div>text, labels, controls</div>
+            <div style="font-family:var(--font-serif)">Instrument Serif <i>Italic</i></div><div>titles, numerals, quotes</div>
+            <div style="font-family:var(--font-book)">Source Sans 3</div><div>the book's voice (Myriad in print)</div>
+            <div style="font-family:var(--font-book-serif);font-style:italic">EB Garamond italic</div><div>research-book standfirsts</div>
+            <div style="font-family:var(--font-data);font-size:17px">IBM Plex Mono</div><div>data, drafted pages</div>
+            <div style="font-family:var(--font-thaana)"><span dir="rtl">ދިވެހި</span></div><div>Noto Sans Thaana, Dhivehi names</div>
+          </div>
+          <div class="rules-inline">
+            <div>Serif titles at regular weight, one word italic in the semester colour. Never bold, never uppercase.</div>
+            <div>Uppercase is for labels and navigation only, never for sentences.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Language -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">03 · Language</p><h2>Say what is true.</h2><p>Words are part of the interface: the same thing is always said the same way.</p></div>
+        <div class="serves"><span>P4</span><span>P3</span></div>
+      </div>
+      <div class="body say">
+        <div class="pair"><p class="lab">Case</p><div class="yes">Sun shading and ventilation</div><div class="no">Sun Shading And Ventilation</div><p class="why">Sentence case for every heading, button and label.</p></div>
+        <div class="pair"><p class="lab">Captions</p><div class="yes">Section through the stair core, looking east</div><div class="no">Image 3</div><p class="why">Say what the drawing shows. Alt text too.</p></div>
+        <div class="pair"><p class="lab">Status</p><div class="yes">Lunch Lab · starts May 2027</div><div class="no">Coming soon</div><p class="why">A promise has a date, or it isn't made.</p></div>
+        <div class="pair"><p class="lab">Links</p><div class="yes">Read the full story</div><div class="no">Click here</div><p class="why">A link says where it goes; it's always underlined.</p></div>
+        <div class="pair"><p class="lab">Credit</p><div class="yes">Group work · with four classmates</div><div class="no">(an unmarked group board)</div><p class="why">Group work is marked as group work, on the site and in the book.</p></div>
+        <div class="pair"><p class="lab">Voice</p><div class="yes">I wrote a bot because I kept losing</div><div class="no">Leveraging AI to optimise gameplay</div><p class="why">First person and plain. Say the problem before the solution.</p></div>
+      </div>
+    </section>
+
+    <!-- 04 Grid -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">04 · Grid and space</p><h2>A few spans, one rhythm.</h2><p>12 columns, 24 px gutters, 1180 px at most. Layouts are spans, and only these.</p></div>
+        <div class="serves"><span>P3</span><span>P5</span></div>
+      </div>
+      <div class="body">
+        <div class="grid12"><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div><div class="c"></div></div>
+        <div class="spans"><div style="grid-column: span 6">6 · title and facts</div><div style="grid-column: span 6">6 · lead image</div></div>
+        <div class="spans"><div style="grid-column: span 5">5 · text</div><div style="grid-column: span 7">7 · drawing beside it</div></div>
+        <div class="spans"><div style="grid-column: span 4">4 · drawing set</div><div style="grid-column: span 4">4</div><div style="grid-column: span 4">4</div></div>
+        <div class="spans"><div style="grid-column: 3 / span 8">8 · body text, 68 characters</div></div>
+        <div class="bps">
+          <div class="bp"><div class="dev" style="width:52px;height:96px;grid-template-rows:1fr 1fr 1fr"><i></i><i></i><i></i></div><p><b>Phone · 1 column</b>Designed first. Nothing scrolls sideways at 375 px; 16 px gutters; touch targets 44 px.</p></div>
+          <div class="bp"><div class="dev" style="width:84px;height:110px;grid-template-columns:1fr 1fr"><i></i><i></i><i></i><i></i></div><p><b>Tablet · 2 columns</b>820 px and under: spans stack; the lead image comes first.</p></div>
+          <div class="bp"><div class="dev" style="width:150px;height:96px;grid-template-columns:5fr 7fr"><i></i><i></i></div><p><b>Desktop · 12 columns</b>Space inside a chapter from 4 to 36 px; between chapters, a rule and 40–68 px.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Form and motion -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">05 · Form and motion</p><h2>A quiet frame for the work.</h2><p>Four corners, six spacing steps, one shadow, one curve. Never rounded or animated for effect.</p></div>
+        <div class="serves"><span>P1</span><span>P3</span><span>P5</span></div>
+      </div>
+      <div class="body">
+        <div class="form">
+          <div class="radii">
+            <div><div style="border-radius:var(--radius-xs)"></div><p><b>4 px</b>drawings</p></div>
+            <div><div style="border-radius:var(--radius-sm)"></div><p><b>8 px</b>photos, tiles</p></div>
+            <div><div style="border-radius:var(--radius)"></div><p><b>14 px</b>cards</p></div>
+            <div><div style="border-radius:var(--radius-pill)"></div><p><b>pill</b>buttons, chips</p></div>
+          </div>
+          <div class="steps">
+            <div><i style="width:4px;height:4px"></i><p><b>4</b></p></div>
+            <div><i style="width:8px;height:8px"></i><p><b>8</b></p></div>
+            <div><i style="width:12px;height:12px"></i><p><b>12</b></p></div>
+            <div><i style="width:16px;height:16px"></i><p><b>16</b></p></div>
+            <div><i style="width:24px;height:24px"></i><p><b>24</b></p></div>
+            <div><i style="width:36px;height:36px"></i><p><b>36</b></p></div>
+            <div><p class="muted" style="font-size:12px">spacing steps, px</p></div>
+          </div>
+          <div class="durs">
+            <div><b>200 ms</b><span class="bar" style="width:25%"></span></div>
+            <div><b>250 ms</b><span class="bar" style="width:31%"></span></div>
+            <div><b>800 ms</b><span class="bar" style="width:100%"></span></div>
+            <p>hover · things that move · content entering</p>
+          </div>
+        </div>
+        <div class="form-rules">
+          <div><b>Drawings sit on white</b> with a 1 px rule, because they were drawn on white. Photos take 8 px and no border.</div>
+          <div><b>Rules and space</b> separate chapters, not cards. A card means a separate thing you can act on.</div>
+          <div><b>Motion is an entrance or a response</b>: hover moves 1–4 px. Nothing bounces, scales or spins; reduced motion stops it all.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 States -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">06 · States</p><h2>One look for each state, everywhere.</h2><p>Current is the same shape, filled. Focus is a 2 px terracotta ring, 3 px off, never removed.</p></div>
+        <div class="serves"><span>P3</span><span>P5</span></div>
+      </div>
+      <div class="body states">
+        <div class="panel">
+          <p class="lab">On paper</p>
+          <div class="st-row">
+            <div class="st"><span class="pill">Academic</span><small>default</small></div>
+            <div class="st"><span class="pill hover">Academic</span><small>hover</small></div>
+            <div class="st"><span class="pill current">Academic</span><small>current</small></div>
+            <div class="st"><span class="pill focus">Academic</span><small>focus</small></div>
+            <div class="st"><span class="pill disabled">Academic</span><small>disabled</small></div>
+          </div>
+        </div>
+        <div class="panel ink">
+          <p class="lab">On ink</p>
+          <div class="st-row">
+            <div class="st"><span class="pill">Coding</span><small>default</small></div>
+            <div class="st"><span class="pill hover">Coding</span><small>hover</small></div>
+            <div class="st"><span class="pill current">Coding</span><small>current</small></div>
+            <div class="st"><span class="pill focus">Coding</span><small>focus</small></div>
+            <div class="st"><span class="pill disabled">Coding</span><small>disabled</small></div>
+          </div>
+        </div>
+      </div>
+      <p class="note">Current is semantic as well as visual: <code>aria-current</code> sets it. If it looks clickable it must do something; images open the lightbox but don't grow on hover.</p>
+    </section>
+
+    <!-- 07 Place markers -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">07 · Place markers</p><h2>One bird per semester.</h2><p>Bird, colour, progress bar and page edge tell you where you are, in the book and on the site.</p></div>
+        <div class="serves"><span>P2</span><span>P1</span></div>
+      </div>
+      <div class="body">
+        <div class="birds">
+          <div class="bd" style="--c:var(--sem-1)"><div class="img"><img src="../public/assets/img/birds/sem1.webp" alt=""></div><b>I · Whistling-duck</b><small>pen</small></div>
+          <div class="bd" style="--c:var(--sem-2)"><div class="img"><img src="../public/assets/img/birds/sem2.webp" alt=""></div><b>II · Grey waterbird</b><small>watercolour</small></div>
+          <div class="bd" style="--c:var(--sem-3)"><div class="img"><img src="../public/assets/img/birds/sem3.webp" alt=""></div><b>III · Flamingo</b><small>digital</small></div>
+          <div class="bd" style="--c:var(--sem-4)"><div class="img"><img src="../public/assets/img/birds/sem4.webp" alt=""></div><b>IV · House crow</b><small>ink wash</small></div>
+          <div class="bd" style="--c:var(--sem-5)"><div class="img"><img src="../public/assets/img/birds/sem5.webp" alt=""></div><b>V · Grey heron</b><small>digital</small></div>
+          <div class="bd" style="--c:var(--sem-6)"><div class="tbc">to be chosen</div><b>VI</b><small>with the final project</small></div>
+        </div>
+        <div class="devices">
+          <div class="panel">
+            <p class="lab">Progress bar</p>
+            <div style="margin-top:6px">
+              <span class="bar6"><i style="background:var(--sem-1)"></i><i style="background:var(--sem-2)"></i><i style="background:var(--sem-3)"></i><i></i><i></i><i></i></span>
+            </div>
+            <p>Six segments, filled to the current semester, in a 1 px ink outline: on every cover since Semester 1, and under every project title and in the pager.</p>
+          </div>
+          <div class="panel">
+            <p class="lab">Page edge and reading bar</p>
+            <div class="mini"><div class="top"></div><div class="edge"></div><div class="l" style="top:24px;width:46%"></div><div class="l" style="top:40px;width:62%"></div><div class="l" style="top:56px;width:54%"></div><div class="l" style="top:72px;width:40%"></div></div>
+            <p>6 px of the semester colour down the right; 3 px across the top. In the book: six edge tabs.</p>
+          </div>
+          <div class="panel">
+            <p class="lab">Chapter nav</p>
+            <div class="chips"><span class="chip">Context</span><span class="chip on">Site</span><span class="chip">Proposal</span><span class="chip">Drawings</span></div>
+            <p>Sticky under the navbar, one chip per chapter; current is filled with the semester's text shade.</p>
+          </div>
+        </div>
+        <p class="note">A bird appears behind a project's title at 26%, on the book's semester opener at 100%, or beside each semester in an index. Never in the navbar, never to fill a corner, never mirrored or recoloured.</p>
+      </div>
+    </section>
+
+    <!-- 08 Voices -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">08 · Voices</p><h2>One shell, many voices.</h2><p>A project may speak like its own boards. It never changes how the site is built or how it behaves.</p></div>
+        <div class="serves"><span>P3</span><span>P1</span></div>
+      </div>
+      <div class="body">
+        <div class="shell"><b>The shell</b><span class="muted">navbar · grid · page shape · place markers · states · footer</span></div>
+        <div class="voices">
+          <div class="vc v-kit"><p class="lab">Sem 1–3 · the kit</p><div class="name">Blue<br><em>Canvas</em></div><p>Instrument Serif and Inter, as the shell is</p></div>
+          <div class="vc v-book"><p class="lab">Sem 4 · research book</p><div class="name">Measured embrace</div><div class="sf">a standfirst in Garamond</div><p>Source Sans 3 heavy, Garamond italic, Plex labels</p></div>
+          <div class="vc v-five"><p class="lab">Sem 5 · Design V boards</p><div class="name">Yield, <i>register,</i> transmit</div><p>Source Sans 3 bold and italic, white ground</p></div>
+          <div class="vc v-eng"><p class="lab">Engineering · drafting sheet</p><div class="name">Villimalé tower</div><div class="sf">DWG 03 · SECTION A–A</div><p>Grid paper, mono labels, square corners</p></div>
+          <div class="vc v-ink"><p class="lab">Personal · after hours</p><div class="name">Drawing <em>every bird</em><span>.</span></div><p>The same shell on ink: sky for illustration, terracotta for code</p></div>
+          <div class="vc v-six"><p class="lab">Sem 6</p><div class="name">Voice from its boards</div><p>Chosen with the final project</p></div>
+        </div>
+        <div class="canwrap">
+          <div><p class="lab">A voice can change</p><div class="chips"><span class="chip">Typeface, from the six</span><span class="chip">Paper tone</span><span class="chip">A few colours of its own</span><span class="chip">Imagery</span><span class="chip">How much it plays (Personal)</span></div></div>
+          <div><p class="lab">A voice can't change</p><div class="chips"><span class="chip x">Grid and spacing</span><span class="chip x">Page shape</span><span class="chip x">Hero and fact tiles</span><span class="chip x">Navigation</span><span class="chip x">States</span><span class="chip x">Place markers</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Page shapes -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">09 · Page shapes</p><h2>Every page in the same order.</h2><p>A studio project and a code story are the same page, one on paper and one on ink.</p></div>
+        <div class="serves"><span>P2</span><span>P3</span></div>
+      </div>
+      <div class="body shapes">
+        <div class="panel">
+          <p class="lab">Project page · paper</p>
+          <ol class="steps-list">
+            <li><span><b>Kicker</b> · Semester N · course · year</span></li>
+            <li><span><b>Title</b> · serif, last word italic in the semester colour; the bird behind it</span></li>
+            <li><span><b>Progress bar</b>, filled to N</span></li>
+            <li><span><b>Sub-line, standfirst, two to four facts</b></span></li>
+            <li><span><b>Lead image</b> · one, with the semester colour down its edge</span></li>
+            <li><span><b>Chapter nav</b> · sticky chips</span></li>
+            <li><span><b>Chapters</b> · numbered, a rule between, drawings on white</span></li>
+            <li><span><b>Pager</b> · previous · progress · next</span></li>
+          </ol>
+        </div>
+        <div class="panel ink">
+          <p class="lab">Code story · ink</p>
+          <ol class="steps-list">
+            <li><span><b>Kicker</b> · date · kind · language</span></li>
+            <li><span><b>Title</b> · what it does, last phrase italic in the accent</span></li>
+            <li><span><b>Status</b> · in use, retired or an experiment</span></li>
+            <li><span><b>Two to four facts</b> · year, language, where the code is</span></li>
+            <li><span><b>Lead visual</b> · its own animation, 4:3</span></li>
+            <li><span><b>Chapter nav</b> · the same sticky chips</span></li>
+            <li><span><b>Chapters</b> · the itch · what it does · how · what I learned</span></li>
+            <li><span><b>Pager</b> · previous · all code · next</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Never pretend -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">10 · Empty, loading, failed</p><h2>Never pretend.</h2><p>Live data and unfinished work say exactly what is known, and nothing more.</p></div>
+        <div class="serves"><span>P4</span><span>P2</span></div>
+      </div>
+      <div class="body states3">
+        <div class="case"><p class="lab">Count known</p><h4>Show it, with its total</h4><div class="demo"><b>15</b> / 204 birds drawn</div><p>Read at build time, rebuilt every morning.</p></div>
+        <div class="case"><p class="lab">Count unknown</p><h4>Leave the number out</h4><div class="demo">Drawing every bird of the Maldives</div><p>Never "0 of 0" or a guessed figure.</p></div>
+        <div class="case"><p class="lab">Feed failed</p><h4>Drop the block quietly</h4><div class="demo">(journal section not shown)</div><p>No "couldn't load" box on a page built in advance.</p></div>
+        <div class="case"><p class="lab">Not finished</p><h4>Say so</h4><div class="demo">Semester VI · in progress</div><p>A place in the progress bar, not a blank page.</p></div>
+      </div>
+    </section>
+
+    <!-- Checklist -->
+    <section>
+      <div class="sec-head">
+        <div><p class="lab">Before a change ships</p><h2>Does it still belong?</h2><p>The review for every page PR, by principle.</p></div>
+      </div>
+      <div class="body check">
+        <div><p class="lab">P1</p><h4>The work leads</h4><ul><li>Is anything over a drawing?</li><li>Are drawings whole, on white?</li><li>Is the accent used for a few signals only?</li></ul></div>
+        <div><p class="lab">P2</p><h4>Where you are</h4><ul><li>Kicker, bird, bar and edge in the semester's colour?</li><li>Is the current chapter marked?</li></ul></div>
+        <div><p class="lab">P3</p><h4>One shell</h4><ul><li>Only tokens: no hex, font names or px radii in page CSS?</li><li>Shared components, voice on top?</li><li>Snapshots compared?</li></ul></div>
+        <div><p class="lab">P4</p><h4>Tell it straight</h4><ul><li>Sentence case?</li><li>Captions and alt text say what's shown?</li><li>Group work marked; no undated "soon"?</li></ul></div>
+        <div><p class="lab">P5</p><h4>Everyone</h4><ul><li>375 px with no sideways scroll?</li><li>44 px targets, visible focus?</li><li>4.5:1 text on its real ground?</li></ul></div>
+      </div>
+    </section>
+
+    <p class="close">Let the drawings lead. Let every page say where it is.<br>Let the rules serve the work.</p>
+    <div class="foot"><span>Values: public/assets/css/main.css · Rules: DESIGN.md · Plan: docs/DESIGN-PLAN.md</span><span>npm run guide</span></div>
+
+    <script>
+      // Contrast of each text colour on its ground, from the values main.css actually holds
+      const css = getComputedStyle(document.documentElement);
+      const parse = (v) => {
+        v = v.startsWith("--") ? css.getPropertyValue(v).trim() : v;
+        if (v.startsWith("#")) return [...[1, 3, 5].map((i) => parseInt(v.slice(i, i + 2), 16)), 1];
+        const m = v.match(/[\d.]+/g).map(Number);
+        return [m[0], m[1], m[2], m[3] ?? 1];
+      };
+      const lum = ([r, g, b]) => {
+        const f = (c) => ((c /= 255) <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      };
+      for (const el of document.querySelectorAll(".ratio")) {
+        const bg = parse(el.dataset.bg);
+        const [r, g, b, a] = parse(el.dataset.fg);
+        const fg = [r * a + bg[0] * (1 - a), g * a + bg[1] * (1 - a), b * a + bg[2] * (1 - a)];
+        const [l1, l2] = [lum(fg), lum(bg)].sort((x, y) => y - x);
+        el.textContent = `${((l1 + 0.05) / (l2 + 0.05)).toFixed(1)}:1`;
+      }
+    </script>
+  </body>
+</html>
