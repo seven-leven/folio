@@ -11,5 +11,5 @@ import fitz
 docs = Path(__file__).resolve().parent.parent / "docs"
 pdf = fitz.open(docs / "design-manifesto.pdf")
 svg = pdf[0].get_svg_image(text_as_path=True)
-(docs / "design-manifesto.svg").write_text(svg, encoding="utf-8")
+(docs / "design-manifesto.svg").write_text(svg, encoding="utf-8", newline="\n")
 print(f"Wrote {docs / 'design-manifesto.svg'} ({len(svg) // 1024} KB)")
