@@ -80,6 +80,10 @@ for (const page of await distPages()) {
       document
         .querySelectorAll(".reveal,.animate-on-scroll-target,#project-showcase-hero")
         .forEach((e) => e.classList.add("is-visible"));
+      // Load every image now, lazy or not, so none arrives mid-measurement and moves boxes by a pixel
+      const images = [...document.images];
+      for (const img of images) img.loading = "eager";
+      await Promise.all(images.map((img) => img.decode().catch(() => {})));
       await document.fonts.ready;
     });
     const data = await tab.evaluate((props: string[]) => {

@@ -7,6 +7,41 @@ import { gitDate } from "./tools/version.ts";
 
 const SITE_URL = "https://seven-leven.github.io/folio/";
 
+/** npm run dev: send http://localhost:8000/ to /folio/, where the site lives (as on GitHub Pages). */
+function devRootRedirect(): AstroIntegration {
+  return {
+    name: "folio-dev-root",
+    hooks: {
+      "astro:config:setup": ({ command, updateConfig }) => {
+        if (command !== "dev") return;
+        updateConfig({
+          vite: {
+            plugins: [
+              {
+                name: "folio-dev-root",
+                // The returned hook runs after Astro's, which puts its base-path check (a 404 for "/")
+                // at the front of the stack; putting ours in front of that lets "/" through to here
+                configureServer: (server) => () => {
+                  server.middlewares.stack.unshift({
+                    route: "",
+                    handle: (req, res, next) => {
+                      if (req.url === "/" || req.url === "/index.html") {
+                        res.writeHead(302, { location: "/folio/" }).end();
+                        return;
+                      }
+                      next();
+                    },
+                  });
+                },
+              },
+            ],
+          },
+        });
+      },
+    },
+  };
+}
+
 /** Writes dist/sitemap.xml: every page but 404, homepage first, each with the date its source last changed in git. */
 function sitemap(): AstroIntegration {
   return {
@@ -41,5 +76,5 @@ export default defineConfig({
   outDir: fileURLToPath(new URL("./dist/", import.meta.url)),
   server: { port: 8000 },
   devToolbar: { enabled: false },
-  integrations: [sitemap(), responsiveImages(), cacheBust()],
+  integrations: [devRootRedirect(), sitemap(), responsiveImages(), cacheBust()],
 });
