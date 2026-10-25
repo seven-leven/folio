@@ -15,6 +15,7 @@ commit.
 
 ## Unreleased
 
+- Astro 7.4.2 (from 5.18.2): the built site is byte-for-byte the same apart from whitespace in the `<head>`; the dev server's "could not be resolved" scan error is gone
 - Migration follow-ups: the homepage's "This portfolio" entry describes the Astro site; `npm run dev` sends the bare `localhost:8000/` to `/folio/`; snapshots wait for every image, so two runs of the same build always match; workflows use `actions/checkout@v7` and `actions/setup-node@v7`
 - Fonts are served from the site (`public/assets/fonts/`, `npm run fonts`) instead of Google Fonts: the same files and rules, so pages render the same, with no request to Google
 - Responsive images: every local image wider than 640 px gets smaller copies and a `srcset` at build time; on a phone the project pages download 30–55% less. The lightbox still opens the full-size image
