@@ -30,10 +30,35 @@ Every page on the site is good on its own. Together they don't yet tell one stor
 
 ## 2. The through-line
 
-A portfolio is easier to remember when everything on it answers one question. The work
-already suggests one; three candidates, in order of preference:
+A portfolio is easier to remember when everything on it answers one question.
 
-### A. Counting and knowing (recommended)
+### The mindset shift (recommended: it's already yours)
+
+The printed book already has a through-line, in your own words and backed by the portfolios
+(`Final Folio/Narrative_Notes.md`):
+
+> "Before, I was thinking I would use my engineering expertise and work experience to power
+> through this course, but at some point I changed mindset and decided I'm gonna power through
+> this course as an architect."
+
+The evidence for it is on record:
+
+- The engineering capstone and thesis are written in the third person, with no reflection.
+- Sem 1 begins an observational voice.
+- Sem 4's crit called the design "two disconnected buildings awkwardly sharing a plot".
+- The Sem 4 resit diagnoses that failure ("I was designing representations of ideas rather
+  than the material assemblies that embody them").
+- Sem 5 resolves it in the idea of yield, and in the profile line: "An engineering degree gave
+  me the technical language for systems and structures. Architecture gave me the spatial one."
+
+The site and the book should tell the same story. On the site, that means:
+- the hero carries the Sem 5 profile line;
+- Sem 4 becomes the turning-point chapter, not just the longest one;
+- each Looking back records where you were on the shift.
+
+The options below stay as motifs inside that story, not as competing theses.
+
+### A. Counting and knowing (a motif)
 
 > **Engineering taught me to count. Architecture is teaching me to know.**
 
@@ -64,8 +89,9 @@ of you.
 Everything is about the Maldives: Henveiru, Kendhikulhudhoo, the lagoon, Villimalé, Thulusdhoo,
 the old port, the birds. Strong as a setting; weaker as a thesis, because it says where, not why.
 
-**(you)** Does A feel true? If it does, every section below is written to it. If not, which
-sentence would you put at the top of the site instead?
+**(you)** Is the mindset shift still the story you want to tell, and does "counting and
+knowing" sit well inside it? The sections below were drafted around counting and knowing.
+Where they disagree with the mindset shift, the shift wins.
 
 ## 3. Who reads it, and what they must leave with
 
