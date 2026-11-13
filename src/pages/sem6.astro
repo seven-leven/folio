@@ -3,13 +3,15 @@ import TumblrFeed from "../components/TumblrFeed.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 ---
 
 <BaseLayout
   page="sem6.html"
   title="Known Again"
-  description="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress: the group's masterplan, the artwork, and the Part 3A proposal."
-  shareDescription="Known Again: eighty-four homes round a courtyard on Malé's old port. Design Studio VI, in progress."
+  description="Known Again: eighty-one homes in two buildings round a courtyard on Malé's old port. Design Studio VI: the group's masterplan, the artwork, the Part 3A ring and the Part 3B design."
+  shareDescription="Known Again: eighty-one homes in two buildings round a courtyard on Malé's old port. Design Studio VI."
   image="assets/img/cover-sem6.webp"
   styles={["sem6"]}
   bodyClass="project-page project-known pk"
@@ -20,25 +22,25 @@ import Footer from "../components/Footer.astro";
       <header class="pk-hero">
         <div class="pk-wrap pk-hero__grid">
           <div class="pk-hero__text">
-            <p class="pk-kicker">Semester 6 · Architectural Design VI · 2026 · in progress</p>
+            <p class="pk-kicker">Semester 6 · Architectural Design VI · 2026 · Part 3B</p>
             <h1 class="pk-title">Known <em>Again</em></h1>
             <p class="sem-mark"><span class="sem-bar" data-at="6" role="img" aria-label="Semester 6 of 6"><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
-            <p class="pk-sub">Eighty-four homes round a courtyard, on Malé's old port</p>
+            <p class="pk-sub">Eighty-one homes in two buildings round a courtyard, on Malé's old port</p>
             <p class="pk-standfirst sem6-motto">Goods are counted. People are known.</p>
             <dl class="pk-facts">
-              <div><dt>Homes</dt><dd>84, for islanders and families</dd></div>
-              <div><dt>Storeys</dt><dd>9, 29.45 m</dd></div>
-              <div><dt>Ground</dt><dd>60% given to the city</dd></div>
-              <div><dt>Open to the sky</dt><dd>22% of the plot</dd></div>
+              <div><dt>Homes</dt><dd>81, for islanders and families</dd></div>
+              <div><dt>People</dt><dd>219</dd></div>
+              <div><dt>Buildings</dt><dd>2, half a storey apart</dd></div>
+              <div><dt>Payback</dt><dd>about 22 years</dd></div>
             </dl>
           </div>
           <figure class="pk-hero__media">
             <img
-              src="assets/projects/sem6/section-bb.webp"
-              alt="Section B-B through the building and its courtyard: homes with bedrooms on the outer face and day rooms on the inner, the corridors, the courtyard and the raft foundation"
-              width="2400" height="1698" fetchpriority="high" decoding="async"
+              src="assets/projects/sem6/3b-section-s1.webp"
+              alt="Section S1 through both buildings and the courtyard: homes on every floor, the floating corridors, the stair-bridges, the courtyard with its water and tree"
+              width="2400" height="1533" fetchpriority="high" decoding="async"
             >
-            <figcaption>One cut through the courtyard: the homes, the corridors, the air and the water.</figcaption>
+            <figcaption>Section S1, Part 3B: both buildings and the courtyard between them.</figcaption>
           </figure>
         </div>
       </header>
@@ -49,10 +51,13 @@ import Footer from "../components/Footer.astro";
           <a href="#counting">I · Counting</a>
           <a href="#breaking">II · Breaking</a>
           <a href="#known">III · Known</a>
+          <a href="#known-again">IV · Known again</a>
           <a href="#next">What comes next</a>
           <a href="#journal">Process journal</a>
         </div>
       </nav>
+
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"]]} />
 
       <div class="pk-wrap pk-body">
         <figure class="sem6-pano">
@@ -63,6 +68,7 @@ import Footer from "../components/Footer.astro";
           >
         </figure>
 
+        <StageMark id="stage-concept" no="01" label="Concept" say="The old port, the group’s masterplan, and the artwork: how I first saw Malé, as a city where people are stored." />
         <section id="old-port" class="animate-on-scroll-target">
           <h2 data-label="Context · why plot B1">The old port</h2>
           <div class="pk-grid pk-grid--split">
@@ -273,10 +279,11 @@ import Footer from "../components/Footer.astro";
           </section>
         </div>
 
+        <StageMark id="stage-development" no="02" label="Development" say="The Part 3A ring, and what the crit and the marks made of it." />
         <!-- III · Known -->
         <div class="pk-act" id="known">
           <header class="pk-act__head">
-            <p class="pk-act__no">Part III · The proposal, Part 3A</p>
+            <p class="pk-act__no">Part III · The first proposal, Part 3A</p>
             <h2 class="pk-act__title"><em>Known</em></h2>
             <p class="pk-act__say">Putting the island's steps back, in the air.</p>
           </header>
@@ -363,7 +370,7 @@ import Footer from "../components/Footer.astro";
           </section>
 
           <section class="animate-on-scroll-target">
-            <h2 data-label="III">The numbers</h2>
+            <h2 data-label="III · Part 3A">The numbers at Part 3A</h2>
             <div class="pk-grid pk-grid--split">
               <div>
                 <dl class="pk-stats">
@@ -401,11 +408,85 @@ import Footer from "../components/Footer.astro";
           </section>
         </div>
 
+        <StageMark id="stage-final" no="03" label="Final" say="Part 3B: the ring broken into two buildings, with the life inside the frame left free." />
+        <!-- IV · Known again -->
+        <div class="pk-act" id="known-again">
+          <header class="pk-act__head">
+            <p class="pk-act__no">Part IV · Design development, Part 3B · 12 November</p>
+            <h2 class="pk-act__title">Known <em>again</em></h2>
+            <p class="pk-act__say">One frame, simple and repeated; the life inside it free.</p>
+          </header>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="IV · after the 3A crit">The crit, and the break</h2>
+            <div class="pk-grid pk-grid--split">
+              <div>
+                <p>
+                  At Part 3A the scheme was one ring of 84 homes, stepping half a storey between its two
+                  halves. The crit and the marks asked for evidence, not claims, so the next month was
+                  models and drawings. In November the ring broke into two L-shaped buildings, with
+                  stair-bridges across the gaps where the wind gets through.
+                </p>
+              </div>
+              <figure>
+                <img src="assets/projects/sem6/3b-developed.webp" alt="How it developed: the building drawn in colour, with bubbles showing the earlier model of each part in line beside it" width="1800" height="1823" loading="lazy" decoding="async">
+                <figcaption>How it developed: each bubble is an earlier model beside the same view now.</figcaption>
+              </figure>
+            </div>
+            <div class="pk-grid pk-grid--2">
+              <figure>
+                <img src="assets/projects/sem6/3b-model-massing.webp" alt="Massing model of the two L-shaped buildings set into the group's masterplan model" width="1600" height="897" loading="lazy" decoding="async">
+                <figcaption>The massing model in the group’s masterplan model.</figcaption>
+              </figure>
+              <figure>
+                <img src="assets/projects/sem6/3b-model-structure.webp" alt="Laser-cut structure model: columns and slabs of one building" width="1600" height="897" loading="lazy" decoding="async">
+                <figcaption>The structure model: one frame, repeated.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="IV">Two buildings, one courtyard</h2>
+            <p>
+              The block, the break, turned in and let out: one grey frame broken into two halves half a
+              storey apart, round a courtyard, with the colour let out wherever people live.
+            </p>
+            <figure>
+              <img src="assets/projects/sem6/3b-parti.webp" alt="The parti in three axonometric steps: the block, the break into two halves, and the halves turned in round a courtyard" width="2400" height="852" loading="lazy" decoding="async">
+              <figcaption>The parti: the block, the break, turned in.</figcaption>
+            </figure>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="IV">The ground</h2>
+            <div class="pk-grid pk-grid--split">
+              <p>
+                The shops open onto lanes that run from the street into the courtyard. The courtyard is a
+                bowl that floods 150 mm in a storm and drains to the rain store, with a funa tree on an
+                island at its centre.
+              </p>
+              <figure>
+                <img src="assets/projects/sem6/3b-ground.webp" alt="Ground floor and landscape plan: two L-shaped buildings, shops along the lanes, and the courtyard with its water and central island" width="2400" height="2198" loading="lazy" decoding="async">
+                <figcaption>Ground floor and landscape.</figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="animate-on-scroll-target">
+            <h2 data-label="IV · Part 3B">The numbers at Part 3B</h2>
+            <dl class="pk-stats">
+              <div><dt>81</dt><dd>homes: 42 transit, 30 two-bed, 9 three-bed</dd></div>
+              <div><dt>219</dt><dd>people</dd></div>
+              <div><dt>22 <small>years</small></dt><dd>to pay back</dd></div>
+            </dl>
+            <blockquote class="pk-quote">Known Again is housing where you are not stored, but known.</blockquote>
+          </section>
+        </div>
+
         <section id="next" class="pk-section--tint animate-on-scroll-target">
           <h2 data-label="Still to come">What comes next</h2>
           <p>This page is written as the semester happens. These parts are added when they do.</p>
           <ul class="pk-list">
-            <li><b>Part 3B · 11 November.</b> What the crit said; the structure, services and materials resolved; a 1:50 fragment of the half-level corner.</li>
             <li><b>Part 4A · Week 15.</b> The final board, renders and the final model.</li>
             <li><b>Looking back.</b> After the final crit.</li>
           </ul>

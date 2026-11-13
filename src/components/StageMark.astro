@@ -1,0 +1,17 @@
+---
+/** A stage divider inside a semester page: "01 Concept", "02 Development", "03 Final", "04 Resit". */
+interface Props {
+  id: string;
+  no: string;
+  label: string;
+  /** One line on what this stage of the project did */
+  say?: string;
+}
+const { id, no, label, say } = Astro.props;
+---
+
+<div class="stage-mark" id={id}>
+  <p class="stage-mark__no">{no}</p>
+  <h2 class="stage-mark__label">{label}</h2>
+  {say && <p class="stage-mark__say">{say}</p>}
+</div>

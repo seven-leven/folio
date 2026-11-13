@@ -3,7 +3,8 @@
  * The shared navbar. On the homepage its links go to the homepage's own sections; on other
  * pages to index.html#…. `active` highlights one link: home, engineering, architecture,
  * professional, illustrations, coding, about or contact. A link inside a dropdown group
- * (Academic, Personal) also highlights the group's button.
+ * (Architecture, Other work) also highlights the group's button. Architecture lists the six
+ * semesters directly (the assessed work); everything else sits under Other work.
  */
 interface Props {
   /** The page's file name in the built site, e.g. "sem1.html" */
@@ -33,6 +34,16 @@ const link = (nav: string) => ({
   ...(nav === active && { class: "is-active", "aria-current": href[nav] === page ? "page" : "true" }),
 });
 const groupClass = (...links: string[]) => ["nav-group__btn", { "is-active": links.includes(active ?? "") }];
+
+/** The six semesters, in order, with the titles their pages use. */
+const semesters: [string, string, string][] = [
+  ["sem1.html", "I", "Enchanting Reading Nook"],
+  ["sem2.html", "II", "Blue Canvas"],
+  ["sem3.html", "III", "Urban Acupuncture"],
+  ["sem4.html", "IV", "Measured Embrace"],
+  ["sem5.html", "V", "Yield, Register, Transmit"],
+  ["sem6.html", "VI", "Known Again"],
+];
 ---
 
 <nav id="navbar" aria-label="Main">
@@ -47,16 +58,19 @@ const groupClass = (...links: string[]) => ["nav-group__btn", { "is-active": lin
     <ul class="nav-links" id="nav-links">
       <li><a {...link("home")}>Home</a></li>
       <li class="nav-group">
-        <button type="button" class:list={groupClass("engineering", "architecture")} aria-expanded="false" aria-controls="nav-academic">Academic</button>
-        <ul class="nav-group__menu" id="nav-academic">
-          <li><a {...link("engineering")}>Engineering</a></li>
-          <li><a {...link("architecture")}>Architecture</a></li>
+        <button type="button" class:list={groupClass("architecture")} aria-expanded="false" aria-controls="nav-architecture">Architecture</button>
+        <ul class="nav-group__menu" id="nav-architecture">
+          <li><a {...link("architecture")}>All six semesters</a></li>
+          {semesters.map(([file, no, title]) => (
+            <li><a href={file} {...(file === page && { class: "is-active", "aria-current": "page" })}>{no} · {title}</a></li>
+          ))}
         </ul>
       </li>
       <li><a {...link("professional")}>Professional</a></li>
       <li class="nav-group">
-        <button type="button" class:list={groupClass("illustrations", "coding")} aria-expanded="false" aria-controls="nav-personal">Personal</button>
-        <ul class="nav-group__menu" id="nav-personal">
+        <button type="button" class:list={groupClass("engineering", "illustrations", "coding")} aria-expanded="false" aria-controls="nav-other">Other work</button>
+        <ul class="nav-group__menu" id="nav-other">
+          <li><a {...link("engineering")}>Engineering degree</a></li>
           <li><a {...link("illustrations")}>Illustrations</a></li>
           <li><a {...link("coding")}>Coding</a></li>
         </ul>

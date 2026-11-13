@@ -1,4 +1,6 @@
 ---
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Model from "../components/Model.astro";
@@ -39,6 +41,8 @@ import Footer from "../components/Footer.astro";
           </figure>
         </div>
       </header>
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"]]} />
+
 
       <nav class="pk-subnav" aria-label="On this page" data-spy>
         <div class="pk-wrap pk-subnav__row">
@@ -54,6 +58,7 @@ import Footer from "../components/Footer.astro";
       </nav>
 
       <div class="pk-wrap pk-body">
+      <StageMark id="stage-concept" no="01" label="Concept" say="A real site in Henveiru, read at two scales, and a touchstone for what was wrong with it." />
       <section class="animate-on-scroll-target" id="narrative">
         <h2>The Brief</h2>
         <p>
@@ -115,6 +120,17 @@ import Footer from "../components/Footer.astro";
         </div>
       </section>
 
+      <section id="precedents" class="animate-on-scroll-target">
+        <h2>Precedent Studies</h2>
+        <figure>
+          <img src="assets/projects/sem3/precedents.webp" alt="Precedent Studies"
+              width="1620" height="495" loading="lazy" decoding="async"
+            >
+          <figcaption>Influential precedent projects and concepts.</figcaption>
+        </figure>
+      </section>
+
+      <StageMark id="stage-development" no="02" label="Development" say="Programming, parti and massing: find the pressure points and release them." />
       <section id="concept-development" class="animate-on-scroll-target">
         <h2>Concept Development</h2>
         <h3>Programming</h3>
@@ -144,6 +160,7 @@ import Footer from "../components/Footer.astro";
         </div>
       </section>
 
+      <StageMark id="stage-final" no="03" label="Final" say="The building: a first floor hung from the frame above, floor by floor." />
       <section id="overall-views" class="animate-on-scroll-target">
         <h2>Building Representation</h2>
         <figure>
@@ -285,15 +302,6 @@ import Footer from "../components/Footer.astro";
         </div>
       </section>
 
-      <section id="precedents" class="animate-on-scroll-target">
-        <h2>Precedent Studies</h2>
-        <figure>
-          <img src="assets/projects/sem3/precedents.webp" alt="Precedent Studies"
-              width="1620" height="495" loading="lazy" decoding="async"
-            >
-          <figcaption>Influential precedent projects and concepts.</figcaption>
-        </figure>
-      </section>
       </div>
     </main>
 

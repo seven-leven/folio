@@ -1,4 +1,6 @@
 ---
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Model from "../components/Model.astro";
@@ -49,6 +51,8 @@ import Footer from "../components/Footer.astro";
           </figure>
         </div>
       </header>
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"]]} />
+
 
       <nav class="pk-subnav" aria-label="On this page" data-spy>
         <div class="pk-wrap pk-subnav__row">
@@ -63,6 +67,7 @@ import Footer from "../components/Footer.astro";
       </nav>
 
       <div class="pk-wrap pk-body">
+        <StageMark id="stage-concept" no="01" label="Concept" say="Watching ink move through water, then turning it into form." />
         <section id="concept" class="animate-on-scroll-target">
           <h2>Concept</h2>
           <div class="pk-grid pk-grid--split">
@@ -129,6 +134,7 @@ import Footer from "../components/Footer.astro";
           </p>
         </section>
 
+        <StageMark id="stage-development" no="02" label="Development" say="Stack of books, model 1, model 2: averaging the slopes into one form." />
         <section id="development" class="animate-on-scroll-target">
           <h2>Development</h2>
           <div class="pk-grid pk-grid--2">
@@ -165,6 +171,7 @@ import Footer from "../components/Footer.astro";
           </div>
         </section>
 
+        <StageMark id="stage-final" no="03" label="Final" say="The reading nook, drawn, built and detailed." />
         <section id="drawings" class="animate-on-scroll-target">
           <h2>Plans, Elevations, &amp; Sections</h2>
           <div class="pk-grid pk-grid--3">

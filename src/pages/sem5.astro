@@ -1,4 +1,6 @@
 ---
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 import TumblrFeed from "../components/TumblrFeed.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
@@ -42,6 +44,8 @@ import Footer from "../components/Footer.astro";
           </figure>
         </div>
       </header>
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"]]} />
+
 
       <!-- Chapter nav -->
       <nav class="yr-subnav" aria-label="On this page" data-spy>
@@ -56,6 +60,7 @@ import Footer from "../components/Footer.astro";
       </nav>
 
       <!-- Island context -->
+      <StageMark id="stage-concept" no="01" label="Concept" say="Why the lagoon, and the search: sketches, the collage, the touchstone." />
       <section class="yr-chapter" id="context" aria-labelledby="ch-context">
         <div class="yr-wrap">
           <div class="yr-chapter__head animate-on-scroll-target">
@@ -94,7 +99,7 @@ import Footer from "../components/Footer.astro";
               </table>
             </div>
             <div class="yr-entry__media">
-              <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-site.webp" alt="Site map of the lagoon with site forces marked" width="1400" height="1400" loading="lazy"><figcaption>Site forces mapped across the lagoon</figcaption></figure>
+              <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-site.webp" alt="Site map of the lagoon with site forces marked" width="1400" height="1400" loading="lazy"><figcaption>Site forces mapped across the lagoon · <b>Group work</b></figcaption></figure>
             </div>
           </div>
         </div>
@@ -113,7 +118,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig yr-fig--small"><img src="assets/projects/sem5/sketches.webp" alt="Sketches and studies in mixed media" width="322" height="341" loading="lazy"><figcaption>Sketches &amp; studies</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Sketches &amp; Studies</h3>
+              <h3 class="yr-entry__title">Sketches &amp; studies</h3>
               <p>
                 These came after the field trip. Something about being physically on the water shifted
                 the thinking — the question stopped being “what should this look like” and became “how
@@ -131,7 +136,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/collage.webp" alt="Collage of a coconut arriving in the lagoon" width="559" height="396" loading="lazy"><figcaption>The collage</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">The Collage</h3>
+              <h3 class="yr-entry__title">The collage</h3>
               <p>
                 The brief was to map the problem of the island through image. The idea was clear enough:
                 before an island is an island, something arrives. Usually a coconut — carried by current,
@@ -152,7 +157,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig yr-fig--small"><img src="assets/projects/sem5/concept-visions.webp" alt="Pin-up board of concept visions" width="269" height="523" loading="lazy"><figcaption>Concept visions pin-up</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Concept Visions</h3>
+              <h3 class="yr-entry__title">Concept visions</h3>
               <p>
                 The pin-up was incomplete. Some of what mattered most that semester never made it to the
                 board — the social questions, how a floating settlement avoids becoming a separate
@@ -170,7 +175,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/journal-touchstone-sketch.webp" alt="Pencil sketch working out the touchstone anchoring" width="264" height="294" loading="lazy"><figcaption>Touchstone sketch</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Journal &amp; Touchstone</h3>
+              <h3 class="yr-entry__title">Journal &amp; touchstone</h3>
               <p>
                 The sticky notes came before the drawings. Programme, anchoring logic, the two-core
                 structure, the word cultivate — these were the questions the journal was holding while
@@ -187,6 +192,7 @@ import Footer from "../components/Footer.astro";
       </section>
 
       <!-- II Testing -->
+      <StageMark id="stage-development" no="02" label="Development" say="Making to find out: cluster models, the dwelling, the structure and its node." />
       <section class="yr-chapter" id="testing" aria-labelledby="ch-testing">
         <div class="yr-wrap">
           <div class="yr-chapter__head animate-on-scroll-target">
@@ -200,7 +206,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/touchstone.webp" alt="Touchstone model shaped by applied forces" width="256" height="235" loading="lazy"><figcaption>Touchstone</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Sketch Masterplan &amp; Touchstone</h3>
+              <h3 class="yr-entry__title">Sketch masterplan &amp; touchstone</h3>
               <p>
                 Designing from the unit up is instinctive — you know the room, then the floor, then the
                 building. At 150 units the brain stops working that way. The only way through was
@@ -221,7 +227,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/cluster-later.webp" alt="Later cluster model of circular hulls and pathways" width="279" height="253" loading="lazy"><figcaption>Later cluster</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Cluster Models</h3>
+              <h3 class="yr-entry__title">Cluster models</h3>
               <p>
                 The cluster read as bulky. Units too close, too uniform, the shared space between them
                 unclear. Modelling it at this scale made that visible in a way drawing hadn’t — the
@@ -241,7 +247,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/dwelling-model-2.webp" alt="Second dwelling development model" width="246" height="236" loading="lazy"><figcaption>Dwelling study</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Dwelling Development</h3>
+              <h3 class="yr-entry__title">Dwelling development</h3>
               <p>
                 The curved form made this model structurally difficult to hold together. Every joint was
                 fighting the geometry. That fragility was information: if the model couldn’t hold the
@@ -261,7 +267,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/structure-node.webp" alt="Connection node model bending to the geometry" width="240" height="313" loading="lazy"><figcaption>The connection</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Structure &amp; Detail</h3>
+              <h3 class="yr-entry__title">Structure &amp; detail</h3>
               <p>
                 Several people asked if this was a conceptual model. It isn’t — it is the structure. The
                 radial beams and ring geometry produce a rhythm that most structural models don’t have,
@@ -281,7 +287,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/process-timeline.webp" alt="Every model and drawing laid out on a long table" width="525" height="295" loading="lazy"><figcaption>Two weeks of work laid flat</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">Process Timeline</h3>
+              <h3 class="yr-entry__title">Process timeline</h3>
               <p>
                 This table is the two weeks of non-stop work laid flat. Every model in sequence, every
                 drawing taped out below it. Seeing it this way — everything made, everything that failed,
@@ -292,7 +298,7 @@ import Footer from "../components/Footer.astro";
           </div>
 
           <div class="animate-on-scroll-target">
-            <h3 class="yr-entry__title" style="margin-bottom: 1.5rem">What the Making Taught</h3>
+            <h3 class="yr-entry__title" style="margin-bottom: 1.5rem">What the making taught</h3>
             <div class="yr-parts">
               <div class="yr-part">
                 <h3><span>I</span>On the model submission</h3>
@@ -327,6 +333,7 @@ import Footer from "../components/Footer.astro";
       </section>
 
       <!-- III Yielding -->
+      <StageMark id="stage-final" no="03" label="Final" say="Yield, register, transmit: the settlement built the way the island already builds." />
       <section class="yr-chapter yr-chapter--tint" id="yielding" aria-labelledby="ch-yielding">
         <div class="yr-wrap">
           <div class="yr-chapter__head animate-on-scroll-target">
@@ -335,7 +342,7 @@ import Footer from "../components/Footer.astro";
           </div>
 
           <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
-            <h3 class="yr-entry__title">Yield, Register, Transmit</h3>
+            <h3 class="yr-entry__title">Yield, register, transmit</h3>
             <p style="max-width: 70ch">
               Three conditions, not three steps. The settlement yields to force — wave direction, tide,
               wind — rather than resisting it. It registers the environment — light, humidity, current —
@@ -361,7 +368,7 @@ import Footer from "../components/Footer.astro";
               <figure class="yr-fig"><img src="assets/projects/sem5/tutorial-sketch.webp" alt="Tutorial sketch of the dwelling with vegetation through the core" width="410" height="329" loading="lazy"><figcaption>The tutorial sketch</figcaption></figure>
             </div>
             <div class="yr-entry__text">
-              <h3 class="yr-entry__title">The Problem</h3>
+              <h3 class="yr-entry__title">The problem</h3>
               <p>
                 At this point the dwelling had an outer organic shell — marine concrete, metallic,
                 protective — and nothing else. It felt like armour, closer to a bunker than a home. The
@@ -411,7 +418,7 @@ import Footer from "../components/Footer.astro";
           </div>
 
           <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
-            <h3 class="yr-entry__title">Floor Plans &amp; Elevation</h3>
+            <h3 class="yr-entry__title">Floor plans &amp; elevation</h3>
             <div class="yr-parts" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
               <div>
                 <figure class="yr-fig"><img src="assets/projects/sem5/plan-ground.webp" alt="Ground floor plan: livelihood level" width="281" height="239" loading="lazy"><figcaption>Ground floor: livelihood</figcaption></figure>
@@ -453,7 +460,7 @@ import Footer from "../components/Footer.astro";
           </div>
 
           <div class="animate-on-scroll-target" style="margin-bottom: clamp(3rem, 7vw, 5rem)">
-            <h3 class="yr-entry__title">Exploded Assembly</h3>
+            <h3 class="yr-entry__title">Exploded assembly</h3>
             <figure class="yr-fig yr-fig--board"><img src="assets/projects/sem5/board-exploded.webp" alt="Exploded axonometric of the dwelling across two pages" width="2800" height="1400" loading="lazy"><figcaption>Exploded axonometric: hull to occupant layers</figcaption></figure>
             <p style="margin-top: 1.5rem; max-width: 72ch">
               The unit is not built by one contractor. It is distributed across the trades that already
@@ -585,6 +592,7 @@ import Footer from "../components/Footer.astro";
             </div>
           </div>
         </div>
+        <p class="yr-carried">Carried into Semester VI: design inside the constraint, not against it.</p>
       </section>
 
       <!-- Live process journal (Tumblr) -->
