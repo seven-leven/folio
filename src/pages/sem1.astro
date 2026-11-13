@@ -1,4 +1,6 @@
 ---
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Model from "../components/Model.astro";
@@ -7,8 +9,8 @@ import Footer from "../components/Footer.astro";
 
 <BaseLayout
   page="sem1.html"
-  title="Enchanting Reading Nook"
-  description="Enchanting Reading Nook: a Semester 1 architectural design project by Gaahis Yaugoob, a cozy and immersive space designed for literary escape and tranquility."
+  title="Books, Serenity and Cosmic Wonder"
+  description="Books, Serenity and Cosmic Wonder: a reading nook in a house courtyard, the Semester 1 architectural design project by Gaahis Yaugoob. The title borrows from Bocchi the Rock!'s Guitar, Loneliness and Blue Planet."
   image="assets/img/cover-sem1.webp"
   styles={["sem1"]}
   bodyClass="project-page project-reading-nook pk"
@@ -20,9 +22,9 @@ import Footer from "../components/Footer.astro";
         <div class="pk-wrap pk-hero__grid">
           <div class="pk-hero__text">
             <p class="pk-kicker">Semester 1 · Architectural Design I · 2023</p>
-            <h1 class="pk-title">Enchanting <em>Reading Nook</em></h1>
+            <h1 class="pk-title">Books, Serenity <em>and Cosmic Wonder</em></h1>
             <p class="sem-mark"><span class="sem-bar" data-at="1" role="img" aria-label="Semester 1 of 6"><i></i><i></i><i></i><i></i><i></i><i></i></span></p>
-            <p class="pk-sub">Pages, serenity and cosmic wonders</p>
+            <p class="pk-sub">A reading nook in a house courtyard. The title borrows from Bocchi the Rock!’s “Guitar, Loneliness and Blue Planet”.</p>
             <p class="pk-standfirst">
               Step into this enchanting reading nook, a space that invites book lovers to immerse
               themselves in a world of literary wonder. The book shelf showcases your beloved books
@@ -49,6 +51,8 @@ import Footer from "../components/Footer.astro";
           </figure>
         </div>
       </header>
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"]]} />
+
 
       <nav class="pk-subnav" aria-label="On this page" data-spy>
         <div class="pk-wrap pk-subnav__row">
@@ -63,6 +67,7 @@ import Footer from "../components/Footer.astro";
       </nav>
 
       <div class="pk-wrap pk-body">
+        <StageMark id="stage-concept" no="01" label="Concept" say="A reading nook in a house courtyard: what it needs to hold, light and shelter." />
         <section id="concept" class="animate-on-scroll-target">
           <h2>Concept</h2>
           <div class="pk-grid pk-grid--split">
@@ -129,6 +134,7 @@ import Footer from "../components/Footer.astro";
           </p>
         </section>
 
+        <StageMark id="stage-development" no="02" label="Development" say="Stack of books, model 1, model 2: averaging the slopes into one form." />
         <section id="development" class="animate-on-scroll-target">
           <h2>Development</h2>
           <div class="pk-grid pk-grid--2">
@@ -165,6 +171,7 @@ import Footer from "../components/Footer.astro";
           </div>
         </section>
 
+        <StageMark id="stage-final" no="03" label="Final" say="The reading nook, drawn, built and detailed." />
         <section id="drawings" class="animate-on-scroll-target">
           <h2>Plans, Elevations, &amp; Sections</h2>
           <div class="pk-grid pk-grid--3">

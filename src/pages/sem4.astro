@@ -1,4 +1,6 @@
 ---
+import Stages from "../components/Stages.astro";
+import StageMark from "../components/StageMark.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
@@ -43,6 +45,8 @@ import Footer from "../components/Footer.astro";
           </figure>
         </div>
       </header>
+      <Stages items={[["stage-concept", "Concept"], ["stage-development", "Development"], ["stage-final", "Final"], ["stage-resit", "Resit"]]} />
+
 
       <!-- Chapter nav -->
       <nav class="me-subnav" aria-label="On this page" data-spy>
@@ -70,6 +74,7 @@ import Footer from "../components/Footer.astro";
           </div>
 
           <!-- 01 Context -->
+          <StageMark id="stage-concept" no="01" label="Concept" say="Zooming out: the island planned as a group before any one design." />
           <section class="me-chapter" id="context" aria-labelledby="ch-context">
             <div class="me-chapter__head animate-on-scroll-target">
               <span class="me-chapter__num">01.0</span>
@@ -148,6 +153,7 @@ import Footer from "../components/Footer.astro";
           </section>
 
           <!-- 02 Concept -->
+          <StageMark id="stage-development" no="02" label="Development" say="The introverted host: a boundary that filters rather than blocks." />
           <section class="me-chapter" id="concept" aria-labelledby="ch-concept">
             <div class="me-chapter__head animate-on-scroll-target">
               <span class="me-chapter__num">02.0</span>
@@ -237,6 +243,7 @@ import Footer from "../components/Footer.astro";
           </section>
 
           <!-- 03 Proposal -->
+          <StageMark id="stage-final" no="03" label="Final" say="The first submission, read at the crit as two disconnected buildings sharing a plot." />
           <section class="me-chapter" id="proposal" aria-labelledby="ch-proposal">
             <div class="me-chapter__head animate-on-scroll-target">
               <span class="me-chapter__num">03.0</span>
@@ -494,6 +501,7 @@ import Footer from "../components/Footer.astro";
       </div>
 
       <!-- ============== PART B: SUPPLEMENTARY RESOLUTION ============== -->
+      <StageMark id="stage-resit" no="04" label="Resit" say="The resit: privacy built from depth rather than walls, resolved at 1:20." />
       <div class="me-resit">
         <section class="me-resit__band" id="resolution" aria-labelledby="ch-resolution">
           <div class="me-wrap">

@@ -1,0 +1,20 @@
+---
+/**
+ * The stage strip under a semester page's header: every project page runs in the same order,
+ * Concept → Development → Final (Semester IV adds the Resit), as the printed book does.
+ * Each item links to the StageMark with the same id further down the page.
+ */
+interface Props {
+  /** [anchor id, label] in page order */
+  items: [string, string][];
+}
+const { items } = Astro.props;
+---
+
+<nav class="stage-strip" aria-label="Project stages">
+  <ol>
+    {items.map(([id, label], i) => (
+      <li><a href={`#${id}`}><span class="stage-strip__no">{String(i + 1).padStart(2, "0")}</span>{label}</a></li>
+    ))}
+  </ol>
+</nav>
