@@ -24,3 +24,4 @@ node_modules/
 
 # Python bytecode (tools/data scripts)
 __pycache__/
+docs/design-manifesto.pdf
