@@ -87,55 +87,10 @@ const kind = (label: string) => label.charAt(0).toUpperCase() + label.slice(1);
                 <span class="group-intro__num" aria-hidden="true">01</span>
                 <div>
                     <h2 class="group-intro__title">Academic</h2>
-                    <p class="group-intro__text">University work: a civil engineering degree, then architecture.</p>
+                    <p class="group-intro__text">University work: architecture, and the civil engineering degree before it.</p>
                 </div>
             </div>
         </div>
-
-        <!-- Engineering -->
-        <section id="engineering" class="academic">
-            <span id="engineering-work" class="anchor-alias" aria-hidden="true"></span>
-            <div class="container">
-                <header class="section-head reveal">
-                    <p class="eyebrow">Civil engineering · 2019 – 2023</p>
-                    <h3 class="section-title">Engineering</h3>
-                    <p class="section-intro">A Bachelor of Civil Engineering (Hons) at The Maldives National University. Four years of core coursework led to a final semester (2023, Term II) of full projects: structural design, analysis and field work.</p>
-                </header>
-
-                <div class="ac-eng reveal">
-                        <div class="eng-cards">
-                            <a class="eng-card" href="engineering.html#capstone">
-                                <span class="eng-card__img"><img src="assets/img/cover-engineering.webp" alt="" width="1600" height="900" loading="lazy"></span>
-                                <span class="eng-card__body">
-                                    <small>Capstone · BES 401</small>
-                                    <b>Proposed 14-storey mixed-use building, Villimalé</b>
-                                    <span>Site survey, structural design down to a raft foundation, drawing set, cost estimate and schedule.</span>
-                                </span>
-                            </a>
-                            <a class="eng-card" href="engineering.html#thesis">
-                                <span class="eng-card__img eng-card__img--plot"><img src="assets/projects/engineering/wind-polar.webp" alt="" width="457" height="442" loading="lazy"></span>
-                                <span class="eng-card__body">
-                                    <small>Thesis</small>
-                                    <b>Wind-load analysis of a 14-storey building</b>
-                                    <span>Analytical vs STAAD.Pro, with 40 years of Hulhulé wind data processed in Python.</span>
-                                </span>
-                            </a>
-                            <a class="eng-card" href="engineering.html#coastal">
-                                <span class="eng-card__img"><img src="assets/projects/engineering/coastal-drone-map.webp" alt="" width="1250" height="953" loading="lazy"></span>
-                                <span class="eng-card__body">
-                                    <small>Coastal engineering</small>
-                                    <b>Field study &amp; breakwater design, K. Thulusdhoo</b>
-                                    <span>Beach survey, drone mapping, soil sieve analysis and a layered breakwater.</span>
-                                </span>
-                            </a>
-                        </div>
-                        <a class="link-arrow ac-eng__more" href="engineering.html">
-                            View all engineering work
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
-                </div>
-            </div>
-        </section>
 
         <!-- Architecture: the studio projects, in order -->
         <section id="architecture" class="academic">
@@ -303,6 +258,51 @@ const kind = (label: string) => label.charAt(0).toUpperCase() + label.slice(1);
             </div>
         </section>
 
+        <!-- Engineering -->
+        <section id="engineering" class="academic">
+            <span id="engineering-work" class="anchor-alias" aria-hidden="true"></span>
+            <div class="container">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Civil engineering · 2019 – 2023</p>
+                    <h3 class="section-title">Engineering</h3>
+                    <p class="section-intro">A Bachelor of Civil Engineering (Hons) at The Maldives National University. Four years of core coursework led to a final semester (2023, Term II) of full projects: structural design, analysis and field work.</p>
+                </header>
+
+                <div class="ac-eng reveal">
+                        <div class="eng-cards">
+                            <a class="eng-card" href="engineering.html#capstone">
+                                <span class="eng-card__img"><img src="assets/img/cover-engineering.webp" alt="" width="1600" height="900" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Capstone · BES 401</small>
+                                    <b>Proposed 14-storey mixed-use building, Villimalé</b>
+                                    <span>Site survey, structural design down to a raft foundation, drawing set, cost estimate and schedule.</span>
+                                </span>
+                            </a>
+                            <a class="eng-card" href="engineering.html#thesis">
+                                <span class="eng-card__img eng-card__img--plot"><img src="assets/projects/engineering/wind-polar.webp" alt="" width="457" height="442" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Thesis</small>
+                                    <b>Wind-load analysis of a 14-storey building</b>
+                                    <span>Analytical vs STAAD.Pro, with 40 years of Hulhulé wind data processed in Python.</span>
+                                </span>
+                            </a>
+                            <a class="eng-card" href="engineering.html#coastal">
+                                <span class="eng-card__img"><img src="assets/projects/engineering/coastal-drone-map.webp" alt="" width="1250" height="953" loading="lazy"></span>
+                                <span class="eng-card__body">
+                                    <small>Coastal engineering</small>
+                                    <b>Field study &amp; breakwater design, K. Thulusdhoo</b>
+                                    <span>Beach survey, drone mapping, soil sieve analysis and a layered breakwater.</span>
+                                </span>
+                            </a>
+                        </div>
+                        <a class="link-arrow ac-eng__more" href="engineering.html">
+                            View all engineering work
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </a>
+                </div>
+            </div>
+        </section>
+
         <!-- 02 Professional -->
         <section id="professional" class="professional" aria-labelledby="g-professional">
             <div class="container group-intro__inner">
@@ -397,7 +397,7 @@ const kind = (label: string) => label.charAt(0).toUpperCase() + label.slice(1);
                     <span class="group-intro__num" aria-hidden="true">03</span>
                     <div>
                         <h2 class="group-intro__title">Personal</h2>
-                        <p class="group-intro__text">Ongoing projects outside the coursework: illustration and code, with cooking coming next.</p>
+                        <p class="group-intro__text">Ongoing projects outside the coursework: illustration and code.</p>
                     </div>
                 </div>
             </div>
@@ -983,36 +983,6 @@ const kind = (label: string) => label.charAt(0).toUpperCase() + label.slice(1);
                 </div>
             </section>
 
-            <!-- Coming soon: Lunch Lab, a cooking account. Starts May 2027. -->
-            <section id="cooking" class="cooking" aria-labelledby="cooking-title">
-                <div class="container wildlife__grid">
-                    <div class="reveal">
-                        <p class="eyebrow">Coming soon · Cooking</p>
-                        <h3 class="cooking__title" id="cooking-title">Lunch Lab <em>experiments in learning how to cook</em></h3>
-                        <p class="cooking__lede">
-                            Bad chef, great typography. Lunch Lab is a year of learning to cook, told
-                            the way a designer would tell it: each meal an experiment with a number,
-                            a question, the variables, the result and what to change next time. The
-                            mistakes are part of it. It happens in a small kitchen in the Maldives,
-                            with tuna, coconut, rice and whatever the shop has.
-                        </p>
-                        <ul class="cooking__facts">
-                            <li><span>Starts</span><b>May 2027</b></li>
-                            <li><span>Runs</span><b>12 months</b></li>
-                            <li><span>Dishes</span><b>About 70</b></li>
-                        </ul>
-                        <span class="soon-badge">Brand done · first dish next</span>
-                    </div>
-                    <figure class="cooking__media reveal" style="--i: 1">
-                        <img
-                            src="assets/projects/lunch-lab/brand.webp"
-                            alt="The Lunch Lab brand sheet: a stacked LUNCH LAB wordmark in deep green where the A is a flask with a sprout, a reversed version, a round badge and a flask icon, above the palette of a warm white base, deep green and seven food accents from lavender to blush"
-                            width="1600" height="885" loading="lazy" decoding="async"
-                        >
-                        <figcaption>The brand, done before the first dish: a flask for the A, one accent colour per kind of food</figcaption>
-                    </figure>
-                </div>
-            </section>
         </div>
 
         <!-- Skills -->
