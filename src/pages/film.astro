@@ -1,0 +1,62 @@
+---
+/**
+ * film.html: the address the Semester VI booklet's QR code points to (ARC307 Part 5A).
+ * The address never changes. When the film is up, paste its link into FILM_URL:
+ * the page then sends visitors straight to it (the playlist, or the video itself).
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+/** The unlisted YouTube playlist (or the video) once it exists, e.g. "https://www.youtube.com/playlist?list=…" */
+const FILM_URL = "";
+---
+
+<BaseLayout
+  page="film.html"
+  title="Known Again, the film"
+  description="The Semester VI process film by Gaahis Yaugoob: one flight from the ocean to plot B1 in Malé."
+  styles={["404"]}
+  bodyClass="home not-found"
+>
+    <nav id="navbar" aria-label="Main">
+        <div class="container">
+            <a href="/folio/" class="nav-logo" aria-label="Gaahis Yaugoob, home">
+                <span class="nav-mark" aria-hidden="true">GY</span>
+                <span class="nav-name">Gaahis Yaugoob</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="nf">
+        <div class="container nf__inner">
+            <p class="eyebrow">Semester VI · Film</p>
+            {FILM_URL ? (
+                <>
+                    <h1 class="nf__title">Known <em>Again</em></h1>
+                    <p class="nf__text">Taking you to the film…</p>
+                    <div class="nf__actions">
+                        <a class="btn btn--primary" href={FILM_URL}>Watch the film</a>
+                    </div>
+                    <script is:inline define:vars={{ FILM_URL }}>location.replace(FILM_URL);</script>
+                </>
+            ) : (
+                <>
+                    <h1 class="nf__title">The film is still being <em>made</em>.</h1>
+                    <p class="nf__text">Known Again: one flight from the ocean to plot B1 in Malé. It will play from this page when it is finished.</p>
+                    <div class="nf__actions">
+                        <a class="btn btn--primary" href="/folio/sem6.html">See Semester VI</a>
+                        <a class="btn btn--ghost" href="/folio/">Back to the portfolio</a>
+                    </div>
+                </>
+            )}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container site-footer__bottom">
+            <p class="site-footer__copy">© <span id="currentYear"></span> Gaahis Yaugoob. All rights reserved.</p>
+            <a class="site-footer__top" href="/folio/">Home</a>
+        </div>
+    </footer>
+
+    <script src="/folio/assets/js/main.js" is:inline></script>
+</BaseLayout>
